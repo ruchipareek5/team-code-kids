@@ -1,6 +1,6 @@
 /* DROP schema */
 
-drop database if exists wastemanagement;
+drop database if exists onlinegreivancemanagementsystem;
 
 /*Create TABLE IF NOT EXISTS */
 
