@@ -57,7 +57,7 @@ CREATE TABLE `user_committee_member` (
   `name` varchar(150) NOT NULL,
   `email` varchar(150) NOT NULL,
   `priviledge` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`user_committee_memeber`)
+  PRIMARY KEY (`user_committee_member`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
