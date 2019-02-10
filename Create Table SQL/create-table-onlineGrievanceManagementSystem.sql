@@ -78,6 +78,38 @@ CREATE TABLE `user_student` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+
+DROP TABLE IF EXISTS `user_principal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_principal` (
+  `user_principal_id` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `priviledge` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`user_principal_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `warning`
+--
+DROP TABLE IF EXISTS `warning`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `warning` (
+  `warning_id` int(11) NOT NULL,
+  `issued_by_id` int(11) NOT NULL,
+  `issued_to_id` int(11) NOT NULL,
+  PRIMARY KEY (`warning_id`),
+  KEY `issued_to_id_idx` (`issued_to_id`),
+  KEY `issued_by_id_idx` (`issued_by_id`),
+  CONSTRAINT `issued_by_id` FOREIGN KEY (`issued_by_id`) REFERENCES `user_principal` (`user_principal_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `issued_to_id` FOREIGN KEY (`issued_to_id`) REFERENCES `user_committee_member` (`user_committee_memeber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
