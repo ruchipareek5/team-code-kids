@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('index');
 });
+
+
+Route::get('/testPartial', function () {
+    return view('partials/testPartial');
+});
