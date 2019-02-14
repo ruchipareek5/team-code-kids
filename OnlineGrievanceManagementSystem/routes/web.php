@@ -19,3 +19,7 @@ Route::get('/', function () {
 Route::get('/testPartial', function () {
     return view('partials/testPartial');
 });
+
+Route::get('/testTemplate', function(){
+    return view('templates/testTemplate');
+});
