@@ -25,7 +25,6 @@ Route::get('/testTemplate', function(){
 });
 
 Route::post('/login','LoginController@loginCheck')->name('submitLogin');
-});
 
 Route::get('/ui_gridSample', function(){
     return view('templates/ui_gridSample');
