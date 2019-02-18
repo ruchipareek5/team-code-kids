@@ -46,7 +46,7 @@
             <div class="row">
                 <div class="col-md-2 leftNav">
                     <!-- navigation left dash board -->
-                    <div class="sideBtn active" ng-click="page = 'dashboard_student'">
+                    <div class="sideBtn active_sidebtn" ng-click="page = 'dashboard_student'">
                         <img src="assets/icons/dashboard.png" class="icons">
                         <div class="side-link">Dashboard</div>
                     </div>
