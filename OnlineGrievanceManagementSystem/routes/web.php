@@ -12,7 +12,7 @@
  */
 
 Route::get('/', function () {
-    return view('index');
+    return View::make('index');
 });
 
 
@@ -22,4 +22,8 @@ Route::get('/testPartial', function () {
 
 Route::get('/testTemplate', function(){
     return view('templates/testTemplate');
+});
+
+Route::get('/ui_gridSample', function(){
+    return view('templates/ui_gridSample');
 });
