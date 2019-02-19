@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+function cannotProcessData(){
+	return response("Cannot Process Data",412);
+}
 
 Route::get('/', function () {
     return View::make('index');
