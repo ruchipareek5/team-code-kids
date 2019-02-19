@@ -24,7 +24,12 @@ Route::get('/testTemplate', function(){
     return view('templates/testTemplate');
 });
 
-Route::post('/login','LoginController@loginCheck')->name('submitLogin');
+Route::post('/register','LoginController@register');
+
+Route::middleware('auth.basic')->group(function(){
+	Route::post('/login','LoginController@checkAuth');
+});
+
 
 Route::get('/ui_gridSample', function(){
     return view('templates/ui_gridSample');

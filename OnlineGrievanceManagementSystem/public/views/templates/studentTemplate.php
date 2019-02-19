@@ -14,7 +14,7 @@
 
 </head>
 <div>
-    <div ng-controller="studentController">
+    <div ng-controller="appController">
         <div class="container-fluid">
 
             <div class="row">
@@ -35,7 +35,7 @@
                             <span class=""> &#x25BC;
                                 <div class="dropdown-content">
                                   <a href="#">Profile</a>
-                                  <a href="#">Logout</a>
+                                  <a style="cursor: pointer;" ng-click="logout()">Logout</a>
                                 </div>
                             </span>
                         </div>
