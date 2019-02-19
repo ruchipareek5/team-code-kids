@@ -26,6 +26,8 @@ Route::get('/testTemplate', function(){
 
 Route::post('/register','LoginController@register');
 
+Route::post('/grievances', 'GrievancesController@show');
+
 Route::middleware('auth.basic')->group(function(){
 	Route::post('/login','LoginController@checkAuth');
 });
