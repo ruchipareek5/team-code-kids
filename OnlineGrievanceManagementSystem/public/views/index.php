@@ -22,15 +22,19 @@
     <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/favicon-76.png">
     <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/favicon-152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/favicon-180.png">
+    <!--=================================================================================-->
+    <link rel="stylesheet" type="text/css" href="assets/fonts/iconic/css/material-design-iconic-font.min.css">
+
     <meta name="msapplication-TileColor" content="#FFFFFF">
     <meta name="msapplication-TileImage" content="assets/favicon/favicon-144.png">
     <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
     <!-- ****** favicons ****** -->
-    <title>Grievance System</title>
+    <title>Online Grievance Management System</title>
     <!-- jquery should be loaded first ele chart or ng view wont work -->
-<script src="./../../js/libraries/jquery-3.3.1.min.js"></script>
+    <script src="./../../js/libraries/jquery-3.3.1.min.js"></script>
     <script src="./../../js/libraries/angular.min.js"></script>
     <script src="./../../js/libraries/angular-route.min.js"></script>
+    <script type="text/javascript" src="./../../js/libraries/angular-cookies.js"></script>
     <link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="./../../js/libraries/bootstrap3.1.1.min.css" />
 	<script data-require="ui-bootstrap@0.13.3" data-semver="0.13.3" src="./../../js/libraries/ui-bootstrap-tpls.min.js"></script>
 
