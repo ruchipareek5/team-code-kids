@@ -1,5 +1,6 @@
 // Controller for grievancesystem i.e., main controller
 grievancesystem.controller('appController',function($scope,$http,$location,API_URL,$cookies){
+	$scope.page_tab='login';
 	$scope.login = {};
 	$http.defaults.headers.common.Authorization = $cookies.get('Auth');
 
@@ -21,6 +22,7 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 	};
 
 	$scope.doLogin = function(){
+		console.log("hi");
 		$scope.authHeader = "Basic " + btoa([$scope.login.email, $scope.login.password].join(':'));
 		$cookies.put('Auth',$scope.authHeader);
 		$scope.doLoginAttempt();
