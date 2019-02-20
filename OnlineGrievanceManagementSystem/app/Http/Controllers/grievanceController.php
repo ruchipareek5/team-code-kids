@@ -107,6 +107,57 @@ class grievanceController extends Controller
         return json_encode($data);
     }
 
+
+
+
+    public function statistics($type){
+        $student_id = DB::table('user_student')->where('user_id',Auth::user()->id)->get(['id'])[0]->id;
+        if($type == 'total'){
+            $count = Grievance::all()->where('student_id',$student_id)->count();
+            return ['type' => $type,'value'=>$count];
+        }
+        elseif ($type == 'satisfied'){
+            $grievance_id = DB::table('table_grievance')->where('student_id',$student_id)->get(['id']);
+            $data = [];
+            $i = 0;
+            foreach ($grievance_id as $id){
+                $data[$i] = $id->id;
+                $i++;
+            }
+            $count = DB::table('table_grievance_status')->where('status','resolved')->whereIn('grievance_id',$data)->count();
+            return ['type' => $type,'value'=>$count];
+        }
+        elseif ($type == 'pending'){
+            $array = ['raised','assigned'];
+            $grievance_id = DB::table('table_grievance')->where('student_id',$student_id)->get(['id']);
+            $data = [];
+            $i = 0;
+            foreach ($grievance_id as $id){
+                $data[$i] = $id->id;
+                $i++;
+            }
+            $count = DB::table('table_grievance_status')->whereIn('status',$array)->whereIn('grievance_id',$data)->count();
+            return ['type' => $type,'value'=>$count];
+        }
+
+        elseif ($type == 'escalated'){
+            $array = ['delayed','reopened'];
+            $grievance_id = DB::table('table_grievance')->where('student_id',$student_id)->get(['id']);
+            $data = [];
+            $i = 0;
+            foreach ($grievance_id as $id){
+                $data[$i] = $id->id;
+                $i++;
+            }
+            $count = DB::table('table_grievance_status')->whereIn('status',$array)->whereIn('grievance_id',$data)->count();
+            return ['type' => $type,'value'=>$count];
+        }
+
+    }
+
+
+
+
     /**
      * Show the form for editing the specified resource.
      *
