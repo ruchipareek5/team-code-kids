@@ -45,17 +45,29 @@ class grievanceController extends Controller
         $file = $request->file('attachment');
         $student_id = DB::table('user_student')->where('user_id',Auth::user()->getAuthIdentifier())->get(['id','college_id']);
         $department_id = DB::table('table_department')->where('name','LIKE',$type)->where('college_id',$student_id[0]->college_id)->get(['id']);
-
         $grievance = new Grievance;
         $grievance->type = $type;
         $grievance->description = $description;
         $grievance->student_id = $student_id[0]->id;
         $grievance->department_id = $department_id[0]->id;
-        $grievance->documents = $file==null?'':$file->store();
+        $grievance->documents = $file==null?'':$file->storeAs('documents',$file->getClientOriginalName());
         $grievance->save();
 
         $data = [];
         $new_grievance = DB::table('table_grievance')->where('student_id',$student_id[0]->id)->orderBy('id','desc')->get(['id'])->first();
+
+        //Data insertion in grievance status table
+
+        DB::table('table_grievance_status')->insert(
+            [
+                'grievance_id' => $new_grievance->id,
+                'status' => 'raised',
+                'eta' => 7,
+                'level' => 1
+
+            ]
+        );
+
         $data = [
           'id' => $new_grievance->id,
           'message' => 'Your grievance is registered'
@@ -81,16 +93,16 @@ class grievanceController extends Controller
             return response("{'message:No such Grievance'}",403);
         $grievance_status = DB::table('table_grievance_status')->where('grievance_id',$id)->get(['status','eta']);
         $department_name = DB::table('table_department')->where('id',$grievances[0]->department_id)->get(['name']);
-        $data = [
-            'grievance_id' => $grievances[0]->id,
-            'grievance_type' => $grievances[0]->type,
-            'data_of_issue'=> $grievances[0]->created_at,
-            'attachment' => $grievances[0]->documents,
-            'assigned_committee' => $department_name[0]->name,
-            'status' => $grievance_status[0]->status,
-            'eta' => $grievance_status[0]->eta
-        ];
-       
+            $data = [
+                'grievance_id' => $grievances[0]->id,
+                'grievance_type' => $grievances[0]->type,
+                'data_of_issue'=> $grievances[0]->created_at,
+                'attachment' => $grievances[0]->documents,
+                'assigned_committee' => $department_name[0]->name,
+                'status' => $grievance_status[0]->status,
+                'eta' => $grievance_status[0]->eta
+            ];
+
         return response(['message'=>$data],200);
         return json_encode($data);
     }
