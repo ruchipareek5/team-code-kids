@@ -123,9 +123,9 @@
         <div class="row">
           <div class="col-md-12 col-lg-12 div-detail">
               <label>Attachment<span class="imp">*</span></label>
-              <input type="text" name="year" id="year" ng-model="year" placeholder="Upload file pdf, doc, jpg, jpeg, png">
-              <input type="file" name="attachment" id="attachment" > 
-              <label  for="file">Select</label>
+              <input type="text" name="selected_file" class="selected_file" id="selected_file" ng-model="selected_file" placeholder="Upload file pdf, doc, jpg, jpeg, png">
+              <input type="file" name="attachment" class="attachment" id="attachment" > 
+              <label  for="file"  class="attachmentbtn">Select</label>
             </div>
               
             <div class="col-md-12 col-lg-12 div-detail">    
@@ -142,3 +142,18 @@
     <!-- grievance form -->
 </div>
 <!-- container -->
+<script>
+    $(document).ready( function() {
+
+        $(".attachmentbtn").click(function(){
+        $(".attachment").click();
+    });
+    $('.attachment').change(function() {
+    
+    $('.selected_file').val($('.attachment')[0].files[0].name);
+    });
+
+    });
+
+
+    </script>
