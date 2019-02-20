@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Middleware\BasicAuth;
 use Illuminate\Http\Request;
 use App\User;
@@ -21,7 +20,6 @@ class grievanceController extends Controller
     {
         //
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -31,7 +29,6 @@ class grievanceController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -52,29 +49,23 @@ class grievanceController extends Controller
         $grievance->department_id = $department_id[0]->id;
         $grievance->documents = $file==null?'':$file->storeAs('documents',$file->getClientOriginalName());
         $grievance->save();
-
         $data = [];
         $new_grievance = DB::table('table_grievance')->where('student_id',$student_id[0]->id)->orderBy('id','desc')->get(['id'])->first();
-
         //Data insertion in grievance status table
-
         DB::table('table_grievance_status')->insert(
             [
                 'grievance_id' => $new_grievance->id,
                 'status' => 'raised',
                 'eta' => 7,
                 'level' => 1
-
             ]
         );
-
         $data = [
           'id' => $new_grievance->id,
           'message' => 'Your grievance is registered'
         ];
         return json_encode($data);
     }
-
     /**
      * Display the specified resource.
      *
@@ -102,15 +93,14 @@ class grievanceController extends Controller
                 'status' => $grievance_status[0]->status,
                 'eta' => $grievance_status[0]->eta
             ];
-
         return response(['message'=>$data],200);
         return json_encode($data);
     }
 
 
 
-
     public function statistics($type){
+
         $student_id = DB::table('user_student')->where('user_id',Auth::user()->id)->get(['id'])[0]->id;
         if($type == 'total'){
             $count = Grievance::all()->where('student_id',$student_id)->count();
@@ -168,7 +158,6 @@ class grievanceController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -180,7 +169,6 @@ class grievanceController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -191,7 +179,6 @@ class grievanceController extends Controller
     {
         //
     }
-
     public function download($path){
         if($path != null){
             return Storage::download($path);

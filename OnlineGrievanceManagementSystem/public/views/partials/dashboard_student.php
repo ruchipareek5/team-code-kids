@@ -64,7 +64,7 @@
         <div class="row"> 
             <div class="col-md-12 col-lg-12 div-form">
                <label>Grievances Against<span class="imp">*</span></label>
-                <select ng-model="grievance.type">
+                <select ng-model="grievance.type" required="required">
                     <option value="">Select</option>
                     <option ng-repeat= "y in grievanceagainst" value={{y.category}} >{{y.category}}</option>
                 </select>
@@ -78,7 +78,7 @@
               <label>Attachment<span class="imp">*</span></label>
               <input type="text" name="selected_file" class="selected_file" id="selected_file" ng-model="selected_file" placeholder="Upload file pdf, doc, jpg, jpeg, png" readonly="readonly">
               <input type="file" name="attachment" class="attachment" ng-files="setTheFiles($files)" id="attachment" > 
-              <label  for="file"  class="attachmentbtn">Select</label>
+              <label  for="file"  class="attachmentbtn" >Select</label>
             </div>
         </div>
         <div class="row">
@@ -86,12 +86,12 @@
               
             <div class="col-md-12 col-lg-12 div-detail">    
               <label id="label-detail">Details<span class="imp">*</span> </label>            
-              <textarea name="details" id="details" ng-model="grievance.detail" 
-               rows=5 cols=87 placeholder="Please give all the details of your Problem">
-             </textarea>
+              <input style="height: 100px;" type="text" name="details" id="details" ng-model="grievance.detail" 
+               rows=5 cols=87 placeholder="Please give all the details of your Problem" required="required">
+             </input>
             </div>
 
-            <div align="left" class="col-md-12 col-lg-12 "><button class="btn button-submit">Submit</button></div>
+            <div align="left" class="col-md-12 col-lg-12 dashboard_btn"><button class="btn button-submit">Submit</button></div>
          </div>
 
         </div>

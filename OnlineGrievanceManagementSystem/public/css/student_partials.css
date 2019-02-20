@@ -63,6 +63,10 @@ hr
 
 
 /*forms*/
+
+.dashboard_btn{
+    margin-top: 30px;
+}
 #dash-head{
     color:#434B68;
     margin-top: 0.5em;
@@ -155,7 +159,8 @@ hr
     padding: 0.5em;
     border-radius: 0.5em;
     text-align: center;
-    box-shadow: 2px 2px 2px  #48537c,0 0 10px#4e5982;
+    margin-left: 10px;
+    /*box-shadow: 2px 2px 2px  #48537c,0 0 10px#4e5982;*/
 }
 
 
