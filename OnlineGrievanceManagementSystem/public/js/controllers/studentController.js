@@ -26,29 +26,29 @@ grievancesystem.controller('studentController',studentController);
     {"category":"Security"},{"category":"Hostel"},{"category":"Ragging"},{"category":"Canteen"},
     {"category":"Transport"}];
     
-    // 
+    // grievances action starts
     $scope.action =function(row){
         var index = $scope.open_grievance.data.indexOf(row);
         alert(index);
-        console.log(row)
         $scope.open_grievance.data.splice(index,1);
         $scope.escalated_grievance.data.push(row);
         // $scope.open_grievance_data=$scope.open_grievance_data.pop(row);
         // $scope.open_grievance.data.pop(row);
     }
-
-    // grievance search starts
+   
     $scope.searchId='';
     $scope.grievance_search_data;
     $scope.searchGrievance =  function(searchId){
+    $scope.grievance_search.data=new Array();
+
     studentService.searchGrievance(searchId).then(function(success){
             $scope.grievance_search_data=success.data.message;
              $scope.grievance_search.data.push($scope.grievance_search_data);
 
-            console.log(success);
         },
         function(error){
-            console.log(error);
+            console.log(error.data.message);
+            $scope.grievance_search.data=new Array();
 
         });
     

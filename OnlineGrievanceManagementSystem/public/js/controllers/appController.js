@@ -33,5 +33,14 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 			$location.path('/');
 	}
 
+	 // grievances action ends
+    $scope.downloadAttachment=function(path){
+       var url = API_URL+'/grievance/download/'+path;
+       $http.get(url);
+    }
+
+    // grievance search starts
+
+
 });
 
