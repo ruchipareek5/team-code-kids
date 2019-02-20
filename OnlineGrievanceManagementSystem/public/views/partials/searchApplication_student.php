@@ -10,9 +10,10 @@
               <h5 class="grievance-heading">Search Grievance</h5>
      
                 <div class="col-md-12 col-lg-12 div-form table ">                 
-                          <label style="color:#5A5A5A;font-size:1.5em;display: inline;">Enter Grievance Id</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <form  sytle="display: inline;" ng-submit='searchGrievance(searchId)'>
-                     <input type="text" name="search" id="searchId" ng-model="searchId" placeholder="Enter grievance id" required="required">
+                          <label style="color:#5A5A5A;font-size:1.5em;display: inline;">Enter Grievance Id</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                      <input type="text" name="search" id="searchId" ng-model="searchId" placeholder="Enter grievance id" required="required">
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       <button type="Submit" class="btn button-submit">Submit&nbsp;&nbsp;&nbsp;<img src="assets/icons/search.png" height="24" width="24"></button>
                     </form>
