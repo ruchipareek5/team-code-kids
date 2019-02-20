@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Grievance extends Model
 {
+    //
     protected $table = 'table_grievance';
-    public $primaryKey = 'id';
-    public $timestamps = true;
-
+    protected $primaryKey = 'id';
+    protected $fillable = ['type','description','documents','student_id','department_id'];
 }
