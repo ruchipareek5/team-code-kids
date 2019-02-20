@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\BasicAuth;
+use Dotenv\Parser;
 use Illuminate\Http\Request;
 use App\User;
 use App\Grievance;
@@ -49,18 +50,26 @@ class grievanceController extends Controller
         $grievance = new Grievance;
         $grievance->type = $type;
         $grievance->description = $description;
-        $grievance->student_id = $student_id[0]->id;
-        $grievance->department_id = $department_id[0]->id;
+        $grievance->student_id = $student_id->id;
+        $grievance->department_id = $department_id->id;
         $grievance->documents = $file==null?'':$file->store();
         $grievance->save();
 
         $data = [];
         $new_grievance = DB::table('table_grievance')->where('student_id',$student_id[0]->id)->orderBy('id','desc')->get(['id'])->first();
+
+        DB::table('table_grievance_status')->insert([
+            'grievance_id' => $new_grievance->id,
+            'status' => 'raised',
+            'eta' => 7,
+            'level' => 1
+        ]);
+
         $data = [
           'id' => $new_grievance->id,
           'message' => 'Your grievance is registered'
         ];
-        return json_encode($data);
+        return ($data);
     }
 
     /**
@@ -92,6 +101,53 @@ class grievanceController extends Controller
         ];
        
         return response(['message'=>$data],200);
+    }
+
+
+
+    public function statistics($type){
+        $student_id = DB::table('user_student')->where('user_id',Auth::user()->id)->get(['id'])[0]->id;
+        if($type == 'total'){
+            $count = Grievance::all()->where('student_id',$student_id)->count();
+            return ['type' => $type,'value'=>$count];
+        }
+        elseif ($type == 'satisfied'){
+            $grievance_id = DB::table('table_grievance')->where('student_id',$student_id)->get(['id']);
+            $data = [];
+            $i = 0;
+            foreach ($grievance_id as $id){
+                $data[$i] = $id->id;
+                $i++;
+            }
+            $count = DB::table('table_grievance_status')->where('status','resolved')->whereIn('grievance_id',$data)->count();
+            return ['type' => $type,'value'=>$count];
+        }
+        elseif ($type == 'pending'){
+            $array = ['raised','assigned'];
+            $grievance_id = DB::table('table_grievance')->where('student_id',$student_id)->get(['id']);
+            $data = [];
+            $i = 0;
+            foreach ($grievance_id as $id){
+                $data[$i] = $id->id;
+                $i++;
+            }
+            $count = DB::table('table_grievance_status')->whereIn('status',$array)->whereIn('grievance_id',$data)->count();
+            return ['type' => $type,'value'=>$count];
+        }
+
+        elseif ($type == 'escalated'){
+            $array = ['delayed','reopened'];
+            $grievance_id = DB::table('table_grievance')->where('student_id',$student_id)->get(['id']);
+            $data = [];
+            $i = 0;
+            foreach ($grievance_id as $id){
+                $data[$i] = $id->id;
+                $i++;
+            }
+            $count = DB::table('table_grievance_status')->whereIn('status',$array)->whereIn('grievance_id',$data)->count();
+            return ['type' => $type,'value'=>$count];
+        }
+
     }
 
     /**
