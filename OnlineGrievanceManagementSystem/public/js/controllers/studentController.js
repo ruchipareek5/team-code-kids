@@ -21,7 +21,7 @@ grievancesystem.directive('ngFiles', ['$parse', function ($parse) {
 grievancesystem.controller('studentController',studentController);
 
 
- function studentController($scope,$http,studentService,API_URL) {
+ function studentController($scope,$http,appService,studentService,API_URL) {
  	$scope.page='dashboard_student';
 
  	$scope.total_grievances = 18;
@@ -48,12 +48,15 @@ grievancesystem.controller('studentController',studentController);
     $scope.searchId='';
     $scope.grievance_search_data;
     $scope.searchGrievance =  function(searchId){
+    $scope.grievance_search.data=new Array();
     studentService.searchGrievance(searchId).then(function(success){
+            $scope.grievance_search.data=new Array();
             $scope.grievance_search_data=success.data.message;
             $scope.grievance_search.data.push($scope.grievance_search_data);
         },
         function(error){
-            console.log(error);
+            $scope.grievance_search.data=new Array();
+             appService.showAlert('error',error.data.message);
 
         });
     

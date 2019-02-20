@@ -53,9 +53,12 @@
 
     <!-- main controller -->
      <script src="js/controllers/appController.js"></script>
+    <script src="js/services/appService.js"></script>
+
 
      <!-- aicte starts -->
      <script src="js/controllers/aicteController.js"></script>
+
      <!-- aicte ends -->
 
      <!-- student starts -->

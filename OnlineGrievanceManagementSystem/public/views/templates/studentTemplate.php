@@ -69,8 +69,11 @@
                 </div>
 
                 <div class="col-md-10 rightArea">
+                    <div ng-include src="'views/templates/alertTemplate.html'"></div>
+
                     <div ng-switch on="page">
                         <div ng-switch-when="dashboard_student">
+
                             <div ng-include src="'views/partials/dashboard_student.php'"></div>
                         </div>
                         <div ng-switch-when="grievances_student">

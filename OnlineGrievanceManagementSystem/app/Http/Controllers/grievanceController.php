@@ -81,7 +81,7 @@ class grievanceController extends Controller
         $grievances = DB::table('table_grievance')->where(['id'=>$id,
             'student_id'=>$student_id])->get(['id','type','student_id','created_at','documents','department_id']);
         if($grievances->isEmpty())
-            return response("{'message:No such Grievance'}",403);
+                 return response(['message'=>'No Such grievance'],404);
         $grievance_status = DB::table('table_grievance_status')->where('grievance_id',$id)->get(['status','eta']);
         $department_name = DB::table('table_department')->where('id',$grievances[0]->department_id)->get(['name']);
             $data = [
@@ -94,7 +94,6 @@ class grievanceController extends Controller
                 'eta' => $grievance_status[0]->eta
             ];
         return response(['message'=>$data],200);
-        return json_encode($data);
     }
 
 

@@ -1,4 +1,4 @@
 <div class='ui-grid-cell-contents cell ' ng-controller="studentController">
-    <button style="background-color:transparent;border:none;" ng-click="grid.appScope.action(row.entity)" ng-disabled="row.entity.status!='resolved'"><img src='assets/icons/likeUp.png' height=16 width=16 value='{{COL_FIELD CUSTOM_FILTERS}}' ></button>
+    <button style="background-color:transparent;border:none;" ng-click="grid.appScope.action(row.entity,1)" ng-disabled="row.entity.status!='resolved'"><img src='assets/icons/likeUp.png' height=16 width=16 value='{{COL_FIELD CUSTOM_FILTERS}}' ></button>
 
-    &nbsp;&nbsp;<button style="background-color:white;border:none;" ng-click="action(row.entity.status)" ng-disabled="row.entity.status!='resolved'"><img src='assets/icons/likeDown.png' height=16 width=16 value='{{COL_FIELD CUSTOM_FILTERS}}'></button></div> 
+    &nbsp;&nbsp;<button style="background-color:white;border:none;" ng-click="grid.appScope.action(row.entity,0)" ng-disabled="row.entity.status!='resolved'"><img src='assets/icons/likeDown.png' height=16 width=16 value='{{COL_FIELD CUSTOM_FILTERS}}'></button></div> 
