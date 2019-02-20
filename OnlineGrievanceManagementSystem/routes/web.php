@@ -29,11 +29,13 @@ Route::get('/testTemplate', function(){
 
 Route::post('/register','LoginController@register');
 
-Route::post('/grievances', 'GrievancesController@store');
+
 
 Route::middleware('auth.basic')->group(function(){
+    Route::resource('/grievances', 'grievanceController');
 	Route::post('/login','LoginController@checkAuth');
 	Route::get('/grievaceSearch/{id}','grievanceController@show');
+	Route::get('/grievance/download/{path}','grievanceController@download');
 });
 
 

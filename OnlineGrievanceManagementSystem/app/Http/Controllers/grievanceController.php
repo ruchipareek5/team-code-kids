@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\BasicAuth;
 use Illuminate\Http\Request;
 use App\User;
 use App\Grievance;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class grievanceController extends Controller
 {
@@ -38,13 +40,27 @@ class grievanceController extends Controller
      */
     public function store(Request $request)
     {
-        $type = $request->get('type');
-        $description = $request->get('description');
-        $file = $request->get('file');
-        $student_id = DB::table('user_student')->where('email',Auth::user()->email)->get(['id','college_id']);
-        $department_id = DB::table('table_department')->where('type',$type)->get(['']);
-      
+        $type = $request->get('grievance_against');
+        $description = $request->get('details');
+        $file = $request->get('selected_file');
+        $student_id = DB::table('user_student')->where('user_id',Auth::user()->getAuthIdentifier())->get(['id','college_id']);
+        $department_id = DB::table('table_department')->where('name','LIKE',$type)->where('college_id',$student_id[0]->college_id)->get(['id']);
 
+        $grievance = new Grievance;
+        $grievance->type = $type;
+        $grievance->description = $description;
+        $grievance->student_id = $student_id[0]->id;
+        $grievance->department_id = $department_id[0]->id;
+        $grievance->documents = $file==null?'':$file->store();
+        $grievance->save();
+
+        $data = [];
+        $new_grievance = DB::table('table_grievance')->where('student_id',$student_id[0]->id)->orderBy('id','desc')->get(['id'])->first();
+        $data = [
+          'id' => $new_grievance->id,
+          'message' => 'Your grievance is registered'
+        ];
+        return json_encode($data);
     }
 
     /**
@@ -111,5 +127,11 @@ class grievanceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function download($path){
+        if($path != null){
+            return Storage::download($path);
+        }
     }
 }
