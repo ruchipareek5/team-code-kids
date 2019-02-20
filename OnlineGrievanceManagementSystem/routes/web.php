@@ -33,6 +33,7 @@ Route::post('/grievances', 'GrievancesController@store');
 
 Route::middleware('auth.basic')->group(function(){
 	Route::post('/login','LoginController@checkAuth');
+	Route::get('/grievaceSearch/{id}','grievanceController@show');
 });
 
 
