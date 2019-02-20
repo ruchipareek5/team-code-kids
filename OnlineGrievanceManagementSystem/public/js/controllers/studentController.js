@@ -26,7 +26,12 @@ grievancesystem.controller('studentController',studentController);
     {"category":"Security"},{"category":"Hostel"},{"category":"Ragging"},{"category":"Canteen"},
     {"category":"Transport"}];
 
+    $scope.action= function(arg)
+    {
+        alert(arg);
+    };
 
+           
 
 
 
@@ -47,11 +52,21 @@ grievancesystem.controller('studentController',studentController);
    
     $scope.open_grievance_data=[
     {
-        "grievance_id":"1",
-        "Grievance_type":"1",
-        "assigned_committee":"1",
-        "doi":"1",
-        "employed":"1",
+        "grievance_id":"101",
+        "Grievance_type":"resolved",
+        "assigned_committee":"academics",
+        "data_of_issue":"1",
+        "eta":"1",
+        "status":"resolved",
+        "attachment":"clock.png",
+        "action":"1"
+        
+    },
+    {
+        "grievance_id":"101",
+        "Grievance_type":"resolved",
+        "assigned_committee":"academics",
+        "data_of_issue":"1",
         "eta":"1",
         "status":"1",
         "attachment":"1",
@@ -59,72 +74,24 @@ grievancesystem.controller('studentController',studentController);
         
     },
     {
-        "grievance_id":"1",
-        "Grievance_type":"1",
-        "assigned_committee":"1",
-        "doi":"1",
-        "employed":"1",
+        "grievance_id":"101",
+        "Grievance_type":"pending",
+        "assigned_committee":"academics",
+        "data_of_issue":"1",
         "eta":"1",
-        "status":"1",
+        "status":"pending",
         "attachment":"1",
         "action":"1"
         
     },
-    {
-        "grievance_id":"1",
-        "Grievance_type":"1",
-        "assigned_committee":"1",
-        "doi":"1",
-        "employed":"1",
-        "eta":"1",
-        "status":"1",
-        "attachment":"1",
-        "action":"1"
-        
-    },
-    {
-        "grievance_id":"1",
-        "Grievance_type":"1",
-        "assigned_committee":"1",
-        "doi":"1",
-        "employed":"1",
-        "eta":"1",
-        "status":"1",
-        "attachment":"1",
-        "action":"1"
-        
-    },    {
-        "grievance_id":"1",
-        "Grievance_type":"1",
-        "assigned_committee":"1",
-        "doi":"1",
-        "employed":"1",
-        "eta":"1",
-        "status":"1",
-        "attachment":"1",
-        "action":"1"
-        
-    },
-    {
-        "grievance_id":"1",
-        "Grievance_type":"1",
-        "assigned_committee":"1",
-        "doi":"1",
-        "employed":"1",
-        "eta":"1",
-        "status":"1",
-        "attachment":"1",
-        "action":"1"
-        
-    }];
+    ];
 
     $scope.grievance_data=[
         {
             "grievance_id":"1",
             "Grievance_type":"1",
             "assigned_committee":"1",
-            "doi":"1",
-            "employed":"1",
+            "data_of_issue":"1",
             "eta":"1",
             "status":"1",
             "attachment":"1",
@@ -135,8 +102,7 @@ grievancesystem.controller('studentController',studentController);
             "grievance_id":"1",
             "Grievance_type":"1",
             "assigned_committee":"1",
-            "doi":"1",
-            "employed":"1",
+            "data_of_issue":"1",
             "eta":"1",
             "status":"1",
             "attachment":"1",
@@ -147,11 +113,10 @@ grievancesystem.controller('studentController',studentController);
             "grievance_id":"1",
             "Grievance_type":"1",
             "assigned_committee":"1",
-            "doi":"1",
-            "employed":"1",
+            "data_of_issue":"1",
             "eta":"1",
             "status":"1",
-            "attachment":"1",
+            "attachment":"clock.png",
             
             
         },
@@ -159,8 +124,7 @@ grievancesystem.controller('studentController',studentController);
             "grievance_id":"1",
             "Grievance_type":"1",
             "assigned_committee":"1",
-            "doi":"1",
-            "employed":"1",
+            "data_of_issue":"1",
             "eta":"1",
             "status":"1",
             "attachment":"1",
@@ -186,15 +150,14 @@ grievancesystem.controller('studentController',studentController);
 
 
             columnDefs: [
-                { name : "grievance_id",display: 'Grievance ID', cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div>' },
-                { name:"Grievance_type" ,display: 'Grievance Type', cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div> '},
-                { name:"assigned_committee" ,display: 'Assigned Committee',  cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div>'},
-                {name :"doi" ,display: 'Date of Issue' ,cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div>' },
-                {name:"employed" , display: 'employed',cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div> '},
-                {name:"eta", display: 'ETA' ,cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div> '},
-                {name:"status" ,display: 'Status', cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div> '},
-                {name:"attachment",display: 'Attachment',cellTemplate: "<div class='ui-grid-cell-contents cell div-click'><img src='assets/images/attachment.png' height=16 width=16' value='{{COL_FIELD CUSTOM_FILTERS}}'></div> "  },
-                {name:"action",display: 'Action', cellTemplate: "<div class='ui-grid-cell-contents cell div-click'><img src='assets/images/attachment.png' height=16 width=16' value='{{COL_FIELD CUSTOM_FILTERS}}'>&nbsp;&nbsp;<img src='assets/images/attachment.png' height=16 width=16' value='{{COL_FIELD CUSTOM_FILTERS}}'></div> "},
+                { name : "grievance_id",display: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
+                { name:"Grievance_type" ,display: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html'},
+                { name:"assigned_committee" ,display: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
+                {name :"data_of_issue" ,display: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html' },
+                {name:"eta", display: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html'},
+                {name:"status" ,display: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
+                {name:"attachment",display: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
+                {name:"action",display: 'Action', cellTemplate: "/views/cellTemplate/student_action.html"},
                         ],
 
                 
@@ -216,14 +179,13 @@ grievancesystem.controller('studentController',studentController);
 
     
         columnDefs: [
-                    { name : "grievance_id",display: 'Grievance ID', cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div>' },
-                    { name:"Grievance_type" ,display: 'Grievance Type', cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div> '},
-                    { name:"assigned_committee" ,display: 'Assigned Committee',  cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div>'},
-                    {name :"doi" ,display: 'Date of Issue' ,cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div>' },
-                    {name:"employed" , display: 'employed',cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div> '},
-                    {name:"eta", display: 'ETA' ,cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div> '},
-                    {name:"status" ,display: 'Status', cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div> '},
-                    {name:"attachment",display: 'Attachment',cellTemplate: "<div class='ui-grid-cell-contents cell div-click'><img src='assets/images/attachment.png' height=16 width=16' value='{{COL_FIELD CUSTOM_FILTERS}}'></div> "  },
+                    { name : "grievance_id",display: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
+                    { name:"Grievance_type" ,display: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html '},
+                    { name:"assigned_committee" ,display: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
+                    {name :"data_of_issue" ,display: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html' },
+                    {name:"eta", display: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html '},
+                    {name:"status" ,display: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
+                    {name:"attachment",display: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
                     
                             ],
     
@@ -238,28 +200,27 @@ grievancesystem.controller('studentController',studentController);
             enableCellEditing:false,
             enableColumnMenus: false,
             enableHorizontalScrollbar:0,
-            enableVerticalScrollbar:1,
+            enableVerticalScrollbar:0,
             totalItems: $scope.grievance_data.length,
             paginationPageSize: $scope.numRows,
             minRowsToShow: $scope.grievance_data.length < $scope.numRows ? $scope.grievance_data : $scope.numRows,
             enablePaginationControls: false,
 
     columnDefs: [
-                { name : "grievance_id",display: 'Grievance ID', cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div>' },
-                { name:"Grievance_type" ,display: 'Grievance Type', cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div> '},
-                { name:"assigned_committee" ,display: 'Assigned Committee',  cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div>'},
-                {name :"doi" ,display: 'Date of Issue' ,cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div>' },
-                {name:"employed" , display: 'employed',cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div> '},
-                {name:"eta", display: 'ETA' ,cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div> '},
-                {name:"status" ,display: 'Status', cellTemplate: '<div class="ui-grid-cell-contents cell">{{COL_FIELD CUSTOM_FILTERS}}</div> '},
-                {name:"attachment",display: 'Attachment',cellTemplate: "<div class='ui-grid-cell-contents cell div-click'><img src='assets/images/attachment.png' height=16 width=16' value='{{COL_FIELD CUSTOM_FILTERS}}'></div> "  },
+                { name : "grievance_id",display: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
+                { name:"Grievance_type" ,display: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html '},
+                { name:"assigned_committee" ,display: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
+                {name :"data_of_issue" ,display: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html' },
+                {name:"eta", display: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html '},
+                {name:"status" ,display: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
+                {name:"attachment",display: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
                 
                         ],
 
                 
     };
 
-           
+
 
 
 };
