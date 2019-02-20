@@ -55,20 +55,27 @@ class grievanceController extends Controller
      */
     public function show($id)
     {
-        $email = Auth::user()->email;
-        $student_id = DB::table('user_student')->where('email', $email)->get(['id']);
-        $grievances = DB::table('table_grievance')->where('id',$id)->get(['id','type','created_at','documents','department_id']);
+        $gid = Auth::user()->id;
+         // $user_id = DB::table('users')->where('email', $email)->get(['id']);
+         // return  $user_id->id;
+        $student_id = DB::table('user_student')->where('user_id', $gid)->get(['id'])->pluck('id');
+        $grievances = DB::table('table_grievance')->where(['id'=>$id,
+            'student_id'=>$student_id])->get(['id','type','student_id','created_at','documents','department_id']);
+        if($grievances->isEmpty())
+            return response("{'message:No such Grievance'}",403);
         $grievance_status = DB::table('table_grievance_status')->where('grievance_id',$id)->get(['status','eta']);
         $department_name = DB::table('table_department')->where('id',$grievances[0]->department_id)->get(['name']);
         $data = [
-            'id' => $grievances[0]->id,
-            'type' => $grievances[0]->type,
-            'created_at'=> $grievances[0]->created_at,
-            'documents' => $grievances[0]->documents,
-            'committe_assigned' => $department_name[0]->name,
+            'grievance_id' => $grievances[0]->id,
+            'grievance_type' => $grievances[0]->type,
+            'data_of_issue'=> $grievances[0]->created_at,
+            'attachment' => $grievances[0]->documents,
+            'assigned_committee' => $department_name[0]->name,
             'status' => $grievance_status[0]->status,
             'eta' => $grievance_status[0]->eta
         ];
+       
+        return response(['message'=>$data],200);
         return json_encode($data);
     }
 
