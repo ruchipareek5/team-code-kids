@@ -64,69 +64,27 @@
     <div class="grievance-form">
 
         <div class="row"> 
-            <div class="col-md-6 col-lg-6 div-form div-form">        
-                <label>Name
-                <span class="imp">*</span></label>
-                <input type="text" name="name" id="name" ng-model="name" placeholder="Enter your name" >
-            </div>
-
-            <div class="col-md-6 col-lg-6 div-form">             
-                <label>Roll Number<span class="imp">*</span></label>
-                <input type="text" name="roll_num" id="roll_num" ng-model="roll_num" placeholder="Enter your Roll number">
-            </div>
-        </div>
-
-        <div class="row"> 
-            <div class="col-md-6 col-lg-6 div-form">               
-                <label>Contact Number<span class="imp">*</span></label>
-                <input type="text" name="contact" id="contact" ng-model="contact" placeholder="Enter your contact">
-            </div>
-
-            <div class="col-md-6 col-lg-6 div-form">
-                <label>Email<span class="imp">*</span></label>
-                <input type="email" name="email" id="email" ng-model="email" placeholder="Enter your email">               
-            </div>
-        </div>
-
-        <div class="row"> 
-            <div class="col-md-6 col-lg-6 div-form">
-             
-                <label>Course<span class="imp">*</span></label>
-                <input type="text" name="course" id="course" ng-model="course" placeholder="Enter your course">
-            </div>
-
-            <div class="col-md-6 col-lg-6 div-form">
-                <label>Branch<span class="imp">*</span></label>
-                <select ng-model="branch">
-                    <option value="">Select</option>
-                    <option ng-repeat= "y in choose_branch" value={{y.branch}} >{{y.branch}}</option>
-                </select>
-            </div>
-        </div>
-
-            
-        <div class="row"> 
-            <div class="col-md-6 col-lg-6 div-form">
-               <label>Year<span class="imp">*</span></label>
-                <input type="text" name="year" id="year" ng-model="year" placeholder="Enter your year">
-            </div>
-
-            <div class="col-md-6 col-lg-6 div-form">
+            <div class="col-md-12 col-lg-12 div-form">
                <label>Grievances Against<span class="imp">*</span></label>
                 <select ng-model="grievance_against">
                     <option value="">Select</option>
                     <option ng-repeat= "y in grievanceagainst" value={{y.category}} >{{y.category}}</option>
                 </select>
             </div>
+            
+            
         </div>
              
         <div class="row">
-          <div class="col-md-12 col-lg-12 div-detail">
+             <div class="col-md-12 col-lg-12 div-detail">
               <label>Attachment<span class="imp">*</span></label>
               <input type="text" name="selected_file" class="selected_file" id="selected_file" ng-model="selected_file" placeholder="Upload file pdf, doc, jpg, jpeg, png">
               <input type="file" name="attachment" class="attachment" id="attachment" > 
               <label  for="file"  class="attachmentbtn">Select</label>
             </div>
+        </div>
+        <div class="row">
+         
               
             <div class="col-md-12 col-lg-12 div-detail">    
               <label id="label-detail">Details<span class="imp">*</span> </label>            
@@ -135,7 +93,7 @@
              </textarea>
             </div>
 
-            <div align="center" class="col-md-12 col-lg-12 "><button class="btn button-submit">Submit</button></div>
+            <div align="left" class="col-md-12 col-lg-12 "><button class="btn button-submit">Submit</button></div>
         </div>
 
     </div>

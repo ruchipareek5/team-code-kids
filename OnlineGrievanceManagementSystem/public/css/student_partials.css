@@ -92,7 +92,7 @@ hr
     background-color: #F2F1F2 ;
     border: 2px solid #D7D7D7;
     padding: 0.5em;
-    width: 18em;
+    width: 25em;
  
 }
 .div-detail textarea
@@ -110,7 +110,7 @@ hr
     background-color: #F2F1F2;
     border: 2px solid #D7D7D7;
     padding: 0.5em;
-    width: 18em;
+    width: 25em;
     color: #7E7E7E;
 }
 .div-form
@@ -175,6 +175,7 @@ hr
 {
     display: inline-block;
     color: white;
+    margin-top: 20px;
     background-color: #434B68;
     padding: 0.3em;
     border-radius: 0.5em;
