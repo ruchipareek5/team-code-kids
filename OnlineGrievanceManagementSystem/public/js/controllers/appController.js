@@ -1,3 +1,5 @@
+
+
 // Controller for grievancesystem i.e., main controller
 grievancesystem.controller('appController',function($scope,$http,$location,API_URL,$cookies){
 	$scope.page_tab='login';

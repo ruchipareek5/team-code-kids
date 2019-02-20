@@ -1,5 +1,23 @@
+
 // Controller for student
 var grievancesystem= angular.module('grievancesystem');
+
+// directive for uploading document while lodging grievance
+
+grievancesystem.directive('ngFiles', ['$parse', function ($parse) {
+ 
+    function file_links(scope, element, attrs) {
+        var onChange = $parse(attrs.ngFiles);
+        element.on('change', function (event) {
+            onChange(scope, {$files: event.target.files});
+        });
+    }
+ 
+    return {
+        link: file_links
+    }
+}]);
+
 grievancesystem.controller('studentController',studentController);
 
 
@@ -54,6 +72,46 @@ grievancesystem.controller('studentController',studentController);
     
     };
     //  grievance search ends
+
+    // lodge grievance 
+
+    $scope.grievance = {};
+    var formData = new FormData();
+    
+    $scope.lodgeGrievance = function () {
+        console.log($scope.grievance);
+        var request = {
+            method: 'POST',
+            url: API_URL+"grievances",
+            data: formData,
+            headers: {
+                'Content-Type': undefined
+            }
+        };
+ 
+        $http(request)
+            .then(function success(e) {
+                console.log(e.data);
+                alert("Grievance has been loged successfully!");
+                $scope.files = e.data.files;
+                $scope.errors = [];
+                var fileElement = angular.element('#attachment');
+                fileElement.value = '';
+            }, function error(e) {
+                $scope.errors = e.data.errors;
+                console.log(e.data);
+            });
+    };
+ 
+    $scope.setTheFiles = function ($files) {
+        angular.forEach($files, function (value, key) {
+            formData.append('type',$scope.grievance.type);
+            formData.append('detail',$scope.grievance.detail);
+            formData.append('attachment', value);
+
+        });
+    };
+    //  lodge grievance
 
 
     $scope.faq =[{ "ques":"how to file grievance? How we will know it is resolved",
