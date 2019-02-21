@@ -36,9 +36,9 @@ grievancesystem.controller('studentController',studentController);
         
     // grievance search starts
     $scope.searchId='';
-    $scope.grievance_search_data;
+    $scope.grievance_search_data=new Array();
     $scope.searchGrievance =  function(searchId){
-    $scope.grievance_search.data=new Array();
+    $scope.grievance_search_data=new Array();
     studentService.searchGrievance(searchId).then(function(success){
             $scope.grievance_search.data=new Array();
             $scope.grievance_search_data=success.data.message;
@@ -150,16 +150,15 @@ grievancesystem.controller('studentController',studentController);
 
              $scope.open_grievance_data =new Array();
             $scope.escalated_grievance_data =new Array();
-            $scope.grievance_history_data =new Array();
+            $scope.grievance_resolved_data =new Array();
             $scope.loadAllGrievance=function(){
                     $scope.open_grievance_data =new Array();
                     $scope.grievance_data =new Array();
-                    $scope.grievance_history_data =new Array();
+                    $scope.grievance_resolved_data =new Array();
                 studentService.getGrievance('pending').then(function(success)
                  {   
-                  $scope.open_grievance_data = success.data.message;
+                        $scope.open_grievance_data = success.data.message;
                         $scope.open_grievance.data = $scope.open_grievance_data;
-
                     }, function(error)
                  {
 
@@ -203,8 +202,9 @@ grievancesystem.controller('studentController',studentController);
             enableHorizontalScrollbar:0,
             enableVerticalScrollbar:0,
             paginationPageSize: $scope.numRows,
-            minRowsToShow: $scope.numRows,
+            minRowsToShow: $scope.open_grievance_data.length < $scope.numRows ? $scope.open_grievance_data : $scope.numRows,
             enablePaginationControls: false,
+
 
 
             columnDefs: [
@@ -215,6 +215,7 @@ grievancesystem.controller('studentController',studentController);
                 {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html'},
                 {name:"status" ,displayName: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
                 {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
+                { name:"remarks" ,displayName: 'Remarks',  cellTemplate: '/views/cellTemplate/student_remarks.html'},
                 {name:"action",displayName: 'Action', cellTemplate: "/views/cellTemplate/student_action.html"},
                         ],
 
@@ -231,8 +232,9 @@ grievancesystem.controller('studentController',studentController);
                 enableHorizontalScrollbar:0,
                 enableVerticalScrollbar:0,
                 paginationPageSize: $scope.numRows,
-                minRowsToShow: $scope.numRows,
+            minRowsToShow: $scope.escalated_grievance_data.length < $scope.numRows ? $scope.escalated_grievance_data : $scope.numRows,
                 enablePaginationControls: false,
+
 
     
         columnDefs: [
@@ -243,14 +245,14 @@ grievancesystem.controller('studentController',studentController);
                     {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html '},
                     {name:"status" ,displayName: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
                     {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
-                    
+                    { name:"remarks" ,displayName: 'Remarks',  cellTemplate: '/views/cellTemplate/student_remarks.html'},
                             ],
     
                    
         };
 
         $scope.grievance_resolved = {
-            data:$scope.grievance_history_data,
+            data:$scope.grievance_resolved_data,
             enableGridMenus:false,
             enableSorting: false,
             enableFiltering:false,
@@ -259,8 +261,9 @@ grievancesystem.controller('studentController',studentController);
             enableHorizontalScrollbar:0,
             enableVerticalScrollbar:0,
             paginationPageSize: $scope.numRows,
-            minRowsToShow: $scope.numRows,
+            minRowsToShow: $scope.grievance_resolved_data.length < $scope.numRows ? $scope.grievance_resolved_data : $scope.numRows,
             enablePaginationControls: false,
+
 
 
     columnDefs: [
@@ -271,6 +274,8 @@ grievancesystem.controller('studentController',studentController);
                 {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html '},
                 {name:"status" ,displayName: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
                 {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
+                { name:"remarks" ,displayName: 'Remarks',  cellTemplate: '/views/cellTemplate/student_remarks.html'},
+
                 
                         ],
 
@@ -278,7 +283,7 @@ grievancesystem.controller('studentController',studentController);
     };
 
         $scope.grievance_search = {
-            data:$scope.grievance_data_search,
+            data:$scope.grievance_search_data,
             enableGridMenus:false,
             enableSorting: false,
             enableFiltering:false,
@@ -287,8 +292,9 @@ grievancesystem.controller('studentController',studentController);
             enableHorizontalScrollbar:0,
             enableVerticalScrollbar:0,
             paginationPageSize: $scope.numRows,
-            minRowsToShow: $scope.numRows,
+            minRowsToShow: $scope.grievance_search_data.length < $scope.numRows ? $scope.grievance_search_data : $scope.numRows,
             enablePaginationControls: false,
+
 
     columnDefs: [
                 { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
@@ -297,6 +303,7 @@ grievancesystem.controller('studentController',studentController);
                 {name :"created_at" ,displayName: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html' },
                 {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html '},
                 {name:"status" ,displayName: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
+                {name:"remarks" ,displayName: 'Remarks',  cellTemplate: '/views/cellTemplate/student_remarks.html'},
                 {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
                 
                         ],

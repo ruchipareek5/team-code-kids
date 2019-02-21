@@ -1,7 +1,7 @@
 
 
 // Controller for grievancesystem i.e., main controller
-grievancesystem.controller('appController',function($scope,$http,$location,API_URL,$cookies,$window){
+grievancesystem.controller('appController',function($scope,$http,$location,API_URL,$cookies,$window,appService){
 	$scope.page_tab='login';
 	$scope.login = {};
 	$http.defaults.headers.common.Authorization = $cookies.get('Auth');
@@ -35,14 +35,28 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 			$location.path('/');
 	}
 
-	 // grievances action ends
+	 // grievances action starts
     $scope.downloadAttachment=function(path){
 
        var url = API_URL+'grievance/download/'+path;
        $window.open(url);
     }
+    // grievances action ends
 
-    // grievance search starts
+    // grievance remakrs starts
+    $scope.remarkMessage='';
+    $scope.viewRemarks=function(id){
+    	var url = API_URL+'grievance/remarks/'+id;
+    	$http.get(url).then(function(success){
+    		$scope.remarkMessage=success.data.message;
+    		$('#modal-conatiner').addClass('visible');
+    	},
+    	function(error){
+
+    	});
+    }
+
+    // grievance remakrs starts
 
 
 });
