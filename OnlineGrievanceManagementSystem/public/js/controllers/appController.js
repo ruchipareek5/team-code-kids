@@ -37,7 +37,9 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 
 	 // grievances action ends
     $scope.downloadAttachment=function(path){
-       var url = API_URL+'/grievance/download/'+path;
+	    alert(path);
+       var url = API_URL+'grievance/download/'+path;
+       alert(url);
        $http.get(url);
     }
 

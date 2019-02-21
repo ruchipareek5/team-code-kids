@@ -24,5 +24,6 @@ class VerifyCsrfToken extends Middleware
         '/login/',
         '/grievances/',
         '/grievance/*',
+        '/grievances/index',
     ];
 }

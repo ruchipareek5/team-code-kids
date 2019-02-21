@@ -58,32 +58,32 @@ class grievanceController extends Controller
         $id ="5";
         //$id = Auth::user()->id;
         $student_id = DB::table('user_student')->where('user_id',$id)->get(['id'])->first();
-        $grievance = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','asc')
+        $grievance_escalated = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','asc')
                         ->get(['id','type','created_at','documents']);
-        $data = [];
+        $data_escalated = [];
         $i = 0;
-        foreach ($grievance as $id){
-            $data[$i] = $id->id;
+        foreach ($grievance_escalated as $id){
+            $data_escalated[$i] = $id->id;
             $i++;
         }
-        $grievance_status = DB::table('table_grievance_status')->whereIn('status',['delayed','reopened'])
-            ->whereIn('grievance_id',$data)->orderBy('grievance_id','asc')
+        $grievance_status_escalated = DB::table('table_grievance_status')->whereIn('status',['delayed','reopened'])
+            ->whereIn('grievance_id',$data_escalated)->orderBy('grievance_id','asc')
             ->get(['grievance_id','status','eta']);
         $i = 0;
 
         $esclated=[];
         
 
-        for ($i = 0; $i<count($grievance_status);$i++){
+        for ($i = 0; $i<count($grievance_status_escalated);$i++){
             $action = 0;
             $esclated[$i] = [
-              'id'=>$grievance[$i]->id,
-              'type' => $grievance[$i]->type,
-              'assigned_to' => $grievance[$i]->type,
-              'created_at' => $grievance[$i]->created_at,
-              'documents'=>  $grievance[$i]->documents,
-                'status'=>$grievance_status[$i]->status,
-                'eta'=>$grievance_status[$i]->eta,
+              'id'=>$grievance_status_escalated[$i]->grievance_id,
+              'type' => $grievance_escalated[$i]->type,
+              'assigned_to' => $grievance_escalated[$i]->type,
+              'created_at' => $grievance_escalated[$i]->created_at,
+              'documents'=>  $grievance_escalated[$i]->documents,
+                'status'=>$grievance_status_escalated[$i]->status,
+                'eta'=>$grievance_status_escalated[$i]->eta,
                 'action'=>$action
             ];
         }
@@ -91,32 +91,32 @@ class grievanceController extends Controller
         $id ="5";
         //$id = Auth::user()->id;
         $student_id = DB::table('user_student')->where('user_id',$id)->get(['id'])->first();
-        $grievance = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','asc')
+        $grievance_solved = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','asc')
                         ->get(['id','type','created_at','documents']);
-        $data = [];
+        $data_solved = [];
         $i = 0;
-        foreach ($grievance as $id){
-            $data[$i] = $id->id;
+        foreach ($grievance_solved as $id){
+            $data_solved[$i] = $id->id;
             $i++;
         }
-        $grievance_status = DB::table('table_grievance_status')->whereIn('status',['resolved'])
-            ->whereIn('grievance_id',$data)->orderBy('grievance_id','asc')
+        $grievance_status_solved = DB::table('table_grievance_status')->whereIn('status',['resolved'])
+            ->whereIn('grievance_id',$data_solved)->orderBy('grievance_id','asc')
             ->get(['grievance_id','status','eta']);
         $i = 0;
 
         $resolved=[];
         
 
-        for ($i = 0; $i<count($grievance_status);$i++){
+        for ($i = 0; $i<count($grievance_status_solved);$i++){
             $action = 1;
             $resolved[$i] = [
-              'id'=>$grievance[$i]->id,
-              'type' => $grievance[$i]->type,
-              'assigned_to' => $grievance[$i]->type,
-              'created_at' => $grievance[$i]->created_at,
-              'documents'=>  $grievance[$i]->documents,
-                'status'=>$grievance_status[$i]->status,
-                'eta'=>$grievance_status[$i]->eta,
+              'id'=>$grievance_status_solved[$i]->grievance_id,
+              'type' => $grievance_solved[$i]->type,
+              'assigned_to' => $grievance_solved[$i]->type,
+              'created_at' => $grievance_solved[$i]->created_at,
+              'documents'=>  $grievance_solved[$i]->documents,
+                'status'=>$grievance_status_solved[$i]->status,
+                'eta'=>$grievance_status_solved[$i]->eta,
                 'action'=>$action
             ];
         }
@@ -125,7 +125,7 @@ class grievanceController extends Controller
         $result["esclated"] = $esclated;
         $result["resolved"] = $resolved;
 
-        return \json_encode($result);
+        echo json_encode($result);
     }
 
     /**
@@ -306,6 +306,7 @@ class grievanceController extends Controller
     }
     public function download($path){
         if($path != null){
+            $path = '/documents/'.$path;
             return Storage::download($path);
         }
     }
