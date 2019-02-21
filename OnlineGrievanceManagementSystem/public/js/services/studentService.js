@@ -9,15 +9,24 @@ grievancesystem.service('studentService',function ($http,API_URL) {
 	}
 
 	this.open_grievances=function () {
-		var url = API_URL + 'grievances/index';
-		return $http.post(url);
+		var url = API_URL + 'grievances';
+		return $http.get(url);
 
 	}
 
 	this.action_grievance = function(data)
 	{
-		var url = API_URL + 'grievances/updateStatus';
-		return $http.post(url,data);
+        alert("jhag"+ data.id);
+		var request = {
+                'method': 'POST',
+                'url': API_URL+"grievances/updateStatus",
+                'data': data,
+                'headers': {
+                    'Content-Type': undefined
+                }
+            };
+     
+            return $http(request)
 	}
 	
 });

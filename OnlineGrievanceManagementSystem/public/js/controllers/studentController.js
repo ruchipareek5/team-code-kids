@@ -108,6 +108,8 @@ grievancesystem.controller('studentController',studentController);
                     appService.showAlert('success',e.data.message +" having an ID "+ e.data.id);
                     $scope.files = e.data.files;
                     $scope.errors = [];
+                    $scope.grievance = {};
+                    $scope.lodgeGrievanceForm.$setUntouched()
                     var fileElement = angular.element('#attachment');
                     fileElement.value = '';
                 }, function error(e) {
@@ -139,43 +141,57 @@ grievancesystem.controller('studentController',studentController);
 
                     
                 ];
-    
-   
-                $scope.open_grievance_data =new Array();
-                studentService.open_grievances().then(function(success)
-                     {   $scope.open_grievance.data = new Array();
-                            $scope.open_grievance_data = success.data.open;
-                            $scope.open_grievance.data = $scope.open_grievance_data;
+             $scope.open_grievance_data =new Array();
+            $scope.escalated_grievance_data =new Array();
+            $scope.grievance_history_data =new Array();
+   $scope.loadAllGrievance=function(){
+                     $scope.open_grievance_data =new Array();
+                    $scope.grievance_data =new Array();
+                    $scope.grievance_history_data =new Array();
+            studentService.open_grievances().then(function(success)
+                 {   
 
-                    }, function(error)
-                         {
-            
-                              });
+                        $scope.open_grievance_data = success.data.open;
+                        $scope.open_grievance.data = $scope.open_grievance_data;
 
-                $scope.grievance_data =new Array();
-                studentService.open_grievances().then(function(success)
-                     {   $scope.escalated_grievance.data = new Array();
-                            $scope.grievance_data = success.data.esclated;
-                            $scope.escalated_grievance.data = $scope.grievance_data;
+                         $scope.escalated_grievance_data = success.data.esclated;
+                        $scope.escalated_grievance.data = $scope.escalated_grievance_data;
+
+                        $scope.grievance_history_data = success.data.resolved;
+                        $scope.grievance_history.data = $scope.grievance_history_data;
+
+
+
+                }, function(error)
+                     {
+        
+                          });
+
+                // $scope.grievance_data =new Array();
+                // studentService.open_grievances().then(function(success)
+                //      {   $scope.escalated_grievance.data = new Array();
+                //             $scope.grievance_data = success.data.esclated;
+                //             $scope.escalated_grievance.data = $scope.grievance_data;
                            
-                    }, function(error)
-                         {
+                //     }, function(error)
+                //          {
             
-                              });
-                $scope.grievance_history_data =new Array();
-                    studentService.open_grievances().then(function(success)
-                                   {   $scope.grievance_history.data = new Array();
-                                          $scope.grievance_history_data = success.data.resolved;
-                                          $scope.grievance_history.data = $scope.grievance_history_data;
+                //               });
+                // $scope.grievance_history_data =new Array();
+                //     studentService.open_grievances().then(function(success)
+                //                    {   $scope.grievance_history.data = new Array();
+                //                           $scope.grievance_history_data = success.data.resolved;
+                //                           $scope.grievance_history.data = $scope.grievance_history_data;
                                          
-                                  }, function(error)
-                                       {
+                //                   }, function(error)
+                //                        {
                           
-                                            });
+                //                             });
 
+}
 
-
-        $scope.numRows = 5;
+        $scope.numRows = 3;
+        $scope.loadAllGrievance();
    
      $scope.open_grievance = {
         data:$scope.open_grievance_data,
@@ -186,9 +202,8 @@ grievancesystem.controller('studentController',studentController);
             enableColumnMenus: false,
             enableHorizontalScrollbar:0,
             enableVerticalScrollbar:0,
-            totalItems: $scope.open_grievance_data.length,
             paginationPageSize: $scope.numRows,
-            minRowsToShow: $scope.open_grievance_data.length < $scope.numRows ? $scope.open_grievance_data : $scope.numRows,
+            minRowsToShow: $scope.numRows,
             enablePaginationControls: false,
 
 
@@ -207,7 +222,7 @@ grievancesystem.controller('studentController',studentController);
              };
 
              $scope.escalated_grievance = {
-                data:$scope.grievance_data,
+                data:$scope.escalated_grievance_data,
                 enableGridMenus:false,
                 enableSorting: false,
                 enableFiltering:false,
@@ -215,9 +230,8 @@ grievancesystem.controller('studentController',studentController);
                 enableColumnMenus: false,
                 enableHorizontalScrollbar:0,
                 enableVerticalScrollbar:0,
-                totalItems: $scope.grievance_data.length,
                 paginationPageSize: $scope.numRows,
-                minRowsToShow: $scope.grievance_data.length < $scope.numRows ? $scope.grievance_data : $scope.numRows,
+                minRowsToShow: $scope.numRows,
                 enablePaginationControls: false,
 
     
@@ -244,9 +258,8 @@ grievancesystem.controller('studentController',studentController);
             enableColumnMenus: false,
             enableHorizontalScrollbar:0,
             enableVerticalScrollbar:0,
-            totalItems: $scope.grievance_data.length,
             paginationPageSize: $scope.numRows,
-            minRowsToShow: $scope.grievance_data.length < $scope.numRows ? $scope.grievance_data : $scope.numRows,
+            minRowsToShow: $scope.numRows,
             enablePaginationControls: false,
 
 
@@ -273,9 +286,8 @@ grievancesystem.controller('studentController',studentController);
             enableColumnMenus: false,
             enableHorizontalScrollbar:0,
             enableVerticalScrollbar:0,
-            totalItems: $scope.grievance_data.length,
             paginationPageSize: $scope.numRows,
-            minRowsToShow: $scope.grievance_data.length < $scope.numRows ? $scope.grievance_data : $scope.numRows,
+            minRowsToShow: $scope.numRows,
             enablePaginationControls: false,
 
     columnDefs: [
@@ -300,14 +312,16 @@ grievancesystem.controller('studentController',studentController);
             "action":action
         };
 
-        studentService.action_grievance($scope.data).then(
+         studentService.action_grievance($scope.data).then(
             function(success)
             {
-                alert("success"+success.data.message+$scope.data.id);
+                $scope.loadAllGrievance();
+                alert("success "+success.data.message+$scope.data.id);
+
             },
             function(error)
             {
-                appService.showAlert('success','success' );
+                appService.showAlert('error',error.data.message );
             }
         )
     }

@@ -58,7 +58,7 @@
         </div>
     </div>
     
-    <form ng-submit="lodgeGrievance()"  enctype="multipart/form-data">
+    <form ng-submit="lodgeGrievance()" name="lodgeGrievanceForm" enctype="multipart/form-data">
     <div class="grievance-form">
 
         <div class="row"> 
