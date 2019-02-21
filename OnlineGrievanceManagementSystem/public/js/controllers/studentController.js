@@ -184,6 +184,8 @@ grievancesystem.controller('studentController',studentController);
                  {
 
                   });
+
+              
         }
 
         // grievance ends

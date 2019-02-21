@@ -32,8 +32,8 @@
                 <h5 class="grievance-heading">Resolved Grievances</h5>
                   <div class="table sub-grid">
                   <div id="grid1" ui-grid="grievance_resolved" ui-grid-pagination="" ui-grid-cellNav ui-grid-auto-resize  class="sub-grid"></div>
-                  <div class="text-center page" ng-show="grievance_history.totalItems > numRows">
-              <pagination class="pagination-sm" total-items="grievance_history.totalItems" items-per-page="grievance_history.paginationPageSize" ng-model="grievance_history.paginationCurrentPage"></pagination>
+                  <div class="text-center page" ng-show="grievance_resolved.totalItems > numRows">
+              <pagination class="pagination-sm" total-items="grievance_resolved.totalItems" items-per-page="grievance_resolved.paginationPageSize" ng-model="grievance_resolved.paginationCurrentPage"></pagination>
       </div>
                   </div>
             </div>
