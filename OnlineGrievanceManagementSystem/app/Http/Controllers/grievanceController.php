@@ -19,8 +19,8 @@ class grievanceController extends Controller
      */
     public function index()
     {
-        $id ="5";
-        //$id = Auth::user()->id;
+        
+        $id = Auth::user()->id;
         $student_id = DB::table('user_student')->where('user_id',$id)->get(['id'])->first();
         $grievance = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','asc')
                         ->get(['id','type','created_at','documents']);
