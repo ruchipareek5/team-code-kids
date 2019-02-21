@@ -59,33 +59,37 @@ grievancesystem.controller('studentController',studentController);
     //  grievance search ends
 
     // grievance statistics
-    $http.get(API_URL+"grievance/total").then(function(response){
-            $scope.total = response.data.value;
-            console.log($scope.total);
-        },function(errorResponse){
-            console.log(errorResponse);
-        });
-     $http.get(API_URL+"grievance/satisfied").then(function(response){
-            $scope.satisfied = response.data.value;
-            console.log($scope.satisfied);
-        },function(errorResponse){
-            console.log(errorResponse);
-        });
-     $http.get(API_URL+"grievance/pending").then(function(response){
-            $scope.pending = response.data.value;
-            console.log($scope.pending);
-        },function(errorResponse){
-            console.log(errorResponse);
-        });
-     $http.get(API_URL+"grievance/escalated").then(function(response){
-            $scope.escalated = response.data.value;
-            console.log($scope.escalated);
-        },function(errorResponse){
-            console.log(errorResponse);
-        });
+    $scope.lodgeGrievanceStatistics=function(){
+        $http.get(API_URL+"grievance/total").then(function(response){
+                $scope.total = response.data.value;
+                console.log($scope.total);
+            },function(errorResponse){
+                console.log(errorResponse);
+            });
+         $http.get(API_URL+"grievance/satisfied").then(function(response){
+                $scope.satisfied = response.data.value;
+                console.log($scope.satisfied);
+            },function(errorResponse){
+                console.log(errorResponse);
+            });
+         $http.get(API_URL+"grievance/pending").then(function(response){
+                $scope.pending = response.data.value;
+                console.log($scope.pending);
+            },function(errorResponse){
+                console.log(errorResponse);
+            });
+         $http.get(API_URL+"grievance/escalated").then(function(response){
+                $scope.escalated = response.data.value;
+                console.log($scope.escalated);
+            },function(errorResponse){
+                console.log(errorResponse);
+            });
+    }
+    $scope.lodgeGrievanceStatistics();
     // grievance statistics
 
     // lodge grievance 
+
         //My grievance
 
 //    
@@ -109,7 +113,8 @@ grievancesystem.controller('studentController',studentController);
                     $scope.files = e.data.files;
                     $scope.errors = [];
                     $scope.grievance = {};
-                    $scope.lodgeGrievanceForm.$setUntouched()
+                    $scope.grievance.selected_file='';
+                    $scope.lodgeGrievanceStatistics();
                     var fileElement = angular.element('#attachment');
                     fileElement.value = '';
                 }, function error(e) {
@@ -144,8 +149,8 @@ grievancesystem.controller('studentController',studentController);
              $scope.open_grievance_data =new Array();
             $scope.escalated_grievance_data =new Array();
             $scope.grievance_history_data =new Array();
-   $scope.loadAllGrievance=function(){
-                     $scope.open_grievance_data =new Array();
+            $scope.loadAllGrievance=function(){
+                    $scope.open_grievance_data =new Array();
                     $scope.grievance_data =new Array();
                     $scope.grievance_history_data =new Array();
             studentService.open_grievances().then(function(success)
@@ -166,29 +171,7 @@ grievancesystem.controller('studentController',studentController);
                      {
         
                           });
-
-                // $scope.grievance_data =new Array();
-                // studentService.open_grievances().then(function(success)
-                //      {   $scope.escalated_grievance.data = new Array();
-                //             $scope.grievance_data = success.data.esclated;
-                //             $scope.escalated_grievance.data = $scope.grievance_data;
-                           
-                //     }, function(error)
-                //          {
-            
-                //               });
-                // $scope.grievance_history_data =new Array();
-                //     studentService.open_grievances().then(function(success)
-                //                    {   $scope.grievance_history.data = new Array();
-                //                           $scope.grievance_history_data = success.data.resolved;
-                //                           $scope.grievance_history.data = $scope.grievance_history_data;
-                                         
-                //                   }, function(error)
-                //                        {
-                          
-                //                             });
-
-}
+        }
 
         $scope.numRows = 3;
         $scope.loadAllGrievance();
