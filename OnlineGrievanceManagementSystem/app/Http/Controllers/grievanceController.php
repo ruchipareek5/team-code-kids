@@ -44,11 +44,11 @@ class grievanceController extends Controller
             else
                 $action = 0;
             $open[$i] = [
-              'id'=>$grievance[$i]->id,
-              'type' => $grievance[$i]->type,
-              'assigned_to' => $grievance[$i]->type,
-              'created_at' => $grievance[$i]->created_at,
-              'documents'=>  $grievance[$i]->documents,
+              'grievance_id'=>$grievance[$i]->id,
+              'grievance_type' => $grievance[$i]->type,
+              'assigned_committee' => $grievance[$i]->type,
+              'data_of_issue' => $grievance[$i]->created_at,
+              'attachment'=>  $grievance[$i]->documents,
                 'status'=>$grievance_status[$i]->status,
                 'eta'=>$grievance_status[$i]->eta,
                 'action'=>$action
@@ -77,11 +77,11 @@ class grievanceController extends Controller
         for ($i = 0; $i<count($grievance_status_escalated);$i++){
             $action = 0;
             $esclated[$i] = [
-              'id'=>$grievance_status_escalated[$i]->grievance_id,
-              'type' => $grievance_escalated[$i]->type,
-              'assigned_to' => $grievance_escalated[$i]->type,
-              'created_at' => $grievance_escalated[$i]->created_at,
-              'documents'=>  $grievance_escalated[$i]->documents,
+              'grievance_id'=>$grievance_status_escalated[$i]->grievance_id,
+              'grievance_type' => $grievance_escalated[$i]->type,
+              'assigned_committee' => $grievance_escalated[$i]->type,
+              'data_of_issue' => $grievance_escalated[$i]->created_at,
+              'attachment'=>  $grievance_escalated[$i]->documents,
                 'status'=>$grievance_status_escalated[$i]->status,
                 'eta'=>$grievance_status_escalated[$i]->eta,
                 'action'=>$action
@@ -110,11 +110,11 @@ class grievanceController extends Controller
         for ($i = 0; $i<count($grievance_status_solved);$i++){
             $action = 1;
             $resolved[$i] = [
-              'id'=>$grievance_status_solved[$i]->grievance_id,
-              'type' => $grievance_solved[$i]->type,
-              'assigned_to' => $grievance_solved[$i]->type,
-              'created_at' => $grievance_solved[$i]->created_at,
-              'documents'=>  $grievance_solved[$i]->documents,
+              'grievance_id'=>$grievance_status_solved[$i]->grievance_id,
+              'grievance_type' => $grievance_solved[$i]->type,
+              'assigned_committee' => $grievance_solved[$i]->type,
+              'data_of_issue' => $grievance_solved[$i]->created_at,
+              'attachment'=>  $grievance_solved[$i]->documents,
                 'status'=>$grievance_status_solved[$i]->status,
                 'eta'=>$grievance_status_solved[$i]->eta,
                 'action'=>$action
@@ -282,7 +282,7 @@ class grievanceController extends Controller
         $id=$request->input('id');
         $grievance = GrievanceStatus::find($id);
         if($request->input('action') == 0){
-            $grievance->status = "esclated";
+            $grievance->status = "escalated";
             $grievance->eta = 7;
         }
         else{
