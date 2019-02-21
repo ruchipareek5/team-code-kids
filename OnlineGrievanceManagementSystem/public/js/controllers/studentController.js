@@ -23,16 +23,11 @@ grievancesystem.controller('studentController',studentController);
 
  function studentController($scope,$http,appService,studentService,API_URL) {
  	$scope.page='dashboard_student';
-
- 	$scope.total_grievances = 18;
-    $scope.ongoing_grievance = 1;
-    $scope.satisfied_grievance = 8;
-    $scope.pending_grievance = 9;
     
     $scope.total_grievance_date = "Yesterday 02:30PM"
     $scope.pending_grievance_date = "Today 03:00PM"
     $scope.satisfied_grievance_date = "25 Nov 05:30PM"
-    $scope.pending_grievance_date = "Yesterday 02:30PM"
+    $scope.ongoing_grievance_date = "Yesterday 02:30PM"
 
 
     $scope.choose_branch=[{"branch":"Computer Science Engineerng"},{"branch":"Information Technology"},
@@ -63,6 +58,33 @@ grievancesystem.controller('studentController',studentController);
     };
     //  grievance search ends
 
+    // grievance statistics
+    $http.get(API_URL+"grievance/total").then(function(response){
+            $scope.total = response.data.value;
+            console.log($scope.total);
+        },function(errorResponse){
+            console.log(errorResponse);
+        });
+     $http.get(API_URL+"grievance/satisfied").then(function(response){
+            $scope.satisfied = response.data.value;
+            console.log($scope.satisfied);
+        },function(errorResponse){
+            console.log(errorResponse);
+        });
+     $http.get(API_URL+"grievance/pending").then(function(response){
+            $scope.pending = response.data.value;
+            console.log($scope.pending);
+        },function(errorResponse){
+            console.log(errorResponse);
+        });
+     $http.get(API_URL+"grievance/escalated").then(function(response){
+            $scope.escalated = response.data.value;
+            console.log($scope.escalated);
+        },function(errorResponse){
+            console.log(errorResponse);
+        });
+    // grievance statistics
+
     // lodge grievance 
 
         $scope.grievance = {};
@@ -81,7 +103,7 @@ grievancesystem.controller('studentController',studentController);
      
             $http(request)
                 .then(function success(e) {
-                    alert("Grievance has been loged successfully!");
+                    appService.showAlert('success',e.data.message +" having an ID "+ e.data.id);
                     $scope.files = e.data.files;
                     $scope.errors = [];
                     var fileElement = angular.element('#attachment');

@@ -3,7 +3,7 @@
    <div class="row row_gap">
     	<div class="col-md-3 grievance-box">
     		<div class="grievance grievance-total">
-    			<span class="grievance-stat-value">{{total_grievances}} <img class="image-bar" src="assets/icons/barGraph.png" width="35" ></span>
+    			<span class="grievance-stat-value">{{total}} <img class="image-bar" src="assets/icons/barGraph.png" width="35" ></span>
                     
                 <span class="grievance-stat-name">Total Grievances </span>
                 <hr>
@@ -16,9 +16,9 @@
     		<div class="grievance grievance-pending">
     			<!-- <span class="number">{{total_grievances}} <img src="assets/icons/barGraph.png"></span>
     			<span>Total Grievance</span> -->
-    			<span class="grievance-stat-value">{{pending_grievance}} <img class="image-bar" src="assets/icons/barGraph.png" width="35" ></span>
+    			<span class="grievance-stat-value">{{escalated}} <img class="image-bar" src="assets/icons/barGraph.png" width="35" ></span>
                     
-                <span class="grievance-stat-name">Pending Grievances </span>
+                <span class="grievance-stat-name">Escalated Grievances </span>
                 <hr>
                 <span class="grievance-stat-time"><img src="assets/icons/clock.png" height="12" width="12">&nbsp;&nbsp;
                     {{pending_grievance_date}}</span>
@@ -29,7 +29,7 @@
     		<div class="grievance grievance-satisfied">
     			<!-- <span class="number">{{total_grievances}} <img src="assets/icons/barGraph.png"></span>
     			<span>Total Grievance</span> -->
-    			<span class="grievance-stat-value">{{satisfied_grievance}} <img class="image-bar" src="assets/icons/barGraph.png" width="35" ></span>
+    			<span class="grievance-stat-value">{{satisfied}} <img class="image-bar" src="assets/icons/barGraph.png" width="35" ></span>
                     
                 <span class="grievance-stat-name">Satisfied Grievances </span>
                 <hr>
@@ -42,9 +42,9 @@
     		<div class="grievance grievance-ongoing">
     			<!-- <span class="number">{{total_grievances}} <img src="assets/icons/barGraph.png"></span>
     			<span>Total Grievance</span> -->
-    			<span class="grievance-stat-value">{{ongoing_grievance}} <img class="image-bar" src="assets/icons/barGraph.png" width="35" ></span>
+    			<span class="grievance-stat-value">{{pending}} <img class="image-bar" src="assets/icons/barGraph.png" width="35" ></span>
                     
-                <span class="grievance-stat-name">Ongoing Grievances </span>
+                <span class="grievance-stat-name">Pending Grievances </span>
                 <hr>
                 <span class="grievance-stat-time"><img src="assets/icons/clock.png" height="12" width="12">&nbsp;&nbsp;
                     {{ongoing_grievance_date}}</span>
