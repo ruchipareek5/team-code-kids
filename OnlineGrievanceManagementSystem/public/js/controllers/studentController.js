@@ -146,7 +146,7 @@ grievancesystem.controller('studentController',studentController);
                      {   $scope.open_grievance.data = new Array();
                             $scope.open_grievance_data = success.data.open;
                             $scope.open_grievance.data = $scope.open_grievance_data;
-                           
+
                     }, function(error)
                          {
             
@@ -307,7 +307,7 @@ grievancesystem.controller('studentController',studentController);
             },
             function(error)
             {
-                alert("error"+error.data.message);
+                appService.showAlert('success','success' );
             }
         )
     }

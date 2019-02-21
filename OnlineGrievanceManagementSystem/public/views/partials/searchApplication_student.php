@@ -19,7 +19,7 @@
                     </form>
                         <br>
                         <br>
-                      <div id="grid1" ui-grid="grievance_search" ui-grid-pagination="" class="grid"></div>
+                      <div id="grid1" ui-grid="grievance_search" ui-grid-pagination="" class="sub-grid"></div>
                 <div class="text-center page" ng-show="grievance_search.totalItems > numRows">
               <pagination class="pagination-sm" total-items="grievance_search.totalItems" items-per-page="grievance_search.paginationPageSize" ng-model="grievance_search.paginationCurrentPage"></pagination>
       </div>
