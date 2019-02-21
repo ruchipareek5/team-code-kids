@@ -71,8 +71,8 @@ class grievanceController extends Controller
         $type = $request->get('type');
         $description = $request->get('detail');
         $file = $request->file('attachment');
-        $student_id = DB::table('user_student')->where('user_id',Session::get('user_id'))->get(['id','college_id'])->first();
-        $department_id = DB::table('table_department')->where('name','LIKE',$type)->where('college_id',$student_id->college_id)->get(['id']);
+        $student_id = DB::table('user_student')->where('id',Session::get('user_id'))->get(['id','college_id'])->first();
+        $department_id = DB::table('table_department')->where('type','LIKE',$type)->where('college_id',$student_id->college_id)->get(['id'])->first();
         $grievance = new Grievance;
         $grievance->type = $type;
         $grievance->description = $description;
@@ -176,7 +176,7 @@ class grievanceController extends Controller
         if($request->get('action') == '0'){
            $grievance = Grievance::find($id);
            $grievance->status = 'escalated';
-           $grievance->eta = 7;
+           $grievance->eta =  DB::raw('DATE_ADD(NOW(),INTERVAL 7 DAY)');;
            $grievance->save();
         }
         else if($request->get('action')=='1'){
@@ -203,6 +203,16 @@ class grievanceController extends Controller
         if($path != null){
             $path = '/documents/'.$path;
             return Storage::download($path);
+        }
+    }
+
+
+    public function getRemarks($id){
+        $remarks = \App\GrievanceMessage::where('grievance_id',$id)->get()->first();
+        if($remarks == null)
+            return response(['message'=>'No Remarks Yet'],200);
+        else{
+            return \response(['message'=>$remarks],200);
         }
     }
    
