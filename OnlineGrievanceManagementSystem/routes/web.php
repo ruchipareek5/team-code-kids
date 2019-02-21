@@ -40,6 +40,7 @@ Route::middleware('auth.basic')->group(function(){
     
     Route::post('/grievances/updateStatus','grievanceController@updateStatus');
     Route::get('/grievance/student/{type}','grievanceController@grievanceDetails');             //For student My grievances data
+    Route::get('/grievance/remarks/{id}','grievanceController@getRemarks');
 });
 
 
