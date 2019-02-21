@@ -292,6 +292,26 @@ grievancesystem.controller('studentController',studentController);
                 
     };
 
+    $scope.action = function(gid,action)
+    {
+        
+        $scope.data={
+            "id":gid,
+            "action":action
+        };
+
+        studentService.action_grievance($scope.data).then(
+            function(success)
+            {
+                alert("success"+success.data.message+$scope.data.id);
+            },
+            function(error)
+            {
+                alert("error"+error.data.message);
+            }
+        )
+    }
+
 
 
 

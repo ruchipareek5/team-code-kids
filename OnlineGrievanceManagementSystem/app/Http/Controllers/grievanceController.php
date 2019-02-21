@@ -5,6 +5,7 @@ use App\Http\Middleware\BasicAuth;
 use Illuminate\Http\Request;
 use App\User;
 use App\Grievance;
+use App\GrievanceStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -275,6 +276,7 @@ class grievanceController extends Controller
     {
         //
     }
+
     public function updateStatus(Request $request)
     {
         $id=$request->input('id');

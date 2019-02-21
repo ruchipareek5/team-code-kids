@@ -14,6 +14,10 @@ grievancesystem.service('studentService',function ($http,API_URL) {
 
 	}
 
-
+	this.action_grievance = function(data)
+	{
+		var url = API_URL + 'grievances/updateStatus';
+		return $http.post(url,data);
+	}
 	
 });
