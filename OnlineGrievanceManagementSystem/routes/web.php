@@ -36,7 +36,9 @@ Route::middleware('auth.basic')->group(function(){
 	Route::post('/login','LoginController@checkAuth');
 	Route::get('/grievaceSearch/{id}','grievanceController@show');
 	Route::get('/grievance/download/{path}','grievanceController@download');
-	Route::get('/grievance/{type}','grievanceController@statistics');
+    Route::get('/grievance/{type}','grievanceController@statistics');
+    Route::post('/grievances/index','grievanceController@index');
+    Route::post('/grievances/updateStatus','grievanceController@updateStatus');
 });
 
 

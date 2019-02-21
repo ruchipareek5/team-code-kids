@@ -18,8 +18,115 @@ class grievanceController extends Controller
      */
     public function index()
     {
-        //
+        $id ="5";
+        //$id = Auth::user()->id;
+        $student_id = DB::table('user_student')->where('user_id',$id)->get(['id'])->first();
+        $grievance = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','asc')
+                        ->get(['id','type','created_at','documents']);
+        $data = [];
+        $i = 0;
+        foreach ($grievance as $id){
+            $data[$i] = $id->id;
+            $i++;
+        }
+        $grievance_status = DB::table('table_grievance_status')->whereIn('status',['raised','addressed'])
+            ->whereIn('grievance_id',$data)->orderBy('grievance_id','asc')
+            ->get(['grievance_id','status','eta']);
+        $i = 0;
+
+        $open=[];
+        
+
+        for ($i = 0; $i<count($grievance_status);$i++){
+            if($grievance_status[$i]->status == 'addressed')
+                $action = 1;
+            else
+                $action = 0;
+            $open[$i] = [
+              'id'=>$grievance[$i]->id,
+              'type' => $grievance[$i]->type,
+              'assigned_to' => $grievance[$i]->type,
+              'created_at' => $grievance[$i]->created_at,
+              'documents'=>  $grievance[$i]->documents,
+                'status'=>$grievance_status[$i]->status,
+                'eta'=>$grievance_status[$i]->eta,
+                'action'=>$action
+            ];
+        }
+
+        $id ="5";
+        //$id = Auth::user()->id;
+        $student_id = DB::table('user_student')->where('user_id',$id)->get(['id'])->first();
+        $grievance = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','asc')
+                        ->get(['id','type','created_at','documents']);
+        $data = [];
+        $i = 0;
+        foreach ($grievance as $id){
+            $data[$i] = $id->id;
+            $i++;
+        }
+        $grievance_status = DB::table('table_grievance_status')->whereIn('status',['delayed','reopened'])
+            ->whereIn('grievance_id',$data)->orderBy('grievance_id','asc')
+            ->get(['grievance_id','status','eta']);
+        $i = 0;
+
+        $esclated=[];
+        
+
+        for ($i = 0; $i<count($grievance_status);$i++){
+            $action = 0;
+            $esclated[$i] = [
+              'id'=>$grievance[$i]->id,
+              'type' => $grievance[$i]->type,
+              'assigned_to' => $grievance[$i]->type,
+              'created_at' => $grievance[$i]->created_at,
+              'documents'=>  $grievance[$i]->documents,
+                'status'=>$grievance_status[$i]->status,
+                'eta'=>$grievance_status[$i]->eta,
+                'action'=>$action
+            ];
+        }
+
+        $id ="5";
+        //$id = Auth::user()->id;
+        $student_id = DB::table('user_student')->where('user_id',$id)->get(['id'])->first();
+        $grievance = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','asc')
+                        ->get(['id','type','created_at','documents']);
+        $data = [];
+        $i = 0;
+        foreach ($grievance as $id){
+            $data[$i] = $id->id;
+            $i++;
+        }
+        $grievance_status = DB::table('table_grievance_status')->whereIn('status',['resolved'])
+            ->whereIn('grievance_id',$data)->orderBy('grievance_id','asc')
+            ->get(['grievance_id','status','eta']);
+        $i = 0;
+
+        $resolved=[];
+        
+
+        for ($i = 0; $i<count($grievance_status);$i++){
+            $action = 1;
+            $resolved[$i] = [
+              'id'=>$grievance[$i]->id,
+              'type' => $grievance[$i]->type,
+              'assigned_to' => $grievance[$i]->type,
+              'created_at' => $grievance[$i]->created_at,
+              'documents'=>  $grievance[$i]->documents,
+                'status'=>$grievance_status[$i]->status,
+                'eta'=>$grievance_status[$i]->eta,
+                'action'=>$action
+            ];
+        }
+
+        $result["open"] = $open;
+        $result["esclated"] = $esclated;
+        $result["resolved"] = $resolved;
+
+        return \json_encode($result);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -168,6 +275,23 @@ class grievanceController extends Controller
     {
         //
     }
+    public function updateStatus(Request $request)
+    {
+        $id=$request->input('id');
+        $grievance = GrievanceStatus::find($id);
+        if($request->input('action') == 0){
+            $grievance->status = "esclated";
+            $grievance->eta = 7;
+        }
+        else{
+            $grievance->status = "resolved";
+            $grievance->eta = 0;
+        }
+        
+        $grievance->save();
+
+        return redirect('/grievances/index');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -183,4 +307,5 @@ class grievanceController extends Controller
             return Storage::download($path);
         }
     }
+   
 }

@@ -86,7 +86,9 @@ grievancesystem.controller('studentController',studentController);
     // grievance statistics
 
     // lodge grievance 
+        //My grievance
 
+//    
         $scope.grievance = {};
         $scope.errors = "";
         var formData = new FormData();
@@ -139,87 +141,39 @@ grievancesystem.controller('studentController',studentController);
                 ];
     
    
-    $scope.open_grievance_data=[
-    {
-        "grievance_id":"101",
-        "Grievance_type":"resolved",
-        "assigned_committee":"academics",
-        "data_of_issue":"1",
-        "eta":"1",
-        "status":"resolved",
-        "attachment":"clock.png",
-        "action":"1"
-        
-    },
-    {
-        "grievance_id":"101",
-        "Grievance_type":"resolved",
-        "assigned_committee":"academics",
-        "data_of_issue":"1",
-        "eta":"1",
-        "status":"1",
-        "attachment":"1",
-        "action":"1"
-        
-    },
-    {
-        "grievance_id":"101",
-        "Grievance_type":"pending",
-        "assigned_committee":"academics",
-        "data_of_issue":"1",
-        "eta":"1",
-        "status":"pending",
-        "attachment":"1",
-        "action":"1"
-        
-    },
-    ];
+                $scope.open_grievance_data =new Array();
+                studentService.open_grievances().then(function(success)
+                     {   $scope.open_grievance.data = new Array();
+                            $scope.open_grievance_data = success.data.open;
+                            $scope.open_grievance.data = $scope.open_grievance_data;
+                           
+                    }, function(error)
+                         {
+            
+                              });
 
-    $scope.grievance_data=[
-        {
-            "grievance_id":"1",
-            "Grievance_type":"1",
-            "assigned_committee":"1",
-            "data_of_issue":"1",
-            "eta":"1",
-            "status":"1",
-            "attachment":"1",
-         
+                $scope.grievance_data =new Array();
+                studentService.open_grievances().then(function(success)
+                     {   $scope.escalated_grievance.data = new Array();
+                            $scope.grievance_data = success.data.esclated;
+                            $scope.escalated_grievance.data = $scope.grievance_data;
+                           
+                    }, function(error)
+                         {
             
-        },
-        {
-            "grievance_id":"1",
-            "Grievance_type":"1",
-            "assigned_committee":"1",
-            "data_of_issue":"1",
-            "eta":"1",
-            "status":"1",
-            "attachment":"1",
-            
-            
-        },
-        {
-            "grievance_id":"1",
-            "Grievance_type":"1",
-            "assigned_committee":"1",
-            "data_of_issue":"1",
-            "eta":"1",
-            "status":"1",
-            "attachment":"clock.png",
-            
-            
-        },
-        {
-            "grievance_id":"1",
-            "Grievance_type":"1",
-            "assigned_committee":"1",
-            "data_of_issue":"1",
-            "eta":"1",
-            "status":"1",
-            "attachment":"1",
-            
-            
-        },]
+                              });
+                $scope.grievance_history_data =new Array();
+                    studentService.open_grievances().then(function(success)
+                                   {   $scope.grievance_history.data = new Array();
+                                          $scope.grievance_history_data = success.data.resolved;
+                                          $scope.grievance_history.data = $scope.grievance_history_data;
+                                         
+                                  }, function(error)
+                                       {
+                          
+                                            });
+
+
 
         $scope.numRows = 5;
    
@@ -239,13 +193,13 @@ grievancesystem.controller('studentController',studentController);
 
 
             columnDefs: [
-                { name : "grievance_id",display: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
-                { name:"grievance_type" ,display: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html'},
-                { name:"assigned_committee" ,display: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
-                {name :"data_of_issue" ,display: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html' },
+                { name : "id",display: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
+                { name:"type" ,display: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html'},
+                { name:"assigned_to" ,display: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
+                {name :"created_at" ,display: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html' },
                 {name:"eta", display: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html'},
                 {name:"status" ,display: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
-                {name:"attachment",display: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
+                {name:"document",display: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
                 {name:"action",display: 'Action', cellTemplate: "/views/cellTemplate/student_action.html"},
                         ],
 
@@ -268,13 +222,13 @@ grievancesystem.controller('studentController',studentController);
 
     
         columnDefs: [
-                    { name : "grievance_id",display: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
-                    { name:"Grievance_type" ,display: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html '},
-                    { name:"assigned_committee" ,display: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
-                    {name :"escalated_on" ,display: 'Escalated On' ,cellTemplate: '/views/cellTemplate/cell.html' },
+                    { name : "id",display: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
+                    { name:"type" ,display: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html '},
+                    { name:"assigned_to" ,display: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
+                    {name :"created_at" ,display: 'Escalated On' ,cellTemplate: '/views/cellTemplate/cell.html' },
                     {name:"eta", display: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html '},
                     {name:"status" ,display: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
-                    {name:"attachment",display: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
+                    {name:"document",display: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
                     
                             ],
     
@@ -282,7 +236,7 @@ grievancesystem.controller('studentController',studentController);
         };
 
         $scope.grievance_history = {
-            data:$scope.grievance_data,
+            data:$scope.grievance_history_data,
             enableGridMenus:false,
             enableSorting: false,
             enableFiltering:false,
@@ -297,13 +251,13 @@ grievancesystem.controller('studentController',studentController);
 
 
     columnDefs: [
-                { name : "grievance_id",display: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
-                { name:"Grievance_type" ,display: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html '},
-                { name:"assigned_committee" ,display: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
-                {name :"escalated_on" ,display: 'Escalated On' ,cellTemplate: '/views/cellTemplate/cell.html' },
+                { name : "id",display: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
+                { name:"type" ,display: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html '},
+                { name:"assigned_to" ,display: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
+                {name :"created_at" ,display: 'Escalated On' ,cellTemplate: '/views/cellTemplate/cell.html' },
                 {name:"eta", display: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html '},
                 {name:"status" ,display: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
-                {name:"attachment",display: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
+                {name:"document",display: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
                 
                         ],
 
