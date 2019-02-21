@@ -202,7 +202,7 @@ grievancesystem.controller('studentController',studentController);
             enableHorizontalScrollbar:0,
             enableVerticalScrollbar:0,
             paginationPageSize: $scope.numRows,
-            minRowsToShow: $scope.open_grievance_data.length < $scope.numRows ? $scope.open_grievance_data : $scope.numRows,
+            minRowsToShow: $scope.numRows,
             enablePaginationControls: false,
 
 
@@ -232,7 +232,7 @@ grievancesystem.controller('studentController',studentController);
                 enableHorizontalScrollbar:0,
                 enableVerticalScrollbar:0,
                 paginationPageSize: $scope.numRows,
-            minRowsToShow: $scope.escalated_grievance_data.length < $scope.numRows ? $scope.escalated_grievance_data : $scope.numRows,
+                minRowsToShow: $scope.numRows,
                 enablePaginationControls: false,
 
 
@@ -261,7 +261,7 @@ grievancesystem.controller('studentController',studentController);
             enableHorizontalScrollbar:0,
             enableVerticalScrollbar:0,
             paginationPageSize: $scope.numRows,
-            minRowsToShow: $scope.grievance_resolved_data.length < $scope.numRows ? $scope.grievance_resolved_data : $scope.numRows,
+            minRowsToShow: $scope.numRows,
             enablePaginationControls: false,
 
 
@@ -292,7 +292,7 @@ grievancesystem.controller('studentController',studentController);
             enableHorizontalScrollbar:0,
             enableVerticalScrollbar:0,
             paginationPageSize: $scope.numRows,
-            minRowsToShow: $scope.grievance_search_data.length < $scope.numRows ? $scope.grievance_search_data : $scope.numRows,
+            minRowsToShow: 1,
             enablePaginationControls: false,
 
 

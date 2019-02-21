@@ -7,15 +7,13 @@ $(function() {
       $(this).addClass("active_sidebtn");
    });
 
-      $('.sideBtn').on('click',function() {
-       if(!$('.rightArea').get(0).scrollHeight > $('.rightArea').height()){
+       if(!$('.rightArea').get(0).scrollHeight <= $('.rightArea').height()+30){
         $( '.footer').show(); 
       }
       
-    });
 
    var height;
-    var trigger = 650;
+    var trigger = 600;
     var scroll;
     if($(this).scrollTop()){
         trigger=0;
@@ -32,7 +30,7 @@ $(function() {
       }
 
     $('.sideBtn').on('click',function() {
-         if( ( $('.rightArea').get(0).scrollHeight <= $('.rightArea').height() ) ){
+         if( ( $('.rightArea').get(0).scrollHeight <= $('.rightArea').height() +30) ){
             $( '.footer').show();   
         }else{
             $( '.footer').hide();   

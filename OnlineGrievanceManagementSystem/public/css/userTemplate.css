@@ -143,6 +143,7 @@ html,body{
 	background: #f2f2f2;
 	max-height: 92vh;
 	overflow-y: auto;
+	padding-bottom: 2.1em;
 }
 .rightAreaScroll{
 	height: 100%;
