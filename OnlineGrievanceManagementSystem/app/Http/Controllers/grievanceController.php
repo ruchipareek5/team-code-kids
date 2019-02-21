@@ -25,33 +25,10 @@ class grievanceController extends Controller
     }
 
 
-
     public function grievanceDetails($type){
         $array = [];
         if($type=='pending'){
             $array = ['raised','addressed'];
-
-        $id ="5";
-        //$id = Auth::user()->id;
-        $student_id = DB::table('user_student')->where('user_id',$id)->get(['id'])->first();
-        $grievance_escalated = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','asc')
-                        ->get(['id','type','created_at','documents']);
-        $data_escalated = [];
-        $i = 0;
-        foreach ($grievance_escalated as $id){
-            $data_escalated[$i] = $id->id;
-            $i++;
-
-        $id = Auth::user()->id;
-        $student_id = DB::table('user_student')->where('user_id',$id)->get(['id'])->first();
-        $grievance_escalated = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','asc')
-                        ->get(['id','type','created_at','documents']);
-        $data_escalated = [];
-        $i = 0;
-        foreach ($grievance_escalated as $id){
-            $data_escalated[$i] = $id->id;
-            $i++;
-
         }
         elseif ($type=='escalated'){
             $array = ['delayed','reopened'];
