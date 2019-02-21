@@ -1,7 +1,7 @@
 
 
 // Controller for grievancesystem i.e., main controller
-grievancesystem.controller('appController',function($scope,$http,$location,API_URL,$cookies){
+grievancesystem.controller('appController',function($scope,$http,$location,API_URL,$cookies,$window){
 	$scope.page_tab='login';
 	$scope.login = {};
 	$http.defaults.headers.common.Authorization = $cookies.get('Auth');
@@ -37,10 +37,9 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 
 	 // grievances action ends
     $scope.downloadAttachment=function(path){
-	    alert(path);
+
        var url = API_URL+'grievance/download/'+path;
-       alert(url);
-       $http.get(url);
+       $window.open(url);
     }
 
     // grievance search starts
