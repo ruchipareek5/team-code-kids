@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Grievance;
 use App\GrievanceStatus;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -19,41 +21,26 @@ class grievanceController extends Controller
      */
     public function index()
     {
-        
-        $id = Auth::user()->id;
+
+    }
+
+
+
+    public function grievanceDetails($type){
+        $array = [];
+        if($type=='pending'){
+            $array = ['raised','addressed'];
+
+        $id ="5";
+        //$id = Auth::user()->id;
         $student_id = DB::table('user_student')->where('user_id',$id)->get(['id'])->first();
-        $grievance = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','asc')
+        $grievance_escalated = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','asc')
                         ->get(['id','type','created_at','documents']);
-        $data = [];
+        $data_escalated = [];
         $i = 0;
-        foreach ($grievance as $id){
-            $data[$i] = $id->id;
+        foreach ($grievance_escalated as $id){
+            $data_escalated[$i] = $id->id;
             $i++;
-        }
-        $grievance_status = DB::table('table_grievance_status')->whereIn('status',['raised','addressed'])
-            ->whereIn('grievance_id',$data)->orderBy('grievance_id','asc')
-            ->get(['grievance_id','status','eta']);
-        $i = 0;
-
-        $open=[];
-        
-
-        for ($i = 0; $i<count($grievance_status);$i++){
-            if($grievance_status[$i]->status == 'addressed')
-                $action = 1;
-            else
-                $action = 0;
-            $open[$i] = [
-              'grievance_id'=>$grievance[$i]->id,
-              'grievance_type' => $grievance[$i]->type,
-              'assigned_committee' => $grievance[$i]->type,
-              'data_of_issue' => $grievance[$i]->created_at,
-              'attachment'=>  $grievance[$i]->documents,
-                'status'=>$grievance_status[$i]->status,
-                'eta'=>$grievance_status[$i]->eta,
-                'action'=>$action
-            ];
-        }
 
         $id = Auth::user()->id;
         $student_id = DB::table('user_student')->where('user_id',$id)->get(['id'])->first();
@@ -64,67 +51,27 @@ class grievanceController extends Controller
         foreach ($grievance_escalated as $id){
             $data_escalated[$i] = $id->id;
             $i++;
+
         }
-        $grievance_status_escalated = DB::table('table_grievance_status')->whereIn('status',['delayed','reopened'])
-            ->whereIn('grievance_id',$data_escalated)->orderBy('grievance_id','asc')
-            ->get(['grievance_id','status','eta']);
-        $i = 0;
-
-        $esclated=[];
-        
-
-        for ($i = 0; $i<count($grievance_status_escalated);$i++){
-            $action = 0;
-            $esclated[$i] = [
-              'grievance_id'=>$grievance_status_escalated[$i]->grievance_id,
-              'grievance_type' => $grievance_escalated[$i]->type,
-              'assigned_committee' => $grievance_escalated[$i]->type,
-              'data_of_issue' => $grievance_escalated[$i]->created_at,
-              'attachment'=>  $grievance_escalated[$i]->documents,
-                'status'=>$grievance_status_escalated[$i]->status,
-                'eta'=>$grievance_status_escalated[$i]->eta,
-                'action'=>$action
+        elseif ($type=='escalated'){
+            $array = ['delayed','reopened'];
+        }elseif ($type=='resolved'){
+            $array = ['resolved'];
+        }
+        else {
+            $data = [
+                'message' => 'Wrong url return',
+                'status' => "'" . Response::HTTP_NOT_FOUND . "'"
             ];
+            return $data;
         }
+        $student_id = Session::get('user_id');
+        $grievances = Grievance::where('student_id',$student_id)->whereIn('status',$array)->orderBy('id','asc')
+                      ->get(['id','type','eta','status','documents','created_at']);
 
-        $id ="5";
-        //$id = Auth::user()->id;
-        $student_id = DB::table('user_student')->where('user_id',$id)->get(['id'])->first();
-        $grievance_solved = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','asc')
-                        ->get(['id','type','created_at','documents']);
-        $data_solved = [];
-        $i = 0;
-        foreach ($grievance_solved as $id){
-            $data_solved[$i] = $id->id;
-            $i++;
-        }
-        $grievance_status_solved = DB::table('table_grievance_status')->whereIn('status',['resolved'])
-            ->whereIn('grievance_id',$data_solved)->orderBy('grievance_id','asc')
-            ->get(['grievance_id','status','eta']);
-        $i = 0;
 
-        $resolved=[];
-        
+        return response(['message'=>$grievances],200);
 
-        for ($i = 0; $i<count($grievance_status_solved);$i++){
-            $action = 1;
-            $resolved[$i] = [
-              'grievance_id'=>$grievance_status_solved[$i]->grievance_id,
-              'grievance_type' => $grievance_solved[$i]->type,
-              'assigned_committee' => $grievance_solved[$i]->type,
-              'data_of_issue' => $grievance_solved[$i]->created_at,
-              'attachment'=>  $grievance_solved[$i]->documents,
-                'status'=>$grievance_status_solved[$i]->status,
-                'eta'=>$grievance_status_solved[$i]->eta,
-                'action'=>$action
-            ];
-        }
-
-        $result["open"] = $open;
-        $result["esclated"] = $esclated;
-        $result["resolved"] = $resolved;
-
-        echo json_encode($result);
     }
 
     /**
@@ -184,69 +131,44 @@ class grievanceController extends Controller
         $gid = Auth::user()->id;
          // $user_id = DB::table('users')->where('email', $email)->get(['id']);
          // return  $user_id->id;
-        $student_id = DB::table('user_student')->where('user_id', $gid)->get(['id'])->pluck('id');
-        $grievances = DB::table('table_grievance')->where(['id'=>$id,
-            'student_id'=>$student_id])->get(['id','type','student_id','created_at','documents','department_id']);
-        if($grievances->isEmpty())
-                 return response(['message'=>'No Such grievance'],404);
-        $grievance_status = DB::table('table_grievance_status')->where('grievance_id',$id)->get(['status','eta']);
-        $department_name = DB::table('table_department')->where('id',$grievances[0]->department_id)->get(['name']);
-            $data = [
-                'grievance_id' => $grievances[0]->id,
-                'grievance_type' => $grievances[0]->type,
-                'data_of_issue'=> $grievances[0]->created_at,
-                'attachment' => $grievances[0]->documents,
-                'assigned_committee' => $department_name[0]->name,
-                'status' => $grievance_status[0]->status,
-                'eta' => $grievance_status[0]->eta
-            ];
-        return response(['message'=>$data],200);
+        $data = Grievance::find($id)->committee_member;
+        $data = Grievance::find($id);
+        $data1 = Grievance::find($id)->committee_member;
+        return response(['message'=>json_encode(array_merge(json_decode($data, true),json_decode($data1, true)))],200);
     }
 
 
 
     public function statistics($type){
 
-        $student_id = DB::table('user_student')->where('user_id',Auth::user()->id)->get(['id'])[0]->id;
+        $student_id = Session::get('user_id');
         if($type == 'total'){
             $count = Grievance::all()->where('student_id',$student_id)->count();
             return ['type' => $type,'value'=>$count];
         }
         elseif ($type == 'satisfied'){
-            $grievance_id = DB::table('table_grievance')->where('student_id',$student_id)->get(['id']);
-            $data = [];
-            $i = 0;
-            foreach ($grievance_id as $id){
-                $data[$i] = $id->id;
-                $i++;
-            }
-            $count = DB::table('table_grievance_status')->where('status','resolved')->whereIn('grievance_id',$data)->count();
+
+            $count = Grievance::where('student_id',$student_id)->whereIn('status',['resolved'])->count();
             return ['type' => $type,'value'=>$count];
         }
         elseif ($type == 'pending'){
-            $array = ['raised','assigned'];
-            $grievance_id = DB::table('table_grievance')->where('student_id',$student_id)->get(['id']);
-            $data = [];
-            $i = 0;
-            foreach ($grievance_id as $id){
-                $data[$i] = $id->id;
-                $i++;
-            }
-            $count = DB::table('table_grievance_status')->whereIn('status',$array)->whereIn('grievance_id',$data)->count();
+            $array = ['raised','addressed'];
+            $count = Grievance::where('student_id',$student_id)->whereIn('status',$array)->count();
             return ['type' => $type,'value'=>$count];
         }
 
         elseif ($type == 'escalated'){
             $array = ['delayed','reopened'];
-            $grievance_id = DB::table('table_grievance')->where('student_id',$student_id)->get(['id']);
-            $data = [];
-            $i = 0;
-            foreach ($grievance_id as $id){
-                $data[$i] = $id->id;
-                $i++;
-            }
-            $count = DB::table('table_grievance_status')->whereIn('status',$array)->whereIn('grievance_id',$data)->count();
+            $count = Grievance::where('student_id',$student_id)->whereIn('status',$array)->count();
             return ['type' => $type,'value'=>$count];
+        }
+
+        else {
+            $data = [
+                'message' => 'Wrong url return',
+                'status' => "'" . Response::HTTP_NOT_FOUND . "'"
+            ];
+            return $data;
         }
 
     }
@@ -281,25 +203,20 @@ class grievanceController extends Controller
         $id=$request->get('id');
 
         if($request->get('action') == '0'){
-           DB::table('table_grievance_status')->where('grievance_id',$id)->update([
-               'status'=>'escalated',
-               'eta'=>7
-           ]);
+           $grievance = Grievance::find($id);
+           $grievance->status = 'escalated';
+           $grievance->eta = 7;
+           $grievance->save();
         }
-        else{
-            DB::table('table_grievance_status')->where('grievance_id',$id)->update([
-                'status'=>'resolved',
-                'eta'=>0
-            ]);
+        else if($request->get('action')=='1'){
+            $grievance = Grievance::find($id);
+            $grievance->status = 'resolved';
+            $grievance->eta = DB::raw('CURRENT_TIMESTAMP');
+            $grievance->save();
         }
+        else return ['message'=>'Invalid Action value','status'=>Response::HTTP_NOT_MODIFIED];
+        return ['message'=>'Successfully updated','id'=>$request->get($id),'status'=>Response::HTTP_ACCEPTED];
 
-
-        $data=[];
-        $data=[
-            'message'=>"successfully updated",
-            'id'=>$request->get('id')
-        ];
-        return json_encode($data);
     }
     /**
      * Remove the specified resource from storage.

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
@@ -30,8 +31,21 @@ class LoginController extends Controller
 
      public function checkAuth(){
 
-        return response(Auth::user()->roles,200);  
-
+        $roles = Auth::user()->roles;
+        $table_name ='';
+        if($roles == 'student')
+            $table_name = 'user_student';
+        elseif ($roles == 'principal')
+            $table_name = 'user_pricipal';
+        elseif ($roles == 'ombudman')
+            $table_name = 'user_ombudsman';
+        elseif ($roles == 'aicte')
+            $table_name = 'user_aicte';
+        elseif ($roles == 'committee member')
+            $table_name = 'user_committee_member';
+        $user_id = DB::table($table_name)->where('user_id',Auth::user()->getAuthIdentifier())->get(['id'])->first();
+        Session::put('user_id',$user_id->id);
+        return response(Auth::user()->roles,200);
 
     }
 
