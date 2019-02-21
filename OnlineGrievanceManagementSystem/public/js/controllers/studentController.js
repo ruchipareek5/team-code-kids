@@ -322,7 +322,8 @@ grievancesystem.controller('studentController',studentController);
             function(success)
             {
                 $scope.loadAllGrievance();
-                alert("success "+success.data.message+$scope.data.id);
+                $scope.lodgeGrievanceStatistics();
+                alert("success "+success.data.message+" "+$scope.data.id);
 
             },
             function(error)
