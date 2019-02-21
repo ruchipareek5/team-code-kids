@@ -279,20 +279,28 @@ class grievanceController extends Controller
 
     public function updateStatus(Request $request)
     {
-        $id=$request->input('id');
-        $grievance = GrievanceStatus::find($id);
-        if($request->input('action') == 0){
-            $grievance->status = "escalated";
-            $grievance->eta = 7;
+        $id=$request->get('id');
+
+        if($request->get('action') == '0'){
+           DB::table('table_grievance_status')->where('grievance_id',$id)->update([
+               'status'=>'escalated',
+               'eta'=>7
+           ]);
         }
         else{
-            $grievance->status = "resolved";
-            $grievance->eta = 0;
+            DB::table('table_grievance_status')->where('grievance_id',$id)->update([
+                'status'=>'resolved',
+                'eta'=>0
+            ]);
         }
-        
-        $grievance->save();
 
-        return redirect('/grievances/index');
+
+        $data=[];
+        $data=[
+            'message'=>"successfully updated",
+            'id'=>$request->get('id')
+        ];
+        return json_encode($data);
     }
     /**
      * Remove the specified resource from storage.
