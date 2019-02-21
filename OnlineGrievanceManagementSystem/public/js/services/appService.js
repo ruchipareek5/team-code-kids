@@ -5,7 +5,6 @@ grievancesystem.service('appService',function ($http,API_URL) {
 	this.showAlert=function (type,message) {
 		$('#alertPrompt').removeClass( 'alert-success');
 		$('#alertPrompt').removeClass( 'alert-danger');
-		$('#alertText').text
 		if(type=='success')
 			$('#alertPrompt').addClass( 'alert-success');
 		else
@@ -17,5 +16,11 @@ grievancesystem.service('appService',function ($http,API_URL) {
 
 		// setTimeout($('#alertPrompt').show(10),40);
 
+	}
+
+	this.showModal=function (message) {
+		$('#modalText').text(message);
+
+		$('#modal-conatiner').addClass('visible');
 	}
 });

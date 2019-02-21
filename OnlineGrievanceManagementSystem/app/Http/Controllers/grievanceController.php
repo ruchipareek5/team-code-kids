@@ -175,7 +175,7 @@ class grievanceController extends Controller
 
         if($request->get('action') == '0'){
            $grievance = Grievance::find($id);
-           $grievance->status = 'escalated';
+           $grievance->status = 'reopened';
            $grievance->eta =  DB::raw('DATE_ADD(NOW(),INTERVAL 7 DAY)');;
            $grievance->save();
         }

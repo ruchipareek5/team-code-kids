@@ -91,10 +91,13 @@
                 </div>
             </div>
         </div>
+        <div ng-include src="'views/templates/modalTemplate.php'"></div>
 
         <div class="footer">
           <div class="row align-items-center" ng-include src="'views/templates/footerTemplate.html'"></div>           
         </div>
+
+
      </div>
  </div> 
 <script src="js/script.js"></script>
