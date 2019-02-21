@@ -193,13 +193,13 @@ grievancesystem.controller('studentController',studentController);
 
 
             columnDefs: [
-                { name : "id",display: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
-                { name:"type" ,display: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html'},
-                { name:"assigned_to" ,display: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
-                {name :"created_at" ,display: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html' },
+                { name : "grievance_id",display: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
+                { name:"grievance_type" ,display: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html'},
+                { name:"assigned_committee" ,display: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
+                {name :"data_of_issue" ,display: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html' },
                 {name:"eta", display: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html'},
                 {name:"status" ,display: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
-                {name:"document",display: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
+                {name:"attachment",display: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
                 {name:"action",display: 'Action', cellTemplate: "/views/cellTemplate/student_action.html"},
                         ],
 
@@ -222,13 +222,13 @@ grievancesystem.controller('studentController',studentController);
 
     
         columnDefs: [
-                    { name : "id",display: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
-                    { name:"type" ,display: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html '},
-                    { name:"assigned_to" ,display: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
-                    {name :"created_at" ,display: 'Escalated On' ,cellTemplate: '/views/cellTemplate/cell.html' },
+                    { name : "grievance_id",display: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
+                    { name:"grievance_type" ,display: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html '},
+                    { name:"assigned_committee" ,display: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
+                    {name :"data_of_issue" ,display: 'Escalated On' ,cellTemplate: '/views/cellTemplate/cell.html' },
                     {name:"eta", display: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html '},
                     {name:"status" ,display: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
-                    {name:"document",display: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
+                    {name:"attachment",display: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
                     
                             ],
     
@@ -251,13 +251,13 @@ grievancesystem.controller('studentController',studentController);
 
 
     columnDefs: [
-                { name : "id",display: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
-                { name:"type" ,display: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html '},
-                { name:"assigned_to" ,display: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
-                {name :"created_at" ,display: 'Escalated On' ,cellTemplate: '/views/cellTemplate/cell.html' },
+                { name : "grievance_id",display: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
+                { name:"grievance_type" ,display: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html '},
+                { name:"assigned_committee" ,display: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
+                {name :"data_of_issue" ,display: 'Escalated On' ,cellTemplate: '/views/cellTemplate/cell.html' },
                 {name:"eta", display: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html '},
                 {name:"status" ,display: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
-                {name:"document",display: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
+                {name:"attachment",display: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
                 
                         ],
 
