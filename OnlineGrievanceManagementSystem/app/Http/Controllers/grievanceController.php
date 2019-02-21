@@ -71,26 +71,20 @@ class grievanceController extends Controller
         $type = $request->get('type');
         $description = $request->get('detail');
         $file = $request->file('attachment');
-        $student_id = DB::table('user_student')->where('user_id',Auth::user()->getAuthIdentifier())->get(['id','college_id']);
-        $department_id = DB::table('table_department')->where('name','LIKE',$type)->where('college_id',$student_id[0]->college_id)->get(['id']);
+        $student_id = DB::table('user_student')->where('user_id',Session::get('user_id'))->get(['id','college_id'])->first();
+        $department_id = DB::table('table_department')->where('name','LIKE',$type)->where('college_id',$student_id->college_id)->get(['id']);
         $grievance = new Grievance;
         $grievance->type = $type;
         $grievance->description = $description;
-        $grievance->student_id = $student_id[0]->id;
-        $grievance->department_id = $department_id[0]->id;
+        $grievance->student_id = $student_id->id;
+        $grievance->department_id = $department_id->id;
         $grievance->documents = $file==null?'':$file->storeAs('documents',$file->getClientOriginalName());
+        $grievance->status = 'raised';
+        $grievance->eta = DB::raw('DATE_ADD(NOW(),INTERVAL 7 DAY)');
         $grievance->save();
         $data = [];
-        $new_grievance = DB::table('table_grievance')->where('student_id',$student_id[0]->id)->orderBy('id','desc')->get(['id'])->first();
+        $new_grievance = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','desc')->get(['id'])->first();
         //Data insertion in grievance status table
-        DB::table('table_grievance_status')->insert(
-            [
-                'grievance_id' => $new_grievance->id,
-                'status' => 'raised',
-                'eta' => 7,
-                'level' => 1
-            ]
-        );
         $data = [
           'id' => $new_grievance->id,
           'message' => 'Your grievance is registered'
@@ -110,8 +104,8 @@ class grievanceController extends Controller
          // return  $user_id->id;
         $data = Grievance::find($id)->committee_member;
         $data = Grievance::find($id);
-        $data1 = Grievance::find($id)->committee_member;
-        return response(['message'=>json_encode(array_merge(json_decode($data, true),json_decode($data1, true)))],200);
+
+        return response(['message'=>$data],200);
     }
 
 
