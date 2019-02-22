@@ -58,7 +58,8 @@ Route::get('/grievance/aicte/chart/year','AicteDashBoardController@getYearStatis
 Route::get('/grievance/aicte/chart/state','AicteDashBoardController@getStateStatistics');           //for chart using state
 Route::get('/grievance/aicte/chart/college','AicteDashBoardController@getCollegeStatistics');       //for chart using college
 Route::get('/grievance/aicte/chart/department','AicteDashBoardController@getGrievanceTypeStatistics');      //for chart using department
-
+Route::get('grievance/aicte/importantinfo/university/{id}','AicteDashBoardController@getUniversityDetails');           //For university details
+Route::get('grievance/aicte/importantinfo/institute/{id}','AicteDashBoardController@getCollegeDetails');
  Route::get('/grievance/download/documents/{path}','grievanceController@download');     //Document Download request
 
 
