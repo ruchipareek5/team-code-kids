@@ -99,21 +99,21 @@ class AicteDashBoardController extends Controller
             $date = date('Y');
             $startyear = ($date).'-01-01 00:00:00';
             $endyear = ($date+1).'-01-01 00:00:00';
-            $count1 = DB::select("SELECT count(*) as '".$date."' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear'");
+            $count1 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear'");
              $startyear = ($date-1).'-01-01 00:00:00';
              $endyear = ($date).'-01-01 00:00:00';
-             $count2 = DB::select("SELECT count(*) as '".($date-1)."' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear'");
+             $count2 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear'");
              $startyear = ($date-2).'-01-01 00:00:00';
              $endyear = ($date-1).'-01-01 00:00:00';
-             $count3 = DB::select("SELECT count(*) as '".($date-2)."' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear'");
+             $count3 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear'");
              $startyear = ($date-3).'-01-01 00:00:00';
              $endyear = ($date-2).'-01-01 00:00:00';
-             $count4 = DB::select("SELECT count(*) as '".($date-3)."' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear'");
+             $count4 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear'");
              $startyear = ($date-4).'-01-01 00:00:00';
              $endyear = ($date-3).'-01-01 00:00:00';
-             $count5 = DB::select("SELECT count(*) as '".($date-4)."' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear'");
+             $count5 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear'");
 
-            return response([$count1,$count2,$count3,$count4,$count5],200);
+            return response(['count'=>[$count1[0]->year,$count2[0]->year,$count3[0]->year,$count4[0]->year,$count5[0]->year],'year'=>[$date,$date-1,$date-2,$date-3,$date-4]],200);
          }
 
 
