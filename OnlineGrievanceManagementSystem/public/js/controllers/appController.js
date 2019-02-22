@@ -18,13 +18,16 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 		}
 		
 	},function(errorResponse){
+		if (errorResponse.data.message) {
+			alert(errorResponse.data.message);
+		}else
 		alert('Sorry! username password doesnot match');
+
 	});
 	
 	};
 
 	$scope.doLogin = function(){
-		console.log("hi");
 		$scope.authHeader = "Basic " + btoa([$scope.login.email, $scope.login.password].join(':'));
 		$cookies.put('Auth',$scope.authHeader);
 		$scope.doLoginAttempt();

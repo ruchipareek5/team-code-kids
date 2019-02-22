@@ -3,25 +3,26 @@
 }
 
 .grievance-box{
-	color: #fff;
-	margin: 0;
+    color: #fff;
+    margin: 0;
+    text-align: center;
 }
 .grievance{
-	padding: 0.2em 0.5em;
-	border-radius: 5px;
-	width: 100%;
+    padding: 0.2em 0.5em;
+    border-radius: 5px;
+    width: 100%;
 }
 .grievance-total{
-	background: #866561;
+    background: #866561;
+}
+.grievance-escalated{
+    background-color: #0098BC;
 }
 .grievance-pending{
-	background-color: #0098BC;
-}
-.grievance-satisfied{
     background-color: #EE8F00;
 }
-.grievance-ongoing{
-	background: #4e8e19;
+.grievance-resolved{
+    background: #4e8e19;
 }
 .image-bar
 {
@@ -62,7 +63,7 @@ hr
 
 /*charts */
 .graph{
-	height: 33.5vh;
+    height: 33.5vh;
     overflow: auto;
 }
 .graph div{

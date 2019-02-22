@@ -5,7 +5,9 @@
 
 .grievance-box{
     color: #fff;
+    text-align: center; 
     margin: 0;
+
 }
 .grievance{
     padding: 0.2em 0.5em;
@@ -78,6 +80,9 @@ hr
     border-radius: 0.5em;
     color: #5A5A5A;
     font-size: 1em;
+    height: 30vw;
+    margin-top: 1.5vw;
+    width :45vw;
     
     
 }
@@ -94,7 +99,7 @@ hr
 .div-form input
 {   display: inline-block;
     background-color: #F2F1F2 ;
-    border: 2px solid #D7D7D7;
+    border: 1px solid #D7D7D7;
     padding: 0.5em;
     width: 25em;
  
@@ -103,7 +108,7 @@ hr
 {
     
     background-color: #F2F1F2 ;
-    border: 2px solid #D7D7D7;
+    border: 1px solid #D7D7D7;
     padding: 0.5em;
     
    
@@ -112,9 +117,9 @@ hr
 .div-form select{
     display: inline-block;
     background-color: #F2F1F2;
-    border: 2px solid #D7D7D7;
+    border: 1px solid #D7D7D7;
     padding: 0.5em;
-    width: 25em;
+    width: 38em;
     color: #7E7E7E;
 }
 .div-form
@@ -137,12 +142,19 @@ hr
 {
     display: inline-block;
     background-color: #F2F1F2 ;
-    border: 2px solid #D7D7D7;
+    border: 1px solid #D7D7D7;
     padding: 0.5em;
-    width: 25em !important;
+    width: 38em !important;
  
 }
-
+.div-attachment input{
+    display: inline-block;
+    background-color: #F2F1F2 ;
+    border: 1px solid #D7D7D7;
+    padding: 0.5em;
+    width: 17em !important;
+    margin-left: 15px;
+}
 #attachment {
     width: 0.1px;
     height: 0.1px;
@@ -155,12 +167,13 @@ hr
 #attachment + label {
     display: inline-block;
     color: white;
-    background-color: #434B68;
+    background-color: #0098BC;
     padding: 0.5em;
     border-radius: 0.5em;
     text-align: center;
     margin-left: 10px;
-    /*box-shadow: 2px 2px 2px  #48537c,0 0 10px#4e5982;*/
+    box-shadow: 2px 2px 2px  #48537c,0 0 10px#4e5982;
+    width: 100px;
 }
 
 
@@ -169,7 +182,7 @@ hr
 }
 #attachment:focus + label,
 #attachment + label:hover {
-    background-color: #4e5982;
+    background-color: #47a2b7;
 }
 #attachment:focus + label {
     outline: 1px dotted #000;
@@ -231,7 +244,7 @@ hr
     margin:0;
     width: 100%;
     padding:0;
-
+    height: auto !important;
     text-align: center;
     font-size: 0.8em;
     color: #6F6E6F;
