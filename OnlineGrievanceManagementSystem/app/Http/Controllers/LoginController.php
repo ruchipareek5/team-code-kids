@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Nexmo\Response;
 
 class LoginController extends Controller
 {
@@ -44,6 +45,9 @@ class LoginController extends Controller
         elseif ($roles == 'committee member')
             $table_name = 'user_committee_member';
         $user_id = DB::table($table_name)->where('user_id',Auth::user()->getAuthIdentifier())->get(['id'])->first();
+        if($user_id == null){
+            return response(['message'=>'No such user'],403);
+        }
         Session::put('user_id',$user_id->id);
         return response(Auth::user()->roles,200);
 
