@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Grievance;
+use App\GrievanceMessage;
+use DB;
 class AicteController extends Controller
 {
     /**
@@ -93,6 +95,23 @@ class AicteController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function addComment(Request $request){
+        $message = $request->message;
+
+        $comments = DB::select("SELECT aicte FROM table_message WHERE grievance_id = ".$request->id);
+
+        $comments = $comments[0]->aicte.$message;
+        $grievance_id = GrievanceMessage::where('grievance_id', $request->id)->get(['id'])->first()->id;
+
+        if($grievance_id == null)
+            return response(["message"=>'No data found'], 404);
+
+        $grievance_message = GrievanceMessage::find($grievance_id);
+        $grievance_message->aicte = $comments;
+        $grievance_message->save();
+        return response(["message"=>'Updated Successfully'], 200);
     }
 
     /**

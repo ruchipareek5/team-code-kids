@@ -33,6 +33,8 @@ Route::get('/testTemplate', function(){
 
 Route::post('/register','LoginController@register');
 
+Route::post('/aicte/addComment', 'AicteController@addComment');
+
 
 Route::middleware('auth.basic')->group(function(){
     Route::resource('/grievances', 'grievanceController');
