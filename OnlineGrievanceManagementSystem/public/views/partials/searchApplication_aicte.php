@@ -21,7 +21,7 @@
                           <option value="4">Grievance Type</option>
                           </select>
                           
-                     <input type="text" name="searchKeyword" id="searchKeyword" ng-model="searchKeyword" placeholder="Enter grievance id" >
+                     <input type="text" name="searchKeyword" id="searchKeyword" ng-model="searchKeyword" placeholder="Enter id" >
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       <button type="Submit" class="btn button-submit">Search&nbsp;&nbsp;&nbsp;<img src="assets/icons/search.png" height="24" width="24"></button></form>
                         <br>

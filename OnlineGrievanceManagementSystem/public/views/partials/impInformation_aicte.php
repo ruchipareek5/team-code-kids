@@ -32,7 +32,7 @@
       </div>
       <div class="row">
           <div class="col-lg-12 col-md-12 open-grievance ">
-              <h5 class="grievance-heading">Search University</h5>
+              <h5 class="grievance-heading">Search Institute</h5>
                 
                      
                 <div class="col-md-12 col-lg-12 div-form table ">
