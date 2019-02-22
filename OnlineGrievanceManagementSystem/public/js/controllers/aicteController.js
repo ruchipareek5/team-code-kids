@@ -3,7 +3,8 @@ var grievancesystem= angular.module('grievancesystem');
 grievancesystem.controller('aicteController',aicteController);
 
 
- function aicteController($scope,$http,appService,aicteService,API_URL) {
+ function aicteController($scope,$http,appService,aicteService,API_URL,$location) {
+   
  	$scope.page='dashboard_aicte';
 
  	//load grievance panel
@@ -104,15 +105,14 @@ grievancesystem.controller('aicteController',aicteController);
                         $scope.searchGrievance = function(grievanceFilter,searchKeyword){
 
                         aicteService.searchGrievance(grievanceFilter,searchKeyword).then(function(success){
-                    $scope.grievance_search_result.data=new Array();
-                     $scope.grievance_search_data=success.data.message; 
-                     console.log($scope.grievance_search_data);  
-                     $scope.grievance_search_result.data=$scope.grievance_search_data;             
-                                },
-                                function(error){
-                                    $scope.grievance_search_result.data=new Array();
-                                     appService.showAlert('error',error.data.message);
-                                });
+                            $scope.grievance_search_result.data=new Array();
+                             $scope.grievance_search_data=success.data.message;  
+                             $scope.grievance_search_result.data=$scope.grievance_search_data;             
+                            },
+                            function(error){
+                                $scope.grievance_search_result.data=new Array();
+                                 appService.showAlert('error','Result Not Found');
+                            });
 
                     };
                         
@@ -152,7 +152,15 @@ grievancesystem.controller('aicteController',aicteController);
                     
             $scope.university_search=function(university_id)
             {
-                    alert(university_id)
+                aicteService.university_search(university_id).then(function(success){
+                    $scope.university_search_result.data=new Array();
+                     $scope.university_search_data=success.data.message;   
+                     $scope.university_search_result.data=$scope.university_search_data;             
+                    },
+                    function(error){
+                        $scope.university_search_result.data=new Array();
+                         appService.showAlert('error',error.data.message);
+                    });
             };
             $scope.university_search_data=[];
 
@@ -175,9 +183,9 @@ grievancesystem.controller('aicteController',aicteController);
                     { name : "university_id",displayName: 'University Code', cellTemplate: '/views/cellTemplate/cell.html' },
                     { name:"university_name" ,displayName: 'University', cellTemplate: '/views/cellTemplate/cell.html '},
                     { name:"ombudsman_name" ,displayName: 'Ombudsman Name',  cellTemplate: '/views/cellTemplate/cell.html'},
-                    {name:"ombudsman_contact" ,displayName: 'Contact Number', cellTemplate: '/views/cellTemplate/cell.html '},
-                    {name:"ombudsman_email",displayName: 'Email id',cellTemplate: '/views/cellTemplate/cell.html '  },
-                    {name:"open_grievance",displayName: 'Open Grievances',cellTemplate: '/views/cellTemplate/cell.html '  },
+                    {name:"omudsman_contact" ,displayName: 'Contact Number', cellTemplate: '/views/cellTemplate/cell.html '},
+                    {name:"email",displayName: 'Email id',cellTemplate: '/views/cellTemplate/cell.html '  },
+                    {name:"open_grievances",displayName: 'Open Grievances',cellTemplate: '/views/cellTemplate/cell.html '  },
  
                             ],
     
@@ -185,9 +193,17 @@ grievancesystem.controller('aicteController',aicteController);
         };
 //institute search
 
-                $scope.institute_search=function(university_id)
+                $scope.institute_search=function(institute_id)
                 {
-                         alert(institute_id)
+                    aicteService.institute_search(institute_id).then(function(success){
+                    $scope.institute_search_result.data=new Array();
+                     $scope.institute_search_data=success.data.message;  
+                     $scope.institute_search_result.data=$scope.institute_search_data;             
+                    },
+                    function(error){
+                        $scope.institute_search_result.data=new Array();
+                         appService.showAlert('error',error.data.message);
+                    });
                 };
         $scope.institute_search_data=[];
             $scope.institute_search_result = {
@@ -206,11 +222,11 @@ grievancesystem.controller('aicteController',aicteController);
 
     
         columnDefs: [
-                    { name : "institute_id",displayName: 'Institute Code', cellTemplate: '/views/cellTemplate/cell.html' },
-                    { name:"institute_name" ,displayName: 'Institute', cellTemplate: '/views/cellTemplate/cell.html '},
-                    { name:"principal_name" ,displayName: 'Principal',  cellTemplate: '/views/cellTemplate/cell.html'},
+                    { name : "college_id",displayName: 'Institute Code', cellTemplate: '/views/cellTemplate/cell.html' },
+                    { name:"college_name" ,displayName: 'Institute', cellTemplate: '/views/cellTemplate/cell.html '},
+                    { name:"pricipal_name" ,displayName: 'Principal',  cellTemplate: '/views/cellTemplate/cell.html'},
                     {name:"principal_contact" ,displayName: 'Contact Number', cellTemplate: '/views/cellTemplate/cell.html '},
-                    {name:"principal_email",displayName: 'Email Id',cellTemplate: '/views/cellTemplate/cell.html '  },
+                    {name:"email",displayName: 'Email Id',cellTemplate: '/views/cellTemplate/cell.html '  },
                     {name:"open_grievances",displayName: 'Open Grievances',cellTemplate: '/views/cellTemplate/cell.html '  },
   
                             ],

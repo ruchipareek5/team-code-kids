@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$('#graphs').ready(function(){
 
 
 $.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/college', function(data) {
@@ -121,7 +121,6 @@ Highcharts.chart('grievance_type', {
 
 // grievance_yearwise
 $.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/year', function(data) {
-    console.log(data);
 Highcharts.chart('grievance_yearwise', {
     chart: {
         type: 'column'

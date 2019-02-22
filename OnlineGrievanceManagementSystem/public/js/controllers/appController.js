@@ -26,7 +26,7 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 	});
 	
 	};
-
+	
 	$scope.doLogin = function(){
 		$scope.authHeader = "Basic " + btoa([$scope.login.email, $scope.login.password].join(':'));
 		$cookies.put('Auth',$scope.authHeader);
@@ -79,13 +79,11 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
                 }
             };
     	$http(request).then(function(success){
-    		// appService.showAlert('success',success.data.message)
-    		alert(success.data.message);
+    		appService.showAlert('success',success.data.message)
 
     	},
     	function(error){
-    		// appService.showAlert('error',error.data.message)
-    		console.log(error.data)
+    		appService.showAlert('error',error.data.message)
 
     	});
 		

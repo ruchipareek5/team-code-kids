@@ -39,27 +39,28 @@
             </div>
         </div>
     </div>
+    <div id="graphs">
+        <div class="row row_gap">
+            <div class="col-md-6 graph">
+                <div id="top5_institute"></div>
+            </div>
 
-    <div class="row row_gap">
-        <div class="col-md-6 graph">
-            <div id="top5_institute"></div>
+            <div class="col-md-6 graph">
+                <div id="grievance_type"></div>
+            </div>
+
         </div>
 
-        <div class="col-md-6 graph">
-            <div id="grievance_type"></div>
+         <div class="row row_gap">
+            <div class="col-md-6 graph">
+                <div id="grievance_yearwise"></div>
+            </div>
+
+            <div class="col-md-6 graph">
+                <div id="top5_state"></div>
+            </div>
+
         </div>
-
-    </div>
-
-     <div class="row row_gap">
-        <div class="col-md-6 graph">
-            <div id="grievance_yearwise"></div>
-        </div>
-
-        <div class="col-md-6 graph">
-            <div id="top5_state"></div>
-        </div>
-
     </div>
 
 </div>

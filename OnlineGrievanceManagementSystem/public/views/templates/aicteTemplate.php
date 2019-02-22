@@ -12,8 +12,7 @@
     <script src="js/libraries/angular-ui-grid/ui-grid.core.min.js"></script>
 
 </head>
-<div>
-    <div ng-controller="appController">
+    <div ng-controller='aicteController'>
     	<div class="container-fluid">
 
     		<div class="row">
@@ -79,6 +78,7 @@
     			</div>
 
     			<div class="col-md-10 rightArea">
+                    <div ng-include src="'views/templates/alertTemplate.html'"></div>
 				 	<div ng-switch on="page">
 		                <div ng-switch-when="dashboard_aicte">
 		                    <div ng-include src="'views/partials/dashboard_aicte.php'"></div>
@@ -110,5 +110,5 @@
 		  <div class="row align-items-center" ng-include src="'views/templates/footerTemplate.html'"></div>  			
 		</div>
 	 </div>
- </div>	
+
 <script src="js/script.js"></script>

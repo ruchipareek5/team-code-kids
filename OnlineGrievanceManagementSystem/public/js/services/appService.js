@@ -13,7 +13,7 @@ grievancesystem.service('appService',function ($http,API_URL) {
 		$('#alertText').text(message);
 		$('#alertPrompt').show(10);
 		
-		setTimeout(function() { $("#alertPrompt").hide(); }, 2000);
+		setTimeout(function() { $("#alertPrompt").hide(100); }, 2500);
 	}
 
 	this.showModal=function (message) {
@@ -21,4 +21,5 @@ grievancesystem.service('appService',function ($http,API_URL) {
 
 		$('#modal-conatiner').addClass('visible');
 	}
+	
 });

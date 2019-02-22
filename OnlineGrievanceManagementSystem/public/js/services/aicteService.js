@@ -21,5 +21,15 @@ grievancesystem.service('aicteService',function ($http,API_URL) {
 		    }
 		 	});
 		}
+
+	this.institute_search=function(institute_id){
+		var url =API_URL + 'grievance/aicte/importantinfo/institute/'+ institute_id;
+		return $http.get(url);
+	}
+
+	this.university_search=function(university_id){
+		var url =API_URL + 'grievance/aicte/importantinfo/university/'+ university_id;
+		return $http.get(url);
+	}
 	
 });
