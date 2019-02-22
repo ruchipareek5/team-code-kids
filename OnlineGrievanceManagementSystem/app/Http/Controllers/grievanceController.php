@@ -78,7 +78,7 @@ class grievanceController extends Controller
         $grievance->description = $description;
         $grievance->student_id = $student_id->id;
         $grievance->department_id = $department_id->id;
-        $grievance->documents = $file==null?'':$file->storeAs('documents',$file->getClientOriginalName());
+        $grievance->documents = $file==null?'':$file->store('documents');
         $grievance->status = 'raised';
         $grievance->eta = DB::raw('DATE_ADD(NOW(),INTERVAL 7 DAY)');
         $grievance->save();

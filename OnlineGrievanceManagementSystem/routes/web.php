@@ -14,6 +14,10 @@ function cannotProcessData(){
 	return response("Cannot Process Data",412);
 }
 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: *');
+header('Access-Control-Allow-Headers: *');
+
 Route::get('/', function () {
     return View::make('index');
 });
@@ -40,9 +44,21 @@ Route::middleware('auth.basic')->group(function(){
     Route::post('/grievances/updateStatus','grievanceController@updateStatus');
     Route::get('/grievance/student/{type}','grievanceController@grievanceDetails');  //For student My grievances data
     Route::get('/grievance/remarks/{id}','grievanceController@getRemarks');        //For fetching remarks
+
+    Route::get('/grievance/aicte/statistics/{type}','AicteDashBoardController@getStatistics');          //For statistics panel
+
+
+
 });
 
+
+
+Route::get('/grievance/aicte/chart/state','AicteDashBoardController@getStateStatistics');           //for chart using state
+Route::get('/grievance/aicte/chart/college','AicteDashBoardController@getCollegeStatistics');       //for chart using college
+Route::get('/grievance/aicte/chart/department','AicteDashBoardController@getGrievanceTypeStatistics');      //for chart using department
+
  Route::get('/grievance/download/documents/{path}','grievanceController@download');     //Document Download request
+
 
 Route::get('/ui_gridSample', function(){
     return view('templates/ui_gridSample');
