@@ -84,6 +84,7 @@ class AicteDashBoardController extends Controller
 
          public function getGrievanceTypeStatistics(){
             $exam = DB::select("select count(*) as count,type from table_grievance group by type");
+
             $data=[];
             $i=0;
             foreach ($exam as $ex){
@@ -92,6 +93,27 @@ class AicteDashBoardController extends Controller
                 ];
             }
             return response([$data],200);
+         }
+
+         public function getYearStatistics(){
+            $date = date('Y');
+            $startyear = ($date).'-01-01 00:00:00';
+            $endyear = ($date+1).'-01-01 00:00:00';
+            $count1 = DB::select("SELECT count(*) as '".$date."' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear'");
+             $startyear = ($date-1).'-01-01 00:00:00';
+             $endyear = ($date).'-01-01 00:00:00';
+             $count2 = DB::select("SELECT count(*) as '".($date-1)."' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear'");
+             $startyear = ($date-2).'-01-01 00:00:00';
+             $endyear = ($date-1).'-01-01 00:00:00';
+             $count3 = DB::select("SELECT count(*) as '".($date-2)."' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear'");
+             $startyear = ($date-3).'-01-01 00:00:00';
+             $endyear = ($date-2).'-01-01 00:00:00';
+             $count4 = DB::select("SELECT count(*) as '".($date-3)."' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear'");
+             $startyear = ($date-4).'-01-01 00:00:00';
+             $endyear = ($date-3).'-01-01 00:00:00';
+             $count5 = DB::select("SELECT count(*) as '".($date-4)."' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear'");
+
+            return response([$count1,$count2,$count3,$count4,$count5],200);
          }
 
 

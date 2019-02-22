@@ -48,13 +48,13 @@ Route::middleware('auth.basic')->group(function(){
     Route::get('/grievance/aicte/statistics/{type}','AicteDashBoardController@getStatistics');          //For statistics panel
 
     Route::get('/aicte/grievances', 'AicteController@index');       //AICTE grievances
-    Route::post('/aicte/grievanceSearch', 'AicteController@searchGrievances');       //AICTE Search Grievances
+    Route::get('/aicte/grievanceSearch', 'AicteController@searchGrievances');       //AICTE Search Grievances
     Route::post('/aicte/addComment', 'AicteController@addComment');         //AICTE Add Comments
 
 });
 
 
-
+Route::get('/grievance/aicte/chart/year','AicteDashBoardController@getYearStatistics');             //for char using year
 Route::get('/grievance/aicte/chart/state','AicteDashBoardController@getStateStatistics');           //for chart using state
 Route::get('/grievance/aicte/chart/college','AicteDashBoardController@getCollegeStatistics');       //for chart using college
 Route::get('/grievance/aicte/chart/department','AicteDashBoardController@getGrievanceTypeStatistics');      //for chart using department
