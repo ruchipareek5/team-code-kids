@@ -34,8 +34,6 @@ Route::get('/testTemplate', function(){
 Route::post('/register','LoginController@register');
 
 
-Route::get('/aicte/grievances', 'AicteController@index');       //AICTE grievances
-
 Route::middleware('auth.basic')->group(function(){
     Route::resource('/grievances', 'grievanceController');
 	Route::post('/login','LoginController@checkAuth');
@@ -47,7 +45,8 @@ Route::middleware('auth.basic')->group(function(){
 
     Route::get('/grievance/aicte/statistics/{type}','AicteDashBoardController@getStatistics');          //For statistics panel
 
-
+    Route::get('/aicte/grievances', 'AicteController@index');       //AICTE grievances
+    Route::get('/aicte/grievanceSearch', 'AicteController@searchGrievances');       //AICTE Search Grievances
 
 });
 

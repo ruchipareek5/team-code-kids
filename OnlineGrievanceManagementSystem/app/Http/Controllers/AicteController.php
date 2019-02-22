@@ -14,7 +14,7 @@ class AicteController extends Controller
     public function index() {
         $array = ['raised', 'addressed', 'delayed', 'reopened'];
 
-        $grievances = Grievance::whereIn('status',$array)->orderBy('id','asc')
+        $grievances = Grievance::whereIn('status',$array)->where('level', 3)->orderBy('id','asc')
                       ->get(['id','student_id','type','eta','status','documents','created_at']);
 
 
@@ -53,6 +53,35 @@ class AicteController extends Controller
     public function show($id)
     {
         //
+    }
+
+    // AICTE search grievances
+    public function searchGrievances(Request $request){
+        if($request->type == 1){
+            $grievances = DB::select("SELECT table_grievance.id, student_id, user_student.college_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
+            user_student ON table_grievance.student_id = user_student.id WHERE table_grievance.id = ".$request->data);
+        }
+        else if($request->type == 2){
+            $grievances = DB::select("SELECT table_grievance.id, student_id, user_student.college_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
+            user_student ON table_grievance.student_id = user_student.id WHERE user_student.id = ".$request->data);
+        }
+        else if($request->type == 3){
+            $grievances = DB::select("SELECT table_grievance.id, student_id, user_student.college_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
+                user_student ON table_grievance.student_id = user_student.id WHERE user_student.college_id = ".$request->data);
+        }
+        else if($request->type == 4){
+            DB::select("SELECT table_grievance.id, student_id, user_student.college_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
+                user_student ON table_grievance.student_id = user_student.id WHERE table_grievance.type = ".$request->data);
+        }
+        else{
+            $data = [
+                'message' => 'Wrong url return',
+                'status' => "'" . Response::HTTP_NOT_FOUND . "'"
+            ];
+            return $data;
+        }
+
+        return response(['message'=>$grievances],200);
     }
 
     /**
