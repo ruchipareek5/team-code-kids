@@ -57,14 +57,14 @@
 
      <!-- aicte starts -->
      <script src="js/controllers/aicteController.js"></script>
-
+     <script src="js/services/aicteService.js"></script>
      <!-- aicte ends -->
 
      <!-- student starts -->
      <script src="js/controllers/studentController.js"></script>
     <script src="js/services/studentService.js"></script>
      <!-- student ends -->
-
+    
 
       
 <script src="./../../js/libraries/highcharts.js"></script>

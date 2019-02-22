@@ -1,0 +1,42 @@
+<style>
+.comment
+{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: rgb(245,245,245);
+    border-bottom: 1px solid silver;
+}
+#commentbox
+{
+    margin:0;
+    height:-webkit-fill-available;
+    width: 9.5em;
+    padding:0;
+    background-color: rgb(245,245,245);
+    border:none;
+
+}
+button
+{
+    margin:0;
+
+    padding:0;
+    display: inline;
+    background-color: rgb(245,245,245);
+    border:none;
+
+}
+</style>
+<div class="comment ">
+<form>
+    <input type="text" name="comment" id="commentbox" style="display:inline" ng-model="commentMsg">
+    <button ng-click="grid.appScope.addComment(row.entity.id,commentMsg)">
+        <img src='assets/icons/pencil.png' height=16 width=16 value='{{COL_FIELD CUSTOM_FILTERS}}' >
+        
+    </button>
+</form>
+</div>
+<script>
+    
+</script>

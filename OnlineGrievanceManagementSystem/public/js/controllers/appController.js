@@ -49,6 +49,7 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
     // grievance remakrs starts
     $scope.remarkMessage='';
     $scope.viewRemarks=function(id){
+		
     	var url = API_URL+'grievance/remarks/'+id;
     	$http.get(url).then(function(success){
     		$scope.remarkMessage=success.data.message;
@@ -61,6 +62,25 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 
     // grievance remakrs starts
 
+
+	// comment add starts
+	$scope.addComment=function(id,commentMsg){
+		alert(id+" "+commentMsg)
+		// $scope.data={ "id":id,
+		// 			"comment":commentMsg
+
+		// 			};
+
+		// var request = {
+		// 				'method': 'POST',
+		// 				'url': API_URL+"grievances/updateStatus",
+		// 				'data': data,
+		// 			};
+
+		// return $http(request);
+
+    	
+    }
 
 });
 
