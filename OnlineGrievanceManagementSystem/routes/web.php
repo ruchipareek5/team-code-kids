@@ -48,7 +48,8 @@ Route::middleware('auth.basic')->group(function(){
     Route::get('/grievance/aicte/statistics/{type}','AicteDashBoardController@getStatistics');          //For statistics panel
 
     Route::get('/aicte/grievances', 'AicteController@index');       //AICTE grievances
-    Route::get('/aicte/grievanceSearch', 'AicteController@searchGrievances');       //AICTE Search Grievances
+    Route::post('/aicte/grievanceSearch', 'AicteController@searchGrievances');       //AICTE Search Grievances
+    Route::post('/aicte/addComment', 'AicteController@addComment');         //AICTE Add Comments
 
 });
 
