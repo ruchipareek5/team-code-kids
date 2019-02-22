@@ -102,7 +102,7 @@ class grievanceController extends Controller
         $gid = Auth::user()->id;
          // $user_id = DB::table('users')->where('email', $email)->get(['id']);
          // return  $user_id->id;
-        $data = Grievance::find($id)->committee_member;     //Kyu hai ye line. Kya kar raha hai ye.
+        
         $data = Grievance::find($id);
 
         return response(['message'=>$data],200);

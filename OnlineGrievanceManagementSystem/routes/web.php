@@ -29,7 +29,7 @@ Route::get('/testTemplate', function(){
 
 Route::post('/register','LoginController@register');
 
-Route::get('/grievance/download/documents/{path}','grievanceController@download');
+
 
 
 Route::get('/aicte/grievances', 'AicteController@index');       //AICTE grievances
@@ -37,12 +37,12 @@ Route::get('/aicte/grievances', 'AicteController@index');       //AICTE grievanc
 Route::middleware('auth.basic')->group(function(){
     Route::resource('/grievances', 'grievanceController');
 	Route::post('/login','LoginController@checkAuth');
-	
+    Route::get('/grievance/download/documents/{path}','grievanceController@download');          //Document Download request
     Route::get('/grievance/{type}','grievanceController@statistics');
     Route::get('/grievanceSearch/{id}','grievanceController@show');
     Route::post('/grievances/updateStatus','grievanceController@updateStatus');
     Route::get('/grievance/student/{type}','grievanceController@grievanceDetails');             //For student My grievances data
-    Route::get('/grievance/remarks/{id}','grievanceController@getRemarks');
+    Route::get('/grievance/remarks/{id}','grievanceController@getRemarks');                     //FOr fetching remarks
 });
 
 
