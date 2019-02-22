@@ -102,10 +102,12 @@ class grievanceController extends Controller
         $gid = Auth::user()->id;
          // $user_id = DB::table('users')->where('email', $email)->get(['id']);
          // return  $user_id->id;
-        
-        $data = Grievance::find($id);
 
+        $data = Grievance::find($id);
+        if($data != null)
         return response(['message'=>$data],200);
+        else
+            return response(['message'=>'No data available for the given ID '.$id],404);
     }
 
 
