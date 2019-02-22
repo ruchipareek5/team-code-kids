@@ -1,14 +1,17 @@
 $(document).ready(function(){
+
+
+$.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/college', function(data) {
     //top5_institute
 Highcharts.chart('top5_institute', {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Top 5 Institutes having maximum filed Grievance'
+        text:'Top 5 College having maximum filled Grievance'
     },
     xAxis: {
-        categories: [' DR.VARSHA PATIL INSTITUTE OF TECHNOLOGY', 'SAIGANAPATHI ENGINEERING COLLEGE', 'JSPM NARHE TECHNICAL CAMPUS', 'NALANDA INSTITUTE OF TECHNOLOGY', 'CHAITANYA INSTITUTE OF COMPUTER SCIENCES']
+        categories: data.college
     },
     yAxis: {
         min: 0,
@@ -51,19 +54,23 @@ Highcharts.chart('top5_institute', {
         enabled: false
     },
     series: [{
-        name: 'Pending',
-        data: [12,8,5,6,3]
-    }, {
-        name: 'Satisfied',
-        data: [8,9,11,10,7]
-    }, {
-        name: 'Handled',
-        data: [6,7,5,3,5]
+        name: 'pending',
+        data:data.pending
+    },
+    {
+        name: 'Escalated',
+        data:data.escalated
+    },
+    {
+        name: 'Resolved',
+        data:data.resolved
     }]
 });
+});
+
 
 // grievance_type
-
+$.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/department', function(data) {
 Highcharts.chart('grievance_type', {
     chart: {
         type: 'pie',
@@ -91,10 +98,10 @@ Highcharts.chart('grievance_type', {
     },
     legend: {
         align: 'right',
-        x: -25 ,
+        layout: 'vertical',
         verticalAlign: 'top',
-        y: 20,
-        floating: true,
+        x: -20,
+        y: 60,
         backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
         borderColor: '#CCC',
         borderWidth: 1,
@@ -106,16 +113,15 @@ Highcharts.chart('grievance_type', {
     },
     series: [{
         name: 'Percentage',
-        data: [
-            ['Examination Cell', 41 ],
-            ['Admission Cell', 14],
-            ['Training & Placement ', 17],
-            ['Accounts', 29],            
-        ]
+        'data': data[0]
     }]
 });
+});
+
 
 // grievance_yearwise
+$.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/year', function(data) {
+    console.log(data);
 Highcharts.chart('grievance_yearwise', {
     chart: {
         type: 'column'
@@ -124,7 +130,7 @@ Highcharts.chart('grievance_yearwise', {
         text: 'Yearwise filled Grievances'
     },
     xAxis: {
-        categories: ['2015','2016','2017','2018','2019']
+        categories: data.year
     },
     yAxis: {
         min: 0,
@@ -158,12 +164,13 @@ Highcharts.chart('grievance_yearwise', {
     },
     series: [{
         name: 'Filled Grievance',
-        data: [6000,2000,5000,7000,3000]
+        data: data.count
     }]
 });
-
+});
 
 // top5_state
+$.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/state', function(data) {
 Highcharts.chart('top5_state', {
     chart: {
         type: 'column'
@@ -172,7 +179,7 @@ Highcharts.chart('top5_state', {
         text: 'Top 5 state having maximum Grievance'
     },
     xAxis: {
-        categories: ['Sikkim','UP ','Punjab','Kerela','Delhi']
+        categories: data.state
     },
     yAxis: {
         min: 0,
@@ -206,8 +213,10 @@ Highcharts.chart('top5_state', {
     },
     series: [{
         name: 'Total Grievance',
-        data: [6000,2000,5000,7000,3000]
+        data: data.total
     }]
+    });
 });
+// api end
 });
 // jquery end

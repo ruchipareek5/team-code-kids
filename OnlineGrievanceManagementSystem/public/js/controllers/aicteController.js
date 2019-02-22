@@ -6,15 +6,36 @@ grievancesystem.controller('aicteController',aicteController);
  function aicteController($scope,$http,appService,aicteService,API_URL) {
  	$scope.page='dashboard_aicte';
 
- 	$scope.total_grievances = 38989;
- 	$scope.pending_grievance = 189;
-    $scope.satisfied_grievance = 400;
-    $scope.ongoing_grievance = 380;
+ 	//load grievance panel
+     $scope.total = 0;
+    $scope.pending = 0;
+    $scope.escalated = 0;
+    $scope.resolved = 0;
 
- 	$scope.total_grievance_date = "Yesterday : 02:30 PM"
-    $scope.pending_grievance_date = "5th Jan, 19 : 02:30 PM"
-    $scope.satisfied_grievance_date = "25th Nov, 18 : 03:00 PM"
-    $scope.ongoing_grievance_date = "Today : 12:00 PM"
+    $scope.loadGrievanceStatistics=function(){
+        $http.get(API_URL+"grievance/aicte/statistics/total").then(function(response){
+                $scope.total = response.data.message;
+            },function(errorResponse){
+                console.log(errorResponse);
+            });
+         $http.get(API_URL+"grievance/aicte/statistics/resolved").then(function(response){
+                $scope.resolved = response.data.message;
+            },function(errorResponse){
+                console.log(errorResponse);
+            });
+         $http.get(API_URL+"grievance/aicte/statistics/pending").then(function(response){
+                $scope.pending = response.data.message;
+            },function(errorResponse){
+                console.log(errorResponse);
+            });
+         $http.get(API_URL+"grievance/aicte/statistics/escalated").then(function(response){
+                $scope.escalated = response.data.message;
+            },function(errorResponse){
+                console.log(errorResponse);
+            });
+    }
+    $scope.loadGrievanceStatistics();
+    // grievance statistics ends
 
         
 
@@ -31,7 +52,7 @@ grievancesystem.controller('aicteController',aicteController);
 
                     
                 ];
-//grievance
+    //grievance
                 $scope.open_grievance_data=new Array()
                 aicteService.getGrievance().then(function(success)
                  {   
@@ -44,36 +65,36 @@ grievancesystem.controller('aicteController',aicteController);
 
 
 
-                        $scope.numRows = 15;
-                     $scope.open_grievance = {
-                        data:$scope.open_grievance_data,
-                            enableGridMenus:false,
-                            enableSorting: false,
-                            enableFiltering:false,
-                            enableCellEditing:false,
-                            enableColumnMenus: false,
-                            enableHorizontalScrollbar:0,
-                            enableVerticalScrollbar:0,
-                            totalItems: $scope.open_grievance_data.length,
-                            paginationPageSize: $scope.numRows,
-                            minRowsToShow: $scope.open_grievance_data.length < $scope.numRows ? $scope.open_grievance_data : $scope.numRows,
-                            enablePaginationControls: false,
-                            
-
-                            columnDefs: [
-                                { name : "id",displayNameName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
-                                { name:"student_id" ,displayName: 'Student Id', cellTemplate: '/views/cellTemplate/cell.html '},
-                                { name:"college_id" ,displayName: 'College ID',  cellTemplate: '/views/cellTemplate/cell.html'},
-                                {name :"type" ,displayName: 'Grievance Type' ,cellTemplate: '/views/cellTemplate/cell.html' },
-                                {name:"created_at", displayName: 'Data of Issue' ,cellTemplate: '/views/cellTemplate/cell.html '},
-                                {name:"eta" ,displayName: 'ETA', cellTemplate: '/views/cellTemplate/cell.html '},
-                                {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
-                                {name:"remarks",displayName: 'Grievance Remarks', cellTemplate: "/views/cellTemplate/aicte_remarks.html"},
-                                {name:"comment",displayName:'Comment',cellTemplate:"/views/cellTemplate/aicte_comment.html"}
-                                        ],
+        $scope.numRows = 15;
+         $scope.open_grievance = {
+            data:$scope.open_grievance_data,
+                enableGridMenus:false,
+                enableSorting: false,
+                enableFiltering:false,
+                enableCellEditing:false,
+                enableColumnMenus: false,
+                enableHorizontalScrollbar:0,
+                enableVerticalScrollbar:0,
+                totalItems: $scope.open_grievance_data.length,
+                paginationPageSize: $scope.numRows,
+                minRowsToShow: $scope.open_grievance_data.length < $scope.numRows ? $scope.open_grievance_data : $scope.numRows,
+                enablePaginationControls: false,
                 
-                                
-                             };
+
+                columnDefs: [
+                    { name : "id",displayNameName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
+                    { name:"student_id" ,displayName: 'Student Id', cellTemplate: '/views/cellTemplate/cell.html '},
+                    { name:"college_id" ,displayName: 'College ID',  cellTemplate: '/views/cellTemplate/cell.html'},
+                    {name :"type" ,displayName: 'Grievance Type' ,cellTemplate: '/views/cellTemplate/cell.html' },
+                    {name:"created_at", displayName: 'Data of Issue' ,cellTemplate: '/views/cellTemplate/cell.html '},
+                    {name:"eta" ,displayName: 'ETA', cellTemplate: '/views/cellTemplate/cell.html '},
+                    {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
+                    {name:"remarks",displayName: 'Grievance Remarks', cellTemplate: "/views/cellTemplate/aicte_remarks.html"},
+                    {name:"comment",displayName:'Comment',cellTemplate:"/views/cellTemplate/aicte_comment.html"}
+                            ],
+    
+                    
+                 };
 
 
 //Grievance
@@ -82,9 +103,18 @@ grievancesystem.controller('aicteController',aicteController);
                         $scope.grievance_search_data=[]
                         $scope.searchGrievance = function(grievanceFilter,searchKeyword){
 
-                        aicteService.searchGrievance(grievanceFilter,searchKeyword);
+                        aicteService.searchGrievance(grievanceFilter,searchKeyword).then(function(success){
+                    $scope.grievance_search_result.data=new Array();
+                     $scope.grievance_search_data=success.data.message; 
+                     console.log($scope.grievance_search_data);  
+                     $scope.grievance_search_result.data=$scope.grievance_search_data;             
+                                },
+                                function(error){
+                                    $scope.grievance_search_result.data=new Array();
+                                     appService.showAlert('error',error.data.message);
+                                });
 
-                        } ;
+                    };
                         
 
                         $scope.grievance_search_result = {

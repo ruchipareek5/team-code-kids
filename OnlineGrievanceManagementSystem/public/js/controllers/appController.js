@@ -65,20 +65,30 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 
 	// comment add starts
 	$scope.addComment=function(id,commentMsg){
-		alert(id+" "+commentMsg)
-		// $scope.data={ "id":id,
-		// 			"comment":commentMsg
+		
+		// var url = API_URL+'aicte/addComment';
+		var formData = new FormData();
+		 formData.append('id',id);
+         formData.append('message', commentMsg);
+		 var request = {
+                method: 'POST',
+                url: API_URL+"aicte/addComment",
+                data: formData,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+    	$http(request).then(function(success){
+    		// appService.showAlert('success',success.data.message)
+    		alert(success.data.message);
 
-		// 			};
+    	},
+    	function(error){
+    		// appService.showAlert('error',error.data.message)
+    		console.log(error.data)
 
-		// var request = {
-		// 				'method': 'POST',
-		// 				'url': API_URL+"grievances/updateStatus",
-		// 				'data': data,
-		// 			};
-
-		// return $http(request);
-
+    	});
+		
     	
     }
 

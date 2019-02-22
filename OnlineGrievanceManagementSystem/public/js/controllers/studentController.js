@@ -23,12 +23,7 @@ grievancesystem.controller('studentController',studentController);
 
  function studentController($scope,$http,appService,studentService,API_URL) {
  	$scope.page='dashboard_student';
-    
-    $scope.total_grievance_date = "Yesterday 02:30PM"
-    $scope.pending_grievance_date = "Today 03:00PM"
-    $scope.satisfied_grievance_date = "25 Nov 05:30PM"
-    $scope.ongoing_grievance_date = "Yesterday 02:30PM"
-
+   
     $scope.grievanceagainst=[{"category":"Admission Cell"},{"category":"Accounts Department"},
     {"category":"Placement & training cell"},
     {"category":"Security"},{"category":"Hostel"},{"category":"Ragging"},{"category":"Canteen"},
@@ -59,7 +54,7 @@ grievancesystem.controller('studentController',studentController);
                 $scope.pending = 0;
                 $scope.escalated = 0;
 
-    $scope.lodgeGrievanceStatistics=function(){
+    $scope.loadGrievanceStatistics=function(){
         $http.get(API_URL+"grievance/total").then(function(response){
                 $scope.total = response.data.value;
                 console.log($scope.total);
@@ -85,7 +80,7 @@ grievancesystem.controller('studentController',studentController);
                 console.log(errorResponse);
             });
     }
-    $scope.lodgeGrievanceStatistics();
+    $scope.loadGrievanceStatistics();
     // grievance statistics ends
 
 
@@ -114,7 +109,7 @@ grievancesystem.controller('studentController',studentController);
                     $scope.grievance = {};
                     $scope.grievance.selected_file='';
                     $scope.loadAllGrievance();
-                    $scope.lodgeGrievanceStatistics();
+                    $scope.loadGrievanceStatistics();
                     var fileElement = angular.element('#attachment');
                     fileElement.value = '';
                 }, function error(e) {
@@ -323,7 +318,7 @@ grievancesystem.controller('studentController',studentController);
             function(success)
             {
                 $scope.loadAllGrievance();
-                $scope.lodgeGrievanceStatistics();
+                $scope.loadGrievanceStatistics();
                 alert("success "+success.data.message+" "+$scope.data.id);
 
             },
