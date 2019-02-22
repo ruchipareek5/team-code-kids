@@ -57,25 +57,21 @@ grievancesystem.controller('studentController',studentController);
     $scope.loadGrievanceStatistics=function(){
         $http.get(API_URL+"grievance/total").then(function(response){
                 $scope.total = response.data.value;
-                console.log($scope.total);
             },function(errorResponse){
                 console.log(errorResponse);
             });
          $http.get(API_URL+"grievance/satisfied").then(function(response){
                 $scope.satisfied = response.data.value;
-                console.log($scope.satisfied);
             },function(errorResponse){
                 console.log(errorResponse);
             });
          $http.get(API_URL+"grievance/pending").then(function(response){
                 $scope.pending = response.data.value;
-                console.log($scope.pending);
             },function(errorResponse){
                 console.log(errorResponse);
             });
          $http.get(API_URL+"grievance/escalated").then(function(response){
                 $scope.escalated = response.data.value;
-                console.log($scope.escalated);
             },function(errorResponse){
                 console.log(errorResponse);
             });
