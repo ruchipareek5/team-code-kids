@@ -138,18 +138,16 @@ class AicteDashBoardController extends Controller
 
         $details = DB::select("select d.id as college_id, d.name as college_name,o.name as pricipal_name,o.phone as principal_contact,
             users.email from table_college d,user_principal o,users where d.id =$id and o.college_id = d.id and o.user_id = users.id ");
-        return $details;
+        
         if($details == null)
             return response(['message'=>'Sorry no data found for given id '.$id],404);
 
 
-        $count = DB::select("select count(*) as open_grievances from table_grievance
-                            INNER join user_student on table_grievance.student_id = user_student.id
-                            INNER JOIN table_college on table_college.id = user_student.college_id
-                            where user_student.university_id = $id and status in ('raised','addressed')");
-        $details[0]->open_grievances = $count[0]->open_grievances;
+        $count = DB::select("select count(*) as open_grievances from table_grievance,user_student where user_student.college_id = $id and table_grievance.student_id=user_student.id and status in ('raised','addressed')");
+	       
+	$details[0]->open_grievances = $count[0]->open_grievances;
 
-        return $details;
+        return response(['message'=>$details],200);
 
     }
 
