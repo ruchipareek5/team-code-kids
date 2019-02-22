@@ -28,10 +28,10 @@ button
 
 }
 </style>
-<div class="comment ">
+<div class="comment " ng-submit="grid.appScope.addComment(row.entity.id,commentMsg)">
 <form>
-    <input type="text" name="comment" id="commentbox" style="display:inline" ng-model="commentMsg">
-    <button ng-click="grid.appScope.addComment(row.entity.id,commentMsg)">
+    <input type="text" name="comment" id="commentbox" style="display:inline" ng-model="commentMsg" required>
+    <button >
         <img src='assets/icons/pencil.png' height=16 width=16 value='{{COL_FIELD CUSTOM_FILTERS}}' >
         
     </button>

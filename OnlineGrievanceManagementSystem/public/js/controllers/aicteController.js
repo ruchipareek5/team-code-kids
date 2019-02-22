@@ -16,7 +16,7 @@ grievancesystem.controller('aicteController',aicteController);
     $scope.satisfied_grievance_date = "25th Nov, 18 : 03:00 PM"
     $scope.ongoing_grievance_date = "Today : 12:00 PM"
 
-
+        
 
      $scope.faq =[{ "ques":"how to file grievance? How we will know it is resolved",
                     "ans": "You will be notified when it will solved"},
@@ -31,7 +31,7 @@ grievancesystem.controller('aicteController',aicteController);
 
                     
                 ];
-
+//grievance
                 $scope.open_grievance_data=new Array()
                 aicteService.getGrievance().then(function(success)
                  {   
@@ -67,7 +67,7 @@ grievancesystem.controller('aicteController',aicteController);
                                 {name :"type" ,displayName: 'Grievance Type' ,cellTemplate: '/views/cellTemplate/cell.html' },
                                 {name:"created_at", displayName: 'Data of Issue' ,cellTemplate: '/views/cellTemplate/cell.html '},
                                 {name:"eta" ,displayName: 'ETA', cellTemplate: '/views/cellTemplate/cell.html '},
-                                {name:"document",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
+                                {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
                                 {name:"remarks",displayName: 'Grievance Remarks', cellTemplate: "/views/cellTemplate/aicte_remarks.html"},
                                 {name:"comment",displayName:'Comment',cellTemplate:"/views/cellTemplate/aicte_comment.html"}
                                         ],
@@ -77,26 +77,18 @@ grievancesystem.controller('aicteController',aicteController);
 
 
 //Grievance
+//Grievance Search
 
+                        $scope.grievance_search_data=[]
+                        $scope.searchGrievance = function(grievanceFilter,searchKeyword){
 
-                             $scope.grievance_search=[
-                                {
-                                    "grievance_id":"1",
-                                    "Grievance_type":"1",
-                                    "assigned_committee":"1",
-                                    "data_of_issue":"1",
-                                    "employed":"1",
-                                    "eta":"1",
-                                    "status":"1",
-                                    "action_taken_on":"1",
-                                    "action":"1",
-                                    "attachment":"1",
+                        aicteService.searchGrievance(grievanceFilter,searchKeyword);
 
-                             }];
-                             
-                
-                        $scope.grievance_search = {
-                            data:$scope.grievance_search,
+                        } ;
+                        
+
+                        $scope.grievance_search_result = {
+                            data:$scope.grievance_search_data,
                             enableGridMenus:false,
                             enableSorting: false,
                             enableFiltering:false,
@@ -104,82 +96,37 @@ grievancesystem.controller('aicteController',aicteController);
                             enableColumnMenus: false,
                             enableHorizontalScrollbar:0,
                             enableVerticalScrollbar:0,
-                            totalItems: $scope.grievance_search.length,
+                            totalItems: $scope.grievance_search_data.length,
                             paginationPageSize: $scope.numRows,
-                            minRowsToShow: $scope.grievance_search.length < $scope.numRows ? $scope.grievance_search : $scope.numRows,
+                            minRowsToShow: $scope.grievance_search_data.length < $scope.numRows ? $scope.grievance_search_data : $scope.numRows,
                             enablePaginationControls: false,
 
                     columnDefs: [
-                                { name : "grievance_id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
-                                { name:"Grievance_type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html '},
-                                { name:"assigned_committee" ,displayName: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
-                                {name :"data_of_issue" ,displayName: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html' },
+                                { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
+                                { name:"student_id" ,displayName: 'Student Id', cellTemplate: '/views/cellTemplate/cell.html '},
+                                { name:"college_id" ,displayName: 'College Id',  cellTemplate: '/views/cellTemplate/cell.html'},
+                                {name :"type" ,displayName: 'Grievance Type' ,cellTemplate: '/views/cellTemplate/cell.html' },
+                                {name :"created_at" ,displayName: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html' },
                                 {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html '},
-                                {name:"status" ,displayName: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
-                                {name:"attachment",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
+                                {name:"documents" ,displayName: 'Attachment', cellTemplate: '/views/cellTemplate/attachment.html '},
+                                {name:"remarks",displayName: 'Grievance Remarks',cellTemplate: "/views/cellTemplate/aicte_remarks.html"  },
                                 
                                         ],
                 
                                 
                     };
-                    $scope.university_data=[];
-                    $scope.manage_ombudsman = {
-                        data:$scope.university_data,
-                        enableGridMenus:false,
-                        enableSorting: false,
-                        enableFiltering:false,
-                        enableCellEditing:false,
-                        enableColumnMenus: false,
-                        enableHorizontalScrollbar:0,
-                        enableVerticalScrollbar:0,
-                        totalItems: $scope.university_data.length,
-                        paginationPageSize: $scope.numRows,
-                        minRowsToShow: $scope.university_data.length < $scope.numRows ? $scope.university_data : $scope.numRows,
-                        enablePaginationControls: false,
-            
-                columnDefs: [
-                            { name : "application_id",displayName: 'Applicant name', cellTemplate: '/views/cellTemplate/cell.html' },
-                            { name:"university" ,displayName: 'University', cellTemplate: '/views/cellTemplate/cell.html '},
-                            { name:"university_code" ,displayName: 'University Code',  cellTemplate: '/views/cellTemplate/cell.html'},
-                            {name:"status" ,displayName: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
-                            {name:"attachment",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html "  },
-                            {name:"action",displayName: 'Action',cellTemplate: "/views/cellTemplate/aicte_ombuds_action.html"  },
-                                
-                                    ],
-            
-                            
-                };
-                
-                
-                $scope.history = {
-                    data:$scope.university_data,
-                    enableGridMenus:false,
-                    enableSorting: false,
-                    enableFiltering:false,
-                    enableCellEditing:false,
-                    enableColumnMenus: false,
-                    enableHorizontalScrollbar:0,
-                    enableVerticalScrollbar:0,
-                    totalItems: $scope.university_data.length,
-                    paginationPageSize: $scope.numRows,
-                    minRowsToShow: $scope.university_data.length < $scope.numRows ? $scope.university_data : $scope.numRows,
-                    enablePaginationControls: false,
         
-            columnDefs: [
-                        { name : "application_id",displayName: 'Applicant name', cellTemplate: '/views/cellTemplate/cell.html' },
-                        { name:"university" ,displayName: 'University', cellTemplate: '/views/cellTemplate/cell.html '},
-                        { name:"university_code" ,displayName: 'University Code',  cellTemplate: '/views/cellTemplate/cell.html'},
-                        {name:"status" ,displayName: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
-                        {name:"attachment",displayName: 'Attachment',cellTemplate: "<div class='ui-grid-cell-contents cell div-click'><img src='assets/images/attachment.png' height=16 width=16' value='{{COL_FIELD CUSTOM_FILTERS}}'></div> "  },
-                        {name:"action",displayName: 'Action',cellTemplate: "<div class='ui-grid-cell-contents cell div-click'><img src='assets/images/attachment.png' height=16 width=16' value='{{COL_FIELD CUSTOM_FILTERS}}'></div>  "  },
-                            
-                                ],
-        
-                        
+//Grievance Search
+
+//university_search
+                    
+            $scope.university_search=function(university_id)
+            {
+                    alert(university_id)
             };
-                
             $scope.university_search_data=[];
-            $scope.university_search = {
+
+            $scope.university_search_result = {
                 data:$scope.university_search_data,
                 enableGridMenus:false,
                 enableSorting: false,
@@ -195,19 +142,53 @@ grievancesystem.controller('aicteController',aicteController);
 
     
         columnDefs: [
-                    { name : "university_code",displayName: 'University Code', cellTemplate: '/views/cellTemplate/cell.html' },
-                    { name:"university" ,displayName: 'University', cellTemplate: '/views/cellTemplate/cell.html '},
-                    { name:"university_type" ,displayName: 'university_type',  cellTemplate: '/views/cellTemplate/cell.html'},
-                    {name:"ombudsman" ,displayName: 'Ombudsman', cellTemplate: '/views/cellTemplate/cell.html '},
-                    {name:"total_grievance",displayName: 'Total Grievance',cellTemplate: '/views/cellTemplate/cell.html '  },
-                    {name:"pending_grievance",displayName: 'Pending Grievance',cellTemplate: '/views/cellTemplate/cell.html '  },
-                    {name:"ongoing_grievance",displayName: 'Ongoing Grievance',cellTemplate: '/views/cellTemplate/cell.html '  },
-                       
+                    { name : "university_id",displayName: 'University Code', cellTemplate: '/views/cellTemplate/cell.html' },
+                    { name:"university_name" ,displayName: 'University', cellTemplate: '/views/cellTemplate/cell.html '},
+                    { name:"ombudsman_name" ,displayName: 'Ombudsman Name',  cellTemplate: '/views/cellTemplate/cell.html'},
+                    {name:"ombudsman_contact" ,displayName: 'Contact Number', cellTemplate: '/views/cellTemplate/cell.html '},
+                    {name:"ombudsman_email",displayName: 'Email id',cellTemplate: '/views/cellTemplate/cell.html '  },
+                    {name:"open_grievance",displayName: 'Open Grievances',cellTemplate: '/views/cellTemplate/cell.html '  },
+ 
+                            ],
+    
+                    
+        };
+//institute search
+
+                $scope.institute_search=function(university_id)
+                {
+                         alert(institute_id)
+                };
+        $scope.institute_search_data=[];
+            $scope.institute_search_result = {
+                data:$scope.institute_search_data,
+                enableGridMenus:false,
+                enableSorting: false,
+                enableFiltering:false,
+                enableCellEditing:false,
+                enableColumnMenus: false,
+                enableHorizontalScrollbar:0,
+                enableVerticalScrollbar:0,
+                totalItems: $scope.institute_search_data.length,
+                paginationPageSize: $scope.numRows,
+                minRowsToShow: $scope.institute_search_data.length < $scope.numRows ? $scope.institute_search_data : $scope.numRows,
+                enablePaginationControls: false,
+
+    
+        columnDefs: [
+                    { name : "institute_id",displayName: 'Institute Code', cellTemplate: '/views/cellTemplate/cell.html' },
+                    { name:"institute_name" ,displayName: 'Institute', cellTemplate: '/views/cellTemplate/cell.html '},
+                    { name:"principal_name" ,displayName: 'Principal',  cellTemplate: '/views/cellTemplate/cell.html'},
+                    {name:"principal_contact" ,displayName: 'Contact Number', cellTemplate: '/views/cellTemplate/cell.html '},
+                    {name:"principal_email",displayName: 'Email Id',cellTemplate: '/views/cellTemplate/cell.html '  },
+                    {name:"open_grievances",displayName: 'Open Grievances',cellTemplate: '/views/cellTemplate/cell.html '  },
+  
                             ],
     
                     
         };
 
+//institute search
 
     
                 

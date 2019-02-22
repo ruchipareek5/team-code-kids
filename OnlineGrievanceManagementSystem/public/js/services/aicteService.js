@@ -8,7 +8,14 @@ grievancesystem.service('aicteService',function ($http,API_URL) {
 		var url = API_URL + 'aicte/grievances';
 		return $http.get(url);
 
-    }
+		}
+		
+		this.searchGrievance=function () {
+			var url = API_URL + 'aicte/grievances';
+			return $http.get(url);
+	
+			}
+			
     
     
 

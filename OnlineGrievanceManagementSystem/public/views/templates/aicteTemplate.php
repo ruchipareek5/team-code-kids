@@ -60,10 +60,6 @@
     					<div class="side-link">Search Application</div>
     				</div>
 
-    				<div class="sideBtn" ng-click="page = 'manageOmbudsman_aicte'">
-    					<img src="assets/icons/manage.png"" class="icons">
-    					<div class="side-link">Manage Ombudsman</div>
-    				</div>
 
     				<div class="sideBtn" ng-click="page = 'impInformation_aicte'">
     					<img src="assets/icons/information.png"" class="icons">
@@ -93,9 +89,6 @@
 		                <div ng-switch-when="searchApplication_aicte">
 		                    <div ng-include src="'views/partials/searchApplication_aicte.php'"></div>
 		                </div>
-                        <div ng-switch-when="manageOmbudsman_aicte">
-                            <div ng-include src="'views/partials/manageOmbudsman_aicte.php'"></div>
-                        </div>
 		                <div ng-switch-when="impInformation_aicte">
 		                    <div ng-include src="'views/partials/impInformation_aicte.php'"></div>
 		                </div>
