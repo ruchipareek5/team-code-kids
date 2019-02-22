@@ -113,6 +113,7 @@ grievancesystem.controller('studentController',studentController);
                     $scope.errors = [];
                     $scope.grievance = {};
                     $scope.grievance.selected_file='';
+                    $scope.loadAllGrievance();
                     $scope.lodgeGrievanceStatistics();
                     var fileElement = angular.element('#attachment');
                     fileElement.value = '';
