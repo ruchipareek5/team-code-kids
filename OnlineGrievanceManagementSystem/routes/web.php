@@ -39,8 +39,8 @@ Route::post('/aicte/addComment', 'AicteController@addComment');
 Route::middleware('auth.basic')->group(function(){
     Route::resource('/grievances', 'grievanceController');
 	Route::post('/login','LoginController@checkAuth');
-    Route::get('/grievance/{type}','grievanceController@statistics');
-    Route::get('/grievanceSearch/{id}','grievanceController@show');
+    Route::get('/grievance/{type}','grievanceController@statistics');       //For grievance statistics in dashboard
+    Route::get('/grievanceSearch/{id}','grievanceController@show');         //For fetching student's my grievance
     Route::post('/grievances/updateStatus','grievanceController@updateStatus');
     Route::get('/grievance/student/{type}','grievanceController@grievanceDetails');  //For student My grievances data
     Route::get('/grievance/remarks/{id}','grievanceController@getRemarks');        //For fetching remarks
