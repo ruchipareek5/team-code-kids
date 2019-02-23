@@ -27,13 +27,13 @@ class grievanceController extends Controller
 
     public function grievanceDetails($type){
         $array = [];
-        if($type=='pending'){
-            $array = ['raised','addressed'];
+        if($type=='open'){
+            $array = ['raised','reopened'];
         }
-        elseif ($type=='escalated'){
-            $array = ['delayed','reopened'];
-        }elseif ($type=='resolved'){
-            $array = ['resolved'];
+        elseif ($type=='inaction'){
+            $array = ['delayed','inaction'];
+        }elseif ($type=='addressed'){
+            $array = ['addressed'];
         }
         else {
             $data = [
@@ -44,12 +44,14 @@ class grievanceController extends Controller
         }
         $student_id = Session::get('user_id');
         $grievances = Grievance::where('student_id',$student_id)->whereIn('status',$array)->orderBy('id','asc')
-                      ->get(['id','type','eta','status','documents','created_at']);
+                      ->get(['id','type','eta','documents','created_at']);
 
 
         return response(['message'=>$grievances],200);
 
     }
+
+    public function 
 
     /**
      * Show the form for creating a new resource.
@@ -178,7 +180,7 @@ class grievanceController extends Controller
         if($request->get('action') == '0'){
            $grievance = Grievance::find($id);
            $grievance->status = 'reopened';
-           $grievance->eta =  DB::raw('DATE_ADD(NOW(),INTERVAL 7 DAY)');;
+           $grievance->eta =  DB::raw('DATE_ADD(NOW(),INTERVAL 7 DAY)');
            $grievance->save();
         }
         else if($request->get('action')=='1'){
