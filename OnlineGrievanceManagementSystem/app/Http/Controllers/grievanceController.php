@@ -172,9 +172,9 @@ class grievanceController extends Controller
         //
     }
 
-    public function updateStatus($id)
+    public function updateStatus(Request $request)
     {
-        $grievance = Grievance::find($id);
+        $grievance = Grievance::find($request->id);
         $grievance->status = 'reopened';
         $grievance->save();
 
@@ -200,12 +200,41 @@ class grievanceController extends Controller
 
 
     public function getRemarks($id){
-        $remarks = \App\GrievanceMessage::where('grievance_id',$id)->get()->first();
+        $remarks = \App\GrievanceMessage::where('grievance_id',$id)->get();
         if($remarks == null)
             return response(['message'=>'No Remarks Yet'],200);
         else{
             return \response(['message'=>$remarks],200);
         }
+    }
+
+    public function addRemarks(Request $request){
+        // $roles = Auth::user()->roles;
+        // $student_id = Session::get('user_id');
+
+        $student_id = 1;
+
+        // if ($roles == 'student')
+        //     $table_name = 'user_student';
+        // elseif ($roles == 'principal')
+        //     $table_name = 'user_pricipal';
+        // elseif ($roles == 'ombudman')
+        //     $table_name = 'user_ombudsman';
+        // elseif ($roles == 'aicte')
+        //     $table_name = 'user_aicte';
+        // elseif ($roles == 'committee member')
+        //     $table_name = 'user_committee_member';
+        // else
+        // return response(["message"=>'No User found'], 403);
+
+        // $user_name = DB::table($table_name)->where('user_id',Auth::user()->getAuthIdentifier())->get(['name'])->first();
+
+        // if($user_name == null)
+        //     return response(['message'=>'No such user'],403);
+        
+        DB::table('table_message')->insert( array( 'grievance_id' => $request->grievance_id, 'message' => $request->message, 'sender_id' => $student_id));
+
+        return response(['message' => 'Cooment Added'], 200);
     }
    
 }
