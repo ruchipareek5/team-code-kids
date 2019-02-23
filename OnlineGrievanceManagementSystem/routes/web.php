@@ -43,16 +43,16 @@ Route::middleware('auth.basic')->group(function(){
 	Route::post('/login','LoginController@checkAuth');
     Route::get('/grievance/{type}','grievanceController@statistics');       //For grievance statistics in dashboard
     Route::get('/grievanceSearch/{id}','grievanceController@show');         //For fetching student's my grievance
-    Route::post('/grievances/updateStatus','grievanceController@updateStatus');         //For Updating status of grievance from raised to inaction
+    Route::post('/grievances/updateStatus','grievanceController@updateStatus');         //For Updating status of grievance from addressed to reopened
     Route::get('/grievance/student/{type}','grievanceController@grievanceDetails');  //For student My grievances data
     Route::get('/grievance/remarks/{id}','grievanceController@getRemarks');        //For fetching remarks
-    Route::post('grievance/addComment', 'grievanceController@addRemarks');          //Adding remarks for student
+    Route::get('/grievance/remarks/{id}','grievanceController@getRemarks');        //For fetching remarks student's page
     Route::get('/grievance/aicte/statistics/{type}','AicteDashBoardController@getStatistics');          //For statistics panel
 
     Route::get('/aicte/grievances', 'AicteController@index');       //AICTE grievances
     Route::get('/aicte/grievanceSearch', 'AicteController@searchGrievances');       //AICTE Search Grievances
     Route::post('/aicte/addComment', 'AicteController@addComment');         //AICTE Add Comments
-
+    Route::get('/aicte/remarks/{id}', 'AicteController@getRemarks');        //For fetching remarks AICTE's page
 });
 
 

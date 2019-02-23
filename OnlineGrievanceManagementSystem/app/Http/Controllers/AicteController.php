@@ -98,22 +98,22 @@ class AicteController extends Controller
     }
 
     public function addComment(Request $request){
-        $message = $request->message;
+        $roles = Auth::user()->roles;
+        $id = Session::get('user_id');
 
-        $comments = DB::select("SELECT aicte FROM table_message WHERE grievance_id = ".$request->id);
-
-        $comments = $comments[0]->aicte.$message;
-        $grievance_id = GrievanceMessage::where('grievance_id', $request->id)->get(['id'])->first()->id;
-
-        if($grievance_id == null)
-            return response(["message"=>'No data found'], 404);
-
-        $grievance_message = GrievanceMessage::find($grievance_id);
-        $grievance_message->aicte = $comments;
-        $grievance_message->save();
+        DB::table('table_message')->insert( array( 'grievance_id' => $request->grievance_id, 'message' => $request->message, 'sender_id' => $id));
+   
         return response(["message"=>'Updated Successfully'], 200);
     }
 
+    public function getRemarks($id){
+        $remarks = GrievanceMessage::where('grievance_id',$id)->get();
+        if($remarks == null)
+            return response(['message'=>'No Remarks Yet'],200);
+        else{
+            return \response(['message'=>$remarks],200);
+        }
+    }
     /**
      * Update the specified resource in storage.
      *
