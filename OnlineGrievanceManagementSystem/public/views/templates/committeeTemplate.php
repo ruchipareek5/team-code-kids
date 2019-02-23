@@ -2,7 +2,7 @@
    
     <link rel="stylesheet" href="js/libraries/bootstrap.min.css">
      <link rel="stylesheet" href="css/userTemplate.css">
-    <link rel="stylesheet" href="css/aicte_partials.css">
+    <link rel="stylesheet" href="css/committee_partials.css">
 
     <title>Document1</title>
 
@@ -12,15 +12,15 @@
     <script src="js/libraries/angular-ui-grid/ui-grid.core.min.js"></script>
 
 </head>
-    <div ng-controller='aicteController'>
+    <div>
     	<div class="container-fluid">
 
     		<div class="row">
     			<div class="col-md-2 leftTop">
     				<!-- nav top head -->
     				<div class="row navTop align-items-center">
-    					<span class="col-md-4 logo"><img src="assets/logos/aicte.png"></span>
-    					<span class="col-md-8 navTop-head">{{username}}</span>
+    					<span class="col-md-4 logo"><img src="assets/logos/cvrce.png"></span>
+    					<span class="col-md-8 navTop-head">{{college_name}}</span>
     				</div>
     			</div>
 
@@ -29,7 +29,7 @@
 				 		<span class="top-icon"><img src="assets/icons/notifiaction.png"></span>
 				 		<span class="top-icon"><img src="assets/icons/message.png"></span>
 				 		<div class=" top-icon dropdown">
-				 			<img src="assets/icons/user.png">AICTE Name 
+				 			<img src="assets/icons/user.png">{{username}} 
 				 			<span class=""> &#x25BC;
 				 				<div class="dropdown-content">
 							      <a href="#">Profile</a>
@@ -44,33 +44,22 @@
     		<div class="row">
     			<div class="col-md-2 leftNav">
     				<!-- navigation left dash board -->
-    				<div class="sideBtn active_sidebtn" ng-click="page = 'dashboard_aicte'">
+    				<div class="sideBtn active_sidebtn" ng-click="page = 'dashboard_committee'">
     					<img src="assets/icons/dashboard.png" class="icons">
     					<div class="side-link">Dashboard</div>
     				</div>
 
-    				<div class="sideBtn" ng-click="page = 'grievances_aicte'">
+    				<div class="sideBtn" ng-click="page = 'grievances_committee'">
     					<img src="assets/icons/grievance.png" class="icons">
-    					<div class="side-link">Grievances</div>
+    					<div class="side-link">View Grievances</div>
     				</div>
 
-    				<div class="sideBtn" ng-click="page = 'searchApplication_aicte'">
+    				<div class="sideBtn" ng-click="page = 'searchApplication_committee'">
     					<img src="assets/icons/search.png" class="icons">
     					<div class="side-link">Search Application</div>
     				</div>
 
-
-    				<div class="sideBtn" ng-click="page = 'impInformation_aicte'">
-    					<img src="assets/icons/information.png"" class="icons">
-    					<div class="side-link">Important Information</div>
-    				</div>
-
-    				<div class="sideBtn" ng-click="page = 'reports_aicte'">
-    					<img src="assets/icons/folder.png"" class="icons">
-    					<div class="side-link">Reports</div>
-    				</div>
-
-    				<div class="sideBtn" ng-click="page = 'faq_aicte'">
+    				<div class="sideBtn" ng-click="page = 'faq_committee'">
     					<img src="assets/icons/faq.png"" class="icons">
     					<div class="side-link">FAQ</div>
     				</div>
@@ -80,20 +69,20 @@
     			<div class="col-md-10 rightArea">
                     <div ng-include src="'views/templates/alertTemplate.html'"></div>
 				 	<div ng-switch on="page">
-		                <div ng-switch-when="dashboard_aicte">
-		                    <div ng-include src="'views/partials/dashboard_aicte.php'"></div>
+		                <div ng-switch-when="dashboard_committee">
+		                    <div ng-include src="'views/partials/dashboard_committee.php'"></div>
 		                </div>
-		                <div ng-switch-when="grievances_aicte">
-		                    <div ng-include src="'views/partials/grievances_aicte.php'"></div>
+		                <div ng-switch-when="grievances_committee">
+		                    <div ng-include src="'views/partials/grievances_committee.php'"></div>
 		                </div>
-		                <div ng-switch-when="searchApplication_aicte">
-		                    <div ng-include src="'views/partials/searchApplication_aicte.php'"></div>
+		                <div ng-switch-when="searchApplication_committee">
+		                    <div ng-include src="'views/partials/searchApplication_committee.php'"></div>
 		                </div>
-		                <div ng-switch-when="impInformation_aicte">
-		                    <div ng-include src="'views/partials/impInformation_aicte.php'"></div>
+		                <div ng-switch-when="impInformation_committee">
+		                    <div ng-include src="'views/partials/impInformation_committee.php'"></div>
 		                </div>
-		                <div ng-switch-when="reports_aicte">
-		                    <div ng-include src="'views/partials/reports_aicte.php'"></div>
+		                <div ng-switch-when="reports_committee">
+		                    <div ng-include src="'views/partials/reports_committee.php'"></div>
 		                </div>
 		                 <div ng-switch-when="faq_aicte">
 		                    <div ng-include src="'views/partials/faq_aicte.php'"></div>

@@ -29,15 +29,15 @@ grievancesystem.config(function ($routeProvider) {
 		controller:'aicteController'
 	})
 	.when('/ombudsman',{
-		templateUrl:'partials/ombudsmanDashboard.html',
+		templateUrl:'/views/templates/ombudsmanTemplate.php',
 		controller:'ombudsmanController'
 	})
 	.when('/principal',{
-		templateUrl:'partials/principalDashboard.html',
+		templateUrl:'/views/templates/principalTemplate.php',
 		controller:'principalController'
 	})
 	.when('/committee',{
-		templateUrl:'partials/committeeDashboard.html',
+		templateUrl:'/views/templates/committeeTemplate.php',
 		controller:'committeeController'
 	})
 	.when('/student',{

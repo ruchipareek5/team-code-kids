@@ -6,6 +6,7 @@ grievancesystem.controller('aicteController',aicteController);
  function aicteController($scope,$http,appService,aicteService,API_URL,$location) {
    
  	$scope.page='dashboard_aicte';
+    $scope.username='AICTE Head';
 
  	//load grievance panel
      $scope.total = 0;

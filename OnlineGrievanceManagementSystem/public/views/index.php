@@ -46,6 +46,8 @@
     <script src="./../../js/libraries/angular-ui-grid/ui-grid.min.js"></script>
     
     <link rel="stylesheet" href="js/libraries/bootstrap.min.css">
+    <link rel="stylesheet" href="js/libraries/bootstrap.min.css">
+    
     <!-- bootstarp ends -->
   
     <script src="js/index.js"></script>
@@ -64,6 +66,11 @@
      <script src="js/controllers/studentController.js"></script>
     <script src="js/services/studentService.js"></script>
      <!-- student ends -->
+
+      <!-- committee starts -->
+     <script src="js/controllers/committeeController.js"></script>
+    <script src="js/services/committeeService.js"></script>
+     <!-- committee ends -->
     
 
       
