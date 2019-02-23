@@ -31,7 +31,7 @@ Route::get('/testTemplate', function(){
     return view('templates/testTemplate');
 });
 
-Route::post('/register','LoginController@register');
+Route::post('/register','LoginController@register');        //Registartion page route
 
 Route::post('/aicte/addComment', 'AicteController@addComment');
 
@@ -41,7 +41,7 @@ Route::middleware('auth.basic')->group(function(){
 	Route::post('/login','LoginController@checkAuth');
     Route::get('/grievance/{type}','grievanceController@statistics');       //For grievance statistics in dashboard
     Route::get('/grievanceSearch/{id}','grievanceController@show');         //For fetching student's my grievance
-    Route::post('/grievances/updateStatus','grievanceController@updateStatus');
+    Route::post('/grievances/updateStatus','grievanceController@updateStatus');         //For Updating status of grievance from raised to inaction
     Route::get('/grievance/student/{type}','grievanceController@grievanceDetails');  //For student My grievances data
     Route::get('/grievance/remarks/{id}','grievanceController@getRemarks');        //For fetching remarks
 
@@ -54,7 +54,7 @@ Route::middleware('auth.basic')->group(function(){
 });
 
 
-Route::get('/grievance/aicte/chart/year','AicteDashBoardController@getYearStatistics');             //for char using year
+Route::get('/grievance/aicte/chart/year','AicteDashBoardController@getYearStatistics');             //for chart using year
 Route::get('/grievance/aicte/chart/state','AicteDashBoardController@getStateStatistics');           //for chart using state
 Route::get('/grievance/aicte/chart/college','AicteDashBoardController@getCollegeStatistics');       //for chart using college
 Route::get('/grievance/aicte/chart/department','AicteDashBoardController@getGrievanceTypeStatistics');      //for chart using department

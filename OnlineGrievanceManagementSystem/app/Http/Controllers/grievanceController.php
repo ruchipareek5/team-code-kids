@@ -51,7 +51,6 @@ class grievanceController extends Controller
 
     }
 
-    public function 
 
     /**
      * Show the form for creating a new resource.
@@ -173,24 +172,13 @@ class grievanceController extends Controller
         //
     }
 
-    public function updateStatus(Request $request)
+    public function updateStatus($id)
     {
-        $id=$request->get('id');
+        $grievance = Grievance::find($id);
+        $grievance->status = 'reopened';
+        $grievance->save();
 
-        if($request->get('action') == '0'){
-           $grievance = Grievance::find($id);
-           $grievance->status = 'reopened';
-           $grievance->eta =  DB::raw('DATE_ADD(NOW(),INTERVAL 7 DAY)');
-           $grievance->save();
-        }
-        else if($request->get('action')=='1'){
-            $grievance = Grievance::find($id);
-            $grievance->status = 'resolved';
-            $grievance->eta = DB::raw('CURRENT_TIMESTAMP');
-            $grievance->save();
-        }
-        else return ['message'=>'Invalid Action value','status'=>Response::HTTP_NOT_MODIFIED];
-        return ['message'=>'Successfully updated','id'=>$request->get($id),'status'=>Response::HTTP_ACCEPTED];
+        return ['message' => 'Grievance Status Updated Successfully', 'id' => $id, 'status' => Response::HTTP_ACCEPTED];
 
     }
     /**
