@@ -14,14 +14,18 @@ grievancesystem.service('studentService',function ($http,API_URL) {
 
 	}
 
-	this.action_grievance = function(data)
+	this.action_grievance = function(gid)
 	{
-		
-        console.log(data.action);
+		alert(gid)
+		var formData = new FormData();
+		formData.append('id',gid);
 		var request = {
                 'method': 'POST',
                 'url': API_URL+"grievances/updateStatus",
-                'data': data,
+                'data': formData,
+                headers: {
+                    'Content-Type': undefined
+                }
             };
      
             return $http(request)

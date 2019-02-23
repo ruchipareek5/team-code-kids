@@ -301,19 +301,16 @@ grievancesystem.controller('studentController',studentController);
                      
     };
 
-    $scope.action = function(gid,action)
+    $scope.actionChangeStatus = function(gid)
     {
         
-        $scope.data={
-            "id":gid,
-            "action":action
-        };
-         studentService.action_grievance($scope.data).then(
+
+         studentService.action_grievance(gid).then(
             function(success)
             {
                 $scope.loadAllGrievance();
                 $scope.loadGrievanceStatistics();
-                alert("success "+success.data.message+" "+$scope.data.id);
+                 appService.showAlert("success",success.data.message);
 
             },
             function(error)
