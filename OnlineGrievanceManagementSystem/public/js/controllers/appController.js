@@ -53,15 +53,44 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
     // grievances action ends
 
     // grievance remakrs starts
-    $scope.remarkMessage='';
+    $scope.comment_numRows=10;
+
+     $scope.comment_history = {
+        data:$scope.open_grievance_data,
+        enableGridMenus:false,
+        enableSorting: false,
+        enableFiltering:false,
+        enableCellEditing:false,
+        enableColumnMenus: false,
+        enableHorizontalScrollbar:0,
+        enableVerticalScrollbar:0,
+        paginationPageSize: $scope.numRows,
+        minRowsToShow: $scope.numRows,
+        enablePaginationControls: false,
+		
+		  columnDefs: [
+            { name : "grievance_id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html',width:"20%"},
+            {name :"updated_at" ,displayName: 'Date' ,cellTemplate: '/views/cellTemplate/cell.html', width: "20%"},
+            { name:"message" ,displayName: 'Comment', cellTemplate: '/views/cellTemplate/cell.html',width:"40%"},
+            {name:"sender_id", displayName: 'Commented By' ,cellTemplate: '/views/cellTemplate/cell.html',width:"20%"},
+            
+        ],
+
+            
+         };
+    $scope.comment_history_data=new Array();
+
     $scope.viewRemarks=function(id){
 		
     	var url = API_URL+'grievance/remarks/'+id;
     	$http.get(url).then(function(success){
-    		$scope.remarkMessage=success.data.message;
     		$('#modal-conatiner').addClass('visible');
+    		console.log(success.data.message);
+    		$scope.comment_history.data=success.data.message;
     	},
     	function(error){
+            $scope.grievance_search.data=new Array();
+             appService.showAlert('error',error.data.message);
 
     	});
     }
@@ -70,22 +99,28 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 
 
 	// comment add starts
-	$scope.addComment=function(id,commentMsg){
+	$scope.comment={};
+	$scope.addComment=function(id){
+		$scope.comment.gid=id;
+		$('#commentModal-conatiner').addClass('visible');
+	}
+
+	$scope.addCommentAPI=function(comment){
 		
-		// var url = API_URL+'aicte/addComment';
+		$('#commentModal-conatiner').removeClass('visible');
 		var formData = new FormData();
-		 formData.append('id',id);
-         formData.append('message', commentMsg);
+		 formData.append('grievance_id',comment.gid);
+         formData.append('message', comment.message);
 		 var request = {
                 method: 'POST',
-                url: API_URL+"aicte/addComment",
+                url: API_URL+"grievance/addComment",
                 data: formData,
                 headers: {
                     'Content-Type': undefined
                 }
             };
     	$http(request).then(function(success){
-    		appService.showAlert('success',success.data.message)
+    		appService.showAlert('success',success.data.message);
 
     	},
     	function(error){

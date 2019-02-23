@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.8.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Feb 23, 2019 at 03:45 PM
--- Server version: 5.7.25-0ubuntu0.18.10.2
--- PHP Version: 7.0.33-1+ubuntu18.10.1+deb.sury.org+1
+-- Host: 127.0.0.1
+-- Generation Time: Feb 23, 2019 at 09:45 PM
+-- Server version: 10.1.31-MariaDB
+-- PHP Version: 7.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -135,8 +137,11 @@ INSERT INTO `table_grievance` (`id`, `type`, `description`, `documents`, `studen
 (2, 'Academics', 'Fee not refunded till now', NULL, 2, '2019-02-20 14:48:27', '2019-02-20 14:48:27', 2, 'raised', '0000-00-00 00:00:00', 0),
 (3, 'Hostel', 'Tap broken', NULL, 1, '2019-02-20 14:51:02', '2019-02-20 14:51:02', 1, 'raised', '0000-00-00 00:00:00', 0),
 (4, 'Academics', 'Penalty of 2000', NULL, 1, '2019-02-20 14:53:22', '2019-02-20 14:53:22', 2, 'raised', '0000-00-00 00:00:00', 0),
-(5, 'Admission Cell', 'Fees not refunded', 'documents/readme.txt', 1, '2019-02-22 04:11:28', '2019-02-22 04:11:28', 2, 'raised', '2019-03-01 09:41:28', 3),
-(6, 'Hostel', 'sample', 'documents/readme.txt', 1, '2019-02-22 04:17:37', '2019-02-22 04:17:37', 1, 'raised', '2019-03-01 09:47:37', 3);
+(5, 'Admission Cell', 'Fees not refunded', 'documents/readme.txt', 1, '2019-02-22 04:11:28', '2019-02-22 04:11:28', 2, 'addressed', '2019-03-01 09:41:28', 3),
+(6, 'Hostel', 'sample', 'documents/readme.txt', 1, '2019-02-22 04:17:37', '2019-02-22 04:17:37', 1, 'delayed', '2019-03-01 09:47:37', 3),
+(7, 'Hostel', 'asda', 'NULL', 1, '2019-02-23 06:11:36', '2019-02-23 06:11:36', 1, 'inaction', '2019-03-02 11:41:36', 0),
+(8, 'Hostel', 'Sample', 'documents/f2LeLf43Q5QbBMfw8G27Xj7eMOaJoReWpjfnaUu3', 1, '2019-02-23 12:16:48', '2019-02-23 12:16:48', 1, 'raised', '2019-03-02 17:46:48', 0),
+(9, 'Hostel', 'aaaa', 'documents/Jmg8UQqXZOQBK8b5ETGjNaTLxeNMpSVOzgE67ZZU', 1, '2019-02-23 12:51:40', '2019-02-23 12:51:40', 1, 'raised', '2019-03-02 18:21:40', 0);
 
 -- --------------------------------------------------------
 
@@ -158,7 +163,9 @@ CREATE TABLE `table_message` (
 
 INSERT INTO `table_message` (`id`, `grievance_id`, `message`, `sender_id`, `updated_at`) VALUES
 (1, 1, 'ok', 4, '2019-02-23 10:12:08'),
-(2, 2, 'fine', 9, '2019-02-23 10:15:09');
+(2, 2, 'fine', 9, '2019-02-23 10:15:09'),
+(3, 6, 'Hello', 1, '2019-02-23 19:45:38'),
+(4, 6, 'Hello 2', 1, '2019-02-23 19:46:03');
 
 -- --------------------------------------------------------
 
@@ -427,7 +434,7 @@ ALTER TABLE `table_grievance`
 -- Indexes for table `table_message`
 --
 ALTER TABLE `table_message`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id`) USING BTREE,
   ADD KEY `sender_id` (`sender_id`),
   ADD KEY `grievance_id` (`grievance_id`);
 
@@ -517,71 +524,91 @@ ALTER TABLE `user_student`
 --
 ALTER TABLE `table_aicte_announcement`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `table_college`
 --
 ALTER TABLE `table_college`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
 --
 -- AUTO_INCREMENT for table `table_department`
 --
 ALTER TABLE `table_department`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `table_grievance`
 --
 ALTER TABLE `table_grievance`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `table_message`
+--
+ALTER TABLE `table_message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `table_ombudsman_announcement`
 --
 ALTER TABLE `table_ombudsman_announcement`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `table_principal_announcement`
 --
 ALTER TABLE `table_principal_announcement`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `table_search`
 --
 ALTER TABLE `table_search`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `table_university`
 --
 ALTER TABLE `table_university`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `user_aicte`
 --
 ALTER TABLE `user_aicte`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `user_committee_member`
 --
 ALTER TABLE `user_committee_member`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `user_ombudsman`
 --
 ALTER TABLE `user_ombudsman`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `user_principal`
 --
 ALTER TABLE `user_principal`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `user_student`
 --
 ALTER TABLE `user_student`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- Constraints for dumped tables
 --
@@ -666,6 +693,7 @@ ALTER TABLE `user_student`
   ADD CONSTRAINT `user_student_ibfk_1` FOREIGN KEY (`college_id`) REFERENCES `table_college` (`id`),
   ADD CONSTRAINT `user_student_ibfk_2` FOREIGN KEY (`university_id`) REFERENCES `table_university` (`id`),
   ADD CONSTRAINT `user_student_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

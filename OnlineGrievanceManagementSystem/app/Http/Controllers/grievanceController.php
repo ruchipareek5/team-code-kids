@@ -44,7 +44,7 @@ class grievanceController extends Controller
         }
         $student_id = Session::get('user_id');
         $grievances = Grievance::where('student_id',$student_id)->whereIn('status',$array)->orderBy('id','asc')
-                      ->get(['id','type','eta','documents','created_at']);
+                      ->get(['id','type','eta','documents','created_at','description','status']);
 
 
         return response(['message'=>$grievances],200);
@@ -209,10 +209,9 @@ class grievanceController extends Controller
     }
 
     public function addRemarks(Request $request){
-        // $roles = Auth::user()->roles;
-        // $student_id = Session::get('user_id');
-
-        $student_id = 1;
+        $roles = Auth::user()->roles;
+        $student_id = Session::get('user_id');
+        // $student_id = 1;
 
         // if ($roles == 'student')
         //     $table_name = 'user_student';
@@ -234,7 +233,7 @@ class grievanceController extends Controller
         
         DB::table('table_message')->insert( array( 'grievance_id' => $request->grievance_id, 'message' => $request->message, 'sender_id' => $student_id));
 
-        return response(['message' => 'Cooment Added'], 200);
+        return response(['message' => 'Comment Added'], 200);
     }
    
 }
