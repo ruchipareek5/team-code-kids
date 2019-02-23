@@ -1,9 +1,7 @@
 
 <head>
     <title>FAQ </title>
-    <script type="text/javascript">
-      alert('FAQ')
-    </script>
+ 
 </head>
   <div class="container">
       <div class="row row_gap">

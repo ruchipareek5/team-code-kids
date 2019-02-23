@@ -8,7 +8,6 @@ grievancesystem.controller('committeeController',committeeController);
  	$scope.page='dashboard_committee';
     $scope.username='Committee Name';
     $scope.college_name='CV Raman College of Engineering';
-    console.log($scope.username)
 
  	//load grievance panel
      $scope.total = 0;

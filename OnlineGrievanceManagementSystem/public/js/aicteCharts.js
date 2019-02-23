@@ -83,6 +83,16 @@ Highcharts.chart('grievance_type', {
         text: 'Types of Grievance'
     },
     plotOptions: {
+         series: {
+            dataLabels: {
+                enabled: true,
+                formatter: function() {
+                    return Math.round(this.percentage*100)/100 + ' %';
+                },
+                distance: 15,
+                
+            }
+        },
         pie: {
             innerSize:70,
             depth: 50,
@@ -112,7 +122,7 @@ Highcharts.chart('grievance_type', {
         enabled: false
     },
     series: [{
-        name: 'Percentage',
+        name: 'Total',
         'data': data[0]
     }]
 });

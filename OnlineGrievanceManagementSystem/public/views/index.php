@@ -71,6 +71,16 @@
      <script src="js/controllers/committeeController.js"></script>
     <script src="js/services/committeeService.js"></script>
      <!-- committee ends -->
+
+      <!-- principal starts -->
+     <script src="js/controllers/principalController.js"></script>
+    <script src="js/services/principalService.js"></script>
+     <!-- principal ends -->
+
+      <!-- ombudsman starts -->
+     <script src="js/controllers/ombudsmanController.js"></script>
+    <script src="js/services/ombudsmanService.js"></script>
+     <!-- ombudsman ends -->
     
 
       

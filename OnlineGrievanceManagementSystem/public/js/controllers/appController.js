@@ -15,6 +15,10 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 			$location.path('/student');
 		}else if (response.data == "committee member") {
 			$location.path('/committee');
+		}else if (response.data == "principal") {
+			$location.path('/principal');
+		}else if (response.data == "ombudsman") {
+			$location.path('/ombudsman');
 		}else {
 			alert('Template Not Available');
 		}

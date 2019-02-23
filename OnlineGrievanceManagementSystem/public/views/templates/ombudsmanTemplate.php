@@ -2,9 +2,9 @@
    
     <link rel="stylesheet" href="js/libraries/bootstrap.min.css">
      <link rel="stylesheet" href="css/userTemplate.css">
-    <link rel="stylesheet" href="css/committee_partials.css">
+    <link rel="stylesheet" href="css/ombudsman_partials.css">
 
-    <title>Document1</title>
+    <title>Ombudsman</title>
 
     <link rel="stylesheet" type="text/css" href="js/libraries/angular-ui-grid/css/ui-grid.core.min.css">
     <script src="js/libraries/angular-ui-grid/ui-grid.core.min.js"></script> 
@@ -20,7 +20,7 @@
     				<!-- nav top head -->
     				<div class="row navTop align-items-center">
     					<span class="col-md-4 logo"><img src="assets/logos/cvrce.png"></span>
-    					<span class="col-md-8 navTop-head">{{college_name}}</span>
+    					<span class="col-md-8 navTop-head">{{university_name}}</span>
     				</div>
     			</div>
 
@@ -44,22 +44,22 @@
     		<div class="row">
     			<div class="col-md-2 leftNav">
     				<!-- navigation left dash board -->
-    				<div class="sideBtn active_sidebtn" ng-click="page = 'dashboard_committee'">
+    				<div class="sideBtn active_sidebtn" ng-click="page = 'dashboard_ombudsman'">
     					<img src="assets/icons/dashboard.png" class="icons">
     					<div class="side-link">Dashboard</div>
     				</div>
 
-    				<div class="sideBtn" ng-click="page = 'grievances_committee'">
+    				<div class="sideBtn" ng-click="page = 'grievances_ombudsman'">
     					<img src="assets/icons/grievance.png" class="icons">
     					<div class="side-link">View Grievances</div>
     				</div>
 
-    				<div class="sideBtn" ng-click="page = 'searchApplication_committee'">
+    				<div class="sideBtn" ng-click="page = 'searchApplication_ombudsman'">
     					<img src="assets/icons/search.png" class="icons">
     					<div class="side-link">Search Application</div>
     				</div>
 
-    				<div class="sideBtn" ng-click="page = 'faq_committee'">
+    				<div class="sideBtn" ng-click="page = 'faq_ombudsman'">
     					<img src="assets/icons/faq.png"" class="icons">
     					<div class="side-link">FAQ</div>
     				</div>
@@ -69,17 +69,17 @@
     			<div class="col-md-10 rightArea">
                     <div ng-include src="'views/templates/alertTemplate.html'"></div>
 				 	<div ng-switch on="page">
-		                <div ng-switch-when="dashboard_committee">
-		                    <div ng-include src="'views/partials/dashboard_committee.php'"></div>
+		                <div ng-switch-when="dashboard_ombudsman">
+		                    <div ng-include src="'views/partials/dashboard_ombudsman.php'"></div>
 		                </div>
-		                <div ng-switch-when="grievances_committee">
-		                    <div ng-include src="'views/partials/grievances_committee.php'"></div>
+		                <div ng-switch-when="grievances_ombudsman">
+		                    <div ng-include src="'views/partials/grievances_ombudsman.php'"></div>
 		                </div>
-		                <div ng-switch-when="searchApplication_committee">
-		                    <div ng-include src="'views/partials/searchApplication_committee.php'"></div>
+		                <div ng-switch-when="searchApplication_ombudsman">
+		                    <div ng-include src="'views/partials/searchApplication_ombudsman.php'"></div>
 		                </div>
-		                 <div ng-switch-when="faq_commitee">
-		                    <div ng-include src="'views/partials/faq_commitee.php'"></div>
+		                 <div ng-switch-when="faq_ombudsman">
+		                    <div ng-include src="'views/partials/faq_ombudsman.php'"></div>
 		                </div>
 		            </div>
 				 	
