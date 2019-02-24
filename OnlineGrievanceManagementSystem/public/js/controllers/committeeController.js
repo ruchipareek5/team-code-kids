@@ -116,7 +116,7 @@ grievancesystem.controller('committeeController',committeeController);
 
         columnDefs: [
             { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
-            {name :"student_details" ,displayName: 'Student Details' ,cellTemplate: '/views/cellTemplate/committee_student_details.html', width: "10%"},
+            {name :"student_details" ,displayName: 'Student Details' ,cellTemplate: '/views/cellTemplate/student_details.html', width: "10%"},
             { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
             { name:"description" ,displayName: 'Description', cellTemplate: '/views/cellTemplate/cell.html',width:"30%"},
             {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html",width:"12%"  },
@@ -145,7 +145,7 @@ grievancesystem.controller('committeeController',committeeController);
 
     columnDefs: [
         { name : "id", cellTemplate: '/views/cellTemplate/cell.html',headerCellTemplate: '<div class="">Grievance <br>ID </div>',width:"7%"},
-        {name :"student_details", headerCellTemplate: '<div class="">Student <br>Details </div>',cellTemplate: '/views/cellTemplate/committee_student_details.html', width: "7%"},
+        {name :"student_details", headerCellTemplate: '<div class="">Student <br>Details </div>',cellTemplate: '/views/cellTemplate/student_details.html', width: "7%"},
         { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html',width:"10%"},
         { name:"description" ,displayName: 'Description', cellTemplate: '/views/cellTemplate/cell.html',width:"15%"},
         {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html",width:"7%"  },
@@ -176,7 +176,7 @@ grievancesystem.controller('committeeController',committeeController);
 
 columnDefs: [
     { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
-    {name :"student_details" ,displayName: 'Student Details' ,cellTemplate: '/views/cellTemplate/committee_student_details.html', width: "10%"},
+    {name :"student_details" ,displayName: 'Student Details' ,cellTemplate: '/views/cellTemplate/student_details.html', width: "10%"},
     { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
     { name:"description" ,displayName: 'Description', cellTemplate: '/views/cellTemplate/cell.html',width:"20%"},
     {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html",width:"12%"  },
