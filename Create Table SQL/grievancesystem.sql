@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2019 at 09:45 PM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.4
+-- Generation Time: Feb 24, 2019 at 08:41 AM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `grievancesystem`
 --
+CREATE DATABASE IF NOT EXISTS `grievancesystem` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `grievancesystem`;
 
 -- --------------------------------------------------------
 
@@ -124,6 +126,7 @@ CREATE TABLE `table_grievance` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `department_id` int(11) DEFAULT NULL,
   `status` varchar(255) NOT NULL DEFAULT 'raised',
+  `delayed_status` tinyint(1) NOT NULL DEFAULT '0',
   `eta` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `level` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -132,16 +135,16 @@ CREATE TABLE `table_grievance` (
 -- Dumping data for table `table_grievance`
 --
 
-INSERT INTO `table_grievance` (`id`, `type`, `description`, `documents`, `student_id`, `created_at`, `updated_at`, `department_id`, `status`, `eta`, `level`) VALUES
-(1, 'Hostel', 'Wifi not working', NULL, 1, '2019-02-20 14:47:47', '2019-02-20 14:47:47', 1, 'raised', '0000-00-00 00:00:00', 3),
-(2, 'Academics', 'Fee not refunded till now', NULL, 2, '2019-02-20 14:48:27', '2019-02-20 14:48:27', 2, 'raised', '0000-00-00 00:00:00', 0),
-(3, 'Hostel', 'Tap broken', NULL, 1, '2019-02-20 14:51:02', '2019-02-20 14:51:02', 1, 'raised', '0000-00-00 00:00:00', 0),
-(4, 'Academics', 'Penalty of 2000', NULL, 1, '2019-02-20 14:53:22', '2019-02-20 14:53:22', 2, 'raised', '0000-00-00 00:00:00', 0),
-(5, 'Admission Cell', 'Fees not refunded', 'documents/readme.txt', 1, '2019-02-22 04:11:28', '2019-02-22 04:11:28', 2, 'addressed', '2019-03-01 09:41:28', 3),
-(6, 'Hostel', 'sample', 'documents/readme.txt', 1, '2019-02-22 04:17:37', '2019-02-22 04:17:37', 1, 'delayed', '2019-03-01 09:47:37', 3),
-(7, 'Hostel', 'asda', 'NULL', 1, '2019-02-23 06:11:36', '2019-02-23 06:11:36', 1, 'inaction', '2019-03-02 11:41:36', 0),
-(8, 'Hostel', 'Sample', 'documents/f2LeLf43Q5QbBMfw8G27Xj7eMOaJoReWpjfnaUu3', 1, '2019-02-23 12:16:48', '2019-02-23 12:16:48', 1, 'raised', '2019-03-02 17:46:48', 0),
-(9, 'Hostel', 'aaaa', 'documents/Jmg8UQqXZOQBK8b5ETGjNaTLxeNMpSVOzgE67ZZU', 1, '2019-02-23 12:51:40', '2019-02-23 12:51:40', 1, 'raised', '2019-03-02 18:21:40', 0);
+INSERT INTO `table_grievance` (`id`, `type`, `description`, `documents`, `student_id`, `created_at`, `updated_at`, `department_id`, `status`, `delayed_status`, `eta`, `level`) VALUES
+(1, 'Hostel', 'Wifi not working', NULL, 1, '2019-02-20 14:47:47', '2019-02-20 14:47:47', 1, 'raised', 0, '0000-00-00 00:00:00', 3),
+(2, 'Academics', 'Fee not refunded till now', NULL, 2, '2019-02-20 14:48:27', '2019-02-20 14:48:27', 2, 'raised', 0, '0000-00-00 00:00:00', 0),
+(3, 'Hostel', 'Tap broken', NULL, 1, '2019-02-20 14:51:02', '2019-02-20 14:51:02', 1, 'raised', 0, '0000-00-00 00:00:00', 0),
+(4, 'Academics', 'Penalty of 2000', NULL, 1, '2019-02-20 14:53:22', '2019-02-20 14:53:22', 2, 'raised', 0, '0000-00-00 00:00:00', 0),
+(5, 'Admission Cell', 'Fees not refunded', 'documents/readme.txt', 1, '2019-02-22 04:11:28', '2019-02-24 01:55:49', 2, 'reopened', 0, '2019-03-01 09:41:28', 3),
+(6, 'Hostel', 'sample', 'documents/readme.txt', 1, '2019-02-22 04:17:37', '2019-02-22 04:17:37', 1, 'delayed', 0, '2019-03-01 09:47:37', 3),
+(7, 'Hostel', 'asda', 'NULL', 1, '2019-02-23 06:11:36', '2019-02-23 06:11:36', 1, 'inaction', 0, '2019-03-02 11:41:36', 0),
+(8, 'Hostel', 'Sample', 'documents/f2LeLf43Q5QbBMfw8G27Xj7eMOaJoReWpjfnaUu3', 1, '2019-02-23 12:16:48', '2019-02-23 12:16:48', 1, 'raised', 0, '2019-03-02 17:46:48', 0),
+(9, 'Hostel', 'aaaa', 'documents/Jmg8UQqXZOQBK8b5ETGjNaTLxeNMpSVOzgE67ZZU', 1, '2019-02-23 12:51:40', '2019-02-23 12:51:40', 1, 'raised', 0, '2019-03-02 18:21:40', 0);
 
 -- --------------------------------------------------------
 
@@ -312,6 +315,13 @@ CREATE TABLE `user_committee_member` (
   `registration_status` int(1) DEFAULT NULL,
   `reset_token` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user_committee_member`
+--
+
+INSERT INTO `user_committee_member` (`id`, `user_id`, `profile_picture`, `name`, `assigned_committee`, `phone`, `created_by`, `department_id`, `registration_status`, `reset_token`) VALUES
+(1, 4, NULL, 'Commmittee Name', 'Examination Cell', 1234567890, 2, 4, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -589,7 +599,7 @@ ALTER TABLE `user_aicte`
 -- AUTO_INCREMENT for table `user_committee_member`
 --
 ALTER TABLE `user_committee_member`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_ombudsman`
