@@ -19,7 +19,7 @@
             <div class="grievance grievance-pending">
                 <span class="grievance-stat-value">{{pending}}</span>
                 <hr>  
-                <span class="grievance-stat-name">Pending Grievances </span>
+                <span class="grievance-stat-name">Open Grievances </span>
             </div>
         </div>
 
@@ -35,7 +35,7 @@
             <div class="grievance grievance-resolved">
                 <span class="grievance-stat-value">{{resolved}}</span>
                  <hr>   
-                <span class="grievance-stat-name">Resolved Grievances </span>
+                <span class="grievance-stat-name">Addressed Grievances </span>
             </div>
         </div>
     </div>

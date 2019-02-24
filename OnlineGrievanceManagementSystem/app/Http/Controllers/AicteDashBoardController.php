@@ -19,22 +19,23 @@ class AicteDashBoardController extends Controller
     }
 
     public function getStatistics($type){
-            $this->check();
-            if ($type == 'total') {
-                $count = Grievance::all()->count();
-                return response(['message' => $count], 200);
-            } elseif ($type == 'pending') {
-                $count = Grievance::whereIn('status', ['addressed', 'raised'])->count();
-                return response(['message' => $count], 200);
-            } elseif ($type == 'escalated') {
-                $count = Grievance::whereIn('status', ['delayed', 'reopened'])->count();
-                return response(['message' => $count], 200);
-            } elseif ($type == 'resolved') {
-                $count = Grievance::whereIn('status', ['resolved'])->count();
-                return response(['message' => $count], 200);
-            } else {
-                return response(['message' => 'Invalid type'], 404);
-            }
+
+        if($type=='total'){
+            $count = Grievance::whereIn('level',['3'])->count();
+            return response(['message'=>$count],200);
+        }elseif ( $type=='pending' ){
+            $count = Grievance::whereIn('status',['addressed','raised'])->whereIn('level',['3'])->count();
+            return response(['message'=>$count],200);
+        }elseif ( $type=='escalated' ){
+            $count = Grievance::whereIn('status',['delayed','reopened'])->whereIn('level',['3'])->count();
+            return response(['message'=>$count],200);
+        }elseif ( $type=='resolved' ){
+            $count = Grievance::whereIn('status',['resolved'])->count();
+            return response(['message'=>$count],200);
+        }
+        else{
+            return response(['message'=>'Invalid type'],404);
+        }
 
     }
 
