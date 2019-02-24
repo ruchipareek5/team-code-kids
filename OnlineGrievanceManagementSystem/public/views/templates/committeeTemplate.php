@@ -78,8 +78,8 @@
 		                <div ng-switch-when="searchApplication_committee">
 		                    <div ng-include src="'views/partials/searchApplication_committee.php'"></div>
 		                </div>
-		                 <div ng-switch-when="faq_commitee">
-		                    <div ng-include src="'views/partials/faq_commitee.php'"></div>
+		                 <div ng-switch-when="faq_committee">
+		                    <div ng-include src="'views/partials/faq_committee.php'"></div>
 		                </div>
 		            </div>
 				 	

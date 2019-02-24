@@ -1,0 +1,25 @@
+<style>
+	.btn-take-action{
+		height: auto;
+		background-color: rgb(1,156,183);
+		color: white;
+		border:none;
+		padding-top: 0.5em;
+		padding-bottom: 0.5em;
+		padding-left:2em;
+		padding-right: 2em;
+		box-shadow: 1px 0px 1px 1px #c7c1c1;
+	}
+	.comment-cell
+	{
+		text-align: center;
+		padding: 0.3em;
+		padding-top: 0.3em;
+		
+	}
+</style>
+
+<div class='ui-grid-cell-contents cell comment-cell'>
+    <!-- committee controller -->
+	<button ng-click="grid.appScope.action(row.entity.id)" class="btn-take-action">Take Action&nbsp;&nbsp;<img src='assets/icons/take_action.png' height=12 width=12  ></button>
+	</div> 

@@ -2,7 +2,7 @@
 <head>
     <title>FAQ </title>
     <script type="text/javascript">
-      alert('FAQ')
+      alert('FAQ');
     </script>
 </head>
   <div class="container">

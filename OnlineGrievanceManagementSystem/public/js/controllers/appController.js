@@ -129,7 +129,12 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
     	});
 		
     	
-    }
+	}
+	
+	$scope.view_student_details=function(id)
+	{
+		alert(id);
+	}
 
 });
 
