@@ -66,6 +66,12 @@ Route::middleware('auth.basic')->group(function(){
     Route::get('/committee/grievanceSearch/{id}', 'CommitteeController@show');                       //Committee Seek For Approval
      Route::post('/committee/markAddressed', 'CommitteeController@markAddressed');                       //Committee Mark Addressed
     Route::post('/user/viewStudent', 'CommitteeController@viewStudent');                   //Committee and principal -->view Student
+
+    Route::get('/principal/grievances/{type}', 'PrincipalController@grievanceDetails');         //Principal's grievance page
+    Route::get('/principal/chart/status/{type}', 'PrincipalController@committeeStatistics');    //Piechart for grievance types   
+    Route::get('/principal/chart/type', 'PrincipalController@grievanceTypes');                  //Piechart for grievance status (percentage)
+    Route::get('/principal/chart/statistics/{type}', 'PrincipalController@getStatistics');      //Stats for principal's dashboard
+    Route::post('/principal/grievance/', 'PrincipalController@show');
 });
 
 
