@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Session;
 use App\Grievance;
 use App\GrievanceMessage;
 use App\Student;
 use DB;
+
 
 class CommitteeController extends Controller
 {
@@ -21,6 +23,7 @@ class CommitteeController extends Controller
         $grievance = Grievance::find($request->id);
         $grievance->status = 'inaction';
         $grievance->save();
+         return ['message' => 'Grievance Status Updated Successfully', 'id' => $request->id, 'status' => Response::HTTP_ACCEPTED];
     }
 
     public function index()
@@ -31,7 +34,6 @@ class CommitteeController extends Controller
     public function grievanceDetails($type){
         $id = Session::get('user_id');
         //$id = 1;
-
         $condition = DB::select("SELECT user_principal.college_id, user_committee_member.assigned_committee FROM user_committee_member INNER JOIN 
             user_principal ON user_principal.id = user_committee_member.created_by WHERE user_committee_member.id = ".$id);
 
@@ -43,7 +45,7 @@ class CommitteeController extends Controller
             AND table_grievance.status = 'raised'");
         }
         elseif ($type=='inaction'){
-            $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta
+            $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta,table_grievance.level
             FROM table_grievance INNER JOIN user_student ON user_student.id = table_grievance.student_id 
             WHERE user_student.college_id = ".$condition[0]->college_id." AND table_grievance.type = '".$condition[0]->assigned_committee."'
             AND table_grievance.status = 'inaction'");

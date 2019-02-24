@@ -145,8 +145,6 @@ class grievanceController extends Controller
             return $data;
         }
 
-    }        }
-
     }
 
 

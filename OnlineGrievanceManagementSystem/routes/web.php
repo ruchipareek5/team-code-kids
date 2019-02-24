@@ -33,7 +33,6 @@ Route::get('/testTemplate', function(){
 
 Route::post('/register','LoginController@register');        //Registartion page route
 
-Route::post('/aicte/addComment', 'AicteController@addComment');
 
 
 
@@ -45,7 +44,7 @@ Route::middleware('auth.basic')->group(function(){
     Route::get('/grievanceSearch/{id}','grievanceController@show');         //For fetching student's my grievance
     Route::post('/grievances/updateStatus','grievanceController@updateStatus');         //For Updating status of grievance from addressed to reopened
     Route::get('/grievance/student/{type}','grievanceController@grievanceDetails');  //For student My grievances data
-    Route::get('/grievance/remarks/{id}','grievanceController@getRemarks');        //For fetching remarks
+    Route::post('/grievance/addComment','grievanceController@addRemarks');        //For adding remarks
     Route::get('/grievance/remarks/{id}','grievanceController@getRemarks');        //For fetching remarks student's page
     Route::get('/grievance/aicte/statistics/{type}','AicteDashBoardController@getStatistics');          //For statistics panel
 
@@ -55,6 +54,7 @@ Route::middleware('auth.basic')->group(function(){
     Route::get('/aicte/remarks/{id}', 'AicteController@getRemarks');        //For fetching remarks AICTE's page
 
     Route::get('/committee/grievances/{type}', 'CommitteeController@grievanceDetails');         //Committee Grievance Page
+     Route::post('/committee/takeAction', 'CommitteeController@takeAction');         //Committee take action (raised to inaction)
     Route::post('/committee/sfa', 'CommitteeController@seekForApproval');                       //Committee Seek For Approval
     Route::post('/committee/viewStudent', 'CommitteeController@viewStudent');                   //Committee view Student
 });
