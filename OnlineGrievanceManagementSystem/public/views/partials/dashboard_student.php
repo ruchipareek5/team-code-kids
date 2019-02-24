@@ -2,7 +2,7 @@
 <div class="container">
    <div class="row row_gap">
         <div class="col-md-3 grievance-box">
-            <div class="grievance grievance-total">
+            <div class="grievance grievance-brown">
                 <span class="grievance-stat-value">{{total}}</span>
                 <hr>  
                 <span class="grievance-stat-name">Total Grievances </span>
@@ -11,7 +11,7 @@
         </div>
 
         <div class="col-md-3 grievance-box">
-            <div class="grievance grievance-pending">
+            <div class="grievance grievance-orange">
                 <!-- <span class="number">{{total_grievances}} <img src="assets/icons/barGraph.png"></span>
                 <span>Total Grievance</span> -->
                 <span class="grievance-stat-value">{{escalated}}</span>
@@ -21,7 +21,7 @@
         </div>
 
         <div class="col-md-3 grievance-box">
-            <div class="grievance grievance-satisfied">
+            <div class="grievance grievance-blue">
                 <!-- <span class="number">{{total_grievances}} <img src="assets/icons/barGraph.png"></span>
                 <span>Total Grievance</span> -->
                 <span class="grievance-stat-value">{{satisfied}}</span>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="col-md-3 grievance-box">
-            <div class="grievance grievance-ongoing">
+            <div class="grievance grievance-green">
                 <!-- <span class="number">{{total_grievances}} <img src="assets/icons/barGraph.png"></span>
                 <span>Total Grievance</span> -->
                 <span class="grievance-stat-value">{{pending}}</span>

@@ -11,28 +11,28 @@ grievancesystem.controller('committeeController',committeeController);
 
  	//load grievance panel
      $scope.total = 0;
-    $scope.pending = 0;
+    $scope.open = 0;
     $scope.escalated = 0;
-    $scope.resolved = 0;
+    $scope.addressed = 0;
 
     $scope.loadGrievanceStatistics=function(){
-        $http.get(API_URL+"grievance/aicte/statistics/total").then(function(response){
-                $scope.total = response.data.message;
+        $http.get(API_URL+"grievance/total").then(function(response){
+                $scope.total = response.data.value;
             },function(errorResponse){
                 console.log(errorResponse);
             });
-         $http.get(API_URL+"grievance/aicte/statistics/resolved").then(function(response){
-                $scope.resolved = response.data.message;
+        $http.get(API_URL+"grievance/open").then(function(response){
+                $scope.open = response.data.value;
             },function(errorResponse){
                 console.log(errorResponse);
             });
-         $http.get(API_URL+"grievance/aicte/statistics/pending").then(function(response){
-                $scope.pending = response.data.message;
+        $http.get(API_URL+"grievance/escalated").then(function(response){
+                $scope.escalated = response.data.value;
             },function(errorResponse){
                 console.log(errorResponse);
             });
-         $http.get(API_URL+"grievance/aicte/statistics/escalated").then(function(response){
-                $scope.escalated = response.data.message;
+         $http.get(API_URL+"grievance/addressed").then(function(response){
+                $scope.addressed = response.data.value;
             },function(errorResponse){
                 console.log(errorResponse);
             });
@@ -57,46 +57,44 @@ grievancesystem.controller('committeeController',committeeController);
                 ];
 
  ///View Grievance
- $scope.open_grievance_data = [
-     {
-         "id":"1",
-         "student_details":"1",
-         "type":"1",
-         "description":"1",
-         "documents":"1",
-         "eta":"1",
-         "action":1
-     },
-    
- ];
- $scope.in_action_grievance_data = [
-    {
-        "id":"1",
-        "student_details":"1",
-        "type":"1",
-        "description":"1",
-        "documents":"1",
-        "eta":"1",
-        "action":1
-    },
-   
-];
+          $scope.open_grievance_data =new Array();
+        $scope.in_action_grievance_data =new Array();
+        $scope.resolved_grievance_data =new Array();
+        $scope.loadAllGrievance=function(){
+                $scope.open_grievance_data =new Array();
+                $scope.in_action_grievance_data =new Array();
+                $scope.resolved_grievance_data =new Array();
+            committeeService.getGrievance('new').then(function(success)
+             {   
+                    $scope.open_grievance_data = success.data.message;
+                    $scope.open_grievance.data = $scope.open_grievance_data;
+                }, function(error){
 
-$scope.resolved_grievance_data = [
-    {
-        "id":"1",
-        "student_details":"1",
-        "type":"1",
-        "description":"1",
-        "documents":"1",
-        "eta":"1",
-        "closing_date":"1",
-        "closing_status":"1",
-        
-    },
-   
-];
+              });
 
+            committeeService.getGrievance('inaction').then(function(success)
+             {   
+               $scope.in_action_grievance_data = success.data.message;
+                 $scope.in_action_grievance.data = $scope.in_action_grievance_data;
+
+                }, function(error){
+
+              });
+
+            committeeService.getGrievance('addressed').then(function(success)
+             {   
+               $scope.resolved_grievance_data = success.data.message;
+                 $scope.resolved_grievance.data = $scope.resolved_grievance_data;
+
+                }, function(error)                 {
+
+              });
+
+          
+    }
+    $scope.loadAllGrievance();
+
+    // grievance ends
 
 
  $scope.numRows = 3;
@@ -231,9 +229,20 @@ columnDefs: [
    
 
 //action
-$scope.action = function(id)
+$scope.action = function(gid)
 {
-    alert(id)
+    committeeService.takeAction(gid).then(function(success)
+    {
+        $scope.loadAllGrievance();
+        $scope.loadGrievanceStatistics();
+         appService.showAlert("success",success.data.message);
+
+    },
+    function(error)
+    {
+        appService.showAlert('error',error.data.message );
+    }
+    );
 }
 //action
 

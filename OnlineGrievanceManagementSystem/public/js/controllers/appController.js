@@ -84,7 +84,8 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 		
     	var url = API_URL+'grievance/remarks/'+id;
     	$http.get(url).then(function(success){
-    		$('#modal-conatiner').addClass('visible');
+
+    		$('#modal-container').addClass('visible');
     		console.log(success.data.message);
     		$scope.comment_history.data=success.data.message;
     	},
@@ -101,13 +102,14 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 	// comment add starts
 	$scope.comment={};
 	$scope.addComment=function(id){
+			$('#commentModal-container').addClass('visible');
+		
 		$scope.comment.gid=id;
-		$('#commentModal-conatiner').addClass('visible');
 	}
 
 	$scope.addCommentAPI=function(comment){
 		
-		$('#commentModal-conatiner').removeClass('visible');
+		$('#commentModal-container').removeClass('visible');
 		var formData = new FormData();
 		 formData.append('grievance_id',comment.gid);
          formData.append('message', comment.message);

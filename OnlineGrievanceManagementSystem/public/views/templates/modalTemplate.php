@@ -1,5 +1,5 @@
 <style type="text/css">
-	#modal-conatiner{
+	#modal-container{
 		width: 100vw;
 		height: 100vh;
 		position: absolute;
@@ -9,7 +9,7 @@
 		background: rgba(0,0,0,0.8);
 		display: none;
 	}
-	#modal-conatiner #modal{
+	#modal-container #modal{
 		width: 60%;
 		min-height: 30%;
 		max-height: 75%;
@@ -55,7 +55,7 @@
 	}
 </style>
 
-<div id="modal-conatiner" class="">
+<div id="modal-container" class="">
 	<div id="modal">
 		<span class="close_modal">&#10060;</span>
 				<div class="container">
@@ -63,7 +63,7 @@
 						History
 						<span class="history-icon"><img src="assets/icons/history.png"></span>
 					</div>
-					<div id="grid1" ui-grid="comment_history" ui-grid-pagination="" ui-grid-cellNav ui-grid-auto-resize  class="sub-grid"></div>
+					<div id="grid1" ui-grid="comment_history" ui-grid-pagination="" ui-grid-cellNav ui-grid-auto-resize ></div>
                       <div class="text-center page" ng-show="comment_history.totalItems > comment_numRows">
               <pagination class="pagination-sm" total-items="comment_history.totalItems" items-per-page="comment_history.paginationPageSize" ng-model="comment_history.paginationCurrentPage"></pagination>
 				</div>
@@ -81,12 +81,12 @@
 
 <script type="text/javascript">
 	$('.close_modal').click(function () {
-		$("#modal-conatiner").removeClass("visible");
+		$("#modal-container").removeClass("visible");
 	});
 
 	$(document).click(function(event) {
 	  if (!$(event.target).closest("#modal").length) {
-	    $("body").find("#modal-conatiner").removeClass("visible");
+	    $("body").find("#modal-container").removeClass("visible");
 	  }
 	});
 

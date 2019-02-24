@@ -62,12 +62,12 @@ grievancesystem.controller('studentController',studentController);
             },function(errorResponse){
                 console.log(errorResponse);
             });
-         $http.get(API_URL+"grievance/satisfied").then(function(response){
+         $http.get(API_URL+"grievance/addressed").then(function(response){
                 $scope.satisfied = response.data.value;
             },function(errorResponse){
                 console.log(errorResponse);
             });
-         $http.get(API_URL+"grievance/pending").then(function(response){
+         $http.get(API_URL+"grievance/open").then(function(response){
                 $scope.pending = response.data.value;
             },function(errorResponse){
                 console.log(errorResponse);

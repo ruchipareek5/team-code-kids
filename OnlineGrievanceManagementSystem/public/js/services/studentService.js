@@ -16,7 +16,6 @@ grievancesystem.service('studentService',function ($http,API_URL) {
 
 	this.action_grievance = function(gid)
 	{
-		alert(gid)
 		var formData = new FormData();
 		formData.append('id',gid);
 		var request = {
@@ -28,7 +27,7 @@ grievancesystem.service('studentService',function ($http,API_URL) {
                 }
             };
      
-            return $http(request)
+            return $http(request);
 	}
 	
 });

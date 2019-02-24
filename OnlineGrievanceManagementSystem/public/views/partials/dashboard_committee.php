@@ -1,14 +1,19 @@
 
 <head>
     <title></title>
-
+    <style type="text/css">
+        #committee-graphs .graph{
+            height: 66.6vh;
+            overflow: auto; 
+        }
+    </style>
 </head>
 
 <div class="container dashboard">
 
     <div class="row row_gap">
         <div class="col-md-3 grievance-box">
-            <div class="grievance grievance-total">
+            <div class="grievance grievance-brown">
                 <span class="grievance-stat-value">{{total}}</span>
                  <hr>   
                 <span class="grievance-stat-name">Total Grievances </span>
@@ -16,15 +21,15 @@
         </div>
 
         <div class="col-md-3 grievance-box">
-            <div class="grievance grievance-pending">
-                <span class="grievance-stat-value">{{pending}}</span>
+            <div class="grievance grievance-orange">
+                <span class="grievance-stat-value">{{open}}</span>
                 <hr>  
-                <span class="grievance-stat-name">Pending Grievances </span>
+                <span class="grievance-stat-name">Open Grievances </span>
             </div>
         </div>
 
         <div class="col-md-3 grievance-box">
-            <div class="grievance grievance-escalated">
+            <div class="grievance grievance-blue">
                 <span class="grievance-stat-value">{{escalated}}</span>
                 <hr>   
                 <span class="grievance-stat-name">Escalated Grievances </span>
@@ -32,36 +37,24 @@
         </div>
 
         <div class="col-md-3 grievance-box">
-            <div class="grievance grievance-resolved">
-                <span class="grievance-stat-value">{{resolved}}</span>
+            <div class="grievance grievance-green">
+                <span class="grievance-stat-value">{{addressed}}</span>
                  <hr>   
-                <span class="grievance-stat-name">Resolved Grievances </span>
+                <span class="grievance-stat-name">Addressed Grievances </span>
             </div>
         </div>
     </div>
-    <div id="graphs">
+    <div id="committee-graphs">
         <div class="row row_gap">
             <div class="col-md-6 graph">
-                <div id="top5_institute"></div>
+                <div id="committee-top5_institute"></div>
             </div>
 
             <div class="col-md-6 graph">
-                <div id="grievance_type"></div>
+                <div id="committee-grievance_yearwise"></div>
             </div>
-
-        </div>
-
-         <div class="row row_gap">
-            <div class="col-md-6 graph">
-                <div id="grievance_yearwise"></div>
-            </div>
-
-            <div class="col-md-6 graph">
-                <div id="top5_state"></div>
-            </div>
-
         </div>
     </div>
 
 </div>
-<script src="js/aicteCharts.js"></script>
+<script src="js/committeeCharts.js"></script>

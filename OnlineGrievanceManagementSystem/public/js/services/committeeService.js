@@ -4,8 +4,8 @@ grievancesystem.service('committeeService',function ($http,API_URL) {
 	
 
 
-	this.getGrievance=function () {
-		var url = API_URL + 'aicte/grievances';
+	this.getGrievance=function (type) {
+		var url = API_URL + 'committee/grievances/'+type;
 		return $http.get(url);
 
 		}
@@ -21,6 +21,22 @@ grievancesystem.service('committeeService',function ($http,API_URL) {
 		    }
 		 	});
 		}
+
+	this.takeAction = function(gid)
+	{
+		var formData = new FormData();
+		formData.append('id',gid);
+		var request = {
+                'method': 'POST',
+                'url': API_URL+"committee/takeAction",
+                'data': formData,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+     
+            return $http(request);
+	}
 
 	this.institute_search=function(institute_id){
 		var url =API_URL + 'grievance/aicte/importantinfo/institute/'+ institute_id;

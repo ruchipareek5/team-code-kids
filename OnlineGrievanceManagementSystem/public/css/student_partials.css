@@ -14,16 +14,17 @@
     border-radius: 5px;
     width: 100%;
 }
-.grievance-total{
+.grievance-brown{
     background: #866561;
 }
-.grievance-pending{
+.grievance-orange{
+    background-color: #EE8F00;
+
+}
+.grievance-blue{
     background-color: #0098BC;
 }
-.grievance-satisfied{
-    background-color: #EE8F00;
-}
-.grievance-ongoing{
+.grievance-green{
     background: #4e8e19;
 }
 .image-bar

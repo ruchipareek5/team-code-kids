@@ -12,16 +12,16 @@
     border-radius: 5px;
     width: 100%;
 }
-.grievance-total{
+.grievance-brown{
     background: #866561;
 }
-.grievance-escalated{
+.grievance-blue{
     background-color: #0098BC;
 }
-.grievance-pending{
+.grievance-orange{
     background-color: #EE8F00;
 }
-.grievance-resolved{
+.grievance-green{
     background: #4e8e19;
 }
 .image-bar
@@ -62,10 +62,7 @@ hr
 }
 
 /*charts */
-.graph{
-    height: 33.5vh;
-    overflow: auto;
-}
+
 .graph div{
      min-width: 100%;
      min-height: 100%;

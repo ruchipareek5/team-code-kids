@@ -1,5 +1,5 @@
 <style type="text/css">
-	#commentModal-conatiner{
+	#commentModal-container{
 		width: 100vw;
 		height: 100vh;
 		position: absolute;
@@ -9,7 +9,7 @@
 		background: rgba(0,0,0,0.8);
 		display: none;
 	}
-	#commentModal-conatiner #modal{
+	#commentModal-container #modal{
 		width: 40%;
 		min-height: 30%;
 		max-height: 75%;
@@ -44,7 +44,7 @@
 
 </style>
 
-<div id="commentModal-conatiner" class="">
+<div id="commentModal-container" class="">
 	<div id="modal">
 		<span class="close_modal">&#10060;</span>
 		<div class="container">
@@ -68,12 +68,12 @@
 
 <script type="text/javascript">
 	$('.close_modal').click(function () {
-		$("#commentModal-conatiner").removeClass("visible");
+		$("#commentModal-container").removeClass("visible");
 	});
 
 	$(document).click(function(event) {
 	  if (!$(event.target).closest("#modal").length) {
-	    $("body").find("#commentModal-conatiner").removeClass("visible");
+	    $("body").find("#commentModal-container").removeClass("visible");
 	  }
 	});
 
