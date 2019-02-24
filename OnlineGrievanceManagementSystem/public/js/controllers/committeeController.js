@@ -184,7 +184,7 @@ columnDefs: [
     {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html",width:"12%"  },
     {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
     {name:"closing_date",displayName: 'Closing Date',cellTemplate: "/views/cellTemplate/cell.html",width:"12%"  },
-    {name:"closing_status",displayName: 'Closing Status',cellTemplate: "/views/cellTemplate/cell.html",width:"10%"  },
+    {name:"closure_status",displayName: 'Closure Status',cellTemplate: "/views/cellTemplate/cell.html",width:"10%"  },
           
                     ],
 
