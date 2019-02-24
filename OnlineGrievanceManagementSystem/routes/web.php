@@ -53,6 +53,10 @@ Route::middleware('auth.basic')->group(function(){
     Route::get('/aicte/grievanceSearch', 'AicteController@searchGrievances');       //AICTE Search Grievances
     Route::post('/aicte/addComment', 'AicteController@addComment');         //AICTE Add Comments
     Route::get('/aicte/remarks/{id}', 'AicteController@getRemarks');        //For fetching remarks AICTE's page
+
+    Route::get('/committee/grievances/{type}', 'CommitteeController@grievanceDetails');         //Committee Grievance Page
+    Route::post('/committee/sfa', 'CommitteeController@seekForApproval');                       //Committee Seek For Approval
+    Route::post('/committee/viewStudent', 'CommitteeController@viewStudent');                   //Committee view Student
 });
 
 

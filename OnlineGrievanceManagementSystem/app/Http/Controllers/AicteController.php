@@ -83,6 +83,9 @@ class AicteController extends Controller
             return $data;
         }
 
+        if($grievances == null)
+            return response(['message'=> 'No data found'], 404);
+
         return response(['message'=>$grievances],200);
     }
 

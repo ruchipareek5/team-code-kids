@@ -120,13 +120,13 @@ class grievanceController extends Controller
             $count = Grievance::all()->where('student_id',$student_id)->count();
             return ['type' => $type,'value'=>$count];
         }
-        elseif ($type == 'satisfied'){
+        elseif ($type == 'addressed'){
 
-            $count = Grievance::where('student_id',$student_id)->whereIn('status',['resolved'])->count();
+            $count = Grievance::where('student_id',$student_id)->whereIn('status',['resolved','addressed'])->count();
             return ['type' => $type,'value'=>$count];
         }
-        elseif ($type == 'pending'){
-            $array = ['raised','addressed'];
+        elseif ($type == 'open'){
+            $array = ['raised', 'inaction'];
             $count = Grievance::where('student_id',$student_id)->whereIn('status',$array)->count();
             return ['type' => $type,'value'=>$count];
         }
@@ -144,6 +144,8 @@ class grievanceController extends Controller
             ];
             return $data;
         }
+
+    }        }
 
     }
 
