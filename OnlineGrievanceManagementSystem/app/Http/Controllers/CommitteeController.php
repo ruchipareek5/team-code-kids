@@ -219,7 +219,7 @@ class CommitteeController extends Controller
 
         $department_id = $department[0]->department_id;
         $date = date('Y');
-        $data = ['year'=>[$date,$date-1,$date-2,$date-3,$date-4]];
+       /* $data = ['year'=>[$date,$date-1,$date-2,$date-3,$date-4]];
         $all_data=[];
         for($i = 0; $i< 5; $i++){
             $startyear = ($date-$i).'-01-01 00:00:00';
@@ -230,8 +230,8 @@ class CommitteeController extends Controller
             $all_data[$i]=$year;
         }
         $data['all_data']=$all_data;
-        return \response(['message'=>$data],200);
-        /*$startyear = ($date).'-01-01 00:00:00';
+        return \response(['message'=>$data],200);*/
+        $startyear = ($date).'-01-01 00:00:00';
         $endyear = ($date+1).'-01-01 00:00:00';
         $count1 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear' and department_id =".$department_id);
         $startyear = ($date-1).'-01-01 00:00:00';
@@ -246,8 +246,8 @@ class CommitteeController extends Controller
         $startyear = ($date-4).'-01-01 00:00:00';
         $endyear = ($date-3).'-01-01 00:00:00';
         $count5 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear' and department_id =".$department_id);
-*/
-  //      return response(['count'=>[$count1[0]->year,$count2[0]->year,$count3[0]->year,$count4[0]->year,$count5[0]->year],'year'=>[$date,$date-1,$date-2,$date-3,$date-4]],200);
+
+        return response(['count'=>[$count1[0]->year,$count2[0]->year,$count3[0]->year,$count4[0]->year,$count5[0]->year],'year'=>[$date,$date-1,$date-2,$date-3,$date-4]],200);
 
     }
 }
