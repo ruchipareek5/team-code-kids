@@ -14,14 +14,12 @@
         {
             text-align: center;
             padding: 0.3em;
-            padding-top: 0.5em;
-            padding-bottom: 0.5em;
+            padding-top: 0.3em;
             
         }
     </style>
     
     <div class='ui-grid-cell-contents cell comment-cell'>
-         <button  ng-click="grid.appScope.addComment(row.entity.id)" class="btn-connect" style="background-color: #cc3333;margin-left: 0.8em">Comment&nbsp;&nbsp;<img src='assets/icons/pen.png' height=12 width=12  ></button>
-        
+        <button ng-click="grid.appScope.addComment(row.entity.id)" class="btn-connect">Comment&nbsp;&nbsp;<img src='assets/icons/pen.png' height=12 width=12  ></button>
         <button  ng-click="grid.appScope.viewRemarks(row.entity.id)" class="btn-connect" style="background-color: rgb(131,190,41);margin-left: 0.8em">View History&nbsp;&nbsp;<img src='assets/icons/clock.png' height=12 width=12  ></button>
     </div> 

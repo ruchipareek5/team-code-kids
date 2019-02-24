@@ -10,18 +10,25 @@ grievancesystem.service('committeeService',function ($http,API_URL) {
 
 		}
 		
-	this.searchGrievance=function(t,d) {
-		var url = API_URL + 'aicte/grievanceSearch';
-		return $http({
-		    'url': url, 
-		    method: "GET",
-		    params: {
-		    	'type': t,
-		    	'data':d
-		    }
-		 	});
-		}
+	this.searchGrievance=function (searchId) {
+		var url=API_URL+'committee/grievanceSearch/'+searchId;
+		return $http.get(url);
 
+	}
+	this.seekForApproval = function(gid){
+		var formData = new FormData();
+		formData.append('id',gid);
+		var request = {
+                'method': 'POST',
+                'url': API_URL+"/committee/sfa",
+                'data': formData,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+     
+            return $http(request);
+	}
 	this.takeAction = function(gid)
 	{
 		var formData = new FormData();
@@ -38,14 +45,19 @@ grievancesystem.service('committeeService',function ($http,API_URL) {
             return $http(request);
 	}
 
-	this.institute_search=function(institute_id){
-		var url =API_URL + 'grievance/aicte/importantinfo/institute/'+ institute_id;
-		return $http.get(url);
-	}
-
-	this.university_search=function(university_id){
-		var url =API_URL + 'grievance/aicte/importantinfo/university/'+ university_id;
-		return $http.get(url);
+	this.markAddressed = function(gid){
+		var formData = new FormData();
+		formData.append('id',gid);
+		var request = {
+                'method': 'POST',
+                'url': API_URL+"committee/markAddressed",
+                'data': formData,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+     
+            return $http(request);
 	}
 	
 });

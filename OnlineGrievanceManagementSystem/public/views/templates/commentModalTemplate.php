@@ -40,6 +40,7 @@
 		border-radius: 5px;
 		padding: 0.2em 0.8em;
 		margin-top: 0.5em;
+		margin-bottom: 0.8em;
 	}
 
 </style>
@@ -71,9 +72,9 @@
 		$("#commentModal-container").removeClass("visible");
 	});
 
-	$(document).click(function(event) {
+	$("#commentModal-container").click(function(event) {
 	  if (!$(event.target).closest("#modal").length) {
-	    $("body").find("#commentModal-container").removeClass("visible");
+	    $("#commentModal-container").removeClass("visible");
 	  }
 	});
 

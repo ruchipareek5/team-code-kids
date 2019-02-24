@@ -84,8 +84,8 @@ grievancesystem.controller('aicteController',aicteController);
                 
 
                 columnDefs: [
-                    { name : "greivance_id",displayNameName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' , width:"11%"},
-                    { name:"student_details" ,displayName: 'Student Details',  cellTemplate: '/views/cellTemplate/committee_student_details.html', width:"11%"},
+                    { name : "id",displayNameName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' , width:"11%"},
+                    { name:"committee_student_details" ,displayName: 'Student Details',  cellTemplate: '/views/cellTemplate/committee_student_details.html', width:"11%"},
                     { name:"college_id" ,displayName: 'College ID',  cellTemplate: '/views/cellTemplate/cell.html', width:"11%"},
                     {name :"type" ,displayName: 'Grievance Type' ,cellTemplate: '/views/cellTemplate/cell.html' , width:"11%"},
                     {name:"created_at", displayName: 'Data of Issue' ,cellTemplate: '/views/cellTemplate/cell.html ', width:"11%"},

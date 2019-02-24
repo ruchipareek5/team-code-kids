@@ -152,7 +152,7 @@ grievancesystem.controller('committeeController',committeeController);
         {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html',width:"10%"},
         {name:"connect",displayName: 'Connect',cellTemplate: "/views/cellTemplate/committee_connect.html",width:"21%"  },
         {name:"action",displayName: 'Action',cellTemplate: "/views/cellTemplate/committee_action.html",width:"16%"  },
-        {name:"authority",displayName: 'Authority',cellTemplate: "/views/cellTemplate/cell.html",width:"7%"  },
+        {name:"authority",displayName: 'Authority',cellTemplate: "/views/cellTemplate/authorityCell.html",width:"7%"  },
         
     ],     
 
@@ -181,8 +181,8 @@ columnDefs: [
     { name:"description" ,displayName: 'Description', cellTemplate: '/views/cellTemplate/cell.html',width:"20%"},
     {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html",width:"12%"  },
     {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
-    {name:"closing_date",displayName: 'Closing Date',cellTemplate: "/views/cellTemplate/cell.html",width:"12%"  },
-    {name:"closure_status",displayName: 'Closure Status',cellTemplate: "/views/cellTemplate/cell.html",width:"10%"  },
+    {name:"updated_at",displayName: 'Closing Date',cellTemplate: "/views/cellTemplate/cell.html",width:"12%"  },
+    {name:"delayed_status",displayName: 'Closing Status',cellTemplate: "/views/cellTemplate/closureCell.html",width:"10%"  },
           
                     ],
 
@@ -209,7 +209,7 @@ columnDefs: [
 
 columnDefs: [
             { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
-            { name:"student_details" ,displayName: 'Student Details', cellTemplate: '/views/cellTemplate/committee_student_details.html '},
+            { name:"student_details" ,displayName: 'Student Details', cellTemplate: '/views/cellTemplate/student_details.html '},
             { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html '},
             {name :"description" ,displayName: 'Description' ,cellTemplate: '/views/cellTemplate/cell.html', width:"15%" },
 
@@ -247,15 +247,51 @@ $scope.action = function(gid)
 //action
 
 //sfa
-$scope.sfa = function(id)
-{
-    alert(id)
-}
-//sfa
-//addressed
-$scope.addressed = function(id)
-{
-    alert(id)
-}
+    $scope.sfa = function(gid)
+    {
+        committeeService.seekForApproval(gid).then(function(success){
+            $scope.loadAllGrievance();
+             appService.showAlert("success",success.data.message);
+
+        },function(error){
+            appService.showAlert('error',error.data.message );
+        }
+        );
+    }
+    //sfa
+
+    //addressed
+    $scope.markAddressed = function(gid)
+    {
+        committeeService.markAddressed(gid).then(function(success){
+            $scope.loadAllGrievance();
+             appService.showAlert("success",success.data.message);
+
+        },function(error){
+            appService.showAlert('error',error.data.message );
+        }
+        );
+    }
+
+       // grievance search starts
+    $scope.searchId='';
+    $scope.grievance_search_data=new Array();
+    $scope.searchGrievance =  function(searchId){
+        $scope.grievance_search_data=new Array();
+        committeeService.searchGrievance(searchId).then(function(success){
+                $scope.grievance_search_data=success.data.message;
+                 $scope.grievance_search.data=[];  
+                $scope.grievance_search.data.push($scope.grievance_search_data);
+            },
+            function(error){
+                $scope.grievance_search.data=new Array();
+                 appService.showAlert('error',error.data.message);
+
+            });
+    
+    };
+    //  grievance search ends
+
 }
 
+// closing of controller

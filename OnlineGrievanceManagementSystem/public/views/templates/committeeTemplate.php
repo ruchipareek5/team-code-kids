@@ -88,7 +88,9 @@
 		 </div>
 		<div ng-include src="'views/templates/modalTemplate.php'"></div>
         <div ng-include src="'views/templates/commentModalTemplate.php'"></div>
-  		  <div ng-include src="views/templates/commentModalTemplate.php"></div>
+        <div ng-include src="'views/templates/studentDetailModalTemplate.php'"></div>
+          <div ng-include src="views/templates/commentModalTemplate.php"></div>
+  		  <div ng-include src="views/templates/modalTemplate.php"></div>
 
 
 	 	<div class="footer">

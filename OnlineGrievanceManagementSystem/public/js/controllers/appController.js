@@ -103,6 +103,7 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 	$scope.comment={};
 	$scope.addComment=function(id){
 			$('#commentModal-container').addClass('visible');
+			$('#commentModal-container').show();
 		
 		$scope.comment.gid=id;
 	}
@@ -133,10 +134,63 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
     	
 	}
 	
-	$scope.view_student_details=function(id)
-	{
-		alert(id);
-	}
+	// view Student starts
+    $scope.comment_numRows=10;
+
+     $scope.student_detail = {
+        data:$scope.open_grievance_data,
+        enableGridMenus:false,
+        enableSorting: false,
+        enableFiltering:false,
+        enableCellEditing:false,
+        enableColumnMenus: false,
+        enableHorizontalScrollbar:0,
+        enableVerticalScrollbar:0,
+        paginationPageSize: $scope.numRows,
+        minRowsToShow: 1,
+        enablePaginationControls: false,
+		
+		  columnDefs: [
+            { name : "id",displayName: 'ID', cellTemplate: '/views/cellTemplate/cell.html',width:"14.28%"},
+            {name :"name" ,displayName: 'Name' ,cellTemplate: '/views/cellTemplate/cell.html', width: "14.28%"},
+            { name:"college_id" ,displayName: 'College', cellTemplate: '/views/cellTemplate/cell.html',width:"14.28%"},
+            { name:"course" ,displayName: 'Course', cellTemplate: '/views/cellTemplate/cell.html',width:"14.28%"},
+            { name:"branch" ,displayName: 'Branch', cellTemplate: '/views/cellTemplate/cell.html',width:"14.28%"},
+            { name:"year" ,displayName: 'Year', cellTemplate: '/views/cellTemplate/cell.html',width:"14.28%"},
+            { name:"registration_number" ,displayName: 'Regd No.', cellTemplate: '/views/cellTemplate/cell.html',width:"14.28%"},
+            
+        ],
+
+            
+         };
+    $scope.student_detail_data=new Array();
+
+    $scope.view_student_details=function(id){
+		
+    	var formData = new FormData();
+		 formData.append('id',id);
+		 var request = {
+                method: 'POST',
+                url: API_URL+"user/viewStudent",
+                data: formData,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+    	$http(request).then(function(success){
+    		$('#studentModal-container').addClass('visible');
+    		console.log(success.data.message);
+    		$scope.student_detail.data=[];
+    		$scope.student_detail.data.push(success.data.message);
+    	},
+    	function(error){
+            $scope.student_detail.data=new Array();
+             appService.showAlert('error',error.data.message);
+
+    	});
+    }
+
+    // view student ends
 
 });
 
