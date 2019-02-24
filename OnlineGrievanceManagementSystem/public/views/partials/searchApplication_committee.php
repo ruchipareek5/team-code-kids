@@ -6,7 +6,7 @@
 
  <div class="container">
       <div class="row">
-          <div class="col-lg-12 col-md-12 open-grievance ">
+          <div class="col-lg-12 col-md-12 open-grievance  grid">
               <h5 class="grievance-heading">Search Grievance</h5>
      
                 <div class="col-md-12 col-lg-12 div-form table sub-grid">                 

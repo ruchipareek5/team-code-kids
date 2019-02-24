@@ -91,7 +91,7 @@ $scope.page='dashboard_ombudsman';
                     {name:"created_at", displayName: 'Data of Issue' ,cellTemplate: '/views/cellTemplate/cell.html ', width:"13%"},
                     {name:"eta" ,displayName: 'ETA', cellTemplate: '/views/cellTemplate/cell.html ', width:"13%"},
                     {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html" , width:"10%" },
-                    {name:"connect",displayName: 'Connect', cellTemplate: "/views/cellTemplate/ombudsman_comments.html", width:"20%"},
+                    {name:"connect",displayName: 'Connect', cellTemplate: "/views/cellTemplate/ombudsman_connect.html", width:"20%"},
                     
                             ],
     
@@ -147,7 +147,7 @@ $scope.page='dashboard_ombudsman';
                                 {name :"created_at" ,displayName: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html', width:"12.5%" },
                                 {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html ', width:"12.5%"},
                                 {name:"documents" ,displayName: 'Attachment', cellTemplate: '/views/cellTemplate/attachment.html ', width:"12.5%"},
-                                {name:"comments",displayName: 'Comments',cellTemplate: "/views/cellTemplate/ombudsman_comments.html",  width:"25%"},
+                                {name:"comments",displayName: 'Comments',cellTemplate: "/views/cellTemplate/ombudsman_connects.html",  width:"25%"},
                                 
                                         ],
                 
@@ -216,84 +216,25 @@ $scope.open_grievance = {
 
        columnDefs: [
            { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
-           {name :"student_details" ,displayName: 'Student Details' ,cellTemplate: '/views/cellTemplate/committee_student_details.html', width: "10%"},
+           {name :"student_details" ,displayName: 'Student details' ,cellTemplate: '/views/cellTemplate/committee_student_details.html', width: "13%"},
+           { name:"college_id" ,displayName: 'College ID',  cellTemplate: '/views/cellTemplate/cell.html',width:"10%"},
            { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
-           { name:"description" ,displayName: 'Description', cellTemplate: '/views/cellTemplate/cell.html',width:"15%"},
-           {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html",width:"12%"  },
-           {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
-           {name:"connect",displayName: 'Connect',cellTemplate: "/views/cellTemplate/committee_connect.html",width:"15%"  },
-           {name:"action",displayName: 'Action',cellTemplate: "/views/cellTemplate/committee_take_action.html",width:"12%"  },
-           
+           {name :"created_at" ,displayName: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html' ,width:"13%"},
+            {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html',width:"10%"},
+           {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html",width:"10%"  },
+           {name:"connect",displayName: 'Connect',cellTemplate: "/views/cellTemplate/ombudsman_connects.html",width:"20%"  },
+
        ],
 
            
         };
 
-        $scope.in_action_grievance = {
-           data:$scope.in_action_grievance_data,
-           enableGridMenus:false,
-           enableSorting: false,
-           enableFiltering:false,
-           enableCellEditing:false,
-           enableColumnMenus: false,
-           enableHorizontalScrollbar:0,
-           enableVerticalScrollbar:0,
-           paginationPageSize: $scope.numRows,
-           minRowsToShow: $scope.numRows,
-           enablePaginationControls: false,
-
-
-
-   columnDefs: [
-       { name : "id", cellTemplate: '/views/cellTemplate/cell.html',headerCellTemplate: '<div class="">Grievance <br>ID </div>',width:"7%"},
-       {name :"student_details", headerCellTemplate: '<div class="">Student <br>Details </div>',cellTemplate: '/views/cellTemplate/committee_student_details.html', width: "7%"},
-       { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html',width:"10%"},
-       { name:"description" ,displayName: 'Description', cellTemplate: '/views/cellTemplate/cell.html',width:"15%"},
-       {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html",width:"7%"  },
-       {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html',width:"10%"},
-       {name:"connect",displayName: 'Connect',cellTemplate: "/views/cellTemplate/committee_connect.html",width:"21%"  },
-       {name:"action",displayName: 'Action',cellTemplate: "/views/cellTemplate/committee_action.html",width:"16%"  },
-       {name:"authority",displayName: 'Authority',cellTemplate: "/views/cellTemplate/cell.html",width:"7%"  },
-       
-   ],     
-
-              
-   };
-
-   $scope.resolved_grievance = {
-       data:$scope.resolved_grievance_data,
-       enableGridMenus:false,
-       enableSorting: false,
-       enableFiltering:false,
-       enableCellEditing:false,
-       enableColumnMenus: false,
-       enableHorizontalScrollbar:0,
-       enableVerticalScrollbar:0,
-       paginationPageSize: $scope.numRows,
-       minRowsToShow: $scope.numRows,
-       enablePaginationControls: false,
-
-
-
-columnDefs: [
-   { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
-   {name :"student_details" ,displayName: 'Student Details' ,cellTemplate: '/views/cellTemplate/committee_student_details.html', width: "10%"},
-   { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
-   { name:"description" ,displayName: 'Description', cellTemplate: '/views/cellTemplate/cell.html',width:"20%"},
-   {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html",width:"12%"  },
-   {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
-   {name:"closing_date",displayName: 'Closing Date',cellTemplate: "/views/cellTemplate/cell.html",width:"12%"  },
-   {name:"closure_status",displayName: 'Closure Status',cellTemplate: "/views/cellTemplate/cell.html",width:"10%"  },
-         
-                   ],
-
-          
-};
 
 //view Grievance
 
 //grievance search
-   $scope.grievance_search_data=[];
+
+   $scope.grievance_search_data=[{"comments":1}];
    $scope.grievance_search = {
        data:$scope.grievance_search_data,
        enableGridMenus:false,
@@ -309,17 +250,16 @@ columnDefs: [
 
 
 columnDefs: [
-           { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
-           { name:"student_details" ,displayName: 'Student Details', cellTemplate: '/views/cellTemplate/committee_student_details.html '},
-           { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html '},
-           {name :"description" ,displayName: 'Description' ,cellTemplate: '/views/cellTemplate/cell.html', width:"15%" },
+           { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
+           { name:"college_id" ,displayName: 'College Id', cellTemplate: '/views/cellTemplate/cell.html ',width:"14%"},
+           { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html ',width:"14%"},
+       
+           {name :"created_at" ,displayName: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html',width:"14%" },
+           {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html ', width:"14%"},
 
-           {name :"created_at" ,displayName: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html' },
-           {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html '},
 
-
-           {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
-           {name:"status" ,displayName: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
+           {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html" ,width:"12%" },
+           {name:"comments" ,displayName: 'Comments', cellTemplate: '/views/cellTemplate/ombudsman_connects.html ', width:"20%"},
            
                    ],
 
