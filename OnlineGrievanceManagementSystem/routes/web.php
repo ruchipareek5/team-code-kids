@@ -33,11 +33,11 @@ Route::get('/testTemplate', function(){
 
 Route::post('/register','LoginController@register');        //Registartion page route
 
-
+Route::get('/grievance/committee/graph','CommitteeController@getGraphController');
+    Route::get('/grievance/committee/year','CommitteeController@getYearWiseFiledGrievances');
 
 Route::middleware('auth.basic')->group(function(){
-    Route::get('/grievance/committee/graph','CommitteeController@getGraphController');
-    Route::get('/grievance/committee/year','CommitteeController@getYearWiseFiledGrievances');
+    
     Route::resource('/grievances', 'grievanceController');
 	Route::post('/login','LoginController@checkAuth');
     Route::get('/grievance/{type}','grievanceController@statistics');       //For grievance statistics in dashboard
