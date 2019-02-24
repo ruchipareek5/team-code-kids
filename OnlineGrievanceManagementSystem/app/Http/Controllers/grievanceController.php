@@ -178,7 +178,7 @@ class grievanceController extends Controller
         $grievance->status = 'reopened';
         $grievance->save();
 
-        return ['message' => 'Grievance Status Updated Successfully', 'id' => $request->$id, 'status' => Response::HTTP_ACCEPTED];
+        return ['message' => 'Grievance Status Updated Successfully', 'id' => $request->id, 'status' => Response::HTTP_ACCEPTED];
 
     }
     /**
