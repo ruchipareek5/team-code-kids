@@ -12,6 +12,9 @@ Highcharts.chart('committee-top5_institute', {
     },
     xAxis: {
         categories:data.message.course,
+        title: {
+            text: 'Courses'
+        }
     },
     yAxis: {
         min: 0,
@@ -71,7 +74,10 @@ Highcharts.chart('committee-grievance_yearwise', {
         text: 'Yearwise filled Grievances'
     },
     xAxis: {
-        categories: data.year
+        categories: data.year,
+        title: {
+            text: 'Year'
+        }
     },
     yAxis: {
         min: 0,
