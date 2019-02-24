@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Session;
 use App\Grievance;
 use App\GrievanceMessage;
 use App\Student;
 use DB;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class CommitteeController extends Controller
@@ -35,7 +37,7 @@ class CommitteeController extends Controller
         $id = Session::get('user_id');
         //$id = 1;
         $condition = DB::select("SELECT user_principal.college_id, user_committee_member.assigned_committee FROM user_committee_member INNER JOIN 
-            user_principal ON user_principal.id = user_committee_member.created_by WHERE user_committee_member.id = ".$id);
+            user_principal ON user_principal.id = user_committee_member.created_by WHERE user_committee_member.id = '".$id."'");
 
         $array = [];
         if($type=='new'){
@@ -77,10 +79,21 @@ class CommitteeController extends Controller
     public function seekForApproval(Request $request){
         $grievance = Grievance::find($request->id);
         $grievance->level = $grievance->level + 1;
-
-        return response(['message'=> $grievance->level]);
+        $grievance->save();
+        if(!$grievance)
+             return response(['message'=> "No Grievance with Grievance Id ".$request->id]);
+        return response(['message'=> "Grievance is sent for higher Approval"]);
     }
 
+    public function markAddressed(Request $request){
+        $grievance = Grievance::find($request->id);
+        if(!$grievance)
+             return response(['message'=> "No Grievance with Grievance Id ".$request->id]);
+        $grievance->status = 'addressed';
+        $grievance->save();
+
+        return response(['message'=> "Grievance Id ".$request->id."is Addressed"]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -110,7 +123,15 @@ class CommitteeController extends Controller
      */
     public function show($id)
     {
-        //
+        $gid = Auth::user()->id;
+         // $user_id = DB::table('users')->where('email', $email)->get(['id']);
+         // return  $user_id->id;
+
+        $data = Grievance::find($id);
+        if($data != null)
+        return response(['message'=>$data],200);
+        else
+            return response(['message'=>'No data available for the given ID '.$id],404);
     }
 
     /**

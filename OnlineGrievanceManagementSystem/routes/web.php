@@ -55,8 +55,10 @@ Route::middleware('auth.basic')->group(function(){
 
     Route::get('/committee/grievances/{type}', 'CommitteeController@grievanceDetails');         //Committee Grievance Page
      Route::post('/committee/takeAction', 'CommitteeController@takeAction');         //Committee take action (raised to inaction)
-    Route::post('/committee/sfa', 'CommitteeController@seekForApproval');                       //Committee Seek For Approval
-    Route::post('/committee/viewStudent', 'CommitteeController@viewStudent');                   //Committee view Student
+    Route::post('/committee/sfa', 'CommitteeController@seekForApproval');
+    Route::get('/committee/grievanceSearch/{id}', 'CommitteeController@show');                       //Committee Seek For Approval
+     Route::post('/committee/markAddressed', 'CommitteeController@markAddressed');                       //Committee Mark Addressed
+    Route::post('/user/viewStudent', 'CommitteeController@viewStudent');                   //Committee and principal -->view Student
 });
 
 
