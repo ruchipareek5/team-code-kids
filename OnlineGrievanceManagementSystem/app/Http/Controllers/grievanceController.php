@@ -116,6 +116,7 @@ class grievanceController extends Controller
     public function statistics($type){
 
         $student_id = Session::get('user_id');
+
         if($type == 'total'){
             $count = Grievance::all()->where('student_id',$student_id)->count();
             return ['type' => $type,'value'=>$count];

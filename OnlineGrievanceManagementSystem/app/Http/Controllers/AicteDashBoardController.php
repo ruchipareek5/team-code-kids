@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Grievance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AicteDashBoardController extends Controller
@@ -11,23 +12,30 @@ class AicteDashBoardController extends Controller
 
     //Function for Statistics of Dashboard
 
+    public function check()
+    {
+
+      return "hello";
+    }
+
     public function getStatistics($type){
-        if($type=='total'){
-            $count = Grievance::all()->count();
-            return response(['message'=>$count],200);
-        }elseif ( $type=='pending' ){
-            $count = Grievance::whereIn('status',['addressed','raised'])->count();
-            return response(['message'=>$count],200);
-        }elseif ( $type=='escalated' ){
-            $count = Grievance::whereIn('status',['delayed','reopened'])->count();
-            return response(['message'=>$count],200);
-        }elseif ( $type=='resolved' ){
-            $count = Grievance::whereIn('status',['resolved'])->count();
-            return response(['message'=>$count],200);
-        }
-        else{
-            return response(['message'=>'Invalid type'],404);
-        }
+            $this->check();
+            if ($type == 'total') {
+                $count = Grievance::all()->count();
+                return response(['message' => $count], 200);
+            } elseif ($type == 'pending') {
+                $count = Grievance::whereIn('status', ['addressed', 'raised'])->count();
+                return response(['message' => $count], 200);
+            } elseif ($type == 'escalated') {
+                $count = Grievance::whereIn('status', ['delayed', 'reopened'])->count();
+                return response(['message' => $count], 200);
+            } elseif ($type == 'resolved') {
+                $count = Grievance::whereIn('status', ['resolved'])->count();
+                return response(['message' => $count], 200);
+            } else {
+                return response(['message' => 'Invalid type'], 404);
+            }
+
     }
 
 
@@ -144,7 +152,8 @@ class AicteDashBoardController extends Controller
 
 
         $count = DB::select("select count(*) as open_grievances from table_grievance,user_student where user_student.college_id = $id and table_grievance.student_id=user_student.id and status in ('raised','addressed')");
-	       
+        if($count==null)
+            $count[0]=0;
 	$details[0]->open_grievances = $count[0]->open_grievances;
 
         return response(['message'=>$details],200);

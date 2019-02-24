@@ -11,7 +11,7 @@ Highcharts.chart('committee-top5_institute', {
         text:'Top 5 Course Wise Grievance registered'
     },
     xAxis: {
-        categories:data.message.courses,
+        categories:data.message.course,
     },
     yAxis: {
         min: 0,

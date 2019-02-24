@@ -34,7 +34,7 @@ Route::get('/testTemplate', function(){
 Route::post('/register','LoginController@register');        //Registartion page route
 
 Route::get('/grievance/committee/graph','CommitteeController@getGraphController');
-    Route::get('/grievance/committee/year','CommitteeController@getYearWiseFiledGrievances');
+Route::get('/grievance/committee/year','CommitteeController@getYearWiseFiledGrievances');
 
 Route::middleware('auth.basic')->group(function(){
     
@@ -47,7 +47,7 @@ Route::middleware('auth.basic')->group(function(){
     Route::post('/grievance/addComment','grievanceController@addRemarks');        //For adding remarks
     Route::get('/grievance/remarks/{id}','grievanceController@getRemarks');        //For fetching remarks student's page
            //For statistics panel
-    Route::get('/grievance/aicte/statistics/{type}','AicteDashBoardController@getStatistics')->middleware('aicte');
+    Route::get('/grievance/aicte/statistics/{type}','AicteDashBoardController@getStatistics');
 
     Route::get('/aicte/grievances', 'AicteController@index');       //AICTE grievances
     Route::get('/aicte/grievanceSearch', 'AicteController@searchGrievances');       //AICTE Search Grievances

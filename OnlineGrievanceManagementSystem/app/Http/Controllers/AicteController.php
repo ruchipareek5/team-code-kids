@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Grievance;
 use App\GrievanceMessage;
 use DB;
+use Illuminate\Support\Facades\Auth;
+
 class AicteController extends Controller
 {
     /**
@@ -13,6 +16,14 @@ class AicteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        if((Auth::user()->roles != 'aicte')){
+            return response(['message'=>'You are not authorized to visit this page'],403);
+        }
+    }
+
     public function index() {
         $array = ['raised', 'addressed', 'delayed', 'reopened'];
 

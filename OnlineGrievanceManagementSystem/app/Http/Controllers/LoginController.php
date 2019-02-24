@@ -49,6 +49,7 @@ class LoginController extends Controller
             return response(['message'=>'No such user'],403);
         }
         Session::put('user_id',$user_id->id);
+        Session::put('roles',$roles);
         return response(Auth::user()->roles,200);
 
     }

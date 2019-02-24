@@ -179,33 +179,46 @@ class CommitteeController extends Controller
         $course = DB::select('select user_student.course from user_student where user_student.college_id = '.$college[0]->college_id.' 
                     group by course order by course asc');
 
-        $i=0;
+       $i=0;
             foreach ($course as $c){
                 $courses['course'][$i++]=$c->course;
             }
 
         $all_data=[];
-
+        $data = [];
         $i=0;
-        foreach ($course as $c){
+        //foreach ($course as $c){
             $temp=DB::select('select count(*) as count , user_student.course from table_grievance,user_student
-                    where department_id = 1 and table_grievance.student_id = user_student.id and
-                     user_student.course = '."'".$c->course."'".' group by user_student.course order by user_student.course asc');
-            $total[$i]=$temp[0]->count;
-            $mp = DB::select('select count(*) as count , user_student.course from table_grievance,user_student where department_id = 1
-                    and table_grievance.student_id = user_student.id and user_student.course = '."'".$c->course."'".' and
-                    table_grievance.status in ('."'resolved'".') group by user_student.course order by user_student.course asc');
+                    where department_id = '.$college[0]->department_id.' and table_grievance.student_id = user_student.id  group by user_student.course order by user_student.course asc');
 
+            $mp = DB::select('select count(*) as count , user_student.course from table_grievance,user_student where department_id = '.$college[0]->department_id.'
+                    and table_grievance.student_id = user_student.id and
+                    table_grievance.status in ('."'resolved'".') group by user_student.course order by user_student.course asc');
+           // return [$temp,$mp];
             $pending[$i++]=$mp==null?0:$mp[0]->count;
-        }
+        //}
         $all_data=[];
 
-        for($i =0; $i<count($course);$i++){
+
             $temp_data = new temp();
-            $temp_data->name = $course==null?0:$course[$i]->course;
-            $temp_data->data = $total==null?0:[$total[$i], $pending[$i]];
-            $all_data[$i]=$temp_data;
-        }
+            $temp_data->name = ['Total'];
+            $i=0;
+            foreach ($course as $c){
+                $temp_data->data[$i] = ($temp==null||$mp==null)?0:$temp[$i]->count;
+                $i++;
+            }
+            $all_data[0]=$temp_data;
+
+            $temp_data = new temp();
+            $temp_data->name = ['Pending'];
+            $i=0;
+            foreach ($course as $c){
+                $temp_data->data[$i] = ($temp==null||$mp==null)?0:$mp[$i]->count;
+                $i++;
+            }
+            $all_data[1]=$temp_data;
+
+
         $courses['all_data'] = $all_data;
         return response(['message'=>$courses],200);
 
@@ -219,6 +232,7 @@ class CommitteeController extends Controller
 
         $department_id = $department[0]->department_id;
         $date = date('Y');
+
        /* $data = ['year'=>[$date,$date-1,$date-2,$date-3,$date-4]];
         $all_data=[];
         for($i = 0; $i< 5; $i++){
@@ -233,7 +247,9 @@ class CommitteeController extends Controller
         return \response(['message'=>$data],200);*/
         $startyear = ($date).'-01-01 00:00:00';
         $endyear = ($date+1).'-01-01 00:00:00';
+
         $count1 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear' and department_id =".$department_id);
+
         $startyear = ($date-1).'-01-01 00:00:00';
         $endyear = ($date).'-01-01 00:00:00';
         $count2 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear' and department_id =".$department_id);
