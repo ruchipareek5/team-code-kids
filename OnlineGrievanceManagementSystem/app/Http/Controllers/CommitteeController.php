@@ -171,12 +171,19 @@ class CommitteeController extends Controller
         $id = Session::get('user_id');
         $college = DB::select('select d.college_id, d.type as name,d.id as department_id from  table_department d,
                     user_committee_member c where c.id='.$id.' and c.department_id = d.id limit 1');
+        if($college==null){
+            return \response(['message'=>'sorry College Id not available for the logged in user'],401);
+        }
         $college_id = $college[0]->college_id;
 
         $course = DB::select('select user_student.course from user_student where user_student.college_id = '.$college[0]->college_id.' 
                     group by course order by course asc');
 
-        $courses = ['courses'=>[$course[0]->course,$course[1]->course]];
+        $i=0;
+            foreach ($course as $c){
+                $courses['course'][$i++]=$c->course;
+            }
+
         $all_data=[];
 
         $i=0;
