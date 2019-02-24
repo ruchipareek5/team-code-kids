@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Grievance;
 use App\GrievanceMessage;
 use App\Student;
 use DB;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
-
-
+use Illuminate\Support\Facades\Session;
 
 class CommitteeController extends Controller
 {
@@ -167,4 +166,90 @@ class CommitteeController extends Controller
     {
         //
     }
+
+    public function getGraphController(){
+        $id = Session::get('user_id');
+        $college = DB::select('select d.college_id, d.type as name,d.id as department_id from  table_department d,
+                    user_committee_member c where c.id='.$id.' and c.department_id = d.id limit 1');
+        $college_id = $college[0]->college_id;
+
+        $course = DB::select('select user_student.course from user_student where user_student.college_id = '.$college[0]->college_id.' 
+                    group by course order by course asc');
+
+        $courses = ['courses'=>[$course[0]->course,$course[1]->course]];
+        $all_data=[];
+
+        $i=0;
+        foreach ($course as $c){
+            $temp=DB::select('select count(*) as count , user_student.course from table_grievance,user_student
+                    where department_id = 1 and table_grievance.student_id = user_student.id and
+                     user_student.course = '."'".$c->course."'".' group by user_student.course order by user_student.course asc');
+            $total[$i]=$temp[0]->count;
+            $mp = DB::select('select count(*) as count , user_student.course from table_grievance,user_student where department_id = 1
+                    and table_grievance.student_id = user_student.id and user_student.course = '."'".$c->course."'".' and
+                    table_grievance.status in ('."'resolved'".') group by user_student.course order by user_student.course asc');
+
+            $pending[$i++]=$mp==null?0:$mp[0]->count;
+        }
+        $all_data=[];
+
+        for($i =0; $i<count($course);$i++){
+            $temp_data = new temp();
+            $temp_data->name = $course==null?0:$course[$i]->course;
+            $temp_data->data = $total==null?0:[$total[$i], $pending[$i]];
+            $all_data[$i]=$temp_data;
+        }
+        $courses['all_data'] = $all_data;
+        return response(['message'=>$courses],200);
+
+    }
+
+    public function getYearWiseFiledGrievances(){
+        $department = DB::select('select department_id from user_committee_member where id = '.Session::get('user_id').' limit 1');
+        if($department == null){
+            return \response(['message'=>'Sorry no data found'],404);
+        }
+
+        $department_id = $department[0]->department_id;
+        $date = date('Y');
+        $data = ['year'=>[$date,$date-1,$date-2,$date-3,$date-4]];
+        $all_data=[];
+        for($i = 0; $i< 5; $i++){
+            $startyear = ($date-$i).'-01-01 00:00:00';
+            $endyear = ($date+1-$i).'-01-01 00:00:00';
+            $count = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear' and department_id =".$department_id);
+            $year = new Year();
+            $year->count = $count[0]->year;
+            $all_data[$i]=$year;
+        }
+        $data['all_data']=$all_data;
+        return \response(['message'=>$data],200);
+        /*$startyear = ($date).'-01-01 00:00:00';
+        $endyear = ($date+1).'-01-01 00:00:00';
+        $count1 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear' and department_id =".$department_id);
+        $startyear = ($date-1).'-01-01 00:00:00';
+        $endyear = ($date).'-01-01 00:00:00';
+        $count2 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear' and department_id =".$department_id);
+        $startyear = ($date-2).'-01-01 00:00:00';
+        $endyear = ($date-1).'-01-01 00:00:00';
+        $count3 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear' and department_id =".$department_id);
+        $startyear = ($date-3).'-01-01 00:00:00';
+        $endyear = ($date-2).'-01-01 00:00:00';
+        $count4 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear' and department_id =".$department_id);
+        $startyear = ($date-4).'-01-01 00:00:00';
+        $endyear = ($date-3).'-01-01 00:00:00';
+        $count5 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear' and department_id =".$department_id);
+*/
+  //      return response(['count'=>[$count1[0]->year,$count2[0]->year,$count3[0]->year,$count4[0]->year,$count5[0]->year],'year'=>[$date,$date-1,$date-2,$date-3,$date-4]],200);
+
+    }
+}
+
+ class temp{
+    public $name;
+    public $data;
+}
+
+class Year{
+    public $count;
 }
