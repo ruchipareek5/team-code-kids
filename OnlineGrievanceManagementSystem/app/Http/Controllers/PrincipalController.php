@@ -11,9 +11,6 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-use Session;
-use Auth;
-
 
 class PrincipalController extends Controller
 {
