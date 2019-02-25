@@ -206,8 +206,42 @@ class OmbudsmanDashboardController extends Controller
         return response([$data],200);
     }
 
+    public function getYearStatistics()
+    {
+       // if(!Auth::check())
+       //     return response(['message'=>'You are not logged in'],401);
+        $id = Session::get('user_id');
 
-}
+        $university_id = DB::table('user_ombudsman')->where('id', $id)->get(['university_id'])->first();
+        if ($university_id == null)
+            return response(['message' => 'No data found for the logged in user'], 404);
+        $college = DB::table('table_college')->where('university_id', $university_id->university_id)->get(['id']);
+        $college_id = [];
+        $i = 0;
+        foreach ($college as $c) {
+            $college_id[$i++] = $c->id;
+        }
+        $student = DB::table('user_student')->whereIn('college_id', $college_id)->get(['id']);
+        $student_id = [];
+        $i = 0;
+        foreach ($student as $s) {
+            $student_id[$i++] = $s->id;
+        }
+        $count=[];
+        $year=[];
+        $date = date('Y');
+        for($i=0;$i<5;$i++) {
+            $startyear = ($date-$i) . '-01-01 00:00:00';
+            $endyear = ($date + 1-$i) . '-01-01 00:00:00';
+            $count1 = DB::table('table_grievance')->where('created_at', '<',$endyear)->where('created_at', '>',
+             $startyear)->whereIn('student_id',$student_id)->count();
+            $count[$i]=$count1;
+            $year[$i]=$date-$i;
+        }
+        return response(['count'=>$count,'year'=>$year],200);
+    }
+
+    }
 
 class temp {
     public $name;
