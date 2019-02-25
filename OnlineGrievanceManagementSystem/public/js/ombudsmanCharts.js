@@ -55,15 +55,18 @@ Highcharts.chart('top5_institute', {
     },
     series: [{
         name: 'pending',
-        data:data.pending
+        data:data.pending,
+        color: 'rgb(131,190,41)'
     },
     {
         name: 'Escalated',
-        data:data.escalated
+        data:data.escalated,
+        color: 'rgb(1,156,183)'
     },
     {
         name: 'Resolved',
-        data:data.resolved
+        data:data.resolved,
+        color : 'rgb(239, 96, 64)'
     }]
 });
 });
@@ -78,6 +81,7 @@ $('.select select').on('change',function(){
 function loadChart() {
  
 $.getJSON('http://127.0.0.1:8000/grievance/ombudsman/chart/college/'+selectVal, function(data) {
+
 Highcharts.chart('grievance_type_institute', {
     chart: {
         type: 'column'
@@ -147,6 +151,7 @@ loadChart();
 
 // grievance_yearwise
 $.getJSON('http://127.0.0.1:8000/grievance/ombudsman/chart/year', function(data) {
+
 Highcharts.chart('grievance_yearwise', {
     chart: {
         type: 'column'
