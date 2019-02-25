@@ -146,7 +146,7 @@ loadChart();
 
 
 // grievance_yearwise
-$.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/year', function(data) {
+$.getJSON('http://127.0.0.1:8000/grievance/ombudsman/chart/year', function(data) {
 Highcharts.chart('grievance_yearwise', {
     chart: {
         type: 'column'
@@ -195,7 +195,7 @@ Highcharts.chart('grievance_yearwise', {
 });
 
 // greivance tpe
-$.getJSON('http://127.0.0.1:8000//grievance/ombudsman/chart/department', function(data) {
+$.getJSON('http://127.0.0.1:8000/grievance/ombudsman/chart/department', function(data) {
 Highcharts.chart('grievance_type', {
    chart: {
         type: 'pie',

@@ -50,7 +50,7 @@
                     <div class="select">
                         Select Institute: <select>
                             <option value="1">CVRCE</option>
-                            <option value="1">Techno India</option>
+                            <option value="2">Techno India</option>
                         </select>
                     </div>
                 <div class="graph-boxShort" id="grievance_type_institute"></div>

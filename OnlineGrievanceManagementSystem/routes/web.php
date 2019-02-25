@@ -95,6 +95,8 @@ Route::get('grievance/aicte/importantinfo/university/{id}','AicteDashBoardContro
 Route::get('grievance/aicte/importantinfo/institute/{id}','AicteDashBoardController@getCollegeDetails');
 Route::get('/grievance/download/documents/{path}','grievanceController@download');     //Document Download request
 Route::get('/grievance/ombudsman/chart/department','OmbudsmanDashboardController@getGrievanceTypeStatistics');
+Route::get('/grievance/ombudsman/chart/year','OmbudsmanDashboardController@getYearStatistics');
+
 
 Route::get('/ui_gridSample', function(){
     return view('templates/ui_gridSample');
