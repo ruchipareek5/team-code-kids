@@ -78,6 +78,7 @@ Route::middleware('auth.basic')->group(function(){
 
     Route::get('/principal/chart/statistics/{type}', 'PrincipalController@getStatistics');      //Stats for principal's dashboard
     Route::get('/principal/grievance/{id}', 'PrincipalController@show');
+    Route::get('/principal/grievance/committeewise','PrincipalController@getCommitteewiseDetails');
 
 });
 
@@ -92,7 +93,7 @@ Route::get('/grievance/aicte/chart/department','AicteDashBoardController@getGrie
 Route::get('grievance/aicte/importantinfo/university/{id}','AicteDashBoardController@getUniversityDetails');           //For university details
 Route::get('grievance/aicte/importantinfo/institute/{id}','AicteDashBoardController@getCollegeDetails');
 Route::get('/grievance/download/documents/{path}','grievanceController@download');     //Document Download request
-
+Route::get('/grievance/ombudsman/chart/department','OmbudsmanDashboardController@getGrievanceTypeStatistics');
 
 Route::get('/ui_gridSample', function(){
     return view('templates/ui_gridSample');

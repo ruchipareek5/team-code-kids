@@ -8,8 +8,12 @@ use App\Grievance;
 use App\GrievanceMessage;
 use App\Student;
 use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 use Session;
 use Auth;
+
 
 class PrincipalController extends Controller
 {
@@ -208,5 +212,43 @@ class PrincipalController extends Controller
         }
 
         return $data;
+    }
+
+    public  function  getCommitteeWiseDetails(){
+
+        if(!((Auth::user()->roles)=='principal'))
+            return response(['message'=>'You are not authorized to see this details.'],401);
+        $college_id = DB::table('user_principal')->where('id',Session::get('user_id'))->get(['college_id'])->first();
+        if($college_id==null){
+            return \response(['message'=>'No data found for the logged in user'],404);
+        }
+
+        $committees = DB::select("select table_grievance.type from table_grievance
+                            INNER join user_student on table_grievance.student_id = user_student.id
+                            where user_student.college_id = ".$college_id->college_id."
+                            group by table_grievance.type order by count(*) desc limit 5");
+        if($committees==null){
+            return \response(['message'=>'No Committee found for the logged in user'],404);
+        }
+
+        $committee=[];
+        $i=0;
+        $total=[];
+        $resolved=[];
+
+        foreach ($committees as $name){
+            $committee[$i]=$name->type;
+            $temp=DB::select("select count(*) as total from table_grievance 
+                            INNER join user_student on table_grievance.student_id = user_student.id
+                            where user_student.college_id = ".$college_id->college_id." and
+                             table_grievance.type ='".$name->type."'");
+            $total[$i]=$temp[0]->total;
+            $temp=DB::select("select count(*) as resolved from table_grievance 
+                            INNER join user_student on table_grievance.student_id = user_student.id
+                            where user_student.college_id = ".$college_id->college_id." and
+                             table_grievance.type ='".$name->type."' and status  in ('resolved','addressed')");
+            $resolved[$i++]=$temp[0]->resolved;
+        }
+        return response(['committee'=>$committee,'total'=>$total,'resolved'=>$resolved],200);
     }
 }

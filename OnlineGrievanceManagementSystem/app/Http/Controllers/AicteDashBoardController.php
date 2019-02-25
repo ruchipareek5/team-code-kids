@@ -21,16 +21,16 @@ class AicteDashBoardController extends Controller
     public function getStatistics($type){
 
         if($type=='total'){
-            $count = Grievance::whereIn('level',['3'])->count();
+            $count = Grievance::count();
             return response(['message'=>$count],200);
         }elseif ( $type=='pending' ){
-            $count = Grievance::whereIn('status',['addressed','raised'])->whereIn('level',['3'])->count();
+            $count = Grievance::whereIn('status',['inaction','raised'])->count();
             return response(['message'=>$count],200);
         }elseif ( $type=='escalated' ){
-            $count = Grievance::whereIn('status',['delayed','reopened'])->whereIn('level',['3'])->count();
+            $count = Grievance::whereIn('status',['delayed','reopened'])->count();
             return response(['message'=>$count],200);
         }elseif ( $type=='resolved' ){
-            $count = Grievance::whereIn('status',['resolved'])->count();
+            $count = Grievance::whereIn('status',['resolved','addressed'])->count();
             return response(['message'=>$count],200);
         }
         else{
@@ -74,7 +74,7 @@ class AicteDashBoardController extends Controller
                 $temp=DB::select("select count(*) as pending from table_grievance
                             INNER join user_student on table_grievance.student_id = user_student.id
                             INNER JOIN table_college on table_college.id = user_student.college_id
-                            where table_college.name ='".$name->name."' and status in ('raised','addressed')");
+                            where table_college.name ='".$name->name."' and status in ('raised','inaction')");
                 $pending[$i]=$temp[0]->pending;
                 $temp=DB::select("select count(*) as escalated from table_grievance
                             INNER join user_student on table_grievance.student_id = user_student.id
@@ -84,7 +84,7 @@ class AicteDashBoardController extends Controller
                 $temp =DB::select("select count(*) as resolved from table_grievance
                             INNER join user_student on table_grievance.student_id = user_student.id
                             INNER JOIN table_college on table_college.id = user_student.college_id
-                            where table_college.name ='".$name->name."' and status in ('resolved')");
+                            where table_college.name ='".$name->name."' and status in ('resolved','addressed')");
                 $resolved[$i++]=$temp[0]->resolved;
             }
             return response(['college'=>$college,'pending'=>$pending,'escalated'=>$escalated,'resolved'=>$resolved],200);
@@ -136,7 +136,7 @@ class AicteDashBoardController extends Controller
             $count = DB::select("select count(*) as open_grievances from table_grievance
                             INNER join user_student on table_grievance.student_id = user_student.id
                             INNER JOIN table_university on table_university.id = user_student.university_id
-                            where user_student.university_id = $id and status in ('raised','addressed')");
+                            where user_student.university_id = $id and status in ('raised','inaction','delayed')");
             $details[0]->open_grievances = $count[0]->open_grievances;
 
              return response(['message'=>$details],200);
