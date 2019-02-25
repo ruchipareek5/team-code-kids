@@ -3,6 +3,7 @@ $('#graphs').ready(function(){
 
 $.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/college', function(data) {
     //top5_institute
+
 Highcharts.chart('top5_institute', {
     chart: {
         type: 'column'
@@ -55,15 +56,18 @@ Highcharts.chart('top5_institute', {
     },
     series: [{
         name: 'pending',
-        data:data.pending
+        data:data.pending,
+        color: 'rgb(131,190,41)'
     },
     {
         name: 'Escalated',
-        data:data.escalated
+        data:data.escalated,
+        color: 'rgb(1,156,183)'
     },
     {
         name: 'Resolved',
-        data:data.resolved
+        data:data.resolved,
+        color : 'rgb(239, 96, 64)'
     }]
 });
 });
@@ -71,6 +75,17 @@ Highcharts.chart('top5_institute', {
 
 // grievance_type
 $.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/department', function(data) {
+
+//graph color options
+Highcharts.setOptions({
+        colors: ['rgb(41, 184, 209)', 'rgb(38, 122, 239)', 'rgb(247, 103, 37)', 'rgb(221, 172, 24)','rgb(132, 144, 249)','rgb(234, 140, 51)','rgb(82, 216, 115)'],
+        plotOptions: {
+            column: {
+                colorByPoint: true
+            }
+        }
+
+    });
 Highcharts.chart('grievance_type', {
     chart: {
         type: 'pie',
@@ -131,6 +146,7 @@ Highcharts.chart('grievance_type', {
 
 // grievance_yearwise
 $.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/year', function(data) {
+
 Highcharts.chart('grievance_yearwise', {
     chart: {
         type: 'column'
@@ -180,6 +196,7 @@ Highcharts.chart('grievance_yearwise', {
 
 // top5_state
 $.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/state', function(data) {
+
 Highcharts.chart('top5_state', {
     chart: {
         type: 'column'
