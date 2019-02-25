@@ -8,6 +8,16 @@ $('.select select').on('change',function(){
 function loadChart() {
  
 $.getJSON('http://127.0.0.1:8000/principal/chart/status/'+selectVal, function(data) {
+//graph color options
+Highcharts.setOptions({
+        colors: ['rgb(41, 184, 209)', 'rgb(38, 122, 239)','rgb(131,190,41)', 'rgb(247, 103, 37)', 'rgb(221, 172, 24)','rgb(132, 144, 249)','rgb(234, 140, 51)','rgb(82, 216, 115)'],
+        plotOptions: {
+            column: {
+                colorByPoint: true
+            }
+        }
+
+    });
 Highcharts.chart('grievance_type_committee', {
     chart: {
         type: 'pie',
