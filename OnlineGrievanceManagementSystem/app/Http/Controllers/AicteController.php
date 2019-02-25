@@ -17,7 +17,7 @@ class AicteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $array = ['raised', 'addressed', 'delayed', 'reopened'];
+        $array = ['raised', 'delayed', 'reopened', 'inaction'];
 
         $grievances = Grievance::whereIn('status',$array)->where('level', 3)->orderBy('id','asc')
                       ->get(['id','student_id','type','eta','status','documents','created_at']);
