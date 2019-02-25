@@ -93,6 +93,8 @@
 
     <div ng-include src="'views/templates/modalTemplate.php'"></div>
     <div ng-include src="'views/templates/commentModalTemplate.php'"></div>
+    <div ng-include src="'views/templates/voiceModalTemplate.php'"></div>
+
 
     <div class="footer">
       <div class="row align-items-center" ng-include src="'views/templates/footerTemplate.html'"></div>           
