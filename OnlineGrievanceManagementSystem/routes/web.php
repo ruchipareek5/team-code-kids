@@ -74,14 +74,17 @@ Route::middleware('auth.basic')->group(function(){
 
 
     Route::get('/principal/grievances/{type}', 'PrincipalController@grievanceDetails');         //Principal's grievance page
-    Route::get('/principal/chart/status/{type}', 'PrincipalController@committeeStatistics');    //Piechart for grievance types   
-    Route::get('/principal/chart/type', 'PrincipalController@grievanceTypes');                  //Piechart for grievance status (percentage)
+    
+
     Route::get('/principal/chart/statistics/{type}', 'PrincipalController@getStatistics');      //Stats for principal's dashboard
-    Route::post('/principal/grievance/', 'PrincipalController@show');
+    Route::get('/principal/grievance/{id}', 'PrincipalController@show');
 
 });
 
+  Route::get('/principal/chart/status/{type}', 'PrincipalController@committeeStatistics');    //Piechart for grievance types 
+    Route::get('/principal/chart/type', 'PrincipalController@grievanceTypes');                  //Piechart for grievance status (percentage)
 
+    
 Route::get('/grievance/aicte/chart/year','AicteDashBoardController@getYearStatistics');             //for chart using year
 Route::get('/grievance/aicte/chart/state','AicteDashBoardController@getStateStatistics');           //for chart using state
 Route::get('/grievance/aicte/chart/college','AicteDashBoardController@getCollegeStatistics');       //for chart using college

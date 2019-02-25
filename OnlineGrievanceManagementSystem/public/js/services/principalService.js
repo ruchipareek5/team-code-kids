@@ -4,23 +4,17 @@ grievancesystem.service('principalService',function ($http,API_URL) {
 	
 
 
-	this.getGrievance=function () {
-		var url = API_URL + 'aicte/grievances';
+	this.getGrievance=function (type) {
+		var url = API_URL + 'principal/grievances/'+type;
 		return $http.get(url);
 
 		}
 		
-	this.searchGrievance=function(t,d) {
-		var url = API_URL + 'aicte/grievanceSearch';
-		return $http({
-		    'url': url, 
-		    method: "GET",
-		    params: {
-		    	'type': t,
-		    	'data':d
-		    }
-		 	});
-		}
+	this.searchGrievance=function (searchId) {
+		var url=API_URL+'principal/grievance/'+searchId;
+		return $http.get(url);
+
+	}
 
 	this.institute_search=function(institute_id){
 		var url =API_URL + 'grievance/aicte/importantinfo/institute/'+ institute_id;

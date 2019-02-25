@@ -37,7 +37,7 @@ class LoginController extends Controller
         if($roles == 'student')
             $table_name = 'user_student';
         elseif ($roles == 'principal')
-            $table_name = 'user_pricipal';
+            $table_name = 'user_principal';
         elseif ($roles == 'ombudsman')
             $table_name = 'user_ombudsman';
         elseif ($roles == 'aicte')

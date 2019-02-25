@@ -1,0 +1,65 @@
+body{
+
+}
+h1{
+	color: #3c3c3c;
+	margin-top: 2vw;
+	margin-left: 4vw;
+}
+#row1{
+	color: white;
+	margin-top: 20vw;
+	height: 10vw;
+	text-align: center;
+}
+#row2{
+	text-align: center;
+	float: center;
+	align-content: center;
+	margin-left: 15vw;
+}
+#student{
+	background-color: dodgerblue;
+	border-top-left-radius: 1vw;
+	border-top-right-radius: 1vw;
+	padding: 0px;
+	font-size: 1.2vw;
+	cursor: pointer;
+	color: #efefef;
+}
+#committee{
+	background-color: green;
+	border-top-left-radius: 1vw;
+	border-top-right-radius: 1vw;
+	padding: 0px;
+	font-size: 1.2vw;
+	cursor: pointer;
+	color: #efefef;
+}
+#principal{
+	background-color: orange;
+	border-top-left-radius: 1vw;
+	border-top-right-radius: 1vw;
+	padding: 0px;
+	font-size: 1.2vw;
+	cursor: pointer;
+	color: #efefef;
+}
+#ombudsman{
+	background-color: darkblue;
+	border-top-left-radius: 1vw;
+	border-top-right-radius: 1vw;
+	padding: 0px;
+	font-size: 1.2vw;
+	cursor: pointer;
+	color: #efefef;
+}
+#aicte {
+	background-color: tomato;
+	border-top-left-radius: 1vw;
+	border-top-right-radius: 1vw;
+	padding: 0px;
+	font-size: 1.2vw;
+	cursor: pointer;
+	color: #efefef;
+}

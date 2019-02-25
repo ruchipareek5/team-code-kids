@@ -8,6 +8,8 @@ use App\Grievance;
 use App\GrievanceMessage;
 use App\Student;
 use DB;
+use Session;
+use Auth;
 
 class PrincipalController extends Controller
 {
@@ -30,22 +32,22 @@ class PrincipalController extends Controller
         $college_id = DB::select("SELECT college_id FROM user_principal WHERE id = ".$id);
 
         if($type == 'seeking'){
-            $grievances = DB::select("SELECT id, type, description, documents, eta FROM table_grievance INNER JOIN user_student
+            $grievances = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta FROM table_grievance INNER JOIN user_student
             ON table_grievance.student_id = user_student.id WHERE table_grievance.level = 1 AND table_grievance.delayed_status = 0 
-            AND table_grievance.status = 'inaction' AND user_student.college_id = ".$college_id);
+            AND table_grievance.status = 'inaction' AND user_student.college_id = ".$college_id[0]->college_id);
 
             return response(['message' => $grievances], 200);
         }
-        else if($type == 'esclated') {
-            $grievances = DB::select("SELECT id, type, description, documents, eta FROM table_grievance INNER JOIN user_student
+        else if($type == 'escalated') {
+            $grievances = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta FROM table_grievance INNER JOIN user_student
             ON table_grievance.student_id = user_student.id WHERE table_grievance.level = 1 AND table_grievance.delayed_status = 1 
-            AND user_student.college_id = ".$college_id);
+            AND user_student.college_id = ".$college_id[0]->college_id);
 
             return response(['message' => $grievances], 200);
         }
         else if($type == 'resolved') {
-            $grievances = DB::select("SELECT id, type, description, documents, eta FROM table_grievance INNER JOIN user_student
-            ON table_grievance.student.id = user_student.id WHERE table_grievance.status = 'addressed' AND user_student.college_id = ".$college_id);
+            $grievances = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta, table_grievance.updated_at, table_grievance.delayed_status FROM table_grievance INNER JOIN user_student
+            ON table_grievance.student_id = user_student.id WHERE table_grievance.status = 'addressed' AND user_student.college_id = ".$college_id[0]->college_id);
 
             return response(['message' => $grievances], 200);
         }
@@ -161,7 +163,7 @@ class PrincipalController extends Controller
     }
 
     public function committeeStatistics($committee){
-        $id = Auth::user()->id;
+        $id = Session::get('user_id');
         //$id = 1;
         $college_id = DB::select("SELECT college_id FROM user_principal WHERE id = ".$id);
         
@@ -185,7 +187,8 @@ class PrincipalController extends Controller
     }
 
     public function grievanceTypes(){
-        $id = Auth::user()->id;
+        $id = Session::get('user_id');
+        
         //$id = 1;
         $college_id = DB::select("SELECT college_id FROM user_principal WHERE id = ".$id);
 
