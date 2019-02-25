@@ -26,9 +26,9 @@
                       <button type="Submit" class="btn button-submit">Search&nbsp;&nbsp;&nbsp;<img src="assets/icons/search.png" height="24" width="24"></button></form>
                         <br>
                         <br>
-                      <div id="grid1" ui-grid="grievance_search" ui-grid-pagination="" class="grid"></div>
-                <div class="text-center page" ng-show="grievance_search.totalItems > numRows">
-              <pagination class="pagination-sm" total-items="grievance_search.totalItems" items-per-page="grievance_search.paginationPageSize" ng-model="grievance_search.paginationCurrentPage"></pagination>
+                      <div id="grid1" ui-grid="grievance_search_result" ui-grid-pagination="" class="grid"></div>
+                <div class="text-center page" ng-show="grievance_search_result.totalItems > numRows">
+              <pagination class="pagination-sm" total-items="grievance_search_result.totalItems" items-per-page="grievance_search_result.paginationPageSize" ng-model="grievance_search_result.paginationCurrentPage"></pagination>
       </div>
                     </div>
                 

@@ -56,7 +56,7 @@ grievancesystem.controller('principalController',principalController);
                     
                 ];
          ///View Grievance
-                $scope.seek_grievance_data =new Array();
+              $scope.seek_grievance_data =new Array();
               $scope.escalated_grievance_data =new Array();
               $scope.resolved_grievance_data =new Array();
               $scope.loadAllGrievance=function(){

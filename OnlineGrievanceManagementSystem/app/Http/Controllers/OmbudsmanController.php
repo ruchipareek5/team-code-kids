@@ -8,6 +8,8 @@ use App\Grievance;
 use App\GrievanceMessage;
 use App\Student;
 use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class OmbudsmanController extends Controller
 {
@@ -20,8 +22,7 @@ class OmbudsmanController extends Controller
     {
         $id = Session::get('user_id');
         //$id = 1;
-
-        $university = DB::select("SELECT university_id FROM user_ombudsman WHERE id = ".$id);
+        $university = DB::select("SELECT user_ombudsman.university_id FROM user_ombudsman WHERE id = ".$id);
         if($university == null)
             return response(['messsage' => 'No such university exists'], 404);
         $university_id = $university[0]->university_id;

@@ -69,8 +69,7 @@ Route::middleware('auth.basic')->group(function(){
 
 
     Route::get('/grievance/ombudsman/statistics/{type}','OmbudsmanDashboardController@getStatistics');
-    Route::get('/grievance/ombudsman/chart/college','OmbudsmanDashboardController@getCollegeStatistics');
-    Route::get('/grievance/ombudsman/chart/college/{id}','OmbudsmanDashboardController@getInstitutewiseDetails');
+    
 
 
     Route::get('/principal/grievances/{type}', 'PrincipalController@grievanceDetails');         //Principal's grievance page
@@ -85,7 +84,8 @@ Route::middleware('auth.basic')->group(function(){
 
 Route::get('/principal/chart/status/{type}', 'PrincipalController@committeeStatistics');    //Piechart for grievance types 
 Route::get('/principal/chart/type', 'PrincipalController@grievanceTypes');                  //Piechart for grievance status (percentage)
-
+Route::get('/grievance/ombudsman/chart/college','OmbudsmanDashboardController@getCollegeStatistics');
+    Route::get('/grievance/ombudsman/chart/college/{id}','OmbudsmanDashboardController@getInstitutewiseDetails');
     
 Route::get('/grievance/aicte/chart/year','AicteDashBoardController@getYearStatistics');             //for chart using year
 Route::get('/grievance/aicte/chart/state','AicteDashBoardController@getStateStatistics');           //for chart using state

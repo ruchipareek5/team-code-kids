@@ -17,9 +17,9 @@
 
         <div class="col-md-3 grievance-box">
             <div class="grievance grievance-pending">
-                <span class="grievance-stat-value">{{pending}}</span>
+                <span class="grievance-stat-value">{{open}}</span>
                 <hr>  
-                <span class="grievance-stat-name">Pending Grievances </span>
+                <span class="grievance-stat-name">open Grievances </span>
             </div>
         </div>
 
@@ -33,9 +33,9 @@
 
         <div class="col-md-3 grievance-box">
             <div class="grievance grievance-resolved">
-                <span class="grievance-stat-value">{{resolved}}</span>
+                <span class="grievance-stat-value">{{addressed}}</span>
                  <hr>   
-                <span class="grievance-stat-name">Resolved Grievances </span>
+                <span class="grievance-stat-name">Addressed Grievances </span>
             </div>
         </div>
     </div>
@@ -46,22 +46,30 @@
             </div>
 
             <div class="col-md-6 graph">
-                <div id="grievance_type"></div>
+                <div class="coverBox"> 
+                    <div class="select">
+                        Select Institute: <select>
+                            <option value="1">CVRCE</option>
+                            <option value="1">Techno India</option>
+                        </select>
+                    </div>
+                <div class="graph-boxShort" id="grievance_type_institute"></div>
+                 </div> 
             </div>
 
         </div>
 
          <div class="row row_gap">
             <div class="col-md-6 graph">
-                <div id="grievance_yearwise"></div>
+                <div class="graph-box" id="grievance_yearwise"></div>
             </div>
 
             <div class="col-md-6 graph">
-                <div id="top5_state"></div>
+                <div class="graph-box" id="grievance_type"></div>
             </div>
 
         </div>
     </div>
 
 </div>
-<script src="js/aicteCharts.js"></script>
+<script src="js/ombudsmanCharts.js"></script>

@@ -1,7 +1,7 @@
 $('#committee-graphs').ready(function(){
 
 
-$.getJSON('http://127.0.0.1:8000//grievance/committee/graph', function(data) {
+$.getJSON('http://127.0.0.1:8000/grievance/committee/graph', function(data) {
     //top5_institute
 Highcharts.chart('committee-top5_institute', {
     chart: {

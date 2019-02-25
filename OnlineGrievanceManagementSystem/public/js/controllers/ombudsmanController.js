@@ -10,27 +10,27 @@ $scope.page='dashboard_ombudsman';
 
  	//load grievance panel
      $scope.total = 0;
-    $scope.pending = 0;
+    $scope.open = 0;
     $scope.escalated = 0;
-    $scope.resolved = 0;
+    $scope.addressed = 0;
 
     $scope.loadGrievanceStatistics=function(){
-        $http.get(API_URL+"grievance/aicte/statistics/total").then(function(response){
+        $http.get(API_URL+"grievance/ombudsman/statistics/total").then(function(response){
                 $scope.total = response.data.message;
             },function(errorResponse){
                 console.log(errorResponse);
             });
-         $http.get(API_URL+"grievance/aicte/statistics/resolved").then(function(response){
-                $scope.resolved = response.data.message;
+         $http.get(API_URL+"grievance/ombudsman/statistics/addressed").then(function(response){
+                $scope.addressed = response.data.message;
             },function(errorResponse){
                 console.log(errorResponse);
             });
-         $http.get(API_URL+"grievance/aicte/statistics/pending").then(function(response){
-                $scope.pending = response.data.message;
+         $http.get(API_URL+"grievance/ombudsman/statistics/open").then(function(response){
+                $scope.open = response.data.message;
             },function(errorResponse){
                 console.log(errorResponse);
             });
-         $http.get(API_URL+"grievance/aicte/statistics/escalated").then(function(response){
+         $http.get(API_URL+"grievance/ombudsman/statistics/escalated").then(function(response){
                 $scope.escalated = response.data.message;
             },function(errorResponse){
                 console.log(errorResponse);
@@ -66,7 +66,23 @@ $scope.page='dashboard_ombudsman';
                   });
 
 
+         ///View Grievance
+              $scope.open_grievance_data =new Array();
+              $scope.loadAllGrievance=function(){
+                      $scope.open_grievance_data =new Array();
+                  ombudsmanService.getGrievance('seeking').then(function(success)
+                   {   
+                          $scope.open_grievance_data = success.data.message;
+                          $scope.open_grievance.data = $scope.open_grievance_data;
+                      }, function(error){
 
+                    });                
+          }
+          $scope.loadAllGrievance();
+
+          // grievance ends
+               
+               
         $scope.numRows = 15;
          $scope.open_grievance = {
             data:$scope.open_grievance_data,
@@ -99,33 +115,25 @@ $scope.page='dashboard_ombudsman';
                  };
 
 
-//Grievance
-//Grievance Search
+              //Grievance
+              //Grievance Search
 
-                    //     $scope.grievance_search_data=[]
-                    //     $scope.searchGrievance = function(grievanceFilter,searchKeyword){
+                        $scope.grievance_search_data =[];
+                        $scope.searchGrievance = function(grievanceFilter,searchKeyword){
 
-                    //     ombudsmanService.searchGrievance(grievanceFilter,searchKeyword).then(function(success){
-                    //         $scope.grievance_search_result.data=new Array();
-                    //          $scope.grievance_search_data=success.data.message;  
-                    //          $scope.grievance_search_result.data=$scope.grievance_search_data;             
-                    //         },
-                    //         function(error){
-                    //             $scope.grievance_search_result.data=new Array();
-                    //              appService.showAlert('error','Result Not Found');
-                    //         });
+                        ombudsmanService.searchGrievance(grievanceFilter,searchKeyword).then(function(success){
+                            $scope.grievance_search_result.data=new Array();
+                             $scope.grievance_search_data=success.data.message;  
+                             console.log(success.data.message);  
+                             $scope.grievance_search_result.data=$scope.grievance_search_data;             
+                            },
+                            function(error){
+                                $scope.grievance_search_result.data=new Array();
+                                 appService.showAlert('error','Result Not Found');
+                            });
 
-                    // };
-                    $scope.grievance_search_data=[{
-                        "id":1,
-                        "college_id":1,
-                        "type":1,
-                        "created_at":1,
-                        "eta":1,
-                        "documents":1,
-                        "comments":1
-                    }];
-
+                    };
+            
                         $scope.grievance_search_result = {
                             data:$scope.grievance_search_data,
                             enableGridMenus:false,
@@ -216,7 +224,7 @@ $scope.open_grievance = {
 
        columnDefs: [
            { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
-           {name :"student_details" ,displayName: 'Student details' ,cellTemplate: '/views/cellTemplate/committee_student_details.html', width: "13%"},
+           {name :"student_details" ,displayName: 'Student details' ,cellTemplate: '/views/cellTemplate/student_details.html', width: "13%"},
            { name:"college_id" ,displayName: 'College ID',  cellTemplate: '/views/cellTemplate/cell.html',width:"10%"},
            { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
            {name :"created_at" ,displayName: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html' ,width:"13%"},

@@ -3,16 +3,16 @@ var grievancesystem=angular.module('grievancesystem');
 grievancesystem.service('ombudsmanService',function ($http,API_URL) {
 
 	this.getGrievance=function () {
-		var url = API_URL + 'aicte/grievances';
+		var url = API_URL + 'ombudsman/grievance';
 		return $http.get(url);
 
 		}
 		
 	this.searchGrievance=function(t,d) {
-		var url = API_URL + 'aicte/grievanceSearch';
+		var url = API_URL + '/ombudsman/grievanceSearch';
 		return $http({
 		    'url': url, 
-		    method: "GET",
+		    method: "POST",
 		    params: {
 		    	'type': t,
 		    	'data':d
