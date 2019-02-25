@@ -114,7 +114,7 @@ class OmbudsmanDashboardController extends Controller
                     $inaction[$i]=$temp[0]->count;
 
                 $temp = DB::select('select count(*) as count from table_grievance g,user_student s,table_department d where s.id = g.student_id and s.college_id = '.$id.'
-                and g.type = '."'".$departments[$i]."'".' and g.status = "addressed" group by d.type order by d.type asc');
+                and g.type = '."'".$departments[$i]."'".' and g.status in ("addressed","resolved") group by d.type order by d.type asc');
                 if($temp == null){
                     $temp = 0;
                     $addressed[$i] = $temp;}

@@ -11,7 +11,7 @@
 		border-radius: 5px;
 		background: #fff;
 		color: #333;
-		z-index: 10000 !important;
+		z-index: 10050 !important;
 	}
 	#voice img{
 		width: 50px;

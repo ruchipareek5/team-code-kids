@@ -29,5 +29,6 @@ class VerifyCsrfToken extends Middleware
         '/committee/*',
         '/principal/*',
         '/ombudsman/*',
+        '/user/*',
     ];
 }

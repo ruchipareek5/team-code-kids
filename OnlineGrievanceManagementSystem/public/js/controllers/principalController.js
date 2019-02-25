@@ -247,9 +247,28 @@ grievancesystem.controller('principalController',principalController);
                
                //take action
 
-               $scope.takeAction = function(id)
+               $scope.grantApproval = function(gid)
                {
+                  var formData = new FormData();
+                   formData.append('id',gid);
+                   var request = {
+                              method: 'POST',
+                              url: API_URL+"principal/grantApproval",
+                              data: formData,
+                              headers: {
+                                  'Content-Type': undefined
+                              }
+                          };
+                    $http(request).then(function(success){
+                      $scope.loadAllGrievance();
+                      $scope.loadGrievanceStatistics();
+                       appService.showAlert('success',success.data.message);
+                    },
+                    function(error){
+                          $scope.student_detail.data=new Array();
+                           appService.showAlert('error',error.data.message);
 
+                    });
                }
                 
    

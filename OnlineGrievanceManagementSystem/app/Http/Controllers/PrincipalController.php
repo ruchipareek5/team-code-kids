@@ -110,6 +110,17 @@ class PrincipalController extends Controller
         //
     }
 
+    public function grantApproval(Request $request){
+        $grievance = Grievance::find($request->id);
+
+        if($grievance == null)
+            return response(['message'=> 'No such grievance.'], 400);
+        $grievance->level = 0;
+        $grievance->save();
+
+        return response(['message'=>'Approval Granted Successfully'], 200);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -213,8 +224,7 @@ class PrincipalController extends Controller
 
     public  function  getCommitteeWiseDetails(){
 
-        if(!((Auth::user()->roles)=='principal'))
-            return response(['message'=>'You are not authorized to see this details.'],401);
+       
         $college_id = DB::table('user_principal')->where('id',Session::get('user_id'))->get(['college_id'])->first();
         if($college_id==null){
             return \response(['message'=>'No data found for the logged in user'],404);

@@ -63,25 +63,25 @@ class AicteController extends Controller
     // AICTE search grievances
     public function searchGrievances(Request $request){
         if($request->type == 1){
-            $grievances = DB::select("SELECT table_grievance.id, student_id, user_student.college_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
+            $grievances = DB::select("SELECT table_grievance.id, student_id, user_student.college_id, user_student.university_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
             user_student ON table_grievance.student_id = user_student.id WHERE table_grievance.id = ".$request->data);
         }
         else if($request->type == 2){
-            $grievances = DB::select("SELECT table_grievance.id, student_id, user_student.college_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
+            $grievances = DB::select("SELECT table_grievance.id, student_id, user_student.college_id, user_student.university_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
             user_student ON table_grievance.student_id = user_student.id WHERE user_student.id = ".$request->data);
         }
         else if($request->type == 3){
-            $grievances = DB::select("SELECT table_grievance.id, student_id, user_student.college_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
+            $grievances = DB::select("SELECT table_grievance.id, student_id, user_student.college_id, user_student.university_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
                 user_student ON table_grievance.student_id = user_student.id WHERE user_student.college_id = ".$request->data);
         }
         else if($request->type == 4){
-            DB::select("SELECT table_grievance.id, student_id, user_student.college_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
-                user_student ON table_grievance.student_id = user_student.id WHERE table_grievance.type = ".$request->data);
+            $grievances = DB::select("SELECT table_grievance.id, student_id, user_student.college_id, user_student.university_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
+                user_student ON table_grievance.student_id = user_student.id WHERE table_grievance.type = '".$request->data."'");
         }
         else{
             $data = [
                 'message' => 'Wrong url return',
-                'status' => "'" . Response::HTTP_NOT_FOUND . "'"
+                'status' => 404
             ];
             return $data;
         }

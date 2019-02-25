@@ -70,7 +70,9 @@ class CommitteeController extends Controller
     }
 
     public function viewStudent(Request $request){
-        $student = Student::find($request->id);
+        $grievance = Grievance::find($request->id);
+        $student_id = $grievance->student_id;
+        $student = Student::find($student_id);
 
         return response(['message'=> $student]);
     }

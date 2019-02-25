@@ -91,6 +91,9 @@
 <body ng-app="grievancesystem">
     <div ng-controller='appController'>
         <div ng-view></div>
+
+        </div>
+     </div>
     </div>
    
 </body>

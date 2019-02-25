@@ -75,12 +75,14 @@ Route::middleware('auth.basic')->group(function(){
     Route::get('/principal/grievances/{type}', 'PrincipalController@grievanceDetails');         //Principal's grievance page
     Route::get('/principal/chart/statistics/{type}', 'PrincipalController@getStatistics');      //Stats for principal's dashboard
     Route::get('/principal/grievance/{id}', 'PrincipalController@show');                        //Principal grievance search
-    Route::get('/principal/grievance/committeewise','PrincipalController@getCommitteewiseDetails');
+    Route::post('/principal/grantApproval', 'PrincipalController@grantApproval');   //Granting Approval Principal
+    
 
     Route::get('/ombudsman/grievance', 'OmbudsmanController@index');                        //Ombudsman grievance page
     Route::post('/ombudsman/grievanceSearch', 'OmbudsmanController@searchGrievances');      //Ombudsman grievance search
 
 });
+Route::get('/principal/chart/committeewise','PrincipalController@getCommitteewiseDetails');
 
 Route::get('/principal/chart/status/{type}', 'PrincipalController@committeeStatistics');    //Piechart for grievance types 
 Route::get('/principal/chart/type', 'PrincipalController@grievanceTypes');                  //Piechart for grievance status (percentage)

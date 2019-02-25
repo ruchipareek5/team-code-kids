@@ -69,7 +69,7 @@ Highcharts.chart('grievance_type_committee', {
 
 loadChart();
 
-// grievance_yearwise
+
 $.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/year', function(data) {
 Highcharts.chart('top5_committeeWise', {
     chart: {
@@ -117,6 +117,69 @@ Highcharts.chart('top5_committeeWise', {
     }]
 });
 });
+// grievance_yearwise
+// $.getJSON('http://127.0.0.1:8000/principal/chart/committeewise', function(data) {
+// Highcharts.chart('top5_committeeWise', {
+//     chart: {
+//         type: 'column'
+//     },
+//     title: {
+//         text:'Top 5 Course Wise Grievance registered'
+//     },
+//     xAxis: {
+//         categories:data.message.committee,
+//         title: {
+//             text: 'Committee'
+//         }
+//     },
+//     yAxis: {
+//         min: 0,
+//         title: {
+//             text: 'Grievance Count'
+//         },
+//         stackLabels: {
+//             enabled: true,
+//             style: {
+//                 fontWeight: 'bold',
+//                 color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+//             }
+//         }
+//     },
+//     legend: {
+//         align: 'right',
+//         layout: 'vertical',
+//         verticalAlign: 'top',
+//         x: -20,
+//         y: 60,
+//         floating:true,
+//         backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+//         borderColor: '#CCC',
+//         borderWidth: 1,
+//         shadow: false
+//     },
+//     tooltip: {
+//         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+//         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+//             '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+//         footerFormat: '</table>',
+//         shared: true,
+//         useHTML: true
+//     },
+//     plotOptions: {
+//         column: {
+
+//             dataLabels: {
+//                 enabled: false,
+//                 color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+//             }
+//         }
+//     },
+//     credits: {
+//         enabled: false
+//     },
+//     series:data.message.all_data
+// });
+// });
 
 // top5_state
 $.getJSON('http://127.0.0.1:8000/principal/chart/type', function(data) {
