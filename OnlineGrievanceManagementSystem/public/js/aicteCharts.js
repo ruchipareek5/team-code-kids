@@ -1,7 +1,7 @@
 $('#graphs').ready(function(){
 
 
-$.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/college', function(data) {
+$.getJSON(baseUrl+'grievance/aicte/chart/college', function(data) {
     //top5_institute
 
 Highcharts.chart('top5_institute', {
@@ -74,7 +74,7 @@ Highcharts.chart('top5_institute', {
 
 
 // grievance_type
-$.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/department', function(data) {
+$.getJSON(baseUrl+'grievance/aicte/chart/department', function(data) {
 
 //graph color options
 Highcharts.setOptions({
@@ -145,7 +145,7 @@ Highcharts.chart('grievance_type', {
 
 
 // grievance_yearwise
-$.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/year', function(data) {
+$.getJSON(baseUrl+'grievance/aicte/chart/year', function(data) {
 
 Highcharts.chart('grievance_yearwise', {
     chart: {
@@ -195,7 +195,7 @@ Highcharts.chart('grievance_yearwise', {
 });
 
 // top5_state
-$.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/state', function(data) {
+$.getJSON(baseUrl+'grievance/aicte/chart/state', function(data) {
 
 Highcharts.chart('top5_state', {
     chart: {

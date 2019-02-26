@@ -1,7 +1,7 @@
 $('#graphs').ready(function(){
 
 
-$.getJSON('http://127.0.0.1:8000/grievance/ombudsman/chart/college', function(data) {
+$.getJSON(baseUrl+'grievance/ombudsman/chart/college', function(data) {
     //top5_institute
 Highcharts.chart('top5_institute', {
     chart: {
@@ -80,7 +80,7 @@ $('.select select').on('change',function(){
 // grievance_type
 function loadChart() {
  
-$.getJSON('http://127.0.0.1:8000/grievance/ombudsman/chart/college/'+selectVal, function(data) {
+$.getJSON(baseUrl+'grievance/ombudsman/chart/college/'+selectVal, function(data) {
 
 Highcharts.chart('grievance_type_institute', {
     chart: {
@@ -150,7 +150,7 @@ loadChart();
 
 
 // grievance_yearwise
-$.getJSON('http://127.0.0.1:8000/grievance/ombudsman/chart/year', function(data) {
+$.getJSON(baseUrl+'grievance/ombudsman/chart/year', function(data) {
 
 Highcharts.chart('grievance_yearwise', {
     chart: {
@@ -200,7 +200,7 @@ Highcharts.chart('grievance_yearwise', {
 });
 
 // greivance tpe
-$.getJSON('http://127.0.0.1:8000/grievance/ombudsman/chart/department', function(data) {
+$.getJSON(baseUrl+'grievance/ombudsman/chart/department', function(data) {
 Highcharts.chart('grievance_type', {
    chart: {
         type: 'pie',

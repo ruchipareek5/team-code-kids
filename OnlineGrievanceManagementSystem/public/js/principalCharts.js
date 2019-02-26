@@ -7,7 +7,7 @@ $('.select select').on('change',function(){
 // grievance_type
 function loadChart() {
  
-$.getJSON('http://127.0.0.1:8000/principal/chart/status/'+selectVal, function(data) {
+$.getJSON(baseUrl+'principal/chart/status/'+selectVal, function(data) {
 //graph color options
 Highcharts.setOptions({
         colors: ['rgb(41, 184, 209)', 'rgb(38, 122, 239)','rgb(131,190,41)', 'rgb(247, 103, 37)', 'rgb(221, 172, 24)','rgb(132, 144, 249)','rgb(234, 140, 51)','rgb(82, 216, 115)'],
@@ -80,7 +80,7 @@ Highcharts.chart('grievance_type_committee', {
 loadChart();
 
 
-$.getJSON('http://127.0.0.1:8000/grievance/aicte/chart/year', function(data) {
+$.getJSON(baseUrl+'grievance/aicte/chart/year', function(data) {
 Highcharts.chart('top5_committeeWise', {
     chart: {
         type: 'column'
@@ -128,7 +128,7 @@ Highcharts.chart('top5_committeeWise', {
 });
 });
 // grievance_yearwise
-// $.getJSON('http://127.0.0.1:8000/principal/chart/committeewise', function(data) {
+// $.getJSON(baseUrl+'principal/chart/committeewise', function(data) {
 // Highcharts.chart('top5_committeeWise', {
 //     chart: {
 //         type: 'column'
@@ -192,7 +192,7 @@ Highcharts.chart('top5_committeeWise', {
 // });
 
 // top5_state
-$.getJSON('http://127.0.0.1:8000/principal/chart/type', function(data) {
+$.getJSON(baseUrl+'principal/chart/type', function(data) {
 Highcharts.chart('grievance_type', {
    chart: {
         type: 'pie',

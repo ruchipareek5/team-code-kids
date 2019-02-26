@@ -1,7 +1,7 @@
 $('#committee-graphs').ready(function(){
 
 
-$.getJSON('http://127.0.0.1:8000/grievance/committee/graph', function(data) {
+$.getJSON(baseUrl+'grievance/committee/graph', function(data) {
     //top5_institute
 Highcharts.chart('committee-top5_institute', {
     chart: {
@@ -66,7 +66,7 @@ Highcharts.chart('committee-top5_institute', {
 });
 
 // grievance_yearwise
-$.getJSON('http://127.0.0.1:8000/grievance/committee/year', function(data) {
+$.getJSON(baseUrl+'grievance/committee/year', function(data) {
 Highcharts.chart('committee-grievance_yearwise', {
     chart: {
         type: 'column'
