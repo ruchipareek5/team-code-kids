@@ -40,6 +40,20 @@ Route::post('/register','LoginController@register');        //Registartion page 
 Route::get('/grievance/committee/graph','CommitteeController@getGraphController');
 Route::get('/grievance/committee/year','CommitteeController@getYearWiseFiledGrievances');
 
+
+//AICTE FAQs related routes
+Route::group(['middleware'=>'web','prefix'=>'aicte'],function() {
+
+    Route::get('/getNumberOfInstitutesAffiliated','FaqController@getNumberOfInstitutesAffiliated'); //To get the total number of affiliated institutes
+    Route::get('/getNumberOfGrievanceReported','FaqController@getNumberOfGrievanceReported'); //To get the number of grievances reported
+    Route::get('/getNumberOfGrievanceAddressed','FaqController@getNumberOfAddressedGrievance'); //To get the number of grievances addressed
+    Route::get('/getNumberOfGrievanceDelayed','FaqController@getNumberOfDelayedGrievance'); //To get the number of delayed grievances
+    Route::get('/getNumberOfGrievanceReOpened','FaqController@getNumberOfReOpenedGrievance'); //To get the number of reopened Grievances
+    Route::get('/getNumberOfGrievanceInAction','FaqController@getNumberOfInActionGrievance'); //To get the number of In Action Grievances
+
+});
+
+
 Route::middleware('auth.basic')->group(function(){
     
     Route::resource('/grievances', 'grievanceController');
@@ -51,7 +65,6 @@ Route::middleware('auth.basic')->group(function(){
     Route::post('/grievance/addComment','grievanceController@addRemarks');        //For adding remarks
     Route::get('/grievance/remarks/{id}','grievanceController@getRemarks');        //For fetching remarks student's page
 
-
     //For statistics panel
     Route::get('/grievance/aicte/statistics/{type}','AicteDashBoardController@getStatistics');
 
@@ -60,12 +73,13 @@ Route::middleware('auth.basic')->group(function(){
     Route::post('/aicte/addComment', 'AicteController@addComment');         //AICTE Add Comments
     Route::get('/aicte/remarks/{id}', 'AicteController@getRemarks');        //For fetching remarks AICTE's page
 
+
     Route::get('/committee/grievances/{type}', 'CommitteeController@grievanceDetails');         //Committee Grievance Page
      Route::post('/committee/takeAction', 'CommitteeController@takeAction');         //Committee take action (raised to inaction)
     Route::post('/committee/sfa', 'CommitteeController@seekForApproval');
     Route::get('/committee/grievanceSearch/{id}', 'CommitteeController@show');                       //Committee Seek For Approval
      Route::post('/committee/markAddressed', 'CommitteeController@markAddressed');                       //Committee Mark Addressed
-    Route::post('/user/viewStudent', 'CommitteeController@viewStudent');                   //Committee and principal -->view Student
+    Route::post('/user/viewStudent', 'CommitteeController@viewStudent');   //Committee and principal -->view Student
 
 
     Route::get('/grievance/ombudsman/statistics/{type}','OmbudsmanDashboardController@getStatistics');
@@ -104,3 +118,12 @@ Route::get('/ui_gridSample', function(){
     return view('templates/ui_gridSample');
 });
 
+
+/**
+ * This is an open end-point to implement voice related searches
+ */
+
+ Route::get('/voiceWebHook',function(){
+
+     return "Testing Voice Web Hook";
+ });
