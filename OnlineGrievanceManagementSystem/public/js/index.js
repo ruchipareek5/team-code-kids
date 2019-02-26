@@ -1,6 +1,8 @@
 // Creating angular module and injecting dependency
-var baseUrl = 'http://13.127.45.135/';
+// var baseUrl = 'http://13.127.45.135/';
 // var baseUrl = 'http://127.0.0.1:8000/';
+var baseUrl = 'http://www.aictegrams.in/';
+
 var grievancesystem = angular.module('grievancesystem',['ngRoute',
 														'ui.grid',
 														'ui.grid.autoResize',
