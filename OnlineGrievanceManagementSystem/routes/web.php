@@ -54,10 +54,10 @@ Route::group(['middleware'=>'web','prefix'=>'aicte'],function() {
 });
 
 
-Route::middleware('auth.basic')->group(function(){
-    
+Route::group(['middleware'=>'auth.basic'],function(){
     Route::resource('/grievances', 'grievanceController');
 	Route::post('/login','LoginController@checkAuth');
+	Route::get('/logout','LoginController@logout');
     Route::get('/grievance/{type}','grievanceController@statistics');       //For grievance statistics in dashboard
     Route::get('/grievanceSearch/{id}','grievanceController@show');         //For fetching student's my grievance
     Route::post('/grievances/updateStatus','grievanceController@updateStatus');         //For Updating status of grievance from addressed to reopened
@@ -67,7 +67,6 @@ Route::middleware('auth.basic')->group(function(){
 
     //For statistics panel
     Route::get('/grievance/aicte/statistics/{type}','AicteDashBoardController@getStatistics');
-
     Route::get('/aicte/grievances', 'AicteController@index');       //AICTE grievances
     Route::get('/aicte/grievanceSearch', 'AicteController@searchGrievances');       //AICTE Search Grievances
     Route::post('/aicte/addComment', 'AicteController@addComment');         //AICTE Add Comments
