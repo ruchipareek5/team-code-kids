@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Middleware\BasicAuth;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\User;
 use App\Grievance;
@@ -201,12 +202,21 @@ class grievanceController extends Controller
 
 
     public function getRemarks($id){
-        $remarks = \App\GrievanceMessage::where('grievance_id',$id)->get();
-        if($remarks == null)
-            return response(['message'=>'No Remarks Yet'],200);
-        else{
-            return \response(['message'=>$remarks],200);
-        }
+
+            $remarks = \App\GrievanceMessage::where('grievance_id', $id)->get()->first();
+
+        $comment = new Comment();
+        $comment->grievance_id = $remarks->grievance_id;
+        $comment->message = $remarks->message;
+        $name_and_role = grievanceController::getName($remarks->sender_id);
+        $comment->commented_by = $name_and_role['name']." (".$name_and_role['roles'].")";
+        $comment->updated_at = $remarks->updated_at;
+            if ($remarks == null)
+                return response(['message' => 'No Remarks Yet'], 200);
+            else {
+                return \response(['message' => $comment], 200);
+            }
+
     }
 
     public function addRemarks(Request $request){
@@ -231,10 +241,47 @@ class grievanceController extends Controller
 
         // if($user_name == null)
         //     return response(['message'=>'No such user'],403);
-        
+      //  try {
         DB::table('table_message')->insert( array( 'grievance_id' => $request->grievance_id, 'message' => $request->message, 'sender_id' => $student_id));
 
         return response(['message' => 'Comment Added'], 200);
+        //}catch (QueryException $ex){
+          //  return \response(['message'=>'Error in Query Building'],500);
+        //}
     }
+
+
+    public static function getName($id){
+        $user = User::find(1);
+        if($user == null)
+            return \response(['message'=>'No user associated with this id '.$id],404);
+        $roles = $user->roles;
+        $table_name="";
+        if($roles == 'student')
+            $table_name = 'user_student';
+        elseif ($roles == 'principal')
+            $table_name = 'user_principal';
+        elseif ($roles == 'ombudsman')
+            $table_name = 'user_ombudsman';
+        elseif ($roles == 'aicte')
+            $table_name = 'user_aicte';
+        elseif ($roles == 'committee member')
+            $table_name = 'user_committee_member';
+        $name = DB::table($table_name)->where('user_id',$id)->get(['name'])->first();
+
+        if($name == null){
+            return response(['message'=>'No such user'],403);
+        }
+        return ['name'=>$name->name,'roles'=>$roles];
+
+}
    
+}
+
+class Comment {
+    public $grievance_id;
+    public $message;
+    public $commented_by;
+    public $updated_at;
+
 }
