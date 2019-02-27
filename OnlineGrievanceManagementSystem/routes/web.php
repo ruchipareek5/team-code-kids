@@ -122,7 +122,4 @@ Route::get('/ui_gridSample', function(){
  * This is an open end-point to implement voice related searches
  */
 
- Route::get('/voiceWebHook',function(){
-
-     return "Testing Voice Web Hook";
- });
+ Route::post('/voiceWebHook','VoiceController@voiceActions');

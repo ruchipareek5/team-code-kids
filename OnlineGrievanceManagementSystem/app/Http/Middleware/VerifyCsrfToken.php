@@ -30,5 +30,6 @@ class VerifyCsrfToken extends Middleware
         '/principal/*',
         '/ombudsman/*',
         '/user/*',
+        '/voiceWebHook/',
     ];
 }
