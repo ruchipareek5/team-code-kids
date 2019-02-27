@@ -1,7 +1,7 @@
 
 
 // Controller for grievancesystem i.e., main controller
-grievancesystem.controller('appController',function($scope,$http,$location,API_URL,$cookies,$window,appService){
+grievancesystem.controller('appController',function($scope,$http,$location,API_URL,$cookies,$window,appService,committeeService){
 	$scope.page_tab='login';
 	$scope.login = {};
 	$http.defaults.headers.common.Authorization = $cookies.get('Auth');
@@ -99,22 +99,23 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
     // grievance remakrs starts
 
 
-	// comment add starts
-	$scope.comment={};
-	$scope.addComment=function(id){
-			$('#commentModal-container').addClass('visible');
-			$('#commentModal-container').show();
-		
-		$scope.comment.gid=id;
-	}
+    
+    // comment add starts
+    $scope.comment={};
+   
+    $scope.addComment=function(id){
+        $('#commentModal-container').addClass('visible');        
+        
+        $scope.comment.gid=id;
+    }
 
-	$scope.addCommentAPI=function(comment){
-		
-		$('#commentModal-container').removeClass('visible');
-		var formData = new FormData();
-		 formData.append('grievance_id',comment.gid);
+    $scope.addCommentAPI=function(comment){
+        
+        $('#commentModal-container').removeClass('visible');
+        var formData = new FormData();
+         formData.append('grievance_id',comment.gid);
          formData.append('message', comment.message);
-		 var request = {
+         var request = {
                 method: 'POST',
                 url: API_URL+"grievance/addComment",
                 data: formData,
@@ -122,18 +123,17 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
                     'Content-Type': undefined
                 }
             };
-    	$http(request).then(function(success){
-    		appService.showAlert('success',success.data.message);
+        $http(request).then(function(success){
+            appService.showAlert('success',success.data.message);
 
-    	},
-    	function(error){
-    		appService.showAlert('error',error.data.message)
+        },
+        function(error){
+            appService.showAlert('error',error.data.message)
 
-    	});
-		
-    	
-	}
-	
+        });
+        
+        
+    }	
 	// view Student starts
     $scope.comment_numRows=10;
 

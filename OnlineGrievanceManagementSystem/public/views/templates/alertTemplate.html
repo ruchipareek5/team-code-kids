@@ -13,15 +13,24 @@
 		font-size: 1.2em;
 		position: relative;
 		top: 5;
-		right: 0;
-
-		
+		right: 0;	
+	}
+	#alertPrompt{
+		box-shadow: 0px 0px 4px 0.2px #222;
+		padding: 1.2em;
+		font-weight: 700;
+	}
+	.alert-success{
+		background: #a0f9b5;
+	}
+	.alert-error{
+		background: #ecabb1;
 	}
 </style>
 <div class="row justify-content-center">
-	<div class="alert alert-success" id="alertPrompt" role="alert">
+	<div class="alert alert-danger" id="alertPrompt" role="alert">
 		<span class="close">&#10060;</span>
-		<span id="alertText"></span>
+		<span id="alertText">lorem ipsum</span>
 	</div>
 </div>
 

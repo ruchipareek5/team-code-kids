@@ -246,19 +246,7 @@ $scope.action = function(gid)
 }
 //action
 
-//sfa
-    $scope.sfa = function(gid)
-    {
-        committeeService.seekForApproval(gid).then(function(success){
-            $scope.loadAllGrievance();
-             appService.showAlert("success",success.data.message);
-
-        },function(error){
-            appService.showAlert('error',error.data.message );
-        }
-        );
-    }
-    //sfa
+// sfa function is in appController
 
     //addressed
     $scope.markAddressed = function(gid)
@@ -292,6 +280,58 @@ $scope.action = function(gid)
     };
     //  grievance search ends
 
+    $scope.sfa;
+    // sfa 
+    $scope.sfaStart = function (id) {
+        if(id){
+            $scope.sfa=1;
+            $scope.addComment(id);
+        }        
+    }
+    $scope.addComment=function(id){
+        $('#commentModal-container').addClass('visible');        
+        
+        $scope.comment.gid=id;
+    }
+
+    $scope.addCommentAPI=function(comment){
+        
+        $('#commentModal-container').removeClass('visible');
+        var formData = new FormData();
+         formData.append('grievance_id',comment.gid);
+         formData.append('message', comment.message);
+         var request = {
+                method: 'POST',
+                url: API_URL+"grievance/addComment",
+                data: formData,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+        $http(request).then(function(success){
+            if ($scope.sfa==1) {
+                console.log($scope.sfa)
+                $scope.sfa=0;
+                committeeService.seekForApproval($scope.comment.gid).then(function(success){
+                    $scope.loadAllGrievance();
+                     appService.showAlert("success",success.data.message);
+
+                },function(error){
+                    appService.showAlert('error',error.data.message );
+                }
+                );
+
+            }
+            appService.showAlert('success',success.data.message);
+
+        },
+        function(error){
+            appService.showAlert('error',error.data.message)
+
+        });
+        
+        
+    }   
 }
 
 // closing of controller

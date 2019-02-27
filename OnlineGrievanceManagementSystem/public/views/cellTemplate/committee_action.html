@@ -24,9 +24,13 @@
     
     <div class='ui-grid-cell-contents cell comment-cell'>
         <!-- Committe controller function -->
-        <button ng-if='row.entity.level=="0"' ng-click="grid.appScope.sfa(row.entity.id)" class="btn-action" style="background-color: rgb(234,139,27);">SFA</button>
+        <div  ng-if='row.entity.level=="0"'>
+             <button ng-click="grid.appScope.sfaStart(row.entity.id)" class="btn-action" style="background-color: rgb(234,139,27);">SFA</button>
+            <button  ng-click="grid.appScope.markAddressed(row.entity.id)" class="btn-action" style="background-color: rgb(1,156,183);margin-left: 0.8em">Addressed</button>
+         </div>
+         <div  ng-if='row.entity.level!="0"'>
+            <button ng-diasbled class="btn-action disabled-btn" style="background-color: rgb(234,139,27);">SFA</button>
+            <button class="btn-action disabled-btn" style="background-color: rgb(1,156,183);margin-left: 0.8em">Addressed</button>
+         </div>
 
-         <button ng-if='row.entity.level!="0"' ng-diasbled class="btn-action disabled-btn" style="background-color: rgb(234,139,27);">SFA</button>
-
-        <button  ng-click="grid.appScope.markAddressed(row.entity.id)" class="btn-action" style="background-color: rgb(1,156,183);margin-left: 0.8em">Addressed</button>
     </div> 
