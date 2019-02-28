@@ -150,6 +150,7 @@ grievancesystem.controller('aicteController',aicteController);
 
                         aicteService.searchGrievance(grievanceFilter,searchKeyword).then(function(success){
                             $scope.grievance_search_result.data=new Array();
+                            $scope.grievance_search_data = new Array();
                              $scope.grievance_search_data=success.data.message;  
                              $scope.grievance_search_result.data=$scope.grievance_search_data;             
                             },

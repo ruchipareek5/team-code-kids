@@ -212,7 +212,7 @@ grievancesystem.controller('studentController',studentController);
 
             columnDefs: [
                 { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
-                {name :"created_at" ,displayName: 'Lodge on' ,cellTemplate: '/views/cellTemplate/cell.html', width: "10%"},
+                {name :"created_at" ,displayName: 'Lodge on' ,cellTemplate: '/views/cellTemplate/cell.html', width: "12%"},
                 { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
                 { name:"description" ,displayName: 'Description', cellTemplate: '/views/cellTemplate/cell.html',width:"40%"},
                 {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
