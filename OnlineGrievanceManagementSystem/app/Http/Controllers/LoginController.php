@@ -44,13 +44,14 @@ class LoginController extends Controller
             $table_name = 'user_aicte';
         elseif ($roles == 'committee member')
             $table_name = 'user_committee_member';
-        $user_id = DB::table($table_name)->where('user_id',Auth::user()->getAuthIdentifier())->get(['id'])->first();
+        $user_id = DB::table($table_name)->where('user_id',Auth::user()->getAuthIdentifier())->get(['id','name'])->first();
         if($user_id == null){
             return response(['message'=>'No such user'],403);
         }
+        Session::put('name',$user_id->name);
         Session::put('user_id',$user_id->id);
         Session::put('roles',$roles);
-        return response(Auth::user()->roles,200);
+        return response(['roles'=>Auth::user()->roles,'name'=>$user_id->name],200);
 
     }
 
