@@ -19,7 +19,7 @@ h1{
 	margin-left: 15vw;
 }
 #student{
-	background-color: dodgerblue;
+	background-color: rgb(0,156,223);
 	border-top-left-radius: 1vw;
 	border-top-right-radius: 1vw;
 	padding: 0px;
@@ -28,7 +28,7 @@ h1{
 	color: #efefef;
 }
 #committee{
-	background-color: green;
+	background-color: rgb(73,175,95);
 	border-top-left-radius: 1vw;
 	border-top-right-radius: 1vw;
 	padding: 0px;
@@ -37,7 +37,7 @@ h1{
 	color: #efefef;
 }
 #principal{
-	background-color: orange;
+	background-color: rgb(242,165,35);
 	border-top-left-radius: 1vw;
 	border-top-right-radius: 1vw;
 	padding: 0px;
@@ -46,7 +46,7 @@ h1{
 	color: #efefef;
 }
 #ombudsman{
-	background-color: darkblue;
+	background-color: rgb(59,133,189);
 	border-top-left-radius: 1vw;
 	border-top-right-radius: 1vw;
 	padding: 0px;
@@ -55,7 +55,7 @@ h1{
 	color: #efefef;
 }
 #aicte {
-	background-color: tomato;
+	background-color: rgb(251,90,62);
 	border-top-left-radius: 1vw;
 	border-top-right-radius: 1vw;
 	padding: 0px;
