@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace public;
 
 use Illuminate\Http\Request;
 use App\Grievance;
@@ -73,7 +73,7 @@ class VoiceController extends Controller
     	];
 		return json_encode($response);
     	}
-    	    	else if(strtolower($intent) == "countsolvedgrievances"){
+    	else if(strtolower($intent) == "countsolvedgrievances"){
     		$responseFromFunction = $this->getNumberOfAddressedGrievanceVoice();
     		$response =[
     		"fulfillmentText" => $responseFromFunction,
@@ -90,7 +90,7 @@ class VoiceController extends Controller
     	];
 		return json_encode($response);
     	}
-    	    	else if(strtolower($intent) == "pendinggrievances"){
+    	else if(strtolower($intent) == "pendinggrievances"){
     		$responseFromFunction = $this->getNumberOfDelayedGrievanceVoice();
     		$response =[
     		"fulfillmentText" => $responseFromFunction,
