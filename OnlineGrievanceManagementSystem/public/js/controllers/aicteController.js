@@ -39,7 +39,51 @@ grievancesystem.controller('aicteController',aicteController);
     $scope.loadGrievanceStatistics();
     // grievance statistics ends
 
+        //How many grievances are pending for the university /college
+
+        //Total number of institutes affiliated by AICTE
+        $http.get(API_URL+"/aicte/getNumberOfInstitutesAffiliated").then(function(response){
+            $scope.totalAffiliated = response.data;
+        }, function(errorResponse){
+            console.log(errorResponse);
+        });
+        //Total number of grievance reported
+        $http.get(API_URL+"/aicte/getNumberOfGrievanceReported").then(function(response){
+            $scope.totalReported = response.data;
+        }, function(errorResponse){
+            console.log(errorResponse);
+        });
+
+        //Total number of grievance addressd
+        $http.get(API_URL+"/aicte/getNumberOfGrievanceAddressed").then(function(response){
+            $scope.totalAddressed = response.data;
+        },function(errorResponse){
+            console.log(errorResponse);
+        });
+
+        //Total number of grievance delayed
+        $http.get(API_URL+"/aicte/getNumberOfGrievanceDelayed").then(function(response){
+            $scope.totalDelayed= response.data;
+        },function(errorResponse){
+            console.log(errorResponse);
+        });
+
+        //total number of grievance reopened
+        $http.get("/getNumberOfGrievanceReOpened").then(function(response){
+            $scope.totalReopened = response.data;
+        },function(errorResponse){
+            console.log(errorResponse);
+        });
+
+        //total number of grievance inaction
+        $http.get("/getNumberOfGrievanceInAction").then(function(response){
+            $scope.totalInaction = response.data;
+        },function(errorResponse){
+            console.log(errorResponse);
+        });
+
         
+
 
      $scope.faq =[{ "ques":"how to file grievance? How we will know it is resolved",
                     "ans": "You will be notified when it will solved"},
