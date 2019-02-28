@@ -5,19 +5,19 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 	$scope.page_tab='login';
 	$scope.login = {};
 	$http.defaults.headers.common.Authorization = $cookies.get('Auth');
-
 	$scope.doLoginAttempt =  function(){
 	$http.defaults.headers.common.Authorization = "Basic " + btoa([$scope.login.email, $scope.login.password].join(':'));
 	$http.post(API_URL + "login", $scope.login).then(function(response){
-		if (response.data == "aicte") {
+        console.log('hello ' +$scope.username);
+		if (response.data.roles == "aicte") {
 			$location.path('/aicte');
-		}else if (response.data == "student") {
+		}else if (response.data.roles == "student") {
 			$location.path('/student');
-		}else if (response.data == "committee member") {
+		}else if (response.data.roles == "committee member") {
 			$location.path('/committee');
-		}else if (response.data == "principal") {
+		}else if (response.data.roles == "principal") {
 			$location.path('/principal');
-		}else if (response.data == "ombudsman") {
+		}else if (response.data.roles == "ombudsman") {
 			$location.path('/ombudsman');
 		}else {
 			alert('Template Not Available');
@@ -56,7 +56,7 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
     $scope.comment_numRows=10;
 
      $scope.comment_history = {
-        data:$scope.open_grievance_data,
+        data:$scope.comment_history_data,
         enableGridMenus:false,
         enableSorting: false,
         enableFiltering:false,
@@ -69,10 +69,10 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
         enablePaginationControls: false,
 		
 		  columnDefs: [
-            { name : "grievance_id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html',width:"20%"},
+            { name : "grievance_id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html',width:"15%"},
             {name :"updated_at" ,displayName: 'Date' ,cellTemplate: '/views/cellTemplate/cell.html', width: "20%"},
             { name:"message" ,displayName: 'Comment', cellTemplate: '/views/cellTemplate/cell.html',width:"40%"},
-            {name:"sender_id", displayName: 'Commented By' ,cellTemplate: '/views/cellTemplate/cell.html',width:"20%"},
+            {name:"commented_by", displayName: 'Commented By' ,cellTemplate: '/views/cellTemplate/cell.html',width:"25%"},
             
         ],
 
@@ -81,13 +81,17 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
     $scope.comment_history_data=new Array();
 
     $scope.viewRemarks=function(id){
+    $scope.comment_history_data=new Array();
 		
     	var url = API_URL+'grievance/remarks/'+id;
     	$http.get(url).then(function(success){
 
     		$('#modal-container').addClass('visible');
     		console.log(success.data.message);
-    		$scope.comment_history.data=success.data.message;
+    		$scope.comment_history.data=[];
+            $scope.comment_history_data=success.data.message;
+            $scope.comment_history.data=$scope.comment_history_data;
+
     	},
     	function(error){
             $scope.grievance_search.data=new Array();

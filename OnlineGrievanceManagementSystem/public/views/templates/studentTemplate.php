@@ -10,7 +10,7 @@
     <script src="js/libraries/angular-ui-grid/ui-grid.pagination.min.js"></script>
     <script src="js/libraries/angular-ui-grid/ui-grid.core.min.js"></script>
 
-    <title>Document1</title>
+    <title>Student</title>
 
 </head>
 <div>
@@ -30,7 +30,7 @@
                     <span class="top-icon"><img src="assets/icons/notifiaction.png"></span>
                     <span class="top-icon"><img src="assets/icons/message.png"></span>
                     <div class="top-icon dropdown">
-                        <img src="assets/icons/user.png">Student Name 
+                        <img src="assets/icons/user.png"> {{username}}
                         <span class=""> &#x25BC;
                             <div class="dropdown-content">
                               <a href="#">Profile</a>

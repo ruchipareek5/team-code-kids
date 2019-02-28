@@ -44,6 +44,7 @@ Route::get('/grievance/committee/year','CommitteeController@getYearWiseFiledGrie
 //AICTE FAQs related routes
 Route::group(['middleware'=>'web','prefix'=>'aicte'],function() {
 
+    
     Route::get('/getNumberOfInstitutesAffiliated','FaqController@getNumberOfInstitutesAffiliated'); //To get the total number of affiliated institutes
     Route::get('/getNumberOfGrievanceReported','FaqController@getNumberOfGrievanceReported'); //To get the number of grievances reported
     Route::get('/getNumberOfGrievanceAddressed','FaqController@getNumberOfAddressedGrievance'); //To get the number of grievances addressed
@@ -55,6 +56,7 @@ Route::group(['middleware'=>'web','prefix'=>'aicte'],function() {
 
 
 Route::group(['middleware'=>'auth.basic'],function(){
+    Route::get('/user/getUserName','LoginController@getUserName');
     Route::resource('/grievances', 'grievanceController');
 	Route::post('/login','LoginController@checkAuth');
 	Route::get('/logout','LoginController@logout');

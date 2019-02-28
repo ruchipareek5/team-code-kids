@@ -5,9 +5,9 @@
 		right: 50px;
 		bottom: 5%;
 		box-shadow: 0 0 10px 0.5px;
-		max-width: 100px;
-		font-size: 1.1em;
 		padding: 0.2em;
+		min-width: 105px;
+		font-size: 1.1em;
 		border-radius: 5px;
 		background: #fff;
 		color: #333;

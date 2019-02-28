@@ -4,9 +4,15 @@ grievancesystem.controller('ombudsmanController',ombudsmanController);
 
 
  function ombudsmanController($scope,$http,appService,ombudsmanService,API_URL,$location) {
+  $scope.university_name='BPUT';
+  $scope.username='';
+    $http.get('/user/getUserName').then(function(success){
+        $scope.username=success.data.message;
+    },function(error){
+        $scope.username='username';
+    });
+
 $scope.page='dashboard_ombudsman';
-    $scope.username='ombudsman Name';
-    $scope.university_name='BPUT';
 
  	//load grievance panel
      $scope.total = 0;

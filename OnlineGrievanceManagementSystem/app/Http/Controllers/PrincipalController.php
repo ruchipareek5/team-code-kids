@@ -145,7 +145,7 @@ class PrincipalController extends Controller
     }
 
     public function getStatistics($type){
-        $id = Auth::user()->id;
+        $id = Session::get('user_id');
         //$id = 1;
         $college_id = DB::select("SELECT college_id FROM user_principal WHERE id = ".$id);
 

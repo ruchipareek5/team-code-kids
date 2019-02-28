@@ -61,5 +61,12 @@ class LoginController extends Controller
         Session::flush();
     }
 
+    public function getUserName(){
+        if(!Auth::check())
+            return response(['message'=>'User not logged in'],401);
+        return response(['message'=>Session::get('name')],200);
+    }
+
+
 
 }

@@ -20,8 +20,16 @@ grievancesystem.directive('ngFiles', ['$parse', function ($parse) {
 
 grievancesystem.controller('studentController',studentController);
 
+    
 
  function studentController($scope,$http,appService,studentService,API_URL) {
+    $scope.username='';
+    $http.get('/user/getUserName').then(function(success){
+        $scope.username=success.data.message;
+    },function(error){
+        $scope.username='username';
+    });
+
  	$scope.page='dashboard_student';
    
     $scope.grievanceagainst=[{"category":"Admission Cell"},{"category":"Accounts Department"},
@@ -263,7 +271,7 @@ grievancesystem.controller('studentController',studentController);
         { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html ', width:"12%"},
         {name :"description" ,displayName: 'Description' ,cellTemplate: '/views/cellTemplate/cell.html', width:"15%" },
         {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html", width:"9%"  },
-        {name:"completed_at", displayName: 'Date of Complettion' ,cellTemplate: '/views/cellTemplate/cell.html ', width:"12%"},
+        {name:"updated_at", displayName: 'Date of Complettion' ,cellTemplate: '/views/cellTemplate/cell.html ', width:"12%"},
         { name:"action" ,displayName: 'Actions',  cellTemplate: '/views/cellTemplate/student_action.html', width:"30%"},
         {name:"status" ,displayName: 'Status', cellTemplate: '/views/cellTemplate/cell.html ', width:"12%"},
 

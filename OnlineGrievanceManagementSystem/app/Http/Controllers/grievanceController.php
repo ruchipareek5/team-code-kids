@@ -45,7 +45,7 @@ class grievanceController extends Controller
         }
         $student_id = Session::get('user_id');
         $grievances = Grievance::where('student_id',$student_id)->whereIn('status',$array)->orderBy('id','asc')
-                      ->get(['id','type','eta','documents','created_at','description','status']);
+                      ->get(['id','type','eta','documents','created_at','updated_at','description','status']);
 
 
         return response(['message'=>$grievances],200);
@@ -203,26 +203,34 @@ class grievanceController extends Controller
 
     public function getRemarks($id){
 
-            $remarks = \App\GrievanceMessage::where('grievance_id', $id)->get()->first();
+        $remarks = \App\GrievanceMessage::where('grievance_id', $id)->get();
+        if($remarks==null){
+            return response(['message'=>'Remarks not found'],400);
+        }
+        $comment=[];
+        $i=0;
+        foreach ($remarks as $remark) {
+        $comment[$i] = new Comment();    
 
-        $comment = new Comment();
-        $comment->grievance_id = $remarks->grievance_id;
-        $comment->message = $remarks->message;
-        $name_and_role = grievanceController::getName($remarks->sender_id);
-        $comment->commented_by = $name_and_role['name']." (".$name_and_role['roles'].")";
-        $comment->updated_at = $remarks->updated_at;
+        $comment[$i]->grievance_id = $remark->grievance_id;
+        $comment[$i]->message = $remark->message;
+        $name_and_role = grievanceController::getName($remark->sender_id);
+        $comment[$i]->commented_by = $name_and_role['name']." (".$name_and_role['roles'].")";
+        $comment[$i++]->updated_at = $remark->updated_at;
+        }
+        
             if ($remarks == null)
-                return response(['message' => 'No Remarks Yet'], 200);
+                return response(['message' => 'No Remarks Yet'], 400);
             else {
-                return \response(['message' => $comment], 200);
+                return response(['message' => $comment], 200);
             }
 
     }
 
     public function addRemarks(Request $request){
         $roles = Auth::user()->roles;
-        $student_id = Session::get('user_id');
-        // $student_id = 1;
+        $sender_id = Auth::user()->id;
+        // $sender_id = 1;
 
         // if ($roles == 'student')
         //     $table_name = 'user_student';
@@ -242,7 +250,7 @@ class grievanceController extends Controller
         // if($user_name == null)
         //     return response(['message'=>'No such user'],403);
       //  try {
-        DB::table('table_message')->insert( array( 'grievance_id' => $request->grievance_id, 'message' => $request->message, 'sender_id' => $student_id));
+        DB::table('table_message')->insert( array( 'grievance_id' => $request->grievance_id, 'message' => $request->message, 'sender_id' => $sender_id));
 
         return response(['message' => 'Comment Added'], 200);
         //}catch (QueryException $ex){
@@ -252,7 +260,7 @@ class grievanceController extends Controller
 
 
     public static function getName($id){
-        $user = User::find(1);
+        $user = User::find($id);
         if($user == null)
             return \response(['message'=>'No user associated with this id '.$id],404);
         $roles = $user->roles;

@@ -36,7 +36,8 @@ Highcharts.chart('top5_institute', {
         backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
         borderColor: '#CCC',
         borderWidth: 1,
-        shadow: false
+        shadow: false,
+
     },
     tooltip: {
         headerFormat: '<b>{point.x}</b><br/>',
@@ -55,7 +56,7 @@ Highcharts.chart('top5_institute', {
         enabled: false
     },
     series: [{
-        name: 'pending',
+        name: 'Pending',
         data:data.pending,
         color: 'rgb(131,190,41)'
     },

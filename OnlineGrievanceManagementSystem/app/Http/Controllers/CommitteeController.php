@@ -174,7 +174,7 @@ class CommitteeController extends Controller
         $college = DB::select('select d.college_id, d.type as name,d.id as department_id from  table_department d,
                     user_committee_member c where c.id='.$id.' and c.department_id = d.id limit 1');
         if($college==null){
-            return \response(['message'=>'sorry College Id not available for the logged in user'],401);
+            return response(['message'=>'sorry College Id not available for the logged in user'],401);
         }
         $college_id = $college[0]->college_id;
 

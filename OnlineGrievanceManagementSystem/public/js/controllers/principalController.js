@@ -6,9 +6,16 @@ grievancesystem.controller('principalController',principalController);
  function principalController($scope,$http,appService,principalService,API_URL,$location) {
    
  	$scope.page='dashboard_principal';
-    $scope.username='principal Name';
     $scope.college_name='CV Raman College of Engineering';
 
+
+ $scope.username='';
+    $http.get('/user/getUserName').then(function(success){
+        $scope.username=success.data.message;
+    },function(error){
+        $scope.username='username';
+    });
+    
  	//load grievance panel
      $scope.total = 0;
     $scope.pending = 0;
@@ -246,32 +253,61 @@ grievancesystem.controller('principalController',principalController);
                 //  grievance search ends  
                
                
-               //take action
+         //take action
+                $scope.approval;
+                    // approval 
+                    $scope.approvalStart = function (id) {
+                        if(id){
+                            $scope.approval=1;
+                            $scope.addComment(id);
+                        }        
+                    }
+                    $scope.addComment=function(id){
+                        $('#commentModal-container').addClass('visible');        
+                        
+                        $scope.comment.gid=id;
+                    }
 
-               $scope.grantApproval = function(gid)
-               {
-                  var formData = new FormData();
-                   formData.append('id',gid);
-                   var request = {
-                              method: 'POST',
-                              url: API_URL+"principal/grantApproval",
-                              data: formData,
-                              headers: {
-                                  'Content-Type': undefined
-                              }
-                          };
-                    $http(request).then(function(success){
-                      $scope.loadAllGrievance();
-                      $scope.loadGrievanceStatistics();
-                       appService.showAlert('success',success.data.message);
-                    },
-                    function(error){
-                          $scope.student_detail.data=new Array();
-                           appService.showAlert('error',error.data.message);
+                    $scope.addCommentAPI=function(comment){
+                        
+                        $('#commentModal-container').removeClass('visible');
+                        var formData = new FormData();
+                         formData.append('grievance_id',comment.gid);
+                         formData.append('message', comment.message);
+                         var request = {
+                                method: 'POST',
+                                url: API_URL+"grievance/addComment",
+                                data: formData,
+                                headers: {
+                                    'Content-Type': undefined
+                                }
+                            };
+                        $http(request).then(function(success){
+                            if ($scope.approval==1) {
+                                console.log($scope.approval)
+                                $scope.approval=0;
+                                principalService.approvedGrant($scope.comment.gid).then(function(success){
+                                    $scope.loadAllGrievance();
+                                     appService.showAlert("success",success.data.message);
 
-                    });
-               }
-                
+                                },function(error){
+                                    appService.showAlert('error',error.data.message );
+                                }
+                                );
+
+                            }
+                            else
+                            appService.showAlert('success',success.data.message);
+
+                        },
+                        function(error){
+                            appService.showAlert('error',error.data.message)
+
+                        });
+                        
+                        
+                    } 
+       
    
                 
 }

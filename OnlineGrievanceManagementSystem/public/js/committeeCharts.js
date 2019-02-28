@@ -14,6 +14,11 @@ Highcharts.chart('committee-top5_institute', {
         categories:data.message.course,
         title: {
             text: 'Courses'
+        },
+        labels: {
+            style: {
+                textTransform:'capitalize'
+            }
         }
     },
     yAxis: {
