@@ -26,7 +26,7 @@ class VoiceController extends Controller
             $responseFromFunction = $this->reportGrievanceVoice($parameters);
             $response =[
             "fulfillmentText" => $responseFromFunction,
-            "fulfillmentMessage" => [ 
+            "fulfillmentMessages" => [ 
                 [
                 "text"=> [
                           "text" => [
@@ -34,8 +34,7 @@ class VoiceController extends Controller
                           ]
                         ]
                 ]   
-            ],
-            "languageCode" => "en"
+            ]
         ];
         return json_encode($response);
         }
@@ -43,7 +42,7 @@ class VoiceController extends Controller
             $responseFromFunction = $this->getNumberOfInstitutesAffiliatedVoice();
             $response =[
             "fulfillmentText" => $responseFromFunction,
-            "fulfillmentMessage" => [ 
+            "fulfillmentMessages" => [ 
                 [
                 "text"=> [
                           "text" => [
@@ -51,8 +50,7 @@ class VoiceController extends Controller
                           ]
                         ]
                 ]   
-            ],
-            "languageCode" => "en"
+            ]
         ];
         return json_encode($response);
         }
@@ -60,7 +58,7 @@ class VoiceController extends Controller
             $responseFromFunction = $this->getNumberOfGrievanceReportedVoice();
             $response =[
             "fulfillmentText" => $responseFromFunction,
-            "fulfillmentMessage" => [ 
+            "fulfillmentMessages" => [ 
                 [
                 "text"=> [
                           "text" => [
@@ -68,8 +66,7 @@ class VoiceController extends Controller
                           ]
                         ]
                 ]   
-            ],
-            "languageCode" => "en"
+            ]
         ];
         return json_encode($response);
         }
@@ -77,7 +74,7 @@ class VoiceController extends Controller
             $responseFromFunction = $this->getNumberOfAddressedGrievanceVoice();
             $response =[
             "fulfillmentText" => $responseFromFunction,
-            "fulfillmentMessage" => [ 
+            "fulfillmentMessages" => [ 
                 [
                 "text"=> [
                           "text" => [
@@ -85,8 +82,7 @@ class VoiceController extends Controller
                           ]
                         ]
                 ]   
-            ],
-            "languageCode" => "en"
+            ]
         ];
         return json_encode($response);
         }
@@ -94,7 +90,7 @@ class VoiceController extends Controller
             $responseFromFunction = $this->getNumberOfDelayedGrievanceVoice();
             $response =[
             "fulfillmentText" => $responseFromFunction,
-            "fulfillmentMessage" => [ 
+            "fulfillmentMessages" => [ 
                 [
                 "text"=> [
                           "text" => [
@@ -102,8 +98,7 @@ class VoiceController extends Controller
                           ]
                         ]
                 ]   
-            ],
-            "languageCode" => "en"
+            ]
         ];
         return json_encode($response);
         }
@@ -112,7 +107,7 @@ class VoiceController extends Controller
         $responseFromFunction="Oops! Here you caught me, I don't know the answer for this";
         $response =[
             "fulfillmentText" => $responseFromFunction,
-            "fulfillmentMessage" => [ 
+            "fulfillmentMessages" => [ 
                 [
                 "text"=> [
                           "text" => [
@@ -120,8 +115,7 @@ class VoiceController extends Controller
                           ]
                         ]
                 ]   
-            ],
-            "languageCode" => "en"
+            ]
         ];
         return json_encode($response);    
         }
@@ -147,7 +141,7 @@ class VoiceController extends Controller
         if($responseGrievanceReport == true){
             $new_grievance = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','desc')->get(['id'])->first();
             $new_grievance_id = $new_grievance->id;
-            $register_grievance_response = "Your grievance is registered having id ".$new_grievance_id.". Please let me know what else can I help you with.";
+            $register_grievance_response = "Your grievance is registered having ID ".$new_grievance_id.". Please let me know what else can I help you with.";
             return (string)$register_grievance_response;
         }
         else{
@@ -162,7 +156,7 @@ class VoiceController extends Controller
             return "Please try later, currently I don't have any records of affiliated institutes. I am working on it. Can I tell you anything else?";
         }
         else{
-            $numberOfInstitutesAffiliatedVoice = $numberOfInstitutesAffiliated.", There are ".$numberOfInstitutesAffiliated." affiliated by AICTE. What else would you like to know?";
+            $numberOfInstitutesAffiliatedVoice = $numberOfInstitutesAffiliated.", There are ".$numberOfInstitutesAffiliated." institutes affiliated by AICTE. What else would you like to know?";
             return (string)$numberOfInstitutesAffiliatedVoice;
         }
         
@@ -175,7 +169,7 @@ class VoiceController extends Controller
             return "Oops! Currently I don't have any records of affiliated institutes. I will check. Would you like to know anything else?";
         }
         else{
-            $totalGrievancesReportedVoice = "There are ".$totalGrievancesReported." reported to AICTE. This is nice people are becoming open. What else do you want to know?";
+            $totalGrievancesReportedVoice = "There are ".$totalGrievancesReported." grievances reported to AICTE. This is nice students are becoming vocal. What else do you want to know?";
              return (string)$totalGrievancesReportedVoice;
         }
        
@@ -185,10 +179,10 @@ class VoiceController extends Controller
         $addressedGrievances = DB::select("SELECT count(*) as addressedGrievances FROM grievancesystem.table_grievance where table_grievance.status = 'addressed'");
         $totalAddressedGrievances = $addressedGrievances[0]->addressedGrievances;
         if($totalAddressedGrievances == 0){
-            return "Oh wow, there are no grievances reported. AICTE is working really hard. What else do you want to know?";
+            return "There are no grievances addressed in the records for now. AICTE is working on it. What else do you want to know?";
         }
         else{
-            $totalAddressedGrievancesVoice = "There are ".$totalAddressedGrievances." reported to AICTE. AICTE is doing a great job. Please let me know what else should I tell you?";
+            $totalAddressedGrievancesVoice = "There are ".$totalAddressedGrievances." grievances reported to AICTE. AICTE is doing a great job. Please let me know what else should I tell you?";
              return (string)$totalAddressedGrievancesVoice;
         }
 
