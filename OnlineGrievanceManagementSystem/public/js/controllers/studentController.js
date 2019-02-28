@@ -38,7 +38,7 @@ grievancesystem.controller('studentController',studentController);
             
             console.log(success.data.message);
             $scope.grievance_search_data=success.data.message;
-             $scope.grievance_search.data=[];  
+             $scope.grievance_search.data=new Array();  
             $scope.grievance_search.data.push($scope.grievance_search_data);
         },
         function(error){
@@ -183,8 +183,10 @@ grievancesystem.controller('studentController',studentController);
         // grievance ends
 
         $scope.numRows = 3;
-        $scope.loadAllGrievance();
-   
+        $scope.pageSize = 7;
+       $scope.loadAllGrievance();
+
+        
      $scope.open_grievance = {
         data:$scope.open_grievance_data,
             enableGridMenus:false,
@@ -194,7 +196,7 @@ grievancesystem.controller('studentController',studentController);
             enableColumnMenus: false,
             enableHorizontalScrollbar:0,
             enableVerticalScrollbar:0,
-            paginationPageSize: $scope.numRows,
+            paginationPageSize: $scope.pageSize,
             minRowsToShow: $scope.numRows,
             enablePaginationControls: false,
 
@@ -222,7 +224,7 @@ grievancesystem.controller('studentController',studentController);
                 enableColumnMenus: false,
                 enableHorizontalScrollbar:0,
                 enableVerticalScrollbar:0,
-                paginationPageSize: $scope.numRows,
+                paginationPageSize: $scope.pageSize,
                 minRowsToShow: $scope.numRows,
                 enablePaginationControls: false,
 
@@ -250,7 +252,7 @@ grievancesystem.controller('studentController',studentController);
             enableColumnMenus: false,
             enableHorizontalScrollbar:0,
             enableVerticalScrollbar:0,
-            paginationPageSize: $scope.numRows,
+            paginationPageSize: $scope.pageSize,
             minRowsToShow: $scope.numRows,
             enablePaginationControls: false,
 
@@ -271,6 +273,8 @@ grievancesystem.controller('studentController',studentController);
                
     };
 
+
+   // $scope.grievance_search_data = [{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},{"id":"1"},];
         $scope.grievance_search = {
             data:$scope.grievance_search_data,
             enableGridMenus:false,
@@ -280,10 +284,11 @@ grievancesystem.controller('studentController',studentController);
             enableColumnMenus: false,
             enableHorizontalScrollbar:0,
             enableVerticalScrollbar:0,
-            paginationPageSize: $scope.numRows,
-            minRowsToShow: $scope.numRows,
+            totalItems: $scope.grievance_search_data.length,
+            paginationPageSize: $scope.pageSize,
+            minRowsToShow: $scope.grievance_search_data.length < $scope.pageSize ? $scope.grievance_search_data : $scope.pageSize,
             enablePaginationControls: false,
-
+            
 
     columnDefs: [
                 { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },

@@ -84,6 +84,7 @@ $scope.page='dashboard_ombudsman';
                
                
         $scope.numRows = 15;
+        
          $scope.open_grievance = {
             data:$scope.open_grievance_data,
                 enableGridMenus:false,
@@ -155,7 +156,7 @@ $scope.page='dashboard_ombudsman';
                                 {name :"created_at" ,displayName: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html', width:"12.5%" },
                                 {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html ', width:"12.5%"},
                                 {name:"documents" ,displayName: 'Attachment', cellTemplate: '/views/cellTemplate/attachment.html ', width:"12.5%"},
-                                {name:"comments",displayName: 'Comments',cellTemplate: "/views/cellTemplate/ombudsman_connects.html",  width:"25%"},
+                                {name:"comments",displayName: 'Comments',cellTemplate: "/views/cellTemplate/ombudsman_connects.html", },
                                 
                                         ],
                 
@@ -163,45 +164,45 @@ $scope.page='dashboard_ombudsman';
                     };
         
 //Grievance Search
-$scope.open_grievance_data = [
-    {
-        "id":"1",
-        "student_details":"1",
-        "type":"1",
-        "description":"1",
-        "documents":"1",
-        "eta":"1",
-        "action":1
-    },
+// $scope.open_grievance_data = [
+//     {
+//         "id":"1",
+//         "student_details":"1",
+//         "type":"1",
+//         "description":"1",
+//         "documents":"1",
+//         "eta":"1",
+//         "action":1
+//     },
    
-];
-$scope.in_action_grievance_data = [
-   {
-       "id":"1",
-       "student_details":"1",
-       "type":"1",
-       "description":"1",
-       "documents":"1",
-       "eta":"1",
-       "action":1
-   },
+// ];
+// $scope.in_action_grievance_data = [
+//    {
+//        "id":"1",
+//        "student_details":"1",
+//        "type":"1",
+//        "description":"1",
+//        "documents":"1",
+//        "eta":"1",
+//        "action":1
+//    },
   
-];
+// ];
 
-$scope.resolved_grievance_data = [
-   {
-       "id":"1",
-       "student_details":"1",
-       "type":"1",
-       "description":"1",
-       "documents":"1",
-       "eta":"1",
-       "closing_date":"1",
-       "closing_status":"1",
+// $scope.resolved_grievance_data = [
+//    {
+//        "id":"1",
+//        "student_details":"1",
+//        "type":"1",
+//        "description":"1",
+//        "documents":"1",
+//        "eta":"1",
+//        "closing_date":"1",
+//        "closing_status":"1",
        
-   },
+//    },
   
-];
+// ];
 
 
 

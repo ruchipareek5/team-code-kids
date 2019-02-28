@@ -299,3 +299,18 @@ hr
 {
     display: inline-block;
 }
+
+
+.gridview
+{
+    height: 300px !important;
+    width: 100%;
+}
+
+.search-grievance
+{
+    width: 100% !important;
+    background-color: white;
+    border-radius: 0.5px;
+}
+

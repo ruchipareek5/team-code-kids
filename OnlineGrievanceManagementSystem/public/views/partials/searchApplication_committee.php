@@ -6,7 +6,7 @@
 
  <div class="container">
       <div class="row">
-          <div class="col-lg-12 col-md-12 open-grievance  grid">
+          <div class="col-lg-12 col-md-12 open-grievance  ">
               <h5 class="grievance-heading">Search Grievance</h5>
      
                 <div class="col-md-12 col-lg-12 div-form table sub-grid">                 
@@ -19,8 +19,8 @@
                     </form>
                         <br>
                         <br>
-                      <div id="grid1" ui-grid="grievance_search"  ui-grid-cellNav ui-grid-auto-resize ui-grid-pagination="" class="grid"></div>
-                <div class="text-center page" ng-show="grievance_search.totalItems > numRows">
+                      <div id="grid1" ui-grid="grievance_search"  ui-grid-pagination="" class="grid"></div>
+                <div class="text-center page" ng-show="grievance_search.totalItems > pageSize">
               <pagination class="pagination-sm" total-items="grievance_search.totalItems" items-per-page="grievance_search.paginationPageSize" ng-model="grievance_search.paginationCurrentPage"></pagination>
       </div>
                     </div>

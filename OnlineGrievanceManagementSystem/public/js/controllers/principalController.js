@@ -97,6 +97,7 @@ grievancesystem.controller('principalController',principalController);
                
                
                 $scope.numRows = 3;
+                $scope.pageSize=7;
                
                 $scope.seek_grievance = {
                    data:$scope.seek_grievance_data,
@@ -107,7 +108,7 @@ grievancesystem.controller('principalController',principalController);
                        enableColumnMenus: false,
                        enableHorizontalScrollbar:0,
                        enableVerticalScrollbar:0,
-                       paginationPageSize: $scope.numRows,
+                       paginationPageSize: $scope.pageSize,
                        minRowsToShow: $scope.numRows,
                        enablePaginationControls: false,
                
@@ -137,7 +138,7 @@ grievancesystem.controller('principalController',principalController);
                            enableColumnMenus: false,
                            enableHorizontalScrollbar:0,
                            enableVerticalScrollbar:0,
-                           paginationPageSize: $scope.numRows,
+                           paginationPageSize: $scope.pageSize,
                            minRowsToShow: $scope.numRows,
                            enablePaginationControls: false,
                
@@ -168,7 +169,7 @@ grievancesystem.controller('principalController',principalController);
                        enableColumnMenus: false,
                        enableHorizontalScrollbar:0,
                        enableVerticalScrollbar:0,
-                       paginationPageSize: $scope.numRows,
+                       paginationPageSize: $scope.pageSize,
                        minRowsToShow: $scope.numRows,
                        enablePaginationControls: false,
                
@@ -202,7 +203,7 @@ grievancesystem.controller('principalController',principalController);
                        enableColumnMenus: false,
                        enableHorizontalScrollbar:0,
                        enableVerticalScrollbar:0,
-                       paginationPageSize: $scope.numRows,
+                       paginationPageSize: $scope.pageSize,
                        minRowsToShow: $scope.numRows,
                        enablePaginationControls: false,
                

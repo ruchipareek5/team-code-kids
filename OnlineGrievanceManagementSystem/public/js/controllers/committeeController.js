@@ -98,6 +98,7 @@ grievancesystem.controller('committeeController',committeeController);
 
 
  $scope.numRows = 3;
+ $scope.pageSize = 7;
 
  $scope.open_grievance = {
     data:$scope.open_grievance_data,
@@ -108,7 +109,7 @@ grievancesystem.controller('committeeController',committeeController);
         enableColumnMenus: false,
         enableHorizontalScrollbar:0,
         enableVerticalScrollbar:0,
-        paginationPageSize: $scope.numRows,
+        paginationPageSize: $scope.pageSize,
         minRowsToShow: $scope.numRows,
         enablePaginationControls: false,
 
@@ -137,7 +138,7 @@ grievancesystem.controller('committeeController',committeeController);
             enableColumnMenus: false,
             enableHorizontalScrollbar:0,
             enableVerticalScrollbar:0,
-            paginationPageSize: $scope.numRows,
+            paginationPageSize: $scope.pageSize,
             minRowsToShow: $scope.numRows,
             enablePaginationControls: false,
 
@@ -168,7 +169,7 @@ grievancesystem.controller('committeeController',committeeController);
         enableColumnMenus: false,
         enableHorizontalScrollbar:0,
         enableVerticalScrollbar:0,
-        paginationPageSize: $scope.numRows,
+        paginationPageSize: $scope.pageSize,
         minRowsToShow: $scope.numRows,
         enablePaginationControls: false,
 
@@ -202,8 +203,9 @@ columnDefs: [
         enableColumnMenus: false,
         enableHorizontalScrollbar:0,
         enableVerticalScrollbar:0,
-        paginationPageSize: $scope.numRows,
-        minRowsToShow: $scope.numRows,
+        totalItems: $scope.grievance_search_data.length,
+        paginationPageSize: $scope.pageSize,
+        minRowsToShow: $scope.grievance_search_data.length < $scope.pageSize ? $scope.grievance_search_data : $scope.pageSize,
         enablePaginationControls: false,
 
 
