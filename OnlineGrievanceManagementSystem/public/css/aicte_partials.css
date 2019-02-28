@@ -213,15 +213,23 @@ hr
     color:#4F4F4F;
     background-color: white;
     margin-top: 1.5em;
-    box-shadow: 2px 2px 2px  silver,0 0 2px silver;;
+    box-shadow: 2px 2px 2px  silver,0 0 2px silver;
+    padding: 1em;
+    border-radius: 0.5em
 }
 
 .div-ques
 {
     margin-top: 1em;
+    margin-left: 0px;
+    margin-right:0px;
     background-color: white;
 }
-
+.faq-ans{
+    border-top: 1px solid silver;
+    font-size: 14pt;
+    padding-left:15pt;
+}
 .add
 {
    float: right;

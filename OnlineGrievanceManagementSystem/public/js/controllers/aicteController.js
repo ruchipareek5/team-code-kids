@@ -69,14 +69,14 @@ grievancesystem.controller('aicteController',aicteController);
         });
 
         //total number of grievance reopened
-        $http.get("/getNumberOfGrievanceReOpened").then(function(response){
+        $http.get("/aicte/getNumberOfGrievanceReOpened").then(function(response){
             $scope.totalReopened = response.data;
         },function(errorResponse){
             console.log(errorResponse);
         });
 
         //total number of grievance inaction
-        $http.get("/getNumberOfGrievanceInAction").then(function(response){
+        $http.get("/aicte/getNumberOfGrievanceInAction").then(function(response){
             $scope.totalInaction = response.data;
         },function(errorResponse){
             console.log(errorResponse);
