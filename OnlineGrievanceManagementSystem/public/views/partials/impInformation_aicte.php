@@ -7,7 +7,7 @@
  <div class="container">
       <div class="row">
           <div class="col-lg-12 col-md-12 open-grievance ">
-              <h5 class="grievance-heading">Search University</h5>
+              <h5 class="grievance-heading">Important Information</h5>
                 
                      
                 <div class="col-md-12 col-lg-12 div-form table ">
@@ -16,7 +16,7 @@
                     
                      <input type="text" name="search" id="search" ng-model="university_search_id" placeholder="Enter University id" required >
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <button type='Submit' class="btn button-submit">Submit&nbsp;&nbsp;&nbsp;<img src="assets/icons/search.png" height="24" width="24"></button>
+                      <button type='Submit' class="btn button-submit">Search&nbsp;&nbsp;&nbsp;<img src="assets/icons/search.png" height="24" width="24"></button>
                 </form>
                         <br>
                         <br>
@@ -32,7 +32,7 @@
       </div>
       <div class="row">
           <div class="col-lg-12 col-md-12 open-grievance ">
-              <h5 class="grievance-heading">Search Institute</h5>
+              <!--<h5 class="grievance-heading">Search Institute</h5>-->
                 
                      
                 <div class="col-md-12 col-lg-12 div-form table ">
@@ -41,7 +41,7 @@
                     
                      <input type="text" name="search" id="search" ng-model="institute_search_id" placeholder="Enter Institute id"  required>
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <button type="Submit" class="btn button-submit">Submit&nbsp;&nbsp;&nbsp;<img src="assets/icons/search.png" height="24" width="24"></button></form>
+                      <button type="Submit" class="btn button-submit">Search&nbsp;&nbsp;&nbsp;<img src="assets/icons/search.png" height="24" width="24"></button></form>
                         <br>
                         <br>
                       <div id="grid1" ui-grid="institute_search_result" ui-grid-pagination="" class="grid"></div>

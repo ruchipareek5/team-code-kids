@@ -191,7 +191,7 @@ class PrincipalController extends Controller
         if($id == null)
             return \response(['message'=>'You are not logged in'],401);
         //$id = 1;
-        $college_id = DB::select("SELECT college_id FROM user_principal WHERE id = ".$id);
+        $college_id = DB::select("SELECT college_id FROM user_principal WHERE id =' ".$id."'");
         if ($college_id == null)
             return \response(['message'=>'No data found for you'],401);
         

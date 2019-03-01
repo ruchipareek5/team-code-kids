@@ -65,14 +65,14 @@
     					<div class="side-link">Important Information</div>
     				</div>
 
-    				<div class="sideBtn" ng-click="page = 'reports_aicte'">
+    				<!--<div class="sideBtn" ng-click="page = 'reports_aicte'">
     					<img src="assets/icons/folder.png"" class="icons">
     					<div class="side-link">Reports</div>
-    				</div>
+    				</div>-->
 
     				<div class="sideBtn" ng-click="page = 'faq_aicte'">
     					<img src="assets/icons/faq.png"" class="icons">
-    					<div class="side-link">FAQ</div>
+    					<div class="side-link">Insights</div>
     				</div>
     				<br>
     			</div>
