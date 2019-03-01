@@ -20,7 +20,51 @@ class CommitteeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+
+    public function getStatistics($type){
+
+        $id = Session::get('user_id');
+        if($id == null)
+            return \response(['message'=>'Please Login again'],401);
+        //$id = 1;
+        $college_id = DB::select("SELECT p.college_id,c.assigned_committee FROM user_principal p,user_committee_member c WHERE p.id=c.created_by and  c.id = ".$id);
+
+
+        if($college_id == null)
+            return \response(['message'=>'No data found for you'],403);
+
+        if($type=='total'){
+            $count = DB::select("SELECT count(*) as count from table_grievance g INNER JOIN user_student
+            ON g.student_id = user_student.id WHERE g.type='".$college_id[0]->assigned_committee."' and user_student.college_id = ".$college_id[0]->college_id);
+            $data = $count[0]->count;
+            return response(['value'=>$data],200);
+        }elseif ( $type=='pending' ){
+            $count = DB::select("SELECT count(*) as count from table_grievance g INNER JOIN user_student
+            ON g.student_id = user_student.id WHERE g.type='".$college_id[0]->assigned_committee."' and user_student.college_id = ".$college_id[0]->college_id." AND g.status IN ('raised', 'inaction')");
+            $data = $count[0]->count;
+            return response(['value'=>$data],200);
+        }elseif ( $type=='escalated' ){
+            $count = DB::select("SELECT count(*) as count from table_grievance g INNER JOIN user_student
+            ON g.student_id = user_student.id WHERE g.type='".$college_id[0]->assigned_committee."' and user_student.college_id = ".$college_id[0]->college_id." AND g.status IN ('delayed', 'reopened')");
+            $data = $count[0]->count;
+            return response(['value'=>$data],200);
+        }elseif ( $type=='satisfied' ){
+            $count = DB::select("SELECT count(*) as count from table_grievance g INNER JOIN user_student
+            ON g.student_id = user_student.id WHERE g.type='".$college_id[0]->assigned_committee."' and user_student.college_id = ".$college_id[0]->college_id." AND g.status IN ('resolved', 'addressed')");
+
+            $data = $count[0]->count;
+
+            return response(['value'=>$data],200);
+        }
+        else{
+            return response(['message'=>'Invalid type'],404);
+        }
+    }
+
+
+
     public function takeAction(Request $request) {
+
         $grievance = Grievance::find($request->id);
         $grievance->status = 'inaction';
         $grievance->save();
@@ -33,6 +77,7 @@ class CommitteeController extends Controller
     }
 
     public function grievanceDetails($type){
+
         $id = Session::get('user_id');
         //$id = 1;
         $condition = DB::select("SELECT user_principal.college_id, user_committee_member.assigned_committee FROM user_committee_member INNER JOIN 
@@ -124,7 +169,8 @@ class CommitteeController extends Controller
      */
     public function show($id)
     {
-        $gid = Auth::user()->id;
+
+
          // $user_id = DB::table('users')->where('email', $email)->get(['id']);
          // return  $user_id->id;
 
@@ -170,9 +216,11 @@ class CommitteeController extends Controller
     }
 
     public function getGraphController(){
+
         $id = Session::get('user_id');
-        $college = DB::select('select d.college_id, d.type as name,d.id as department_id from  table_department d,
-                    user_committee_member c where c.id='.$id.' and c.department_id = d.id limit 1');
+
+        $college = DB::select('select p.college_id, c.assigned_committee as committee from  user_principal p,
+                    user_committee_member c where c.id='.$id.' and c.created_by = p.id limit 1');
         if($college==null){
             return response(['message'=>'sorry College Id not available for the logged in user'],401);
         }
@@ -180,6 +228,7 @@ class CommitteeController extends Controller
 
         $course = DB::select('select user_student.course from user_student where user_student.college_id = '.$college[0]->college_id.' 
                     group by course order by course asc');
+
 
        $i=0;
             foreach ($course as $c){
@@ -190,12 +239,14 @@ class CommitteeController extends Controller
         $data = [];
         $i=0;
         //foreach ($course as $c){
-            $temp=DB::select('select count(*) as count , user_student.course from table_grievance,user_student
-                    where department_id = '.$college[0]->department_id.' and table_grievance.student_id = user_student.id  group by user_student.course order by user_student.course asc');
+            $temp=DB::select('select count(*) as count , user_student.course from table_grievance,user_student where table_grievance.type =
+                  '."'".$college[0]->committee."'".' and table_grievance.student_id = user_student.id and user_student.college_id =
+                  '.$college[0]->college_id.'  group by user_student.course order by user_student.course asc');
 
-            $mp = DB::select('select count(*) as count , user_student.course from table_grievance,user_student where department_id = '.$college[0]->department_id.'
-                    and table_grievance.student_id = user_student.id and
-                    table_grievance.status in ('."'resolved'".') group by user_student.course order by user_student.course asc');
+            $mp = DB::select('select count(*) as count , user_student.course from table_grievance,user_student where table_grievance.type =
+                  '."'".$college[0]->committee."'".' and table_grievance.student_id = user_student.id and user_student.college_id =
+                  '.$college[0]->college_id.' and
+                    table_grievance.status not  in ('."'resolved','addressed'".') group by user_student.course order by user_student.course asc');
            // return [$temp,$mp];
             $pending[$i++]=$mp==null?0:$mp[0]->count;
         //}
@@ -206,7 +257,7 @@ class CommitteeController extends Controller
             $temp_data->name = ['Total'];
             $i=0;
             foreach ($course as $c){
-                $temp_data->data[$i] = ($temp==null||$mp==null)?0:$temp[$i]->count;
+                $temp_data->data[$i] = ($temp==null)?0:$temp[$i]->count;
                 $i++;
             }
             $all_data[0]=$temp_data;
@@ -215,7 +266,7 @@ class CommitteeController extends Controller
             $temp_data->name = ['Pending'];
             $i=0;
             foreach ($course as $c){
-                $temp_data->data[$i] = ($temp==null||$mp==null)?0:$mp[$i]->count;
+                $temp_data->data[$i] = ($mp==null)?0:$mp[$i]->count;
                 $i++;
             }
             $all_data[1]=$temp_data;

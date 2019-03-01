@@ -12,10 +12,10 @@ class OmbudsmanDashboardController extends Controller
     public $id;
     public function getStatistics($type)
     {
-        if (!Auth::check()) {
-            return response(['message' => 'You are not authorized'], 401);
-        }
+
         $id = Session::get('user_id');
+        if($id == null)
+            return response(['message'=>'You are not logged in'],401);
 
         $university_id = DB::table('user_ombudsman')->where('id', $id)->get(['university_id'])->first();
         if ($university_id == null)
@@ -51,6 +51,8 @@ class OmbudsmanDashboardController extends Controller
 
         public function getCollegeStatistics(){
             $id = Session::get('user_id');
+            if($id == null)
+                return response(['message'=>'You are not logged in'],401);
             $college_name = DB::select("select table_college.name from table_grievance
                             INNER join user_student on table_grievance.student_id = user_student.id
                             INNER JOIN table_college on table_college.id = user_student.college_id and table_college.university_id=".$id." 
@@ -82,8 +84,8 @@ class OmbudsmanDashboardController extends Controller
         }
 
         public function getInstitutewiseDetails($id){
-            $department = DB::select('select d.type from table_department d where d.college_id = '.$id.' 
-                    group by d.type order by d.type asc');
+            $department = DB::select('select g.type from table_grievance g,user_student s where s.college_id = '.$id.' and
+                            s.college_id=g.student_id group by g.type order by g.type asc');
             if($department == null){
                 return response(['message'=>'No data found for the selected institute'],404);
             }
@@ -97,40 +99,45 @@ class OmbudsmanDashboardController extends Controller
             foreach ($department as $d){
                 $departments[$i]=$d->type;
 
-                $temp = DB::select('select count(*) as count from table_grievance g,user_student s,table_department d where s.id = g.student_id and s.college_id = '.$id.'
-                and g.type = '."'".$departments[$i]."'".' and g.status = "raised" group by d.type order by d.type asc');
+                $temp = DB::select('select count(*) as count from table_grievance g,user_student s where s.id = g.student_id
+                        and s.college_id = '.$id.' and g.type = '."'".$departments[$i]."'".' and g.status = "raised" group by g.type
+                        order by g.type asc');
                 if($temp == null){
                     $temp = 0;
                 $raised[$i] = $temp;}
                 else
                     $raised[$i]=$temp[0]->count;
 
-                $temp = DB::select('select count(*) as count from table_grievance g,user_student s,table_department d where s.id = g.student_id and s.college_id = '.$id.'
-                and g.type = '."'".$departments[$i]."'".' and g.status = "inaction" group by d.type order by d.type asc');
+                $temp = DB::select('select count(*) as count from table_grievance g,user_student s where s.id = g.student_id
+                        and s.college_id = '.$id.' and g.type = '."'".$departments[$i]."'".' and g.status = "inaction" group by
+                         g.type order by g.type asc');
                 if($temp == null){
                     $temp = 0;
                     $inaction[$i] = $temp;}
                 else
                     $inaction[$i]=$temp[0]->count;
 
-                $temp = DB::select('select count(*) as count from table_grievance g,user_student s,table_department d where s.id = g.student_id and s.college_id = '.$id.'
-                and g.type = '."'".$departments[$i]."'".' and g.status in ("addressed","resolved") group by d.type order by d.type asc');
+                $temp = DB::select('select count(*) as count from table_grievance g,user_student s where s.id = g.student_id
+                        and s.college_id = '.$id.' and g.type = '."'".$departments[$i]."'".' and g.status in ("addressed","resolved")
+                         group by g.type order by g.type asc');
                 if($temp == null){
                     $temp = 0;
                     $addressed[$i] = $temp;}
                 else
                     $addressed[$i]=$temp[0]->count;
 
-                $temp = DB::select('select count(*) as count from table_grievance g,user_student s,table_department d where s.id = g.student_id and s.college_id = '.$id.'
-                and g.type = '."'".$departments[$i]."'".' and g.status = "reopened" group by d.type order by d.type asc');
+                $temp = DB::select('select count(*) as count from table_grievance g,user_student s where s.id = g.student_id
+                        and s.college_id = '.$id.' and g.type = '."'".$departments[$i]."'".' and g.status = "reopened" group by g.type
+                         order by g.type asc');
                 if($temp == null){
                     $temp = 0;
                     $reopened[$i] = $temp;}
                 else
                     $reopened[$i]=$temp[0]->count;
 
-                $temp = DB::select('select count(*) as count from table_grievance g,user_student s,table_department d where s.id = g.student_id and s.college_id = '.$id.'
-                and g.type = '."'".$departments[$i]."'".' and g.status = "delayed" group by d.type order by d.type asc');
+                $temp = DB::select('select count(*) as count from table_grievance g,user_student s where s.id = g.student_id
+                        and s.college_id = '.$id.' and g.type = '."'".$departments[$i]."'".' and g.status = "delayed" group by g.type
+                         order by g.type asc');
                 if($temp == null){
                     $temp = 0;
                     $delayed[$i] = $temp;}
@@ -172,10 +179,10 @@ class OmbudsmanDashboardController extends Controller
 
 
     public function getGrievanceTypeStatistics(){
-        //if (!Auth::check()) {
-        //    return response(['message' => 'You are not authorized'], 401);
-        //}
+
         $id = Session::get('user_id');
+        if($id == null)
+            return response(['message' => 'You are not authorized'], 401);
 
         $university_id = DB::table('user_ombudsman')->where('id', $id)->get(['university_id'])->first();
         if ($university_id == null)
@@ -208,10 +215,9 @@ class OmbudsmanDashboardController extends Controller
 
     public function getYearStatistics()
     {
-       // if(!Auth::check())
-       //     return response(['message'=>'You are not logged in'],401);
         $id = Session::get('user_id');
-
+        if($id == null)
+        return response(['message'=>'You are not logged in'],401);
         $university_id = DB::table('user_ombudsman')->where('id', $id)->get(['university_id'])->first();
         if ($university_id == null)
             return response(['message' => 'No data found for the logged in user'], 404);

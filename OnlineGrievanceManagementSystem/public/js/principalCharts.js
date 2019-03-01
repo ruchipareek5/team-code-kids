@@ -80,7 +80,9 @@ Highcharts.chart('grievance_type_committee', {
 loadChart();
 
 
-$.getJSON(baseUrl+'grievance/aicte/chart/year', function(data) {
+//grievance Yearwise
+$.getJSON(baseUrl+'principal/chart/year', function(data) {
+
 Highcharts.chart('top5_committeeWise', {
     chart: {
         type: 'column'

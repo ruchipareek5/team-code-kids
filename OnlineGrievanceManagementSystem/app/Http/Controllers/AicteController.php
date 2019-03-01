@@ -22,7 +22,8 @@ class AicteController extends Controller
         $grievances = Grievance::whereIn('status',$array)->where('level', 3)->orderBy('id','asc')
                       ->get(['id','student_id','type','eta','status','documents','created_at']);
 
-
+        if($grievances == null)
+            return \response(['message'=>'No data found'],404);
         return response(['message'=>$grievances],200);
     }
 
@@ -104,9 +105,11 @@ class AicteController extends Controller
     }
 
     public function addComment(Request $request){
+
         $roles = Auth::user()->roles;
         $id = Session::get('user_id');
-
+        if($id == null)
+            return \response(['message'=>'Please do logout and login again'],401);
         DB::table('table_message')->insert( array( 'grievance_id' => $request->grievance_id, 'message' => $request->message, 'sender_id' => $id));
    
         return response(["message"=>'Updated Successfully'], 200);

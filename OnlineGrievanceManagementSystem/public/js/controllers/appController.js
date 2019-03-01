@@ -7,29 +7,29 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 	$http.defaults.headers.common.Authorization = $cookies.get('Auth');
 	$scope.doLoginAttempt =  function(){
 	$http.defaults.headers.common.Authorization = "Basic " + btoa([$scope.login.email, $scope.login.password].join(':'));
-	$http.post(API_URL + "login", $scope.login).then(function(response){
-        console.log('hello ' +$scope.username);
-		if (response.data.roles == "aicte") {
-			$location.path('/aicte');
-		}else if (response.data.roles == "student") {
-			$location.path('/student');
-		}else if (response.data.roles == "committee member") {
-			$location.path('/committee');
-		}else if (response.data.roles == "principal") {
-			$location.path('/principal');
-		}else if (response.data.roles == "ombudsman") {
-			$location.path('/ombudsman');
-		}else {
-			alert('Template Not Available');
-		}
-		
-	},function(errorResponse){
-		if (errorResponse.data.message) {
-			alert(errorResponse.data.message);
-		}else
-		alert('Sorry! username password doesnot match');
+        $http.post(API_URL + "login", $scope.login).then(function(response){
+            console.log('hello ' +$scope.username);
+            if (response.data.roles == "aicte") {
+                $location.path('/aicte');
+            }else if (response.data.roles == "student") {
+                $location.path('/student');
+            }else if (response.data.roles == "committee member") {
+                $location.path('/committee');
+            }else if (response.data.roles == "principal") {
+                $location.path('/principal');
+            }else if (response.data.roles == "ombudsman") {
+                $location.path('/ombudsman');
+            }else {
+                alert('Template Not Available');
+            }
 
-	});
+        },function(errorResponse){
+            if (errorResponse.data.message) {
+                alert(errorResponse.data.message);
+            }else
+                alert('Sorry! username password doesnot match');
+
+        });
 	
 	};
 	

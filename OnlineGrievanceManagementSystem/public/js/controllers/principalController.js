@@ -29,7 +29,7 @@ grievancesystem.controller('principalController',principalController);
                 console.log(errorResponse);
             });
          $http.get(API_URL+"principal/chart/statistics/escalated").then(function(response){
-                $scope.resolved = response.data.message[0].count;
+                $scope.escalated = response.data.message[0].count;
             },function(errorResponse){
                 console.log(errorResponse);
             });
@@ -39,7 +39,7 @@ grievancesystem.controller('principalController',principalController);
                 console.log(errorResponse);
             });
          $http.get(API_URL+"principal/chart/statistics/satisfied").then(function(response){
-                $scope.escalated = response.data.message[0].count;
+                $scope.satisfied = response.data.message[0].count;
             },function(errorResponse){
                 console.log(errorResponse);
             });

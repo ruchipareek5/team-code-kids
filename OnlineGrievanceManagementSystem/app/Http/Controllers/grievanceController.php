@@ -201,36 +201,55 @@ class grievanceController extends Controller
     }
 
 
-    public function getRemarks($id){
+    public function getRemarks($id)
+    {
 
         $remarks = \App\GrievanceMessage::where('grievance_id', $id)->get();
-        if($remarks==null){
-            return response(['message'=>'Remarks not found'],400);
+        if ($remarks == null) {
+            return response(['message' => 'Remarks not found'], 400);
         }
-        $comment=[];
-        $i=0;
+        $comment = [];
+        $i = 0;
         foreach ($remarks as $remark) {
-        $comment[$i] = new Comment();    
-
-        $comment[$i]->grievance_id = $remark->grievance_id;
-        $comment[$i]->message = $remark->message;
-        $name_and_role = grievanceController::getName($remark->sender_id);
-        $comment[$i]->commented_by = $name_and_role['name']." (".$name_and_role['roles'].")";
-        $comment[$i++]->updated_at = $remark->updated_at;
+            $comment[$i] = new Comment();
+            if ($remarks == null)
+                return response(['message' => 'No Remarks Yet'], 200);
+            $comment[$i]->grievance_id = $remark->grievance_id;
+            $comment[$i]->message = $remark->message;
+            $name_and_role = grievanceController::getName($remark->sender_id);
+            $comment[$i]->commented_by = $name_and_role['name'] . " (" . $name_and_role['roles'] . ")";
+            $comment[$i++]->updated_at = $remark->updated_at;
         }
-        
+
+
+        if ($remarks == null)
+            return response(['message' => 'No Remarks Yet'], 200);
+        else {
+
             if ($remarks == null)
                 return response(['message' => 'No Remarks Yet'], 400);
             else {
+
                 return response(['message' => $comment], 200);
+
+
             }
-
+        }
     }
-
     public function addRemarks(Request $request){
+
         $roles = Auth::user()->roles;
+
+        if($roles == null)
+            return \response(['message'=>'Please do logout and login again'],401);
+
+
+        $student_id = Session::get('user_id');
+        // $student_id = 1;
+
         $sender_id = Auth::user()->id;
         // $sender_id = 1;
+
 
         // if ($roles == 'student')
         //     $table_name = 'user_student';

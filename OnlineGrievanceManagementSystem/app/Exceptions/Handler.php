@@ -3,7 +3,9 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -34,7 +36,17 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        parent::report($exception);
+
+        if($exception instanceof QueryException){
+            return response(['message'=>'Some error occurred at our side'],500);
+        }
+        if($exception instanceof UnauthorizedHttpException)
+            return response(['message'=>'You are not authorized to access this page'],401);
+        else
+            return response(['message'=>'Some error occurred at Server end'],401);
+
+
+
     }
 
     /**

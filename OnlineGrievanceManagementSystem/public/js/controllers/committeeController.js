@@ -1,4 +1,4 @@
- // Controller for AICTE user
+  // Controller for AICTE user
 var grievancesystem= angular.module('grievancesystem');
 grievancesystem.controller('committeeController',committeeController);
 
@@ -21,22 +21,22 @@ grievancesystem.controller('committeeController',committeeController);
     $scope.addressed = 0;
 
     $scope.loadGrievanceStatistics=function(){
-        $http.get(API_URL+"grievance/total").then(function(response){
+        $http.get(API_URL+"committee/statistics/total").then(function(response){
                 $scope.total = response.data.value;
             },function(errorResponse){
                 console.log(errorResponse);
             });
-        $http.get(API_URL+"grievance/open").then(function(response){
+        $http.get(API_URL+"committee/statistics/pending").then(function(response){
                 $scope.open = response.data.value;
             },function(errorResponse){
                 console.log(errorResponse);
             });
-        $http.get(API_URL+"grievance/escalated").then(function(response){
+        $http.get(API_URL+"committee/statistics/escalated").then(function(response){
                 $scope.escalated = response.data.value;
             },function(errorResponse){
                 console.log(errorResponse);
             });
-         $http.get(API_URL+"grievance/addressed").then(function(response){
+         $http.get(API_URL+"committee/statistics/satisfied").then(function(response){
                 $scope.addressed = response.data.value;
             },function(errorResponse){
                 console.log(errorResponse);

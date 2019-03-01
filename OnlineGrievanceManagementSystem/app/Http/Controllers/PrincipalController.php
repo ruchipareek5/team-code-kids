@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 
+
 class PrincipalController extends Controller
 {
     /**
@@ -48,7 +49,7 @@ class PrincipalController extends Controller
         }
         else if($type == 'resolved') {
             $grievances = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta, table_grievance.updated_at, table_grievance.delayed_status FROM table_grievance INNER JOIN user_student
-            ON table_grievance.student_id = user_student.id WHERE table_grievance.status = 'addressed' AND user_student.college_id = ".$college_id[0]->college_id);
+            ON table_grievance.student_id = user_student.id WHERE table_grievance.status in ('addressed','resolved') AND user_student.college_id = ".$college_id[0]->college_id);
 
             return response(['message' => $grievances], 200);
         }
@@ -145,9 +146,19 @@ class PrincipalController extends Controller
     }
 
     public function getStatistics($type){
+
+
+
+
         $id = Session::get('user_id');
+
         //$id = 1;
+        if($id == null)
+            return \response(['message'=>'Please Login again'],401);
         $college_id = DB::select("SELECT college_id FROM user_principal WHERE id = ".$id);
+
+        if($college_id == null)
+            return \response(['message'=>'No data found for you'],403);
 
         if($type=='total'){
             $count = DB::select("SELECT count(*) as total from table_grievance INNER JOIN user_student
@@ -176,8 +187,13 @@ class PrincipalController extends Controller
 
     public function committeeStatistics($committee){
         $id = Session::get('user_id');
+
+        if($id == null)
+            return \response(['message'=>'You are not logged in'],401);
         //$id = 1;
         $college_id = DB::select("SELECT college_id FROM user_principal WHERE id = ".$id);
+        if ($college_id == null)
+            return \response(['message'=>'No data found for you'],401);
         
         $grievance_count = DB::select("SELECT count(*) as count, table_grievance.status from table_grievance INNER JOIN user_student
         ON table_grievance.student_id = user_student.id WHERE user_student.college_id = ".$college_id[0]->college_id." 
@@ -224,7 +240,13 @@ class PrincipalController extends Controller
 
     public  function  getCommitteeWiseDetails(){
 
-       
+
+     //   if(!((Auth::user()->roles)=='principal'))
+       //     return response(['message'=>'You are not authorized to see this details.'],401);
+
+        if(!((Auth::user()->roles)=='principal'))
+            return response(['message'=>'You are not authorized to see this details.'],401);
+
         $college_id = DB::table('user_principal')->where('id',Session::get('user_id'))->get(['college_id'])->first();
         if($college_id==null){
             return \response(['message'=>'No data found for the logged in user'],404);
@@ -258,4 +280,35 @@ class PrincipalController extends Controller
         }
         return response(['committee'=>$committee,'total'=>$total,'resolved'=>$resolved],200);
     }
+
+
+    public function getYearStatistics()
+    {
+        $id = Session::get('user_id');
+        if($id == null)
+            return response(['message'=>'You are not logged in'],401);
+        $college_id = DB::table('user_principal')->where('id', $id)->get(['college_id'])->first();
+        if ($college_id == null)
+            return response(['message' => 'No data found for the logged in user'], 404);
+
+        $student = DB::table('user_student')->where('college_id', $college_id->college_id)->get(['id']);
+        $student_id = [];
+        $i = 0;
+        foreach ($student as $s) {
+            $student_id[$i++] = $s->id;
+        }
+        $count=[];
+        $year=[];
+        $date = date('Y');
+        for($i=0;$i<5;$i++) {
+            $startyear = ($date-$i) . '-01-01 00:00:00';
+            $endyear = ($date + 1-$i) . '-01-01 00:00:00';
+            $count1 = DB::table('table_grievance')->where('created_at', '<',$endyear)->where('created_at', '>',
+                $startyear)->whereIn('student_id',$student_id)->count();
+            $count[$i]=$count1;
+            $year[$i]=$date-$i;
+        }
+        return response(['count'=>$count,'year'=>$year],200);
+    }
+
 }

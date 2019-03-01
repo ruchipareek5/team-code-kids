@@ -20,22 +20,20 @@ class AicteDashBoardController extends Controller
 
     public function getStatistics($type){
 
+        $count=null;
         if($type=='total'){
             $count = Grievance::count();
-            return response(['message'=>$count],200);
         }elseif ( $type=='pending' ){
             $count = Grievance::whereIn('status',['inaction','raised'])->count();
-            return response(['message'=>$count],200);
         }elseif ( $type=='escalated' ){
             $count = Grievance::whereIn('status',['delayed','reopened'])->count();
-            return response(['message'=>$count],200);
         }elseif ( $type=='resolved' ){
             $count = Grievance::whereIn('status',['resolved','addressed'])->count();
-            return response(['message'=>$count],200);
         }
         else{
             return response(['message'=>'Invalid type'],404);
         }
+        return response(['message'=>$count],200);
 
     }
 

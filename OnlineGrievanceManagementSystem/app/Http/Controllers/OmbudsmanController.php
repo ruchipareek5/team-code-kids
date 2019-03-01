@@ -20,6 +20,8 @@ class OmbudsmanController extends Controller
      */
     public function index()
     {
+        if(!Auth::check())
+            return \response(['message'=>'Please do logout and login again'],401);
         $id = Session::get('user_id');
         //$id = 1;
         $university = DB::select("SELECT user_ombudsman.university_id FROM user_ombudsman WHERE id = ".$id);
@@ -70,8 +72,11 @@ class OmbudsmanController extends Controller
     }
 
     public function searchGrievances(Request $request){
-        //$id = Session::get('user_id');
-        $id = 1;
+
+        $id = Session::get('user_id');
+        if($id == null)
+            return \response(['message'=>'Please do logout and login again'],401);
+
 
         $university = DB::select("SELECT university_id FROM user_ombudsman WHERE id = ".$id);
         if($university == null)
