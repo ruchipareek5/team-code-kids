@@ -8,7 +8,6 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 	$scope.doLoginAttempt =  function(){
 	$http.defaults.headers.common.Authorization = "Basic " + btoa([$scope.login.email, $scope.login.password].join(':'));
         $http.post(API_URL + "login", $scope.login).then(function(response){
-            console.log('hello ' +$scope.username);
             if (response.data.roles == "aicte") {
                 $location.path('/aicte');
             }else if (response.data.roles == "student") {

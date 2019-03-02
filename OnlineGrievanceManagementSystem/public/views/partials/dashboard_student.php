@@ -1,4 +1,11 @@
-
+<style type="text/css">
+    .testimonial{
+        width: 100%;
+    }
+    .form-box{
+        padding-bottom: 1.1em;
+    }
+</style>
 <div class="container">
    <div class="row row_gap">
         <div class="col-md-3 grievance-box">
@@ -49,6 +56,7 @@
         </div>
     </div>
     <div class="container">
+    <div class="row align-items-center form-box">
     <div class="col-lg-8">
     <form ng-submit="lodgeGrievance()" name="lodgeGrievanceForm" enctype="multipart/form-data">
     <div class="grievance-form">
@@ -62,7 +70,7 @@
             </div>           
         </div>
         <div class="row">
-           <div class="col-md-12 col-lg-12 div-detail">    
+            <div class="col-md-12 col-lg-12 div-detail">    
               <label id="label-detail">Details<span class="imp">*</span> </label> </br>           
               <input style="height: 100px;" type="text" name="details" id="details" ng-model="grievance.detail" 
                rows=5 cols=87 placeholder="Please give all the details of your Problem" required="required">
@@ -87,10 +95,13 @@
     <!-- grievance form -->
 </div>
 <div class="col-lg-4">
-    <!--image box-->
+    <img class="testimonial" src="assets/images/testimonial.png">
 </div>
+</div>
+<!-- row -->
 </div>
 <!-- container -->
+
 <script>
     $(document).ready( function() {
 
