@@ -21,18 +21,18 @@
     				</div>
 				</div>
 
-				<div class="tabs col-md-3">
+				<!-- <div class="tabs col-md-3">
 					<div class="tab_btn" ng-click="page_tab = 'signup'">
     					<div class="tab-link">Sign Up</div>
     				</div>
-				</div>
+				</div> -->
 			</div>
 
 			<!-- tab switch code starts -->
              <div class="container" ng-switch on="page_tab">
              	<!-- login6 switch starts -->
 				<div ng-switch-when="login">
-	                <form name="loginForm" ng-submit="doLogin()">
+	                <form id="loginForm" name="loginForm" ng-submit="doLogin()">
 						<div class="row form-group">
 							<input class="col-md-10" type="text" name="email" required="required" placeholder="Username" ng-model="login.email">
 							<div class="col-md-2">

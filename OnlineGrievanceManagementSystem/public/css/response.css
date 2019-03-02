@@ -3,6 +3,75 @@
  	 overflow: auto;
 
   }
+  #video{
+  	display: none;
+  }
 
-  #
+  #google_translate_element {
+    margin: 75% 0 0 -18%;
+	}
+
+	.responsive-cont{
+	margin-top: 0 !important;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    background: #ffffff;
+	}
+	#row2{
+		margin:auto !important;
+	}
+	#row2 img{
+		height: 9vh !important;
+	}
+	#row2 h1{
+		width: 60%;
+		font-size: 5vmin !important;
+		color: #212529 !important;
+	}
+	#row1{
+		margin: 3vh !important;
+    	height: auto !important;
+	}
+	#student, #committee, #principal, #ombudsman, #aicte{
+		height: 11vh;
+    	margin-bottom: 3vh;
+    	padding: 2px;
+    	font-size: 8vmin !important;
+    	padding: 2% !important;
+	}
+	.stakeholder-template-image{
+		display: none;
+	}
+	.go-template-icon{
+		display: none;
+	}
+	.vertical-icon{
+		float: left;
+	    height: 85%;
+	   padding: 2%;
+    	margin-left: 7%;
+	}
+	#form-box{
+    width: 92vw;
+    min-height: 70vh;
+    padding: 1.5em;
+    position: absolute;
+    left: 32%;
+    top: 50%;
+	}
+	#form-box .col-md-3{
+		width: 100%;
+    text-align: center;
+	}
+	#form-box .col-md-3 img{
+		height: 8vh;
+    	width: auto;
+	}
+	.form-head{
+		font-size: 4vmin;
+		    width: 100%;
+	}
+	#loginForm .col-md-2{
+			display: none;
+	}
 }
