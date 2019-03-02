@@ -98,6 +98,7 @@ Route::group(['middleware'=>'auth.basic'],function(){
 
     Route::get('/ombudsman/grievance', 'OmbudsmanController@index');                        //Ombudsman grievance page
     Route::post('/ombudsman/grievanceSearch', 'OmbudsmanController@searchGrievances');      //Ombudsman grievance search
+    route::get('/ombudsman/college','OmbudsmanDashboardController@getCollegeNameAndId');
 
     Route::get('/users/fetchCollege', 'UtilityController@fetchCollege');
     Route::get('/users/fetchUniversity', 'UtilityController@fetchUniversity');
