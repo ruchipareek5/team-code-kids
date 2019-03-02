@@ -1,4 +1,3 @@
-
 <head>
     <title></title>
 
@@ -55,8 +54,8 @@
                 <div class="coverBox"> 
                     <div class="select">
                         Select Committee: <select>
-                            <option>Hostel</option>
-                            <option>Academics</option>
+                            <option ng-repeat= "y in department_list" value={{y.type}}>{{y.type}}</option>
+
                         </select>
                     </div>
                 <div class="graph-boxShort" id="grievance_type_committee"></div>

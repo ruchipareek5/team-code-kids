@@ -5,7 +5,7 @@ grievancesystem.controller('principalController',principalController);
 
  function principalController($scope,$http,appService,principalService,API_URL,$location) {
    
- 	$scope.page='dashboard_principal';
+  $scope.page='dashboard_principal';
 
 
  $scope.username='';
@@ -21,8 +21,17 @@ grievancesystem.controller('principalController',principalController);
     },function(error){
         $scope.college_name='College';
     });
+
+    $scope.department_list=[{}];
+
+$http.get('/principal/committee').then(function(success){
+        $scope.department_list=success.data.message;
+        console.log($scope.department_list);
+    },function(error){
+        $scope.department_list=[{}];
+    });
     
- 	//load grievance panel
+  //load grievance panel
      $scope.total = 0;
     $scope.pending = 0;
     $scope.escalated = 0;
@@ -317,4 +326,3 @@ grievancesystem.controller('principalController',principalController);
    
                 
 }
-

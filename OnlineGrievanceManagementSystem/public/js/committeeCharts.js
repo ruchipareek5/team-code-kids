@@ -66,7 +66,14 @@ Highcharts.chart('committee-top5_institute', {
     credits: {
         enabled: false
     },
-    series:data.message.all_data
+    series:data.message.all_data,
+    exporting: {
+  buttons: {
+    contextButton: {
+      menuItems: Highcharts.getOptions().exporting.buttons.contextButton.menuItems.filter(item => item !== 'openInCloud')
+    }
+  }
+}
 });
 });
 

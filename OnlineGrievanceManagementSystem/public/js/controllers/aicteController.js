@@ -282,12 +282,26 @@ grievancesystem.controller('aicteController',aicteController);
 //institute search
 
 //Open Grievance
-            $scope.colleges = [{"name":"cvrce"},{"name":"Techno India"}];
+            $scope.colleges = [{"name":"CVRCE"},{"name":"Techno India"}];
             $scope.states = [{"name":"odisha"},{"name":"West Bengal"}];
             $scope.university = [{"name":"bput"},{"name":"wbut"}];
             $scope.college_grievance_data =new Array();
             $scope.state_grievance_data =new Array();
             $scope.university_grievance_data =new Array();
+
+            $scope.collegeName='';
+
+            $('#selectCollegeWise').on('change',function(){
+                var selectVal = $('#selectCollegeWise').val();
+                $scope.collegeWiseGrievance(selectVal);
+                alert(selectVal);
+                
+            });
+
+             $scope.collegeWiseGrievance= function(selectVal){
+                alert(selectVal);
+             }
+
             $scope.loadOpenGrievance=function(){
                     $scope.college_grievance_data =new Array();
                     $scope.state_grievance_data =new Array();

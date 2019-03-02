@@ -31,5 +31,7 @@ grievancesystem.service('aicteService',function ($http,API_URL) {
 		var url =API_URL + 'grievance/aicte/importantinfo/university/'+ university_id;
 		return $http.get(url);
 	}
+
+	
 	
 });

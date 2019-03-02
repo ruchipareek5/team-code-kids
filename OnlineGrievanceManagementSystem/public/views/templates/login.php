@@ -21,11 +21,11 @@
     				</div>
 				</div>
 
-				<!-- <div class="tabs col-md-3">
+				<div class="tabs col-md-3">
 					<div class="tab_btn" ng-click="page_tab = 'signup'">
     					<div class="tab-link">Sign Up</div>
     				</div>
-				</div> -->
+				</div>
 			</div>
 
 			<!-- tab switch code starts -->
