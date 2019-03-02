@@ -311,4 +311,24 @@ class PrincipalController extends Controller
         return response(['count'=>$count,'year'=>$year],200);
     }
 
+    public function getCommittee(){
+        $id = Session::get('user_id');
+        if($id == null)
+            return \response(['message'=>'Your session has been expired'],401);
+        $college = DB::select('select college_id from user_principal where id='.$id);
+        if($college == null)
+            return \response(['message'=>'Your session has been expired'],401);
+        $college_id = $college[0]->college_id;
+        $student =DB::select('select id from user_student where college_id='.$college_id);
+        $student_id=[];
+        $i=0;
+        foreach ($student as $c){
+            $student_id[$i++] = $c->id;
+        }
+        $committee = Grievance::whereIn('student_id',$student_id)->groupBy('type')->get(['type']);
+        if($committee == null)
+            return \response(['message'=>'No departments found in your college'],404);
+        return \response(['message'=>$committee],200);
+    }
+
 }

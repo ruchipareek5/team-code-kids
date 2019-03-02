@@ -95,7 +95,7 @@ Route::group(['middleware'=>'auth.basic'],function(){
     Route::get('/grievance/ombudsman/statistics/{type}','OmbudsmanDashboardController@getStatistics');
     
 
-
+    Route::get('/principal/committee','PrincipalController@getCommittee');
     Route::get('/principal/grievances/{type}', 'PrincipalController@grievanceDetails');         //Principal's grievance page
     Route::get('/principal/chart/statistics/{type}', 'PrincipalController@getStatistics');      //Stats for principal's dashboard
     Route::get('/principal/grievance/{id}', 'PrincipalController@show');                        //Principal grievance search

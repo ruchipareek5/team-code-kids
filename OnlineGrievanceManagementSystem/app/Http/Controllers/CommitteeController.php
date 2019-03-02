@@ -285,12 +285,21 @@ class CommitteeController extends Controller
     }
 
     public function getYearWiseFiledGrievances(){
-        $department = DB::select('select department_id from user_committee_member where id = '.Session::get('user_id').' limit 1');
+        $department = DB::select('select assigned_committee from user_committee_member where id = '.Session::get('user_id').' limit 1');
+
         if($department == null){
             return \response(['message'=>'Sorry no data found'],404);
         }
-
-        $department_id = $department[0]->department_id;
+        $id =DB::select('Select p.college_id from user_principal p,user_committee_member c where c.created_by = p.id');
+        if($id == null)
+            return \response(['message'=>'Your college id is not found in the database'],404);
+        $students_ = DB::select("Select id from user_student where college_id =".$id[0]->college_id);
+        $students = [];
+        $i=0;
+        foreach ($students_ as $s){
+            $students[$i++]=$s->id;
+        }
+        $department_id = $department[0]->assigned_committee;
         $date = date('Y');
 
        /* $data = ['year'=>[$date,$date-1,$date-2,$date-3,$date-4]];
@@ -308,22 +317,22 @@ class CommitteeController extends Controller
         $startyear = ($date).'-01-01 00:00:00';
         $endyear = ($date+1).'-01-01 00:00:00';
 
-        $count1 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear' and department_id =".$department_id);
+        $count1 = Grievance::whereIn('student_id',$students)->where('created_at','>',$startyear)->where('created_at','<',$endyear)->where('type',$department_id)->count();
 
         $startyear = ($date-1).'-01-01 00:00:00';
         $endyear = ($date).'-01-01 00:00:00';
-        $count2 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear' and department_id =".$department_id);
+        $count2 = Grievance::whereIn('student_id',$students)->where('created_at','>',$startyear)->where('created_at','<',$endyear)->where('type',$department_id)->count();
         $startyear = ($date-2).'-01-01 00:00:00';
         $endyear = ($date-1).'-01-01 00:00:00';
-        $count3 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear' and department_id =".$department_id);
+        $count3 = Grievance::whereIn('student_id',$students)->where('created_at','>',$startyear)->where('created_at','<',$endyear)->where('type',$department_id)->count();
         $startyear = ($date-3).'-01-01 00:00:00';
         $endyear = ($date-2).'-01-01 00:00:00';
-        $count4 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear' and department_id =".$department_id);
+        $count4 = Grievance::whereIn('student_id',$students)->where('created_at','>',$startyear)->where('created_at','<',$endyear)->where('type',$department_id)->count();
         $startyear = ($date-4).'-01-01 00:00:00';
         $endyear = ($date-3).'-01-01 00:00:00';
-        $count5 = DB::select("SELECT count(*) as 'year' FROM `table_grievance` WHERE `created_at` < '$endyear' and created_at > '$startyear' and department_id =".$department_id);
+        $count5 = Grievance::whereIn('student_id',$students)->where('created_at','>',$startyear)->where('created_at','<',$endyear)->where('type',$department_id)->count();
 
-        return response(['count'=>[$count1[0]->year,$count2[0]->year,$count3[0]->year,$count4[0]->year,$count5[0]->year],'year'=>[$date,$date-1,$date-2,$date-3,$date-4]],200);
+        return response(['count'=>[$count1,$count2,$count3,$count4,$count5],'year'=>[$date,$date-1,$date-2,$date-3,$date-4]],200);
 
     }
 }
