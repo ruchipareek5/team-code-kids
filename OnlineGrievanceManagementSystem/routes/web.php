@@ -36,6 +36,8 @@ Route::get('/testTemplate', function(){
 Route::post('/register','LoginController@register');        //Registartion page route
 
 
+
+
 // committee dashboard graph
 Route::get('/grievance/committee/graph','CommitteeController@getGraphController');
 Route::get('/grievance/committee/year','CommitteeController@getYearWiseFiledGrievances');
@@ -97,6 +99,8 @@ Route::group(['middleware'=>'auth.basic'],function(){
     Route::get('/ombudsman/grievance', 'OmbudsmanController@index');                        //Ombudsman grievance page
     Route::post('/ombudsman/grievanceSearch', 'OmbudsmanController@searchGrievances');      //Ombudsman grievance search
 
+    Route::get('/users/fetchCollege', 'UtilityController@fetchCollege');
+    Route::get('/users/fetchUniversity', 'UtilityController@fetchUniversity');
 });
 Route::get('/principal/chart/committeewise','PrincipalController@getCommitteewiseDetails');
 
