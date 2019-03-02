@@ -5,6 +5,7 @@ $(document).on({
      ajaxStop: function() { $body.removeClass("loading"); }    
 });
 
+
 $(function() {
 
    $(".sideBtn").click(function() {
@@ -14,7 +15,7 @@ $(function() {
       $(this).addClass("active_sidebtn");
    });
 
-       if(!$('.rightArea').get(0).scrollHeight <= $('.rightArea').height()+30){
+          if(!$('.rightArea').get(0).scrollHeight <= $('.rightArea').height()+30){
         $( '.footer').show(); 
       }
       

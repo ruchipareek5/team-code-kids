@@ -41,10 +41,10 @@
 							</div>
 						</div>
 						<div class="row form-group">
-							<input class="col-md-10" type="password"  name="password" required="required" placeholder="Password" ng-model="login.password">
+							<input class="col-md-10" id="password_holder" type="password"  name="password" required="required" placeholder="Password" ng-model="login.password">
 							<div class="col-md-2">
 								<!-- icons image -->
-								<img style="width: 25px; height: 25px;" src="assets/icons/password_icon.png">
+								<img id="password_icon" style="width: 25px; height: 25px;" src="assets/icons/password_icon.png">
 							</div>
 						</div>
 						<div class="row form-group justify-content-center">
@@ -67,10 +67,10 @@
 							</div>
 						</div>
 						<div class="row form-group">
-							<input class="col-md-10" type="password"  name="password" required="required" placeholder="Password">
+							<input class="col-md-10" id="password_holder" type="password"  name="password" required="required" placeholder="Password">
 							<div class="col-md-1">
 								<!-- icons image -->
-								<img style="width:25px; height: 25px;" src="assets/icons/password_icon.png">
+								<img id="password_icon"  style="width:25px; height: 25px;" src="assets/icons/password_icon.png">
 							</div>
 						</div>
 						<div class="row form-group justify-content-center">
@@ -98,6 +98,19 @@ $(function() {
       $(".tab-link").removeClass("active_tab	");
       // add class to the one we clicked
       $(this).addClass("active_tab	");
+   });
+   $("#password_icon").click(function() {
+     var src = $("#password_icon").attr('src');
+     if(src=='assets/icons/password_icon.png'){
+     	src='assets/icons/password_icon_hide.png';
+     	$('#password_holder').clone().attr('type','text').insertAfter('#password_holder').prev().remove();
+     }else{
+     	src='assets/icons/password_icon.png';
+     	$('#password_holder').clone().attr('type','password').insertAfter('#password_holder').prev().remove();
+
+     }
+
+     $("#password_icon").attr('src',src);
    });
  });
 </script>

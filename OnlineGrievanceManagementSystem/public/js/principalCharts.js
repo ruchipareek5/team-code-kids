@@ -45,8 +45,10 @@ Highcharts.chart('grievance_type_committee', {
             depth: 50,
             dataLabels: {
                 enabled: false,
-                format: '{point.percentage:.1f}%'
-                
+                format: '{point.percentage:.1f}%',
+                 style:{
+                    textTransform:'uppercase'
+                }           
             },
             showInLegend:true,
         },
@@ -63,6 +65,7 @@ Highcharts.chart('grievance_type_committee', {
         borderColor: '#CCC',
         borderWidth: 1,
         shadow: false,
+        
 
     },
     credits: {
