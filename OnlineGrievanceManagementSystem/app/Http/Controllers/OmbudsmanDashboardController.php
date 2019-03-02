@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Grievance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -49,14 +50,33 @@ class OmbudsmanDashboardController extends Controller
         }
     }
 
+    public function getCollegeNameAndId(){
+        $id = Session::get('user_id');
+        if($id == null)
+            return response(['message'=>'You are not logged in'],401);
+        $university = DB::select('select university_id from user_ombudsman where id = '.$id);
+        if($university == null)
+            return response(['message'=>'University details are not found for logged in user'],401);
+        $id = $university[0]->university_id;
+
+        $college = DB::select("select id, name from table_college where university_id =".$id);
+        return response(['message'=>$college],200);
+
+    }
+
         public function getCollegeStatistics(){
             $id = Session::get('user_id');
             if($id == null)
                 return response(['message'=>'You are not logged in'],401);
+            $university = DB::select('select university_id from user_ombudsman where id = '.$id);
+            if($university == null)
+                return response(['message'=>'University details are not found for logged in user'],401);
+            $id = $university[0]->university_id;
             $college_name = DB::select("select table_college.name from table_grievance
                             INNER join user_student on table_grievance.student_id = user_student.id
                             INNER JOIN table_college on table_college.id = user_student.college_id and table_college.university_id=".$id." 
                             group by table_college.name order by count(*) asc limit 5");
+
             $college=[];
             $i=0;
             $escalated=[];
@@ -84,11 +104,21 @@ class OmbudsmanDashboardController extends Controller
         }
 
         public function getInstitutewiseDetails($id){
-            $department = DB::select('select g.type from table_grievance g,user_student s where s.college_id = '.$id.' and
-                            s.college_id=g.student_id group by g.type order by g.type asc');
+
+            $students_ = DB::select("Select id from user_student where college_id =".$id);
+            $students = [];
+            $i=0;
+            foreach ($students_ as $s){
+                $students[$i++]=$s->id;
+            }
+            $department = Grievance::whereIn('student_id',$students)->groupBy('type')->get(['type']);
+
+           // $department = DB::select('select g.type from table_grievance g,user_student s where s.college_id = '.$id.' and
+                         //   s.college_id=g.student_id group by g.type order by g.type asc');
             if($department == null){
                 return response(['message'=>'No data found for the selected institute'],404);
             }
+
             $departments = [];
             $raised = [];
             $inaction=[];
@@ -146,28 +176,28 @@ class OmbudsmanDashboardController extends Controller
                 $i++;
             }
 
-            $temp_data = new temp();
+            $temp_data = new temp_();
             $temp_data->name = 'Raised';
             $temp_data->data = $raised;
             $all_data = [];
             $all_data[0]=$temp_data;
 
-            $temp_data = new temp();
+            $temp_data = new temp_();
             $temp_data->name = 'In Action';
             $temp_data->data = $inaction;
             $all_data[1]=$temp_data;
 
-            $temp_data = new temp();
+            $temp_data = new temp_();
             $temp_data->name = 'Addressed';
             $temp_data->data = $addressed;
             $all_data[2]=$temp_data;
 
-            $temp_data = new temp();
+            $temp_data = new temp_();
             $temp_data->name = 'Re-open';
             $temp_data->data = $reopened;
             $all_data[3]=$temp_data;
 
-            $temp_data = new temp();
+            $temp_data = new temp_();
             $temp_data->name = 'Delayed';
             $temp_data->data = $delayed;
             $all_data[4]=$temp_data;
@@ -249,7 +279,7 @@ class OmbudsmanDashboardController extends Controller
 
     }
 
-class temp {
+class temp_ {
     public $name;
      public  $data;
 }
