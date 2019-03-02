@@ -205,6 +205,7 @@ class grievanceController extends Controller
     {
 
         $remarks = \App\GrievanceMessage::where('grievance_id', $id)->get();
+
         if ($remarks == null) {
             return response(['message' => 'Remarks not found'], 400);
         }
@@ -269,10 +270,26 @@ class grievanceController extends Controller
         // if($user_name == null)
         //     return response(['message'=>'No such user'],403);
       //  try {
-        DB::table('table_message')->insert( array( 'grievance_id' => $request->grievance_id, 'message' => $request->message, 'sender_id' => $sender_id));
+
 
         $file = $request->file('attachment');
-        $grievance->vendor_attachment = $file==null?'':$file->store('documents');
+        if($file != null) {
+            $path = $file == null ? '' : $file->store('documents');
+            if ($path == null)
+                return \response(['message' => 'Error in uploading your file'], 500);
+            DB::table('table_message')->insert( array( 'grievance_id' => $request->grievance_id,
+                'message' => $request->message,
+                'sender_id' => $sender_id,
+                'vendor_attachment'=>$file,
+            ));
+        }
+        else
+        {
+            DB::table('table_message')->insert( array( 'grievance_id' => $request->grievance_id,
+                'message' => $request->message,
+                'sender_id' => $sender_id)
+            );
+        }
 
         return response(['message' => 'Comment Added'], 200);
         //}catch (QueryException $ex){
@@ -297,6 +314,8 @@ class grievanceController extends Controller
             $table_name = 'user_aicte';
         elseif ($roles == 'committee member')
             $table_name = 'user_committee_member';
+        elseif($roles == 'vendor')
+            $table_name = 'user_vendor';
         $name = DB::table($table_name)->where('user_id',$id)->get(['name'])->first();
 
         if($name == null){
