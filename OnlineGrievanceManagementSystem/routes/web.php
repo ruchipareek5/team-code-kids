@@ -82,6 +82,8 @@ Route::group(['middleware'=>'auth.basic'],function(){
 
     Route::post('/aicte/getStateWiseGrievances','AicteController@getAllGrievancesStateWise'); //To get all grievances state wise
 
+    Route::get('/aicte/getMajorGrievances', 'AicteController@getMajorGrievances'); 
+
     Route::get('/user/getUserName','LoginController@getUserName');
     Route::get('/committee/grievances/{type}', 'CommitteeController@grievanceDetails');         //Committee Grievance Page
     Route::get('/committee/statistics/{type}','CommitteeController@getStatistics');

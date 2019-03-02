@@ -156,7 +156,7 @@ class AicteController extends Controller
     public function getAllGrievancesStateWise(Request $request){
 
         $university_id = DB::select("SELECT id FROM table_university WHERE state = '".$request->state."'");
-        
+
         $result = DB::select("SELECT * from table_grievance INNER JOIN user_student
             ON table_grievance.student_id = user_student.id WHERE user_student.university_id = ".$university_id[0]->id);
             
@@ -165,6 +165,17 @@ class AicteController extends Controller
         else{
             return response(['message'=>$result],200);
         }
+    }
+
+    public function getMajorGrievances(){
+        $array = ['Ragging', 'Security'];
+
+        $grievances = Grievance::whereIn('type',$array)->orderBy('id','desc')
+                      ->get(['id','student_id','type','eta','status','documents','created_at']);
+
+        if($grievances == null)
+            return \response(['message'=>'No data found'],404);
+        return response(['message'=>$grievances],200);
     }
     /**
      * Update the specified resource in storage.
