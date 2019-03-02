@@ -111,7 +111,7 @@ grievancesystem.controller('aicteController',aicteController);
 
 
 
-        $scope.numRows = 15;
+        $scope.numRows = 7;
          $scope.open_grievance = {
             data:$scope.open_grievance_data,
                 enableGridMenus:false,
@@ -123,7 +123,7 @@ grievancesystem.controller('aicteController',aicteController);
                 enableVerticalScrollbar:0,
                 totalItems: $scope.open_grievance_data.length,
                 paginationPageSize: $scope.numRows,
-                minRowsToShow: $scope.open_grievance_data.length < $scope.numRows ? $scope.open_grievance_data : $scope.numRows,
+                minRowsToShow: $scope.numRows,
                 enablePaginationControls: false,
                 
 
@@ -280,6 +280,126 @@ grievancesystem.controller('aicteController',aicteController);
         };
 
 //institute search
+
+//Open Grievance
+            $scope.colleges = [{"name":"cvrce"},{"name":"Techno India"}];
+            $scope.states = [{"name":"odisha"},{"name":"West Bengal"}];
+            $scope.university = [{"name":"bput"},{"name":"wbut"}];
+            $scope.college_grievance_data =new Array();
+            $scope.state_grievance_data =new Array();
+            $scope.university_grievance_data =new Array();
+            $scope.loadOpenGrievance=function(){
+                    $scope.college_grievance_data =new Array();
+                    $scope.state_grievance_data =new Array();
+                    $scope.university_grievance_data =new Array();
+                
+
+              
+        }
+
+
+       // $scope.pageSize_grievance = 7;
+       //$scope.loadOpenGrievance();
+
+        
+     $scope.college_grievance = {
+        data:$scope.college_grievance_data,
+            enableGridMenus:false,
+            enableSorting: false,
+            enableFiltering:false,
+            enableCellEditing:false,
+            enableColumnMenus: false,
+            enableHorizontalScrollbar:0,
+            enableVerticalScrollbar:0,
+            paginationPageSize:  $scope.numRows,
+            minRowsToShow:  $scope.numRows,
+            enablePaginationControls: false,
+
+
+
+            columnDefs: [
+                
+                { name : "id",displayNameName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' , width:"11%"},
+                { name:"committee_student_details" ,displayName: 'Student Details',  cellTemplate: '/views/cellTemplate/student_details.html', width:"11%"},
+                { name:"college_name" ,displayName: 'College Name',  cellTemplate: '/views/cellTemplate/cell.html', width:"11%"},
+                {name :"type" ,displayName: 'Grievance Type' ,cellTemplate: '/views/cellTemplate/cell.html' , width:"11%"},
+                {name:"created_at", displayName: 'Data of Issue' ,cellTemplate: '/views/cellTemplate/cell.html ', width:"11%"},
+                {name:"eta" ,displayName: 'ETA', cellTemplate: '/views/cellTemplate/cell.html ', width:"11%"},
+                {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html", width:"11%"  },
+                {name:"connect",displayName: 'Connect',cellTemplate: "/views/cellTemplate/aicte_connect.html", width:"23%" },
+                
+            ],
+
+                
+             };
+
+             $scope.state_grievance = {
+                data:$scope.state_grievance_data,
+                enableGridMenus:false,
+                enableSorting: false,
+                enableFiltering:false,
+                enableCellEditing:false,
+                enableColumnMenus: false,
+                enableHorizontalScrollbar:0,
+                enableVerticalScrollbar:0,
+                paginationPageSize:  $scope.numRows,
+                minRowsToShow:  $scope.numRows,
+                enablePaginationControls: false,
+
+
+    
+        columnDefs: [
+            { name : "id",displayNameName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' , width:"11%"},
+            { name:"committee_student_details" ,displayName: 'Student Details',  cellTemplate: '/views/cellTemplate/student_details.html', width:"11%"},
+            { name:"college_name" ,displayName: 'College name',  cellTemplate: '/views/cellTemplate/cell.html', width:"11%"},
+            {name :"type" ,displayName: 'Grievance Type' ,cellTemplate: '/views/cellTemplate/cell.html' , width:"11%"},
+            {name:"created_at", displayName: 'Data of Issue' ,cellTemplate: '/views/cellTemplate/cell.html ', width:"11%"},
+            {name:"eta" ,displayName: 'ETA', cellTemplate: '/views/cellTemplate/cell.html ', width:"11%"},
+            {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html", width:"11%"  },
+            {name:"connect",displayName: 'Connect',cellTemplate: "/views/cellTemplate/aicte_connect.html", width:"23%" },
+                            ],
+    
+                   
+        };
+
+        $scope.university_grievance = {
+            data:$scope.university_grievance_data,
+            enableGridMenus:false,
+            enableSorting: false,
+            enableFiltering:false,
+            enableCellEditing:false,
+            enableColumnMenus: false,
+            enableHorizontalScrollbar:0,
+            enableVerticalScrollbar:0,
+            paginationPageSize:  $scope.numRows,
+            minRowsToShow:  $scope.numRows,
+            enablePaginationControls: false,
+
+
+
+    columnDefs: [
+        { name : "id",displayNameName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' , width:"11%"},
+        { name:"committee_student_details" ,displayName: 'Student Details',  cellTemplate: '/views/cellTemplate/student_details.html', width:"11%"},
+        { name:"college_name" ,displayName: 'College name',  cellTemplate: '/views/cellTemplate/cell.html', width:"11%"},
+        {name :"type" ,displayName: 'Grievance Type' ,cellTemplate: '/views/cellTemplate/cell.html' , width:"11%"},
+        {name:"created_at", displayName: 'Data of Issue' ,cellTemplate: '/views/cellTemplate/cell.html ', width:"11%"},
+        {name:"eta" ,displayName: 'ETA', cellTemplate: '/views/cellTemplate/cell.html ', width:"11%"},
+        {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html", width:"11%"  },
+        {name:"connect",displayName: 'Connect',cellTemplate: "/views/cellTemplate/aicte_connect.html", width:"23%" },
+
+                
+                        ],
+
+               
+    };
+
+
+
+
+
+
+
+//Open Grievance
 
     
                 
