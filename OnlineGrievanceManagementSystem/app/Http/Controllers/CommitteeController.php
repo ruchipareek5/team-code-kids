@@ -256,8 +256,12 @@ class CommitteeController extends Controller
             $temp_data = new temp();
             $temp_data->name = ['Total'];
             $i=0;
+
             foreach ($course as $c){
-                $temp_data->data[$i] = ($temp==null)?0:$temp[$i]->count;
+                if($i< count($temp))
+                    $temp_data->data[$i] = ($temp==null)?0:$temp[$i]->count;
+                else
+                    $temp_data->data[$i] = 0;
                 $i++;
             }
             $all_data[0]=$temp_data;
@@ -266,7 +270,10 @@ class CommitteeController extends Controller
             $temp_data->name = ['Pending'];
             $i=0;
             foreach ($course as $c){
-                $temp_data->data[$i] = ($mp==null)?0:$mp[$i]->count;
+                if ($i < count($mp))
+                    $temp_data->data[$i] = ($mp==null)?0:$mp[$i]->count;
+                    else
+                        $temp_data->data[$i] = 0;
                 $i++;
             }
             $all_data[1]=$temp_data;
