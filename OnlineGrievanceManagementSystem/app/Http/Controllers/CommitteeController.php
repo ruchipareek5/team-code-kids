@@ -91,13 +91,13 @@ class CommitteeController extends Controller
             AND table_grievance.status = 'raised' order by table_grievance.updated_at desc");
         }
         elseif ($type=='inaction'){
-            $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta,table_grievance.level
+            $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta,table_grievance.level, table_grievance.vendor_status
             FROM table_grievance INNER JOIN user_student ON user_student.id = table_grievance.student_id 
             WHERE user_student.college_id = ".$condition[0]->college_id." AND table_grievance.type = '".$condition[0]->assigned_committee."'
             AND table_grievance.status = 'inaction' order by table_grievance.updated_at desc");
         }elseif ($type=='addressed'){
             $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta, 
-            table_grievance.updated_at, table_grievance.delayed_status 
+            table_grievance.updated_at, table_grievance.delayed_status, table_grievance.vendor_attachment 
             FROM table_grievance INNER JOIN user_student ON user_student.id = table_grievance.student_id 
             WHERE user_student.college_id = ".$condition[0]->college_id." AND table_grievance.type = '".$condition[0]->assigned_committee."'
             AND table_grievance.status = 'addressed' order by table_grievance.updated_at desc");
@@ -126,6 +126,27 @@ class CommitteeController extends Controller
         $grievance = Grievance::find($request->id);
         $grievance->level = $grievance->level + 1;
         $grievance->save();
+        if(!$grievance)
+             return response(['message'=> "No Grievance with Grievance Id ".$request->id]);
+        return response(['message'=> "Grievance is sent for higher Approval"]);
+    }
+
+     public function seekForPurchase(Request $request){
+        $grievance = Grievance::find($request->id);
+        $grievance->vendor_status = 'Sent for purchase';
+
+        $user_id = Session::get('user_id');
+
+            $var = DB::select("SELECT user_principal.college_id FROM user_principal INNER JOIN user_committee_member
+            ON user_principal.id = user_committee_member.created_by WHERE user_committee_member.id = ".$user_id);
+
+            $college_id = $var[0]->college_id;
+
+            $vendor_id  = DB::select("select id from user_vendor where college_id = ".$college_id);
+
+            $grievance->vendor_id = $vendor_id[0]->id;
+             $grievance->save();
+       
         if(!$grievance)
              return response(['message'=> "No Grievance with Grievance Id ".$request->id]);
         return response(['message'=> "Grievance is sent for higher Approval"]);

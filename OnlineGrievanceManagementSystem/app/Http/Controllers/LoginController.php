@@ -44,6 +44,8 @@ class LoginController extends Controller
             $table_name = 'user_aicte';
         elseif ($roles == 'committee member')
             $table_name = 'user_committee_member';
+        elseif ($roles == 'vendor')
+            $table_name = 'user_vendor';
         $user_id = DB::table($table_name)->where('user_id',Auth::user()->getAuthIdentifier())->get(['id','name'])->first();
         if($user_id == null){
             return response(['message'=>'No such user'],403);

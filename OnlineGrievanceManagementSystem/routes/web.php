@@ -93,6 +93,7 @@ Route::group(['middleware'=>'auth.basic'],function(){
      Route::post('/committee/markAddressed', 'CommitteeController@markAddressed');                       //Committee Mark Addressed
     Route::post('/user/viewStudent', 'CommitteeController@viewStudent');   //Committee and principal -->view Student
 
+    Route::post('/committee/sfp', 'CommitteeController@seekForPurchase'); //committee seek for purchase api
 
     Route::get('/grievance/ombudsman/statistics/{type}','OmbudsmanDashboardController@getStatistics');
     
@@ -130,10 +131,15 @@ Route::get('/grievance/download/documents/{path}','grievanceController@download'
 Route::get('/grievance/aicte/chart/department/{state}','AicteDashBoardController@getStateWiseDetails');
 Route::get('/grievance/ombudsman/chart/year','OmbudsmanDashboardController@getYearStatistics');
 
+Route::get('/vendor/getGrievances/{type}','VendorController@getGrievances');
+Route::post('/vendor/deliveryRequest', 'VendorController@deliveryRequest');
 
 Route::get('/ui_gridSample', function(){
     return view('templates/ui_gridSample');
 });
+
+
+
 
 
 /**
