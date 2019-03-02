@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2019 at 05:21 AM
+-- Generation Time: Mar 02, 2019 at 12:05 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -64,7 +64,7 @@ CREATE TABLE `table_college` (
 --
 
 INSERT INTO `table_college` (`id`, `university_id`, `name`, `state`, `location`, `phone`, `logo`, `registration_status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'CVRCE', 'Odisha', 'Khurda', '022-2247686', NULL, 1, '2019-02-27 14:48:05', '2019-02-27 18:30:00'),
+(1, 1, 'CV Raman College of Engineering', 'Odisha', 'Khurda', '022-2247686', NULL, 1, '2019-03-02 10:13:15', '2019-02-27 18:30:00'),
 (2, 2, 'Techno India', 'West Bengal', 'Kolkata', '022-2247686', NULL, 1, '2019-02-27 14:48:10', '2019-02-27 18:30:00'),
 (3, 1, 'Silicon Institute of Technology', 'Odisha', 'Bhubaneswar', '022-2247686', NULL, 1, '2019-02-27 14:48:27', '2019-02-27 18:30:00'),
 (4, 1, 'Gandhi Institute of Engineering and Technology', 'Odisha', 'Bhubaneswar', '022-2247686', NULL, 1, '2019-02-27 14:48:33', '2019-02-27 18:30:00'),
@@ -146,20 +146,41 @@ INSERT INTO `table_grievance` (`id`, `type`, `description`, `documents`, `studen
 (3, 'Academics', 'Compensation for attendance due to institute representation.', NULL, 3, '2017-02-26 04:31:12', '2019-02-26 04:31:12', 12, 'inaction', 0, '2019-02-28 18:30:00', 0),
 (4, 'Academics', 'non availability of reference books in library.', NULL, 4, '2016-02-26 04:35:04', '2019-02-26 04:35:04', 12, 'inaction', 0, '2019-03-04 00:59:00', 0),
 (5, 'Academics', 'Non functioning lab equipment. needs replacing.', NULL, 5, '2019-02-26 04:35:04', '2019-02-26 04:35:04', 12, 'raised', 0, '2019-02-28 02:06:55', 0),
-(6, 'Hostel', 'WiFi not working properly.', NULL, 1, '2019-02-26 04:37:30', '2019-02-26 04:37:30', 1, 'raised', 0, '2019-02-27 18:30:00', 0),
-(7, 'Hostel', 'Fan in room 221 needs replacing.', NULL, 2, '2018-02-26 04:37:30', '2019-02-26 04:37:30', 1, 'raised', 0, '2019-02-27 18:30:00', 0),
+(6, 'Hostel', 'WiFi not working properly.', NULL, 1, '2019-02-26 04:37:30', '2019-03-02 03:58:47', 1, 'addressed', 0, '2019-02-27 18:30:00', 0),
+(7, 'Hostel', 'Fan in room 221 needs replacing.', NULL, 2, '2018-02-26 04:37:30', '2019-03-02 04:35:16', 1, 'inaction', 0, '2019-02-27 18:30:00', 0),
 (8, 'Hostel', 'Unhygenic food being distributed', NULL, 3, '2017-02-26 04:39:18', '2019-02-26 04:39:18', 1, 'inaction', 0, '2019-02-27 18:30:00', 0),
-(9, 'Hostel', 'Fan in room 225 needs replacing.', NULL, 2, '2019-02-26 04:39:18', '2019-02-26 04:39:18', 1, 'addressed', 0, '2019-02-27 18:30:00', 0),
-(10, 'Raging', 'Bad behavior of seniors.', NULL, 2, '2016-02-26 04:42:16', '2019-02-26 04:42:16', 8, 'addressed', 0, '2019-02-05 18:30:00', 0),
+(9, 'Hostel', 'Fan in room 225 needs replacing.', NULL, 2, '2018-02-26 04:39:18', '2019-02-26 04:39:18', 1, 'addressed', 0, '2019-02-27 18:30:00', 0),
+(10, 'Ragging', 'Bad behavior of seniors.', NULL, 2, '2016-02-26 04:42:16', '2019-02-26 04:42:16', 8, 'addressed', 0, '2019-02-05 18:30:00', 0),
 (11, 'Training and Placement', 'Unable to attend upcoming placement drive.', NULL, 2, '2019-02-26 04:42:16', '2019-02-26 04:42:16', 5, 'raised', 0, '2019-02-27 07:30:00', 0),
 (12, 'Training and Placement', 'Not eligible to attend upcoming placement drive.', NULL, 5, '2015-02-26 04:45:42', '2019-02-26 04:45:42', 5, 'delayed', 1, '2019-02-24 18:30:00', 0),
-(13, 'Training and Placement', 'Not eligible to attend upcoming placement drive.', NULL, 3, '2016-02-26 04:45:42', '2019-02-26 04:45:42', 5, 'addressed', 0, '2019-02-26 18:30:00', 0),
+(13, 'Training and Placement', 'Not eligible to attend upcoming placement drive.', NULL, 3, '2016-02-26 04:45:42', '2019-03-02 05:15:46', 5, 'reopened', 0, '2019-02-26 18:30:00', 0),
 (14, 'Hostel', 'Router not working properly.', NULL, 6, '2019-02-26 04:54:28', '2019-02-26 04:54:28', 2, 'raised', 0, '2019-02-27 18:30:00', 0),
 (15, 'Hostel', 'Router not wiorking', NULL, 6, '2019-02-26 04:54:28', '2019-02-26 04:54:28', 2, 'delayed', 1, '2019-02-23 18:30:00', 0),
 (16, 'Academics', 'classes not being held.', NULL, 7, '2015-02-26 04:55:41', '2019-02-26 04:55:41', NULL, 'addressed', 0, '2019-02-26 18:30:00', 0),
 (17, 'Hostel', 'bad food', NULL, 7, '2019-02-26 04:55:41', '2019-02-26 04:55:41', 2, 'inaction', 0, '2019-02-27 18:30:00', 0),
-(18, 'Ragging', '4th years', '', 2, '2019-03-01 09:00:00', '2019-03-01 09:00:00', 8, 'raised', 0, '2019-03-08 14:30:00', 0),
-(19, 'Accounts Department', 'kl;k;', '', 1, '2018-03-01 10:08:37', '2019-03-01 10:08:37', 6, 'raised', 0, '2019-03-08 15:38:37', 0);
+(18, 'Ragging', '4th years', '', 2, '2019-03-01 09:00:00', '2019-03-02 04:32:55', 8, 'inaction', 0, '2019-03-08 14:30:00', 0),
+(19, 'Accounts Department', 'kl;k;', '', 1, '2018-03-01 10:08:37', '2019-03-02 03:49:41', 6, 'inaction', 0, '2019-03-08 15:38:37', 0),
+(20, 'Transport', 'bus problem', '', 1, '2019-03-01 23:02:51', '2019-03-01 23:02:51', 9, 'raised', 0, '2019-03-09 04:32:52', 0),
+(21, 'Admission Cell', 'unsatisfied', '', 1, '2019-03-01 23:56:05', '2019-03-02 03:52:05', 2, 'addressed', 0, '2019-03-09 05:26:05', 0),
+(22, 'Accounts Department', 'unsatisfied', '', 1, '2019-03-01 23:56:15', '2019-03-01 23:56:15', 6, 'raised', 0, '2019-03-09 05:26:15', 0),
+(23, 'Security', 'unsatisfied', '', 1, '2019-03-01 23:56:36', '2019-03-02 03:55:11', 7, 'inaction', 0, '2019-03-09 05:26:36', 1),
+(24, 'Security', 'unsatisfied', '', 3, '2019-03-01 23:59:07', '2019-03-01 23:59:07', 7, 'raised', 0, '2019-03-09 05:29:07', 0),
+(25, 'Hostel', 'unsatisfied', '', 3, '2019-03-02 00:00:11', '2019-03-02 00:00:11', 1, 'raised', 0, '2019-03-09 05:30:11', 0),
+(26, 'Ragging', 'unsatisfied', '', 3, '2019-03-02 00:00:20', '2019-03-02 00:00:20', 8, 'raised', 0, '2019-03-09 05:30:20', 0),
+(27, 'Canteen', '---', '', 3, '2019-03-02 00:00:28', '2019-03-02 05:15:08', 10, 'addressed', 0, '2019-03-09 05:30:28', 0),
+(28, 'Transport', 'unsatisfied', '', 3, '2019-03-02 00:00:35', '2019-03-02 00:00:35', 9, 'raised', 0, '2019-03-09 05:30:35', 0),
+(29, 'Transport', 'bus issue', '', 3, '2019-03-02 00:04:12', '2019-03-02 00:04:12', 9, 'raised', 0, '2019-03-09 05:34:12', 0),
+(30, 'Canteen', 'unsatisfied', '', 3, '2019-03-02 01:07:11', '2019-03-02 01:16:12', 10, 'reopened', 0, '2019-03-09 06:37:11', 0),
+(31, 'Ragging', 'by juniors', '', 1, '2019-03-02 04:18:58', '2019-03-02 04:18:58', 8, 'raised', 0, '2019-03-09 09:48:58', 0),
+(32, 'Hostel', 'unsatisfied', '', 2, '2019-03-02 04:26:33', '2019-03-02 04:31:25', 1, 'reopened', 0, '2019-03-09 09:56:33', 0),
+(33, 'Ragging', '--', NULL, 3, '2016-03-26 18:30:00', '2019-03-02 10:18:47', 8, 'raised', 0, '0000-00-00 00:00:00', 0),
+(34, 'Ragging', '--', NULL, 5, '2015-03-20 18:30:00', '2019-03-02 04:57:06', 8, 'reopened', 0, '0000-00-00 00:00:00', 0),
+(35, 'Ragging', '--', NULL, 2, '2018-03-27 18:30:00', '2019-03-02 04:55:46', 8, 'inaction', 0, '0000-00-00 00:00:00', 1),
+(36, 'Ragging', '--', NULL, 4, '2017-03-26 18:30:00', '2019-03-02 04:55:33', 8, 'addressed', 0, '0000-00-00 00:00:00', 0),
+(37, 'Hostel', '--', NULL, 5, '2015-03-29 18:30:00', '2019-03-02 10:34:04', 1, 'raised', 0, '0000-00-00 00:00:00', 0),
+(38, 'Hostel', '--', NULL, 3, '2016-03-27 18:30:00', '2019-03-02 10:34:04', 1, 'raised', 0, '0000-00-00 00:00:00', 0),
+(39, 'Hostel', '--', NULL, 3, '2016-03-20 18:30:00', '2019-03-02 05:11:40', 8, 'reopened', 0, '0000-00-00 00:00:00', 0),
+(40, 'Ragging', '--', NULL, 4, '2016-03-20 18:30:00', '2019-03-02 10:37:07', 1, 'raised', 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -182,7 +203,12 @@ CREATE TABLE `table_message` (
 
 INSERT INTO `table_message` (`id`, `grievance_id`, `message`, `sender_id`, `updated_at`) VALUES
 (1, 1, 'ask', 24, '2019-03-01 14:36:59'),
-(2, 1, 'ok', 16, '2019-03-01 14:39:39');
+(2, 1, 'ok', 16, '2019-03-01 14:39:39'),
+(3, 30, 'approve', 69, '2019-03-02 06:39:32'),
+(4, 30, 'approved', 16, '2019-03-02 06:40:18'),
+(5, 30, 'solution', 2, '2019-03-02 06:49:59'),
+(6, 23, 'pls approve', 65, '2019-03-02 09:25:11'),
+(7, 35, 'approve', 4, '2019-03-02 10:25:46');
 
 -- --------------------------------------------------------
 
@@ -285,9 +311,9 @@ INSERT INTO `users` (`id`, `username`, `password`, `roles`, `email`, `remember_t
 (2, 'Anil Sahoo', '$2y$10$bIo56/5mP7oZ.j9.dD7OHumyisam3XIEYeru9dq/fDP4EUK2GnCVe', 'ombudsman', 'anilsahoo@bput.in', NULL, '2019-03-01 17:03:03', '2019-02-18 08:42:31'),
 (3, 'S.N. Deepa', '$2y$10$GvyaXV/z1.56PPUEXuIOCeMQXnLwXztaKfos6K0VGzO9nNXhaR/0i', 'principal', 'sndeepa@gmail.com', NULL, '2019-02-25 16:41:49', '2019-02-18 08:43:07'),
 (4, 'Priyadarshi Kanungo', '$2y$10$Rs.KpOH/fLXEoRfWNBa7AeeZF7hgaQYPUbUZdK6j4lEOwLzT7hZpS', 'committee member', 'pkanungo@cvrce.edu.in', NULL, '2019-02-26 04:22:33', '2019-02-18 08:44:02'),
-(5, 'Shashank Raj', '$2y$10$fYrX6U67gHpL.ljr6cmAD.a9dRfxOtOaOFEUCVuGyPEB4/nvk7N9.', 'student', 'shashankraj@cvrce.edu.in', NULL, '2019-02-26 04:22:53', '2019-02-18 08:44:21'),
-(6, 'Kaushik Ojha', '$2y$10$RSxC9l7tQcM4kWKOOqmgjeOf8OK6MFVR7AHArX3hBSBVDH.bVtqcu', 'student', 'kaushikojha@cvrce.edu.in', NULL, '2019-02-26 04:23:02', '2019-02-20 09:08:33'),
-(7, 'Surbhi Suman', '$2y$10$j1Dsl/EYS2bOWZFMXQwVWeHicZ51tvHiK1ib1D1yMHLV7Yu3tfN8O', 'student', 'surbhisumanmgr@cvrce.edu.in', NULL, '2019-02-26 04:23:10', '2019-02-20 09:10:17'),
+(5, 'Shashank Raj', '$2y$10$fYrX6U67gHpL.ljr6cmAD.a9dRfxOtOaOFEUCVuGyPEB4/nvk7N9.', 'student', 'bpu/1501227645', NULL, '2019-03-02 10:10:00', '2019-02-18 08:44:21'),
+(6, 'Kaushik Ojha', '$2y$10$RSxC9l7tQcM4kWKOOqmgjeOf8OK6MFVR7AHArX3hBSBVDH.bVtqcu', 'student', 'bpu/1601227444', NULL, '2019-03-02 10:10:27', '2019-02-20 09:08:33'),
+(7, 'Surbhi Suman', '$2y$10$j1Dsl/EYS2bOWZFMXQwVWeHicZ51tvHiK1ib1D1yMHLV7Yu3tfN8O', 'student', 'bpu/1601227171', NULL, '2019-03-02 10:10:41', '2019-02-20 09:10:17'),
 (8, 'M.N. Singh', '$2y$10$fYrX6U67gHpL.ljr6cmAD.a9dRfxOtOaOFEUCVuGyPEB4/nvk7N9.', 'ombudsman', 'mnsingh@wbut.in', NULL, '2019-03-01 17:03:17', '0000-00-00 00:00:00'),
 (9, 'Vishal Kujur', '$2y$10$fYrX6U67gHpL.ljr6cmAD.a9dRfxOtOaOFEUCVuGyPEB4/nvk7N9.', 'ombudsman', 'vishalkujur@apjaktu.in', NULL, '2019-02-25 17:40:17', '0000-00-00 00:00:00'),
 (10, 'S.N. Sivanandan', '$2y$10$fYrX6U67gHpL.ljr6cmAD.a9dRfxOtOaOFEUCVuGyPEB4/nvk7N9.', 'principal', 'sivanandan@gmail.com', NULL, '2019-02-25 16:46:33', '0000-00-00 00:00:00'),
@@ -305,10 +331,10 @@ INSERT INTO `users` (`id`, `username`, `password`, `roles`, `email`, `remember_t
 (22, 'Vipin Sharma', '$2y$10$fYrX6U67gHpL.ljr6cmAD.a9dRfxOtOaOFEUCVuGyPEB4/nvk7N9.', 'principal', 'vipinsharma@gmail.com', NULL, '2019-02-25 17:04:52', '2019-02-23 18:30:00'),
 (23, 'Man Singh', '$2y$10$fYrX6U67gHpL.ljr6cmAD.a9dRfxOtOaOFEUCVuGyPEB4/nvk7N9.', 'principal', 'mansingh@gmail.com', NULL, '2019-02-25 17:06:13', '2019-02-25 05:12:18'),
 (24, 'Debdas Mishra', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'debdasmisrhra@gmail.com', NULL, '2019-02-25 17:52:56', '2019-02-24 18:30:00'),
-(25, 'P.K. Sahoo', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'pksahoo@gmail.com', NULL, '2019-02-25 17:52:56', '2019-02-24 18:30:00'),
+(25, 'P.K. Sahoo', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'pksahoo@cvrce.edu.in', NULL, '2019-03-02 10:31:34', '2019-02-24 18:30:00'),
 (26, 'Asit Rout', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'asitrout@gmail.com', NULL, '2019-02-25 17:54:37', '2019-02-24 18:54:47'),
-(27, 'Sujit Kumar', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'student', 'sujitkumar8092@gmail.com', NULL, '2019-02-25 18:04:09', '2019-02-24 18:30:00'),
-(28, 'Sachin Tiwari', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'student', 'sacht985@gmail.com', NULL, '2019-02-25 18:04:09', '2019-02-24 18:30:00'),
+(27, 'Sujit Kumar', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'student', 'bpu/1501227456', NULL, '2019-03-02 10:11:23', '2019-02-24 18:30:00'),
+(28, 'Sachin Tiwari', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'student', 'bpu/1501227651', NULL, '2019-03-02 10:11:44', '2019-02-24 18:30:00'),
 (29, 'Sourav Shrestha', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'student', 'shrestha.sourav30@gmail.com', NULL, '2019-02-26 04:49:57', '2019-02-23 18:30:00'),
 (30, 'Satyam', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'student', 'satyam@gmail.com', NULL, '2019-02-26 04:49:57', '2019-02-26 18:30:00'),
 (31, 'Prince Himanshu', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'student', 'princehimanshu@gmail.com', NULL, '2019-02-27 07:01:12', '2019-02-27 18:30:00'),
@@ -344,13 +370,13 @@ INSERT INTO `users` (`id`, `username`, `password`, `roles`, `email`, `remember_t
 (61, 'Shazia Rahat', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'shaziarahat@gmail.com', NULL, '2019-02-27 17:47:11', '2019-02-27 18:30:00'),
 (62, 'Rutam Prita Mishra', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'rutam@gmail.com', NULL, '2019-02-27 17:47:11', '2019-02-27 18:30:00'),
 (63, 'Aakash Nanda', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'aakashnanda@gmail.com', NULL, '2019-02-27 17:47:54', '2019-02-27 18:30:00'),
-(64, 'Brajesh Kumar', 'password', 'committee member', 'brajeshkumar@cvrce.edu.in', NULL, '2019-03-01 15:52:09', '0000-00-00 00:00:00'),
-(65, 'Bhavesh Tripathy ', 'password', 'committee member', 'btripathy@cvrce.edu.in', NULL, '2019-03-01 15:52:09', '0000-00-00 00:00:00'),
-(66, 'Aman Agarwal', 'password', 'committee member', 'amanagarwal@cvrce.edu.in', NULL, '2019-03-01 16:05:25', '0000-00-00 00:00:00'),
-(67, 'Vishves Dhave', 'password', 'committee member', 'vdhave@cvrce.edu.in', NULL, '2019-03-01 16:05:25', '0000-00-00 00:00:00'),
-(68, 'Alok Nagar', 'password', 'committee member', 'aloknagar@cvrce.edu.in', NULL, '2019-03-01 16:16:21', '0000-00-00 00:00:00'),
-(69, 'Shaina Sheikh', 'password', 'committee member', 'shaina@cvrce.edu.in', NULL, '2019-03-01 16:16:21', '0000-00-00 00:00:00'),
-(70, 'Kundan Singh', 'password', 'committee member', 'kundansingh@cvrce.edu .in', NULL, '2019-03-01 16:23:55', '0000-00-00 00:00:00');
+(64, 'Brajesh Kumar', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'brajeshkumar@cvrce.edu.in', NULL, '2019-03-02 05:31:52', '0000-00-00 00:00:00'),
+(65, 'Bhavesh Tripathy ', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'btripathy@cvrce.edu.in', NULL, '2019-03-02 05:32:00', '0000-00-00 00:00:00'),
+(66, 'Aman Agarwal', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'amanagarwal@cvrce.edu.in', NULL, '2019-03-02 05:32:07', '0000-00-00 00:00:00'),
+(67, 'Vishves Dhave', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'vdhave@cvrce.edu.in', NULL, '2019-03-02 05:32:13', '0000-00-00 00:00:00'),
+(68, 'Alok Nagar', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'aloknagar@cvrce.edu.in', NULL, '2019-03-02 05:32:20', '0000-00-00 00:00:00'),
+(69, 'Shaina Sheikh', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'shaina@cvrce.edu.in', NULL, '2019-03-02 05:32:27', '0000-00-00 00:00:00'),
+(70, 'Kundan Singh', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'kundansingh@cvrce.edu .in', NULL, '2019-03-02 05:32:34', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -520,7 +546,7 @@ INSERT INTO `user_student` (`id`, `user_id`, `name`, `profile_picture`, `college
 (2, 6, 'Kaushik Ojha', NULL, 1, 1, 'CSE', '1601227173', NULL, 'bca', 3, NULL),
 (3, 7, 'Surbhi Suman', NULL, 1, 1, 'CSE', '1601227432', NULL, 'mca', 2, 1),
 (4, 27, 'Sujit Kumar', NULL, 1, 1, 'Civil', '14325678', NULL, 'm.tech', 2, 1),
-(5, 28, 'Sachin Tiwari', NULL, 1, 1, 'Mechanical', '1234567890', NULL, 'diploma', 1, 1),
+(5, 28, 'Sachin Tiwari', NULL, 1, 1, 'Mechanical', '1234567890', NULL, 'phd', 1, 1),
 (6, 29, 'Sourav Shrestha', NULL, 2, 2, 'HR', '1234567890', NULL, 'MBA', 2, 1),
 (7, 30, 'Satyam', NULL, 2, 2, 'HR', '12345678', NULL, 'MBA', 1, 1),
 (8, 31, 'Prince Himanshu', NULL, 2, 2, 'HR', '65754321', NULL, 'MBA', 1, 1),
@@ -696,13 +722,13 @@ ALTER TABLE `table_department`
 -- AUTO_INCREMENT for table `table_grievance`
 --
 ALTER TABLE `table_grievance`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `table_message`
 --
 ALTER TABLE `table_message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `table_ombudsman_announcement`

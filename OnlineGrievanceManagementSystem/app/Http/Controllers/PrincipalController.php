@@ -42,7 +42,7 @@ class PrincipalController extends Controller
         }
         else if($type == 'escalated') {
             $grievances = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta FROM table_grievance INNER JOIN user_student
-            ON table_grievance.student_id = user_student.id WHERE table_grievance.level = 1 AND table_grievance.delayed_status = 1 
+            ON table_grievance.student_id = user_student.id WHERE table_grievance.level = 1 OR table_grievance.delayed_status = 1 
             AND user_student.college_id = ".$college_id[0]->college_id);
 
             return response(['message' => $grievances], 200);
