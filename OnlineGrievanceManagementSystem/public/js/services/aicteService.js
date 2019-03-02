@@ -5,7 +5,14 @@ grievancesystem.service('aicteService',function ($http,API_URL) {
 
 
 	this.getGrievance=function () {
+		// var url = API_URL + 'aicte/getMajorGrievances';
 		var url = API_URL + 'aicte/grievances';
+		return $http.get(url);
+
+		}
+
+	this.getMajorGrievance=function () {
+		var url = API_URL + 'aicte/getMajorGrievances';
 		return $http.get(url);
 
 		}

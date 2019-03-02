@@ -90,7 +90,6 @@
 <script src="./../../js/libraries/export-data.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/index.css">
-<link rel="stylesheet" type="text/css" href="css/response.css">
     
 </head>
 <body ng-app="grievancesystem">

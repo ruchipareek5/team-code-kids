@@ -20,7 +20,7 @@
     				<!-- nav top head -->
     				<div class="row navTop align-items-center">
     					<span class="col-md-4 logo"><img src="assets/logos/aicte.png"></span>
-    					<span class="col-md-8 navTop-head">{{username}}</span>
+    					<span class="col-md-8 navTop-head">AICTE</span>
     				</div>
     			</div>
 
@@ -29,7 +29,7 @@
 				 		<span class="top-icon"><img src="assets/icons/notifiaction.png"></span>
 				 		<span class="top-icon"><img src="assets/icons/message.png"></span>
 				 		<div class=" top-icon dropdown">
-				 			<img src="assets/icons/user.png">AICTE Name 
+				 			<img src="assets/icons/user.png">{{username}}
 				 			<span class=""> &#x25BC;
 				 				<div class="dropdown-content">
 							      <a href="#">Profile</a>
