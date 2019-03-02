@@ -65,19 +65,19 @@ class AicteController extends Controller
     public function searchGrievances(Request $request){
         if($request->type == 1){
             $grievances = DB::select("SELECT table_grievance.id, student_id, user_student.college_id, user_student.university_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
-            user_student ON table_grievance.student_id = user_student.id WHERE table_grievance.id = ".$request->data);
+            user_student ON table_grievance.student_id = user_student.id WHERE table_grievance.id = ".$request->data." order by table_grievance.updated_at desc");
         }
         else if($request->type == 2){
             $grievances = DB::select("SELECT table_grievance.id, student_id, user_student.college_id, user_student.university_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
-            user_student ON table_grievance.student_id = user_student.id WHERE user_student.id = ".$request->data);
+            user_student ON table_grievance.student_id = user_student.id WHERE user_student.id = ".$request->data." order by table_grievance.updated_at desc");
         }
         else if($request->type == 3){
             $grievances = DB::select("SELECT table_grievance.id, student_id, user_student.college_id, user_student.university_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
-                user_student ON table_grievance.student_id = user_student.id WHERE user_student.college_id = ".$request->data);
+                user_student ON table_grievance.student_id = user_student.id WHERE user_student.college_id = ".$request->data." order by table_grievance.updated_at desc");
         }
         else if($request->type == 4){
             $grievances = DB::select("SELECT table_grievance.id, student_id, user_student.college_id, user_student.university_id, type, eta, status, documents, created_at FROM table_grievance INNER JOIN 
-                user_student ON table_grievance.student_id = user_student.id WHERE table_grievance.type = '".$request->data."'");
+                user_student ON table_grievance.student_id = user_student.id WHERE table_grievance.type = '".$request->data."' order by table_grievance.updated_at desc");
         }
         else{
             $data = [
@@ -129,7 +129,7 @@ class AicteController extends Controller
         $college_id = DB::select("SELECT id FROM table_college WHERE name = '".$request->collegeName."'");
 
         $result = DB::select("SELECT * from table_grievance INNER JOIN user_student
-            ON table_grievance.student_id = user_student.id WHERE user_student.college_id = ".$college_id[0]->id);
+            ON table_grievance.student_id = user_student.id WHERE user_student.college_id = ".$college_id[0]->id." order by table_grievance.updated_at desc");
             
            if($result == null)
             return response(['message'=>'No results Yet'],200);
@@ -144,7 +144,7 @@ class AicteController extends Controller
         $university_id = DB::select("SELECT id FROM table_university WHERE name = '".$request->universityName."'");
 
         $result = DB::select("SELECT * from table_grievance INNER JOIN user_student
-            ON table_grievance.student_id = user_student.id WHERE user_student.university_id = ".$university_id[0]->id);
+            ON table_grievance.student_id = user_student.id WHERE user_student.university_id = ".$university_id[0]->id." order by table_grievance.updated_at desc");
             
            if($result == null)
             return response(['message'=>'No results Yet'],200);
@@ -158,7 +158,7 @@ class AicteController extends Controller
         $university_id = DB::select("SELECT id FROM table_university WHERE state = '".$request->state."'");
 
         $result = DB::select("SELECT * from table_grievance INNER JOIN user_student
-            ON table_grievance.student_id = user_student.id WHERE user_student.university_id = ".$university_id[0]->id);
+            ON table_grievance.student_id = user_student.id WHERE user_student.university_id = ".$university_id[0]->id." order by table_grievance.updated_at desc");
             
            if($result == null)
             return response(['message'=>'No results Yet'],200);

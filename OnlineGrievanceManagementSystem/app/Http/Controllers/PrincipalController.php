@@ -36,20 +36,20 @@ class PrincipalController extends Controller
         if($type == 'seeking'){
             $grievances = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta FROM table_grievance INNER JOIN user_student
             ON table_grievance.student_id = user_student.id WHERE table_grievance.level = 1 AND table_grievance.delayed_status = 0 
-            AND table_grievance.status = 'inaction' AND user_student.college_id = ".$college_id[0]->college_id);
+            AND table_grievance.status = 'inaction' AND user_student.college_id = ".$college_id[0]->college_id." order by table_grievance.updated_at desc");
 
             return response(['message' => $grievances], 200);
         }
         else if($type == 'escalated') {
             $grievances = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta FROM table_grievance INNER JOIN user_student
             ON table_grievance.student_id = user_student.id WHERE table_grievance.level = 1 AND table_grievance.delayed_status = 1 
-            AND user_student.college_id = ".$college_id[0]->college_id);
+            AND user_student.college_id = ".$college_id[0]->college_id." order by table_grievance.updated_at desc");
 
             return response(['message' => $grievances], 200);
         }
         else if($type == 'resolved') {
             $grievances = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta, table_grievance.updated_at, table_grievance.delayed_status FROM table_grievance INNER JOIN user_student
-            ON table_grievance.student_id = user_student.id WHERE table_grievance.status in ('addressed','resolved') AND user_student.college_id = ".$college_id[0]->college_id);
+            ON table_grievance.student_id = user_student.id WHERE table_grievance.status in ('addressed','resolved') AND user_student.college_id = ".$college_id[0]->college_id." order by table_grievance.updated_at desc");
 
             return response(['message' => $grievances], 200);
         }

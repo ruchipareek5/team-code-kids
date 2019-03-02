@@ -20,7 +20,9 @@ grievancesystem.controller('committeeController',committeeController);
     },function(error){
         $scope.college_name='College';
     });
-    
+
+
+
  	//load grievance panel
      $scope.total = 0;
     $scope.open = 0;

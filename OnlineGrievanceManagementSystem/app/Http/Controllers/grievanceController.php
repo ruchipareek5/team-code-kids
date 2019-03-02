@@ -44,7 +44,7 @@ class grievanceController extends Controller
             return $data;
         }
         $student_id = Session::get('user_id');
-        $grievances = Grievance::where('student_id',$student_id)->whereIn('status',$array)->orderBy('id','asc')
+        $grievances = Grievance::where('student_id',$student_id)->whereIn('status',$array)->orderBy('updated_at','desc')
                       ->get(['id','type','eta','documents','created_at','updated_at','description','status']);
 
 

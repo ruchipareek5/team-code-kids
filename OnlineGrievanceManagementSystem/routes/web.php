@@ -126,7 +126,8 @@ Route::get('/grievance/aicte/chart/department','AicteDashBoardController@getGrie
 Route::get('grievance/aicte/importantinfo/university/{id}','AicteDashBoardController@getUniversityDetails');           //For university details
 Route::get('grievance/aicte/importantinfo/institute/{id}','AicteDashBoardController@getCollegeDetails');
 Route::get('/grievance/download/documents/{path}','grievanceController@download');     //Document Download request
-Route::get('/grievance/ombudsman/chart/department','OmbudsmanDashboardController@getGrievanceTypeStatistics');
+//Route::get('/grievance/aicte/chart/department','AicteDashBoardController@getGrievanceTypeStatistics');
+Route::get('/grievance/aicte/chart/department/{state}','AicteDashBoardController@getStateWiseDetails');
 Route::get('/grievance/ombudsman/chart/year','OmbudsmanDashboardController@getYearStatistics');
 
 

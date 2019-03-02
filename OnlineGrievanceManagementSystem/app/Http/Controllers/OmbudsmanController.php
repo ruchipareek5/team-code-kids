@@ -34,7 +34,7 @@ class OmbudsmanController extends Controller
         $grievances = DB::select("SELECT table_grievance.id, table_grievance.student_id, user_student.college_id, table_grievance.type, 
         table_grievance.created_at, table_grievance.eta, table_grievance.documents FROM table_grievance INNER JOIN user_student ON
         table_grievance.student_id = user_student.id WHERE user_student.university_id = ".$university_id." AND table_grievance.status
-        IN ('raised', 'inaction', 'reopened', 'delayed')");
+        IN ('raised', 'inaction', 'reopened', 'delayed') order by table_grievance.updated_at desc");
 
         return response(['message'=>$grievances],200);
     }
@@ -86,17 +86,17 @@ class OmbudsmanController extends Controller
         if($request->type == 1){
             $grievances = DB::select("SELECT table_grievance.id, user_student.college_id, table_grievance.type, table_grievance.created_at, 
             table_grievance.eta, table_grievance.documents FROM table_grievance INNER JOIN user_student ON table_grievance.student_id = user_student.id WHERE 
-            user_student.university_id = ".$university_id." AND table_grievance.id = ".$request->data);
+            user_student.university_id = ".$university_id." AND table_grievance.id = ".$request->data." order by table_grievance.updated_at desc");
         }
         else if($request->type == 2){
             $grievances = DB::select("SELECT table_grievance.id, user_student.college_id, table_grievance.type, table_grievance.created_at, 
             table_grievance.eta, table_grievance.documents FROM table_grievance INNER JOIN user_student ON table_grievance.student_id = user_student.id WHERE 
-            user_student.university_id = ".$university_id." AND user_student.college_id = ".$request->data);
+            user_student.university_id = ".$university_id." AND user_student.college_id = ".$request->data." order by table_grievance.updated_at desc");
         }
         else if($request->type == 3){
             $grievances = DB::select("SELECT table_grievance.id, user_student.college_id, table_grievance.type, table_grievance.created_at, 
             table_grievance.eta, table_grievance.documents FROM table_grievance INNER JOIN user_student ON table_grievance.student_id = user_student.id WHERE 
-            user_student.university_id = ".$university_id." AND table_grievance.type = '".$request->data."'");
+            user_student.university_id = ".$university_id." AND table_grievance.type = '".$request->data."' order by table_grievance.updated_at desc");
         }
         else{
             $data = [

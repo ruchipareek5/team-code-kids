@@ -211,6 +211,7 @@ class OmbudsmanDashboardController extends Controller
     public function getGrievanceTypeStatistics(){
 
         $id = Session::get('user_id');
+
         if($id == null)
             return response(['message' => 'You are not authorized'], 401);
 
@@ -218,18 +219,20 @@ class OmbudsmanDashboardController extends Controller
         if ($university_id == null)
             return response(['message' => 'No data found for the logged in user'], 404);
         $college = DB::table('table_college')->where('university_id', $university_id->university_id)->get(['id']);
+
         $college_id = [];
         $i = 0;
         foreach ($college as $c) {
             $college_id[$i++] = $c->id;
         }
         $student = DB::table('user_student')->whereIn('college_id', $college_id)->get(['id']);
+
         $student_id = [];
         $i = 0;
         foreach ($student as $s) {
             $student_id[$i++] = $s->id;
         }
-        $exam = DB::table('table_grievance')->get(['type'])->groupBy('type');
+        $exam = DB::table('table_grievance')->whereIn('student_id',$student_id)->get(['type'])->groupBy('type');
 
 
         $data=[];
@@ -276,6 +279,8 @@ class OmbudsmanDashboardController extends Controller
         }
         return response(['count'=>$count,'year'=>$year],200);
     }
+
+
 
     }
 

@@ -88,19 +88,19 @@ class CommitteeController extends Controller
             $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta
             FROM table_grievance INNER JOIN user_student ON user_student.id = table_grievance.student_id 
             WHERE user_student.college_id = ".$condition[0]->college_id." AND table_grievance.type = '".$condition[0]->assigned_committee."'
-            AND table_grievance.status = 'raised'");
+            AND table_grievance.status = 'raised' order by table_grievance.updated_at desc");
         }
         elseif ($type=='inaction'){
             $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta,table_grievance.level
             FROM table_grievance INNER JOIN user_student ON user_student.id = table_grievance.student_id 
             WHERE user_student.college_id = ".$condition[0]->college_id." AND table_grievance.type = '".$condition[0]->assigned_committee."'
-            AND table_grievance.status = 'inaction'");
+            AND table_grievance.status = 'inaction' order by table_grievance.updated_at desc");
         }elseif ($type=='addressed'){
             $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta, 
             table_grievance.updated_at, table_grievance.delayed_status 
             FROM table_grievance INNER JOIN user_student ON user_student.id = table_grievance.student_id 
             WHERE user_student.college_id = ".$condition[0]->college_id." AND table_grievance.type = '".$condition[0]->assigned_committee."'
-            AND table_grievance.status = 'addressed'");
+            AND table_grievance.status = 'addressed' order by table_grievance.updated_at desc");
         }
         else {
             $data = [

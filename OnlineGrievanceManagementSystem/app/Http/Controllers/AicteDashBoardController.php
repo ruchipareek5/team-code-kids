@@ -134,7 +134,7 @@ class AicteDashBoardController extends Controller
             $count = DB::select("select count(*) as open_grievances from table_grievance
                             INNER join user_student on table_grievance.student_id = user_student.id
                             INNER JOIN table_university on table_university.id = user_student.university_id
-                            where user_student.university_id = $id and status in ('raised','inaction','delayed')");
+                            where user_student.university_id = $id and status in ('raised','inaction','delayed') order by table_grievance.updated_at desc");
             $details[0]->open_grievances = $count[0]->open_grievances;
 
              return response(['message'=>$details],200);
@@ -150,7 +150,7 @@ class AicteDashBoardController extends Controller
             return response(['message'=>'Sorry no data found for given id '.$id],404);
 
 
-        $count = DB::select("select count(*) as open_grievances from table_grievance,user_student where user_student.college_id = $id and table_grievance.student_id=user_student.id and status in ('raised','addressed')");
+        $count = DB::select("select count(*) as open_grievances from table_grievance,user_student where user_student.college_id = $id and table_grievance.student_id=user_student.id and status in ('raised','addressed') order by table_grievance.updated_at desc");
         if($count==null)
             $count[0]=0;
 	$details[0]->open_grievances = $count[0]->open_grievances;
@@ -160,4 +160,52 @@ class AicteDashBoardController extends Controller
     }
 
 
+    public function getStateWiseDetails($state)
+    {
+        if ($state == 'all') {
+            $exam = DB::select("select count(*) as count,type from table_grievance group by type");
+
+            $data = [];
+            $i = 0;
+            foreach ($exam as $ex) {
+                $data[$i++] = [
+                    $ex->type, $ex->count
+                ];
+            }
+            return response([$data], 200);
+        } else {
+
+            $college_id = DB::table('table_college')->where('state', $state)->get(['id']);
+
+            if ($college_id == null)
+                return response(['message' => 'No data found for the selected state'], 404);
+
+            $college = [];
+            $i = 0;
+            foreach ($college_id as $c) {
+                $college[$i++] = $c->id;
+            }
+            $student = DB::table('user_student')->whereIn('college_id', $college)->get(['id']);
+            $student_id = [];
+            $i = 0;
+            foreach ($student as $s) {
+                $student_id[$i++] = $s->id;
+            }
+            $exam = DB::table('table_grievance')->whereIn('student_id', $student_id)->get(['type'])->groupBy('type');
+
+
+            $data = [];
+            $i = 0;
+            foreach ($exam as $ex) {
+
+                $data[$i++] = [
+                    $ex[0]->type, count($ex)
+                ];
+            }
+            return response([$data], 200);
+
+
+        }
+
+    }
 }
