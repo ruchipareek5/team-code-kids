@@ -54,7 +54,7 @@ Highcharts.chart('top5_institute', {
         enabled: false
     },
     series: [{
-        name: 'pending',
+        name: 'Pending',
         data:data.pending,
         color: 'rgb(131,190,41)'
     },

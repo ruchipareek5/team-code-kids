@@ -81,7 +81,7 @@
              <div class="col-md-11 col-lg-11 div-attachment">
 
                   <label>Attachment<span class="imp"></span></label>
-                  <input type="text" name="selected_file" class="selected_file" id="selected_file" ng-model="grievance.selected_file" placeholder="Upload file pdf, jpg, jpeg, png" readonly="readonly">
+                  <input type="text" name="selected_file" class="selected_file" id="selected_file" ng-model="grievance.selected_file" placeholder="Upload appropriate file" readonly="readonly">
                   <input type="file" name="attachment" class="attachment" ng-files="setTheFiles($files)" id="attachment" > 
 
               <label  for="file"  class="attachmentbtn" >Browse</label>
