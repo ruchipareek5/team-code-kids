@@ -19,6 +19,15 @@ $scope.university_name='';
         $scope.university_name='University';
     });
 
+$scope.college_list=[{}];
+
+$http.get('/ombudsman/college').then(function(success){
+        $scope.college_list=success.data.message;
+        console.log($scope.college_list);
+    },function(error){
+        $scope.college_list=[{}];
+    });
+
 $scope.page='dashboard_ombudsman';
 
  	//load grievance panel

@@ -48,10 +48,10 @@
             <div class="col-md-6 graph">
                 <div class="coverBox"> 
                     <div class="select">
-                        Select Institute: <select>
-                            <option value="1">CVRCE</option>
-                            <option value="2">Techno India</option>
-                        </select>
+                        Select Institute: 
+                        <select>
+                        <option ng-repeat= "y in college_list" value={{y.id}}>{{y.name}}</option>
+                    </select>
                     </div>
                 <div class="graph-boxShort" id="grievance_type_institute"></div>
                  </div> 
