@@ -54,6 +54,7 @@ Route::group(['middleware'=>'web','prefix'=>'aicte'],function() {
     Route::get('/getNumberOfGrievanceReOpened','FaqController@getNumberOfReOpenedGrievance'); //To get the number of reopened Grievances
     Route::get('/getNumberOfGrievanceInAction','FaqController@getNumberOfInActionGrievance'); //To get the number of In Action Grievances
 
+
 });
 
 
@@ -75,6 +76,11 @@ Route::group(['middleware'=>'auth.basic'],function(){
     Route::get('/aicte/grievanceSearch', 'AicteController@searchGrievances');       //AICTE Search Grievances
     Route::post('/aicte/addComment', 'AicteController@addComment');         //AICTE Add Comments
     Route::get('/aicte/remarks/{id}', 'AicteController@getRemarks');        //For fetching remarks AICTE's page
+    Route::post('/aicte/getCollegeWiseGrievances','AicteController@getAllGrievancesCollegeWise'); //To get all grievances college wise
+
+    Route::post('/aicte/getUniversityWiseGrievances','AicteController@getAllGrievancesUniversityWise'); //To get all grievances university wise
+
+    Route::post('/aicte/getStateWiseGrievances','AicteController@getAllGrievancesStateWise'); //To get all grievances state wise
 
     Route::get('/user/getUserName','LoginController@getUserName');
     Route::get('/committee/grievances/{type}', 'CommitteeController@grievanceDetails');         //Committee Grievance Page

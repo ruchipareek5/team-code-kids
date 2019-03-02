@@ -123,6 +123,49 @@ class AicteController extends Controller
             return \response(['message'=>$remarks],200);
         }
     }
+
+    public function getAllGrievancesCollegeWise(Request $request){
+
+        $college_id = DB::select("SELECT id FROM table_college WHERE name = '".$request->collegeName."'");
+
+        $result = DB::select("SELECT * from table_grievance INNER JOIN user_student
+            ON table_grievance.student_id = user_student.id WHERE user_student.college_id = ".$college_id[0]->id);
+            
+           if($result == null)
+            return response(['message'=>'No results Yet'],200);
+        else{
+            return response(['message'=>$result],200);
+        }
+    }
+
+
+     public function getAllGrievancesUniversityWise(Request $request){
+
+        $university_id = DB::select("SELECT id FROM table_university WHERE name = '".$request->universityName."'");
+
+        $result = DB::select("SELECT * from table_grievance INNER JOIN user_student
+            ON table_grievance.student_id = user_student.id WHERE user_student.university_id = ".$university_id[0]->id);
+            
+           if($result == null)
+            return response(['message'=>'No results Yet'],200);
+        else{
+            return response(['message'=>$result],200);
+        }
+    }
+
+    public function getAllGrievancesStateWise(Request $request){
+
+        $university_id = DB::select("SELECT id FROM table_university WHERE state = '".$request->state."'");
+        
+        $result = DB::select("SELECT * from table_grievance INNER JOIN user_student
+            ON table_grievance.student_id = user_student.id WHERE user_student.university_id = ".$university_id[0]->id);
+            
+           if($result == null)
+            return response(['message'=>'No results Yet'],200);
+        else{
+            return response(['message'=>$result],200);
+        }
+    }
     /**
      * Update the specified resource in storage.
      *
