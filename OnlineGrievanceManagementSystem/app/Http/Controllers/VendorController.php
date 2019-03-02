@@ -37,7 +37,7 @@ class VendorController extends Controller
             WHERE user_vendor.college_id = ".$condition[0]->college_id." AND table_grievance.vendor_status = 'Sent for purchase'");
         }
         elseif ($type=='delivered'){
-           $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta, table_grievance.vendor_status
+           $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta, table_grievance.vendor_attachment
             FROM table_grievance INNER JOIN user_vendor ON user_vendor.id = table_grievance.vendor_id 
             WHERE user_vendor.college_id = ".$condition[0]->college_id." AND table_grievance.vendor_status = 'delivered'");
         }

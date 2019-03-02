@@ -29,6 +29,22 @@ grievancesystem.service('committeeService',function ($http,API_URL) {
      
             return $http(request);
 	}
+
+	this.sendForPurchase = function(gid){
+		var formData = new FormData();
+		formData.append('id',gid);
+		var request = {
+                'method': 'POST',
+                'url': API_URL+"/committee/sfp",
+                'data': formData,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+     
+            return $http(request);
+	}
+
 	this.takeAction = function(gid)
 	{
 		var formData = new FormData();

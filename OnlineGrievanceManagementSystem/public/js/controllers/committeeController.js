@@ -89,6 +89,7 @@ grievancesystem.controller('committeeController',committeeController);
             committeeService.getGrievance('inaction').then(function(success)
              {   
                $scope.in_action_grievance_data = success.data.message;
+               console.log(success.data.message);
                  $scope.in_action_grievance.data = $scope.in_action_grievance_data;
 
                 }, function(error){
@@ -98,6 +99,8 @@ grievancesystem.controller('committeeController',committeeController);
             committeeService.getGrievance('addressed').then(function(success)
              {   
                $scope.resolved_grievance_data = success.data.message;
+               console.log(success.data.message);
+
                  $scope.resolved_grievance.data = $scope.resolved_grievance_data;
 
                 }, function(error)                 {
@@ -150,7 +153,7 @@ grievancesystem.controller('committeeController',committeeController);
             enableFiltering:false,
             enableCellEditing:false,
             enableColumnMenus: false,
-            enableHorizontalScrollbar:0,
+            enableHorizontalScrollbar:1,
             enableVerticalScrollbar:0,
             paginationPageSize: $scope.pageSize,
             minRowsToShow: $scope.numRows,
@@ -160,14 +163,15 @@ grievancesystem.controller('committeeController',committeeController);
 
     columnDefs: [
         { name : "id", cellTemplate: '/views/cellTemplate/cell.html',headerCellTemplate: '<div class="">Grievance <br>ID </div>',width:"7%"},
-        {name :"student_details", headerCellTemplate: '<div class="">Student <br>Details </div>',cellTemplate: '/views/cellTemplate/student_details.html', width: "7%"},
+        {name :"student_details", headerCellTemplate: '<div class="">Student <br>Details </div>',cellTemplate: '/views/cellTemplate/student_details.html', width: "9%"},
         { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html',width:"10%"},
         { name:"description" ,displayName: 'Description', cellTemplate: '/views/cellTemplate/cell.html',width:"15%"},
-        {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html",width:"7%"  },
+        {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html",width:"9%"  },
         {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html',width:"10%"},
         {name:"connect",displayName: 'Connect',cellTemplate: "/views/cellTemplate/committee_connect.html",width:"21%"  },
-        {name:"action",displayName: 'Action',cellTemplate: "/views/cellTemplate/committee_action.html",width:"16%"  },
-        {name:"authority",displayName: 'Authority',cellTemplate: "/views/cellTemplate/authorityCell.html",width:"7%"  },
+        {name:"action",displayName: 'Action',cellTemplate: "/views/cellTemplate/committee_action.html",width:"25%"  },
+        {name:"authority",displayName: 'Authority',cellTemplate: "/views/cellTemplate/authorityCell.html",width:"10%"  },
+        {name:"vendor_status",displayName: 'Vendor Status',cellTemplate: "/views/cellTemplate/vendorCell.html",width:"10%"  },
         
     ],     
 
@@ -181,7 +185,7 @@ grievancesystem.controller('committeeController',committeeController);
         enableFiltering:false,
         enableCellEditing:false,
         enableColumnMenus: false,
-        enableHorizontalScrollbar:0,
+        enableHorizontalScrollbar:1,
         enableVerticalScrollbar:0,
         paginationPageSize: $scope.pageSize,
         minRowsToShow: $scope.numRows,
@@ -198,7 +202,8 @@ columnDefs: [
     {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
     {name:"updated_at",displayName: 'Closing Date',cellTemplate: "/views/cellTemplate/cell.html",width:"12%"  },
     {name:"delayed_status",displayName: 'Closing Status',cellTemplate: "/views/cellTemplate/closureCell.html",width:"10%"  },
-          
+    {name:"invoice",displayName: 'Vendor Invoice',cellTemplate: "/views/cellTemplate/invoice_attachment.html",width:"12%"  },
+    
                     ],
 
            
@@ -262,7 +267,7 @@ $scope.action = function(gid)
 }
 //action
 
-// sfa function is in appController
+
 
     //addressed
     $scope.markAddressed = function(gid)
@@ -297,11 +302,20 @@ $scope.action = function(gid)
     //  grievance search ends
 
     $scope.sfa;
+    $scope.purchase;
     // sfa 
     $scope.sfaStart = function (id) {
         if(id){
             $scope.sfa=1;
             $scope.addComment(id);
+        }        
+    }
+
+    $scope.purchaseStart = function (id) {
+        if(id){
+            $scope.purchase=1;
+            $scope.addComment(id);
+            console.log('purhase')
         }        
     }
     $scope.addComment=function(id){
@@ -329,6 +343,19 @@ $scope.action = function(gid)
                 console.log($scope.sfa)
                 $scope.sfa=0;
                 committeeService.seekForApproval($scope.comment.gid).then(function(success){
+                    $scope.loadAllGrievance();
+                     appService.showAlert("success",success.data.message);
+
+                },function(error){
+                    appService.showAlert('error',error.data.message );
+                }
+                );
+
+            }
+            if ($scope.purchase==1) {
+                console.log($scope.purchase)
+                $scope.purchase=0;
+                committeeService.sendForPurchase($scope.comment.gid).then(function(success){
                     $scope.loadAllGrievance();
                      appService.showAlert("success",success.data.message);
 

@@ -149,7 +149,7 @@ class CommitteeController extends Controller
        
         if(!$grievance)
              return response(['message'=> "No Grievance with Grievance Id ".$request->id]);
-        return response(['message'=> "Grievance is sent for higher Approval"]);
+        return response(['message'=> "Purchase Request sent to College Vendor"]);
     }
 
     public function markAddressed(Request $request){

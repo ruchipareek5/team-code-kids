@@ -271,8 +271,8 @@ class grievanceController extends Controller
       //  try {
         DB::table('table_message')->insert( array( 'grievance_id' => $request->grievance_id, 'message' => $request->message, 'sender_id' => $sender_id));
 
-        // $file = $request->file('attachment');
-        // $grievance->vendor_attachment = $file==null?'':$file->store('documents');
+        $file = $request->file('attachment');
+        $grievance->vendor_attachment = $file==null?'':$file->store('documents');
 
         return response(['message' => 'Comment Added'], 200);
         //}catch (QueryException $ex){

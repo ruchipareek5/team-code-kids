@@ -1,0 +1,14 @@
+<div class='ui-grid-cell-contents cell '>
+<div ng-if="row.entity.id">
+	<span ng-show="row.entity.documents">
+		<button style="background-color:transparent;border:none;" ng-click="grid.appScope.downloadInvoice(row.entity.vendor_attachment)"><img src='assets/images/attachment1.png' width=18 height="17" value='{{COL_FIELD CUSTOM_FILTERS}}' ></button>
+	</span>
+	<span ng-if="row.entity.documents==null">
+		No file
+	</span>
+
+	<span ng-if="row.entity.documents==''">
+		No file
+	</span>
+</div>
+</div> 

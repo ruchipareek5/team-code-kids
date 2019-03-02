@@ -82,6 +82,11 @@
      <script src="js/controllers/ombudsmanController.js"></script>
     <script src="js/services/ombudsmanService.js"></script>
      <!-- ombudsman ends -->
+
+      <!-- vendor starts -->
+     <script src="js/controllers/vendorController.js"></script>
+    <script src="js/services/vendorService.js"></script>
+     <!-- vendor ends -->
     
 
       

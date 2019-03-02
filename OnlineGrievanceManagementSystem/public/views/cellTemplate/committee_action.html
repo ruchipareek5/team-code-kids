@@ -8,14 +8,14 @@
             padding-left:2em;
             padding-right: 2em;
             box-shadow: 1px 0px 1px 1px #c7c1c1;
-            
+            margin-left: 0.1em;
+
         }
         .comment-cell
         {
-            text-align: center;
-
-            
+            text-align: center;           
         }
+
         .disabled-btn{
             cursor: no-drop !important;
             opacity: 0.6;
@@ -24,12 +24,14 @@
     
     <div class='ui-grid-cell-contents cell comment-cell'>
         <!-- Committe controller function -->
-        <div  ng-if='row.entity.level=="0"'>
-             <button ng-click="grid.appScope.sfaStart(row.entity.id)" class="btn-action" style="background-color: rgb(234,139,27);">SFA</button>
-            <button  ng-click="grid.appScope.markAddressed(row.entity.id)" class="btn-action" style="background-color: rgb(1,156,183);margin-left: 0.8em">Addressed</button>
+        <div  ng-if="row.entity.level=='0' || row.entity.vendor_status !=='Sent for purchase'">
+             <button  ng-click="grid.appScope.sfaStart(row.entity.id)" class="btn-action" style="background-color: rgb(234,139,27);">SFA</button>
+              <button  ng-click="grid.appScope.purchaseStart(row.entity.id)" class="btn-action" style="background-color: rgb(131,190,41);">SFP</button>
+            <button   ng-click="grid.appScope.markAddressed(row.entity.id)" class="btn-action" style="background-color: rgb(1,156,183);margin-left: 0.8em">Addressed</button>
          </div>
-         <div  ng-if='row.entity.level!="0"'>
-            <button ng-diasbled class="btn-action disabled-btn" style="background-color: rgb(234,139,27);">SFA</button>
+         <div  ng-if="row.entity.level!='0'">
+            <button class="btn-action disabled-btn" style="background-color: rgb(234,139,27);">SFA</button>
+            <button class="btn-action" style="background-color: rgb(131,190,41);">SFP</button>
             <button class="btn-action disabled-btn" style="background-color: rgb(1,156,183);margin-left: 0.8em">Addressed</button>
          </div>
 

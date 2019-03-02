@@ -54,7 +54,11 @@ grievancesystem.config(function ($routeProvider) {
 	.when('/student',{
 		templateUrl:'/views/templates/studentTemplate.php',
 		controller:'studentController'
-	})	
+	})
+	.when('/vendor',{
+		templateUrl:'/views/templates/vendorTemplate.php',
+		controller:'vendorController'
+	})		
 	.otherwise({
 		redirectTo:'/'
 	})

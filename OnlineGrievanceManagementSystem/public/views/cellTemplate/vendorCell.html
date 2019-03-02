@@ -1,0 +1,8 @@
+<div class="ui-grid-cell-contents cell">
+	<div ng-if="row.entity.vendor_status=='' || row.entity.vendor_status==null">
+		None
+	</div>
+	<div ng-hide="row.entity.vendor_status=='' || row.entity.vendor_status=='null'">
+		{{COL_FIELD CUSTOM_FILTERS}}
+	</div>
+</div>

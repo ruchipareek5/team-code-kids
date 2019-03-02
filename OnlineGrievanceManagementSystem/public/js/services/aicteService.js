@@ -1,3 +1,4 @@
+
 var grievancesystem=angular.module('grievancesystem');
 
 grievancesystem.service('aicteService',function ($http,API_URL) {

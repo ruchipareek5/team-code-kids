@@ -18,6 +18,8 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
                 $location.path('/principal');
             }else if (response.data.roles == "ombudsman") {
                 $location.path('/ombudsman');
+            }else if (response.data.roles == "vendor") {
+                $location.path('/vendor');
             }else {
                 alert('Template Not Available');
             }
@@ -45,6 +47,12 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 
 	 // grievances action starts
     $scope.downloadAttachment=function(path){
+
+       var url = API_URL+'grievance/download/'+path;
+       $window.open(url);
+    }
+
+    $scope.downloadInvoice=function(path){
 
        var url = API_URL+'grievance/download/'+path;
        $window.open(url);
@@ -93,7 +101,7 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
 
     	},
     	function(error){
-            $scope.grievance_search.data=new Array();
+            $scope.comment_history.data=new Array();
              appService.showAlert('error',error.data.message);
 
     	});

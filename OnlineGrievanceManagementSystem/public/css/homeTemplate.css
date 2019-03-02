@@ -53,3 +53,10 @@ h1{
 	padding: 0px;
 	font-size: 1.2vw;
 }
+#vendor {
+	background-color:grey;
+	border-top-left-radius: 1vw;
+	border-top-right-radius: 1vw;
+	padding: 0px;
+	font-size: 1.2vw;
+}
