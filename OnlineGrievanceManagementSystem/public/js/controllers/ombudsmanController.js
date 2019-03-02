@@ -12,6 +12,13 @@ grievancesystem.controller('ombudsmanController',ombudsmanController);
         $scope.username='username';
     });
 
+$scope.university_name='';
+    $http.get('/users/fetchUniversity').then(function(success){
+        $scope.university_name=success.data.message;
+    },function(error){
+        $scope.university_name='University';
+    });
+
 $scope.page='dashboard_ombudsman';
 
  	//load grievance panel

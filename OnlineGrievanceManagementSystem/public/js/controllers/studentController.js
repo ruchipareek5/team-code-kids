@@ -30,10 +30,16 @@ grievancesystem.controller('studentController',studentController);
         $scope.username='username';
     });
 
+    $scope.college_name='';
+    $http.get('/users/fetchCollege').then(function(success){
+        $scope.college_name=success.data.message;
+    },function(error){
+        $scope.college_name='College';
+    });
  	$scope.page='dashboard_student';
    
     $scope.grievanceagainst=[{"category":"Admission Cell"},{"category":"Accounts Department"},
-    {"category":"Placement & training cell"},
+    {"category":"Training and Placement cell"},
     {"category":"Security"},{"category":"Hostel"},{"category":"Ragging"},{"category":"Canteen"},
     {"category":"Transport"}];
         

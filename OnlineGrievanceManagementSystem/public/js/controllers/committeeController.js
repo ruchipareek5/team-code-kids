@@ -6,7 +6,6 @@ grievancesystem.controller('committeeController',committeeController);
  function committeeController($scope,$http,appService,committeeService,API_URL,$location) {
    
  	$scope.page='dashboard_committee';
-    $scope.college_name='CV Raman College of Engineering';
 
     $scope.username='';
     $http.get('/user/getUserName').then(function(success){
@@ -14,6 +13,14 @@ grievancesystem.controller('committeeController',committeeController);
     },function(error){
         $scope.username='username';
     });
+
+    $scope.college_name='';
+    $http.get('/users/fetchCollege').then(function(success){
+        $scope.college_name=success.data.message;
+    },function(error){
+        $scope.college_name='College';
+    });
+    
  	//load grievance panel
      $scope.total = 0;
     $scope.open = 0;

@@ -6,7 +6,6 @@ grievancesystem.controller('principalController',principalController);
  function principalController($scope,$http,appService,principalService,API_URL,$location) {
    
  	$scope.page='dashboard_principal';
-    $scope.college_name='CV Raman College of Engineering';
 
 
  $scope.username='';
@@ -14,6 +13,13 @@ grievancesystem.controller('principalController',principalController);
         $scope.username=success.data.message;
     },function(error){
         $scope.username='username';
+    });
+
+    $scope.college_name='';
+    $http.get('/users/fetchCollege').then(function(success){
+        $scope.college_name=success.data.message;
+    },function(error){
+        $scope.college_name='College';
     });
     
  	//load grievance panel

@@ -21,7 +21,7 @@
                 <!-- nav top head -->
                 <div class="row navTop align-items-center">
                     <span class="col-md-3 logo"><img src="assets/logos/cvrce.png"></span>
-                    <span class="col-md-9 navTop-head">C.V. Raman College of Engineering</span>
+                    <span class="col-md-9 navTop-head">{{college_name}}</span>
                 </div>
             </div>
 
