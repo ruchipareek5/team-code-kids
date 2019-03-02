@@ -8,6 +8,7 @@ Highcharts.chart('top5_institute', {
     chart: {
         type: 'column'
     },
+    
     title: {
         text:'Top 5 College having maximum filled Grievance'
     },

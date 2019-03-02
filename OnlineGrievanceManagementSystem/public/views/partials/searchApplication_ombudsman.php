@@ -10,7 +10,7 @@
               <h5 class="grievance-heading">Search Grievance</h5>
                 
                      
-                <div class="col-md-12 col-lg-12 div-form table grid ">
+                <div class="col-md-12 col-lg-12 div-form table ">
                           <form ng-submit='searchGrievance(grievanceFilter,searchKeyword)'>
                           <label style="color:#5A5A5A;font-size:1em;display: inline;">Select</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                           <select ng-model="grievanceFilter" name="grievanceFilter" id="grievanceFilter" required="required">

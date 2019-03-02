@@ -53,6 +53,18 @@
 	.history-icon img{
 		width: 100%;
 	}
+	.grid
+	{
+		margin:0;
+		width: 100%;
+		padding:0;
+		height: auto !important;
+		text-align: center;
+		font-size: 0.85em;
+		color: #6F6E6F;
+		background-color: white;
+
+	}
 </style>
 
 <div id="modal-container" class="">

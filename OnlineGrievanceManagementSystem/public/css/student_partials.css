@@ -220,13 +220,18 @@ hr
     color:#4F4F4F;
     background-color: white;
     margin-top: 1.5em;
-    box-shadow: 2px 2px 2px  silver,0 0 2px silver;;
+    box-shadow: 2px 2px 2px  silver,0 0 2px silver;
+    padding-left: 2em;
+    padding-bottom: 2em;
+    border-radius: 0.5em;
 }
 
 .div-ques
 {
     margin-top: 1em;
     background-color: white;
+    font-weight: 700;
+    color: rgb(64,79,102);
 }
 
 .add

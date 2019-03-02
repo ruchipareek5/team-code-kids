@@ -136,16 +136,40 @@ grievancesystem.controller('studentController',studentController);
     //  lodge grievance ends
 
 
-    $scope.faq =[{ "ques":"how to file grievance? How we will know it is resolved",
-                    "ans": "You will be notified when it will solved"},
-                    { "ques":"how to file grievance? ",
-                    "ans": "You will be notified when it will solved. This is test"},
-                    { "ques":"how to file grievance? ",
-                    "ans": "You will be notified when it will solved. This is test"},
-                    { "ques":"how to file grievance? How we will know it is resolved",
-                    "ans": "You will be notified when it will solved"},
-                    { "ques":"how to file grievance? How we will know it is resolved",
-                    "ans": "You will be notified when it will solved"},
+    $scope.faq =[{ 
+                    "ques":"Can I open grievance web portal in any browser?",
+                    "ans": "Yes. You can open grievance Web Portal in any Web Browser."
+                    },
+                    {
+                        "ques":"How can I lodge a grievance?",
+                         "ans":"In dashboard tab you can find a form to lodge the grievance."
+                    },
+                    { 
+                        "ques":"When I try to login with Institute's Credentials, error message 'Invalid username and password' is displayed. What should I do?",
+                        "ans": "Recheck  the  login  credentials(Case  sensitive).  Confirm  whether  someone  else  has logged  in  with  the  same  credentials"+
+                        "(Please  notethat  per  user  only    sessions  are allowed.  Hence,  if  someone  tries  for  session  then  again  invalid  user  name "+
+                        "and password message  will  popup). If  no  session  is  live  and  still  getting  an  invalid username and password message then contact your principal."},
+                    { 
+                        "ques":"What happens when I lodge the grievance? ",
+                         "ans": "The grievance is acknowledged online. A unique grievance id is given to each grievance."
+                    },
+                    { 
+                        "ques":"What happen to grievance when it  get unaddress within estimated time of action? ",
+                        "ans": "The grievance which remains unaddress within estimated time of action will be explicitly escalated to higher authority."
+                    },
+                    { 
+                        "ques":"How do I know when grievance is addressed?",
+                         "ans": "You will see addressed grievance in history table in my grievance column."
+                    },
+                    {
+                        "ques": "How to reset password?",
+                        "ans": "You can contact your principal or head of student welfare to reset the password."
+                    },
+                    {
+                        "ques": "What if I am  not satisfied with the addressed grievance?",
+                        "ans":"You can reopen the grievance by clicking on reopen button in action column of addressed table."
+                    }
+                    
 
                     
                 ];

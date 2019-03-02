@@ -52,6 +52,18 @@
 	.icon img{
 		width: 100%;
 	}
+	.grid
+	{
+		margin:0;
+		width: 100%;
+		padding:0;
+		height: auto !important;
+		text-align: center;
+		font-size: 0.85em;
+		color: #6F6E6F;
+		background-color: white;
+
+	}
 </style>
 
 <div id="studentModal-container" class="">
@@ -62,7 +74,7 @@
 						Student Details
 						<span class="icon"><img src="assets/icons/student.png"></span>
 					</div>
-					<div id="grid1" ui-grid="student_detail" ui-grid-pagination="" ui-grid-cellNav ui-grid-auto-resize ></div>
+					<div id="grid1" ui-grid="student_detail" ui-grid-pagination="" ui-grid-cellNav ui-grid-auto-resize class="grid" ></div>
                       <div class="text-center page" ng-show="student_detail.totalItems > '1'">
               <pagination class="pagination-sm" total-items="student_detail.totalItems" items-per-page="student_detail.paginationPageSize" ng-model="student_detail.paginationCurrentPage"></pagination>
 				</div>

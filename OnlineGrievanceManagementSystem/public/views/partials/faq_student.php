@@ -19,8 +19,8 @@
         <div class="btn add" ng-click="show=!show">
           <img src="assets/icons/add.png" height="24" width="24" >
         </div>
-        <div ng-show="show">
-          </br> {{data.ans}}
+        <div ng-show="show">   
+          </br> <div class="div-ans">{{data.ans}}</div>
         </div>
       </div>
     </div>
