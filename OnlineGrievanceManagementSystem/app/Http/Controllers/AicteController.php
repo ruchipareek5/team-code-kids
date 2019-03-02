@@ -170,8 +170,8 @@ class AicteController extends Controller
     public function getMajorGrievances(){
         $array = ['Ragging', 'Security'];
 
-        $grievances = Grievance::whereIn('type',$array)->orderBy('id','desc')
-                      ->get(['id','student_id','type','eta','status','documents','created_at']);
+        $grievances = DB::select("select g.id,g.student_id,g.type,g.eta,g.status,g.documents,g.created_at,s.college_id from
+                        table_grievance g, user_student s where g.student_id = s.id and type in ('Ragging', 'Security') order by g.updated_at asc");
 
         if($grievances == null)
             return \response(['message'=>'No data found'],404);
