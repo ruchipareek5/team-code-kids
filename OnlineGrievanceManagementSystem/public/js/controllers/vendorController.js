@@ -23,7 +23,7 @@ grievancesystem.controller('vendorController',vendorController);
      
             $http(request)
                 .then(function success(e) {
-                    appService.showAlert('success',e.data.message +" having an ID "+ e.data.id);
+                    appService.showAlert('success','Success! Your request for mark delivered has been processed.');
                     $scope.files = e.data.files;
                     $scope.errors = [];
                     $scope.selected_file='';

@@ -133,7 +133,7 @@ Route::get('/grievance/ombudsman/chart/year','OmbudsmanDashboardController@getYe
 
 Route::get('/vendor/getGrievances/{type}','VendorController@getGrievances');
 Route::post('/vendor/deliveryRequest', 'VendorController@deliveryRequest');
-
+Route::post('/file/upload','RegisterController@register');
 Route::get('/ui_gridSample', function(){
     return view('templates/ui_gridSample');
 });

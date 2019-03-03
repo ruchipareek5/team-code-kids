@@ -273,6 +273,7 @@ class grievanceController extends Controller
 
 
         $file = $request->file('attachment');
+        dump($request);
         if($file != null) {
             $path = $file == null ? '' : $file->store('documents');
             if ($path == null)
@@ -280,8 +281,8 @@ class grievanceController extends Controller
             DB::table('table_message')->insert( array( 'grievance_id' => $request->grievance_id,
                 'message' => $request->message,
                 'sender_id' => $sender_id,
-                'vendor_attachment'=>$file,
             ));
+            DB::select("UPDATE table_grievance SET vendor_attachment='".$path."', vendor_status = 'delivered' WHERE id=".$request->grievance_id);
         }
         else
         {
