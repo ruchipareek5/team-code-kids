@@ -39,6 +39,13 @@ class UtilityController extends Controller
 
             return response(['message'=> $college_name[0]->name], 200);
         }
+        else if($roles == 'vendor'){
+            $var = DB::select("SELECT college_id FROM user_vendor WHERE id = ".$user_id);
+
+            $college_name = DB::select("SELECT name FROM table_college WHERE id = ".$var[0]->college_id);
+
+            return response(['message'=> $college_name[0]->name], 200);
+        }
     }
 
     public function fetchUniversity(){
@@ -74,5 +81,6 @@ class UtilityController extends Controller
             return response(['message'=> $university_name[0]->name], 200);
 
         }
+        
     }
 }

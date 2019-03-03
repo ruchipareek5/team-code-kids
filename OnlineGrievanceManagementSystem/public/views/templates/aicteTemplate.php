@@ -69,6 +69,11 @@
     					<img src="assets/icons/folder.png"" class="icons">
     					<div class="side-link">Reports</div>
     				</div>-->
+					
+					<div class="sideBtn" ng-click="page = 'aicte_users'">
+    					<img src="assets/icons/faq.png"" class="icons">
+    					<div class="side-link">User</div>
+    				</div>
 
     				<div class="sideBtn" ng-click="page = 'faq_aicte'">
     					<img src="assets/icons/faq.png"" class="icons">
@@ -97,6 +102,9 @@
 		                </div>
 		                 <div ng-switch-when="faq_aicte">
 		                    <div ng-include src="'views/partials/faq_aicte.php'"></div>
+		                </div>
+						<div ng-switch-when="aicte_users">
+		                    <div ng-include src="'views/partials/aicte_users.php'"></div>
 		                </div>
 		            </div>
 				 	

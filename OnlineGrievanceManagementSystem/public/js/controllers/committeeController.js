@@ -89,7 +89,9 @@ grievancesystem.controller('committeeController',committeeController);
             committeeService.getGrievance('inaction').then(function(success)
              {   
                $scope.in_action_grievance_data = success.data.message;
+               console.log('In action');
                console.log(success.data.message);
+               $scope.in_action_grievance.data=[];
                  $scope.in_action_grievance.data = $scope.in_action_grievance_data;
 
                 }, function(error){
@@ -339,6 +341,7 @@ $scope.action = function(gid)
                 }
             };
         $http(request).then(function(success){
+            $scope.loadAllGrievance();
             if ($scope.sfa==1) {
                 console.log($scope.sfa)
                 $scope.sfa=0;

@@ -114,7 +114,7 @@
 
                   <label>Attachment<span class="imp"></span></label>
                   <input type="text" name="selected_file" class="selected_file" id="selected_file" ng-model="selected_file" placeholder="Upload appropriate file" readonly="readonly">
-                  <input type="file" name="attachment" class="attachment" ng-files="setTheFiles($files)" id="attachment" > 
+                  <input type="file" name="attachment" class="attachment" ng-files="setTheFiles($files)" id="attachment" required > 
 
               <label  for="file"  class="attachmentbtn" >Browse</label>
               

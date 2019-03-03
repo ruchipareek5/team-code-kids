@@ -29,9 +29,9 @@
               <button  ng-click="grid.appScope.purchaseStart(row.entity.id)" class="btn-action" style="background-color: rgb(131,190,41);">SFP</button>
             <button   ng-click="grid.appScope.markAddressed(row.entity.id)" class="btn-action" style="background-color: rgb(1,156,183);margin-left: 0.8em">Addressed</button>
          </div>
-         <div  ng-if="row.entity.level!='0'">
+         <div  ng-if="row.entity.level!='0' || row.entity.vendor_status ==='Sent for purchase'">
             <button class="btn-action disabled-btn" style="background-color: rgb(234,139,27);">SFA</button>
-            <button class="btn-action" style="background-color: rgb(131,190,41);">SFP</button>
+            <button class="btn-action disabled-btn" style="background-color: rgb(131,190,41);">SFP</button>
             <button class="btn-action disabled-btn" style="background-color: rgb(1,156,183);margin-left: 0.8em">Addressed</button>
          </div>
 
