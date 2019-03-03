@@ -545,8 +545,10 @@ grievancesystem.controller('aicteController',aicteController);
 $scope.errors = "";
 var formData = new FormData();
 $scope.file={};
-$scope.uploadExcel = function () {
-    
+$scope.role_type = '';
+$scope.uploadExcel = function (role_type) {
+    formData.append('type',role_type);
+    console.log(role_type);
     var request = {
         method: 'POST',
         url: API_URL+"/aicte/registerUser",
@@ -577,7 +579,7 @@ $scope.uploadExcel = function () {
 $scope.setTheFiles = function ($files) {
     angular.forEach($files, function (value, key) {
 
-        formData.append('type',$scope.role_type);
+
         formData.append('file', value);
 
 

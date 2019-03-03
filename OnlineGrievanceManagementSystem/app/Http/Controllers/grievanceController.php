@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Middleware\BasicAuth;
+use App\Mail\GrievanceMail;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\User;
@@ -9,6 +10,7 @@ use App\Grievance;
 use App\GrievanceStatus;
 use App\Student;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -89,6 +91,9 @@ class grievanceController extends Controller
         $grievance->sub_category = $sub_category;
         $grievance->timeslot = $timeslot;
         $grievance->save();
+
+
+
         $data = [];
         $new_grievance = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','desc')->get(['id'])->first();
         //Data insertion in grievance status table
@@ -96,6 +101,12 @@ class grievanceController extends Controller
           'id' => $new_grievance->id,
           'message' => 'Your grievance is registered'
         ];
+        $email = DB::select('select email from users u,table_grievance g, user_committee_member c,user_principal p,
+                user_student s where g.type = c.assigned_committee and g.student_id = s.id and p.id = c.created_by and p.college_id = s.college_id and u.id = c.user_id and g.id ='.$data['id']);
+        $data = ['id'=>$data['id'],'description'=>$description];
+
+        Mail::to($email[0]->email)->send(new GrievanceMail($data['id'],$data['description']));
+
         return json_encode($data);
     }
     /**

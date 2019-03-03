@@ -20,7 +20,7 @@
 <p>Congratulations, you are now registered on AICTE grievance management system </p>
 <p>Your UserId: {{$username}}</p>
 <p>Your Password: {{$password}}</p>
-<p><bold>Note: </bold>Please don't share this email with anyone. By doing the such, Your accound can be exposed to the other person</p>
+<p><bold>Note: </bold>Please don't share this email with anyone. By doing this, Your account can be exposed to the other person</p>
 <p>Thankyou</p>
 <p id="p2">AICTE grams</p>
 </body>

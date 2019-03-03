@@ -11,8 +11,8 @@
                  <h5 class="grievance-heading">Import<h5>
                  <div class="table " style="font-size:0.8em"  style="border-radius:0.3px;">
                     <div class="form-box">
-                    <form ng-submit='uploadExcel()' enctype="multipart/form-data">
-                        <select ng-model="file.role_type">
+                    <form ng-submit='uploadExcel(role_type)' enctype="multipart/form-data">
+                        <select ng-model="role_type">
                             <option value="">Select</option>
                             
                             <option value="0">University</option>

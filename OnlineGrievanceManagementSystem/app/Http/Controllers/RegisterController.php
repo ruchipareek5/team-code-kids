@@ -125,15 +125,15 @@ class RegisterController extends Controller
                 $user = new User();
                 $user->email = $uni->email;
                 $user->password = Hash::make(UtilityController::getPassword($uni->name, $uni->email));
-                $user->roles = 'Ombudsman';
+                $user->roles = 'ombudsman';
                 $user->username = $uni->name;
                 $user->save();
-                $user_id = DB::table('users')->orderBy('created_at', 'desc')->get(['id'])->first();
+                $user_id = DB::select("Select id from users where email ='".$uni->email."'");
                 DB::table('user_ombudsman')->insert([
                     'name' => $uni->name,
                     'university_id' => $university->id,
                     'phone' => $uni->phone,
-                    'user_id' => $user_id->id,
+                    'user_id' => $user_id[0]->id,
                 ]);
                 $data = [
                     'username' => $uni->email,
