@@ -40,6 +40,13 @@ grievancesystem.service('aicteService',function ($http,API_URL) {
 		return $http.get(url);
 	}
 
+	this.getUpdateHistory=function () {
+		
+		var url = API_URL + 'aicte/registerHistory';
+		return $http.get(url);
+
+		}
+
 	
 	
 });

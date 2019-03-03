@@ -487,13 +487,31 @@ grievancesystem.controller('aicteController',aicteController);
 
 
 
+    $scope.getHistory = function()
+    {   $scope.add_user_data = new Array();
 
+        aicteService.getUpdateHistory().then(
+            function(success)
+            {
+                $scope.add_user_data = success.data.message;
+               // console.log(success.data.message);
+                $scope.add_user.data = $scope.add_user_data;
 
-    $scope.add_user_data=[{"file_name":"Omudsman.csv",
-                            "file_type":"Ombudsman",
-                            "file_date":"03/03/2019",
-                            "upload_by":"kamal@aicte.in",
-                            "documents":"1"}];
+            },
+            function(error)
+            {
+                appService.alert('error',error.data.message);
+            }
+            
+        )
+    };
+
+    $scope.getHistory();
+    // $scope.add_user_data=[{"file_name":"Omudsman.csv",
+    //                         "file_type":"Ombudsman",
+    //                         "file_date":"03/03/2019",
+    //                         "upload_by":"kamal@aicte.in",
+    //                         "documents":"1"}];
     $scope.add_user = {
         data:$scope.add_user_data,
             enableGridMenus:false,
@@ -510,13 +528,12 @@ grievancesystem.controller('aicteController',aicteController);
             
 
             columnDefs: [
-                { name : "file_name",displayNameName: 'File Name', cellTemplate: '/views/cellTemplate/cell.html' , width:"20%"},
-                { name:"file_type" ,displayName: 'File Type',  cellTemplate: '/views/cellTemplate/cell.html', width:"20%"},
-                { name:"file_date" ,displayName: 'File Date',  cellTemplate: '/views/cellTemplate/cell.html', width:"20%"},
-                {name :"upload_by" ,displayName: 'Upload By' ,cellTemplate: '/views/cellTemplate/cell.html' , width:"20%"},
+                { name : "filename",displayNameName: 'File Name', cellTemplate: '/views/cellTemplate/cell.html' , width:"25%"},
+                { name:"type" ,displayName: 'File Type',  cellTemplate: '/views/cellTemplate/cell.html', width:"25%"},
+                { name:"date" ,displayName: 'File Date',  cellTemplate: '/views/cellTemplate/cell.html', width:"25%"},
+                {name :"uploaded_by" ,displayName: 'Upload By' ,cellTemplate: '/views/cellTemplate/cell.html' , width:"25%"},
                 
-                {name:"documents",displayName: 'View Uploaded File',cellTemplate: "/views/cellTemplate/attachment.html", width:"20%"  },
-             
+                
             ],
 
                 
@@ -539,6 +556,8 @@ $scope.uploadExcel = function () {
         }
     };
 
+
+
     $http(request)
         .then(function success(e) {
             appService.showAlert('success',e.data.message);
@@ -548,7 +567,7 @@ $scope.uploadExcel = function () {
 
             var fileElement = angular.element('#attachment');
             fileElement.value = '';
-            
+            $scope.getHistory();
             
         }, function error(e) {
             $scope.errors = e.data.errors;
@@ -564,6 +583,9 @@ $scope.setTheFiles = function ($files) {
 
     });
 };
+
+
+
                 
 }
 
