@@ -5,6 +5,9 @@
     .form-box{
         padding-bottom: 1.1em;
     }
+    .sub{
+        width: 90%;
+    }
 </style>
 <div class="container">
    <div class="row row_gap">
@@ -57,15 +60,31 @@
     </div>
     <div class="container">
     <div class="row align-items-center form-box">
-    <div class="col-lg-8">
+    <div class="col-lg-8" class="formBg">
     <form ng-submit="lodgeGrievance()" name="lodgeGrievanceForm" enctype="multipart/form-data">
     <div class="grievance-form">
         <div class="row"> 
             <div class="col-md-12 col-lg-12 div-form">
                <label>Grievances Type<span class="imp">*</span></label>
-                <select ng-model="grievance.type" required="required">
+                <select id="grievanceType" ng-model="grievance.type" ng-change='grievanceChange()' required="required">
                     <option value="">Select</option>
                     <option ng-repeat= "y in grievanceagainst" value={{y.category}} >{{y.category}}</option>
+                </select>
+            </div>           
+        </div>
+        <div class="row"> 
+            <div class="col-md-6 col-lg-6 div-form">
+               <label>Subcategory</label>
+                <select class="sub" ng-model="grievance.subCategory" >
+                    <option value="">Select</option>
+                    <option ng-repeat= "y in grievanceSubcategory" value={{y.category}} >{{y.category}}</option>
+                </select>
+            </div> 
+            <div ng-show='hostel' class="col-md-6 col-lg-6 div-form">
+               <label>Available Timeslots</label>
+                <select  class="sub" ng-model="grievance.timeSlot" >
+                    <option value="">Select</option>
+                    <option ng-repeat= "y in grievanceTimeslot" value={{y.category}} >{{y.category}}</option>
                 </select>
             </div>           
         </div>
@@ -77,6 +96,8 @@
              </input>
             </div>
          </div>
+
+
 
              <div class="col-md-11 col-lg-11 div-attachment">
 

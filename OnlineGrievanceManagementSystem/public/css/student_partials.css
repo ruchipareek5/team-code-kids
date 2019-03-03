@@ -51,7 +51,8 @@
 
 hr
 {
-    border: 0.3px solid white;
+    border: 0.5px solid white !important;
+    color: #fff;
     margin:0.2em 0;
     
 }
@@ -81,11 +82,17 @@ hr
     border-radius: 0.5em;
     color: #5A5A5A;
     font-size: 1em;
-    height: 30vw;
+    min-height: 40vw;
     margin-top: 1.5vw;
-    width :45vw;
+    width :45vw; 
     
-    
+}
+.formBg{
+    background-color: white;
+    padding-bottom:1.2em;
+    border-radius: 0.5em;
+
+
 }
 .imp
 {
@@ -94,7 +101,7 @@ hr
 .div-form label
 {
     display: inline-block;
-    width: 9em;
+    width: 90%;
 }
 
 .div-form input
@@ -102,7 +109,7 @@ hr
     background-color: #F2F1F2 ;
     border: 1px solid #D7D7D7;
     padding: 0.5em;
-    width: 25em;
+    width: 100%;
  
 }
 .div-detail textarea
@@ -120,8 +127,8 @@ hr
     background-color: #F2F1F2;
     border: 1px solid #D7D7D7;
     padding: 0.5em;
-    width: 38em;
-    color: #7E7E7E;
+    width: 90%;
+     color: #7E7E7E;
 }
 .div-form
 {

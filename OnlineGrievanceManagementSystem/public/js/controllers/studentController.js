@@ -45,6 +45,7 @@ grievancesystem.controller('studentController',studentController);
         
     // grievance search starts
     $scope.searchId='';
+
     $scope.grievance_search_data=new Array();
     $scope.searchGrievance =  function(searchId){
         $scope.grievance_search_data=new Array();
@@ -100,7 +101,31 @@ grievancesystem.controller('studentController',studentController);
     // lodge grievance starts
 
         $scope.grievance = {};
+        $scope.grievance.subCategory='';
+        $scope.grievance.timeSlot='';
         $scope.errors = "";
+        $scope.hostel=false;
+
+        // subcategory
+        $scope.grievanceSubcategory=[{}];
+         $scope.academicsSubcategory=[{"category":"Admission"},{"category":"Scholarship"},{"category":"Marksheet"}];
+         $scope.hostelSubcategory=[{"category":"Electrical"},{"category":"Maintainace"},{"category":"WiFi"},
+        ];
+
+        $scope.grievanceTimeslot=[{"category":"8AM to 10AM"},{"category":"1PM to 5PM"},
+        {"category":"6PM to 8PM"}];
+        $scope.grievanceChange = function(){
+            if($scope.grievance.type=='Hostel'){
+                $scope.hostel=true;
+                $scope.grievanceSubcategory=$scope.hostelSubcategory;
+
+            }
+            if($scope.grievance.type=='Admission Cell'){
+                $scope.grievanceSubcategory=$scope.academicsSubcategory;
+            }
+            console.log($scope.grievance.type);
+        }
+
         var formData = new FormData();
         
         $scope.lodgeGrievance = function () {
@@ -121,6 +146,8 @@ grievancesystem.controller('studentController',studentController);
                     $scope.files = e.data.files;
                     $scope.errors = [];
                     $scope.grievance = {};
+                    $scope.grievance.subCategory='';
+                    $scope.grievance.timeSlot='';
                     $scope.grievance.selected_file='';
                     $scope.loadAllGrievance();
                     $scope.loadGrievanceStatistics();
@@ -135,6 +162,10 @@ grievancesystem.controller('studentController',studentController);
             angular.forEach($files, function (value, key) {
                 formData.append('type',$scope.grievance.type);
                 formData.append('detail',$scope.grievance.detail);
+                if($scope.grievance.subCategory!='')
+                    formData.append('subCategory',$scope.grievance.subCategory);
+                if($scope.grievance.timeSlot!='')
+                    formData.append('timeSlot',$scope.grievance.timeSlot);
                 formData.append('attachment', value);
 
             });
