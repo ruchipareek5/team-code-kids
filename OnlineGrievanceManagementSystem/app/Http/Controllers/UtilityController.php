@@ -83,4 +83,12 @@ class UtilityController extends Controller
         }
         
     }
+
+    public static function getPassword($name, $email){
+        $array = str_before($name,' ');
+        $last = str_before($email,'@');
+
+        return $array."#".$last."@";
+
+    }
 }
