@@ -71,8 +71,8 @@
     				</div>-->
 					
 					<div class="sideBtn" ng-click="page = 'aicte_users'">
-    					<img src="assets/icons/faq.png"" class="icons">
-    					<div class="side-link">User</div>
+    					<img src="assets/icons/commicon.png" class="icons">
+    					<div class="side-link"> Add User</div>
     				</div>
 
     				<div class="sideBtn" ng-click="page = 'faq_aicte'">

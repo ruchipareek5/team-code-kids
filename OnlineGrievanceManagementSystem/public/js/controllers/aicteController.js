@@ -489,10 +489,81 @@ grievancesystem.controller('aicteController',aicteController);
 
 
 
+    $scope.add_user_data=[{"file_name":"Omudsman.csv",
+                            "file_type":"Ombudsman",
+                            "file_date":"03/03/2019",
+                            "upload_by":"kamal@aicte.in",
+                            "documents":"1"}];
+    $scope.add_user = {
+        data:$scope.add_user_data,
+            enableGridMenus:false,
+            enableSorting: false,
+            enableFiltering:false,
+            enableCellEditing:false,
+            enableColumnMenus: false,
+            enableHorizontalScrollbar:0,
+            enableVerticalScrollbar:0,
+            totalItems: $scope.add_user_data.length,
+            paginationPageSize: $scope.numRows,
+            minRowsToShow: $scope.numRows,
+            enablePaginationControls: false,
+            
 
-//Open Grievance
+            columnDefs: [
+                { name : "file_name",displayNameName: 'File Name', cellTemplate: '/views/cellTemplate/cell.html' , width:"20%"},
+                { name:"file_type" ,displayName: 'File Type',  cellTemplate: '/views/cellTemplate/cell.html', width:"20%"},
+                { name:"file_date" ,displayName: 'File Date',  cellTemplate: '/views/cellTemplate/cell.html', width:"20%"},
+                {name :"upload_by" ,displayName: 'Upload By' ,cellTemplate: '/views/cellTemplate/cell.html' , width:"20%"},
                 
-   
+                {name:"documents",displayName: 'View Uploaded File',cellTemplate: "/views/cellTemplate/attachment.html", width:"20%"  },
+             
+            ],
+
+                
+             };
+
+
+//User Grievance
+                
+$scope.errors = "";
+var formData = new FormData();
+$scope.file={};
+$scope.uploadExcel = function () {
+    
+    var request = {
+        method: 'POST',
+        url: API_URL+"/aicte/registerUser",
+        data: formData,
+        headers: {
+            'Content-Type': undefined
+        }
+    };
+
+    $http(request)
+        .then(function success(e) {
+            appService.showAlert('success',e.data.message);
+            $scope.files = e.data.files;
+            $scope.errors = [];
+            $scope.selected_file='';
+
+            var fileElement = angular.element('#attachment');
+            fileElement.value = '';
+            
+            
+        }, function error(e) {
+            $scope.errors = e.data.errors;
+        });
+};
+
+$scope.setTheFiles = function ($files) {
+    angular.forEach($files, function (value, key) {
+
+        formData.append('type',$scope.role_type);
+        formData.append('file', value);
+
+
+    });
+};
                 
 }
 
