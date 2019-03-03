@@ -120,7 +120,8 @@ Route::get('/principal/chart/status/{type}', 'PrincipalController@committeeStati
 Route::get('/principal/chart/type', 'PrincipalController@grievanceTypes');                  //Piechart for grievance status (percentage)
 Route::get('/principal/chart/year','PrincipalController@getYearStatistics');
 Route::get('/grievance/ombudsman/chart/college','OmbudsmanDashboardController@getCollegeStatistics');
-    Route::get('/grievance/ombudsman/chart/college/{id}','OmbudsmanDashboardController@getInstitutewiseDetails');
+Route::get('/grievance/ombudsman/chart/college/{id}','OmbudsmanDashboardController@getInstitutewiseDetails');
+Route::get('/grievance/ombudsman/chart/department','OmbudsmanDashboardController@getGrievanceTypeStatistics');
     
 Route::get('/grievance/aicte/chart/year','AicteDashBoardController@getYearStatistics');             //for chart using year
 Route::get('/grievance/aicte/chart/state','AicteDashBoardController@getStateStatistics');           //for chart using state
