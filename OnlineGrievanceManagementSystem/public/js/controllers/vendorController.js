@@ -309,7 +309,8 @@ $http.get('/principal/committee').then(function(success){
                                 $scope.approval=0;
                                 vendorService.approvedGrant($scope.comment.gid).then(function(success){
                                     $scope.loadAllGrievance();
-                                     appService.showAlert("success",success.data.message);
+                                     appService.showAlert("success","Comment added successfully");
+
 
                                 },function(error){
                                     appService.showAlert('error',error.data.message );

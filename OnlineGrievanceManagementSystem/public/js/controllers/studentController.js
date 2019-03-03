@@ -119,12 +119,13 @@ grievancesystem.controller('studentController',studentController);
                 $scope.hostel=true;
                 $scope.grievanceSubcategory=$scope.hostelSubcategory;
 
+            }else if($scope.grievance.type=='Admission Cell'){
+                $scope.grievanceSubcategory=$scope.academicsSubcategory;
             }else{
                 $scope.hostel=false;
+                $scope.grievanceSubcategory=[{}];
 
-            }
-            if($scope.grievance.type=='Admission Cell'){
-                $scope.grievanceSubcategory=$scope.academicsSubcategory;
+
             }
             console.log($scope.grievance.type);
         }
