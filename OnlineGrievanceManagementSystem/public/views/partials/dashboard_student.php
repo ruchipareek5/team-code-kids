@@ -92,7 +92,7 @@
         <div align="left" class="col-md-12 col-lg-12 dashboard_btn" style="color: white"><button class="btn button-submit">Submit</button></div>
     </div>
     </form>
-    <!-- grievance form -->
+    <!-- grievance form --> 
 </div>
 <div class="col-lg-4">
     <img class="testimonial" src="assets/images/testimonial.png">

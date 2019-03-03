@@ -11,13 +11,13 @@ grievancesystem.controller('vendorController',vendorController);
         $scope.errors = "";
         var formData = new FormData();
         
-        $scope.lodgeGrievance = function () {
+        $scope.addCommentAttachementAPI = function (comment) {
             var request = {
                 method: 'POST',
                 url: API_URL+"grievance/addComment",
                 data: formData,
                 headers: {
-                    'Content-Type': undefined
+                    'Content-Type': undefined;
                 }
             };
      
@@ -39,6 +39,8 @@ grievancesystem.controller('vendorController',vendorController);
         $scope.setTheFiles = function ($files) {
             angular.forEach($files, function (value, key) {
                 formData.append('attachment', value);
+                formData.append('grievance_id',$scope.comment.gid);
+                formData.append('message',$scope.comment.message)
 
             });
         };
@@ -126,6 +128,7 @@ $http.get('/principal/committee').then(function(success){
                   vendorService.getGrievance('Sent for purchase').then(function(success)
                    {   
                           $scope.purchase_request_data = success.data.message;
+
                           $scope.purchase_request.data = $scope.purchase_request_data;
                       }, function(error){
 
@@ -134,7 +137,7 @@ $http.get('/principal/committee').then(function(success){
                   vendorService.getGrievance('delivered').then(function(success)
                    {   
                      $scope.delivered_request_data = success.data.message;
-                     console.log(success.data.message)
+                     //console.log(success.data.message)
                        $scope.delivered_request.data = $scope.delivered_request_data;
 
                       }, function(error){
@@ -167,7 +170,7 @@ $http.get('/principal/committee').then(function(success){
                        columnDefs: [
                            { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
                            { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
-                           { name:"description" ,displayName: 'Description', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
+                           { name:"description" ,displayName: 'Description', cellTemplate: '/views/cellTemplate/cell.html',width:"22%"},
                            {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html",width:"12%"  },
                            {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
                            {name:"connects", displayName: 'Connects' ,cellTemplate: '/views/cellTemplate/vendor_connects.html',width:"20%"},
@@ -196,7 +199,7 @@ $http.get('/principal/committee').then(function(success){
                    columnDefs: [
                        { name : "id", cellTemplate: '/views/cellTemplate/cell.html',headerCellTemplate: '<div class="">Grievance <br>ID </div>',width:"10%"},
                        { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html',width:"10%"},
-                       { name:"description" ,displayName: 'Description', cellTemplate: '/views/cellTemplate/cell.html',width:"17%"},
+                       { name:"description" ,displayName: 'Description', cellTemplate: '/views/cellTemplate/cell.html',width:"27%"},
                        {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html",width:"10%"  },
                        {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html',width:"13%"},
                        {name:"connect",displayName: 'Connect',cellTemplate: "/views/cellTemplate/principal_connects.html",width:"20%"  },
@@ -234,7 +237,6 @@ $http.get('/principal/committee').then(function(success){
                            {name :"department_id" ,displayName: 'Committee' ,cellTemplate: '/views/cellTemplate/cell.html',  },
                            {name :"created_at" ,displayName: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html' },
                            {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html '},
-               
                
                            {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html"  },
                            {name:"status" ,displayName: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
@@ -342,6 +344,11 @@ $http.get('/principal/committee').then(function(success){
 
                       });
                     }
+
+//Delivered function
+
+
+
        
    
                 
