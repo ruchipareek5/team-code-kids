@@ -108,8 +108,8 @@ grievancesystem.controller('studentController',studentController);
 
         // subcategory
         $scope.grievanceSubcategory=[{}];
-         $scope.academicsSubcategory=[{"category":"Admission"},{"category":"Scholarship"},{"category":"Marksheet"}];
-         $scope.hostelSubcategory=[{"category":"Electrical"},{"category":"Maintainace"},{"category":"WiFi"},
+         $scope.academicsSubcategory=[{"category":"Admission"},{"category":"Scholarship"},{"category":"Marksheet"},{"category":"Others"}];
+         $scope.hostelSubcategory=[{"category":"Electrical"},{"category":"Maintainace"},{"category":"WiFi"},,{"category":"Others"}
         ];
 
         $scope.grievanceTimeslot=[{"category":"8AM to 10AM"},{"category":"1PM to 5PM"},
@@ -118,6 +118,9 @@ grievancesystem.controller('studentController',studentController);
             if($scope.grievance.type=='Hostel'){
                 $scope.hostel=true;
                 $scope.grievanceSubcategory=$scope.hostelSubcategory;
+
+            }else{
+                $scope.hostel=false;
 
             }
             if($scope.grievance.type=='Admission Cell'){
@@ -148,6 +151,7 @@ grievancesystem.controller('studentController',studentController);
                     $scope.grievance = {};
                     $scope.grievance.subCategory='';
                     $scope.grievance.timeSlot='';
+                    $scope.hostel=false;
                     $scope.grievance.selected_file='';
                     $scope.loadAllGrievance();
                     $scope.loadGrievanceStatistics();
