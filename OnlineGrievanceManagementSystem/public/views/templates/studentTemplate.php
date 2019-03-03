@@ -94,6 +94,7 @@
     <div ng-include src="'views/templates/modalTemplate.php'"></div>
     <div ng-include src="'views/templates/commentModalTemplate.php'"></div>
     <div ng-include src="'views/templates/voiceModalTemplate.php'"></div>
+    <div ng-include src="'views/templates/committeeDetailModalTemplate.php'"></div>
 
 
     <div class="footer">

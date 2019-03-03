@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Grievance;
 use App\GrievanceStatus;
+use App\Student;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
@@ -329,6 +330,18 @@ class grievanceController extends Controller
         return ['name'=>$name->name,'roles'=>$roles];
 
 }
+
+    public function getCommittee(Request $request){
+        $grievance = Grievance::find($request->id);
+        $student_id = $grievance->student_id;
+        $college_id = Student::find($student_id)->get(['college_id']);
+
+        $committee = DB::select("SELECT * FROM user_committee_member INNER JOIN user_principal ON
+            user_committee_member.created_by = user_principal.id WHERE user_principal.college_id = ".$college_id[0]->college_id." 
+            AND user_committee_member.assigned_committee = '".$grievance->type."'");
+
+        return response(['message' => $committee], 200);
+    }
    
 }
 

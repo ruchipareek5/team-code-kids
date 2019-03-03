@@ -202,6 +202,56 @@ grievancesystem.controller('appController',function($scope,$http,$location,API_U
     }
 
     // view student ends
+    $scope.committee_detail = {
+        data:$scope.committee_detail_data,
+        enableGridMenus:false,
+        enableSorting: false,
+        enableFiltering:false,
+        enableCellEditing:false,
+        enableColumnMenus: false,
+        enableHorizontalScrollbar:0,
+        enableVerticalScrollbar:0,
+        paginationPageSize: $scope.numRows,
+        minRowsToShow: 1,
+        enablePaginationControls: false,
+        
+          columnDefs: [
+            { name : "id",displayName: 'ID', cellTemplate: '/views/cellTemplate/cell.html',width:"20%"},
+            {name :"college_id" ,displayName: 'College Id' ,cellTemplate: '/views/cellTemplate/cell.html', width: "20%"},
+            { name:"department_id" ,displayName: 'Department Id', cellTemplate: '/views/cellTemplate/cell.html',width:"20%"},
+            { name:"assigned_committee" ,displayName: 'Assigned Committee', cellTemplate: '/views/cellTemplate/cell.html',width:"20%"},
+            { name:"phone" ,displayName: 'Phone', cellTemplate: '/views/cellTemplate/cell.html',width:"20%"},
+            
+        ],
+
+            
+         };
+    $scope.committee_detail_data=new Array();
+
+    $scope.view_committee_details=function(id){
+        
+        var formData = new FormData();
+         formData.append('id',id);
+         var request = {
+                method: 'POST',
+                url: API_URL+"grievances/getCommittee",
+                data: formData,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+        $http(request).then(function(success){
+            $('#committeeModal-container').addClass('visible');
+            console.log(success.data.message);
+            $scope.committee_detail.data=[];
+            $scope.committee_detail.data.push(success.data.message[0]);
+        },
+        function(error){
+            $scope.committee_detail.data=new Array();
+             appService.showAlert('error',error.data.message);
+
+        });
+    }
 
 });
 

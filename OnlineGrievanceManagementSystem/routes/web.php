@@ -57,6 +57,7 @@ Route::group(['middleware'=>'web','prefix'=>'aicte'],function() {
 
 });
 
+Route::post('/grievances/getCommittee', 'grievanceController@getCommittee');
 
 Route::group(['middleware'=>'auth.basic'],function(){
     Route::get('/user/getUserName','LoginController@getUserName');

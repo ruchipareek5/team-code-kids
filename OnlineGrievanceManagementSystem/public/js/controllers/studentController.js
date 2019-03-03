@@ -277,6 +277,7 @@ grievancesystem.controller('studentController',studentController);
 
             columnDefs: [
                 { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
+                {name :"committee_details" ,displayName: 'Committee Details' ,cellTemplate: '/views/cellTemplate/committee_details.html', width: "10%"},
                 {name :"created_at" ,displayName: 'Lodge on' ,cellTemplate: '/views/cellTemplate/cell.html', width: "12%"},
                 { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
                 { name:"description" ,displayName: 'Description', cellTemplate: '/views/cellTemplate/cell.html',width:"40%"},
@@ -307,6 +308,7 @@ grievancesystem.controller('studentController',studentController);
     
         columnDefs: [
                     { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html', width:"12%"},
+                    {name :"committee_details" ,displayName: 'Committee Details' ,cellTemplate: '/views/cellTemplate/committee_details.html', width: "10%"},
                     { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html ', width:"12%"},
                     {name :"description" ,displayName: 'Description' ,cellTemplate: '/views/cellTemplate/cell.html', width:"15%" },
                     { name:"sub_category" ,displayName: 'Sub Category', cellTemplate: '/views/cellTemplate/cellSubcategory.html',width:"15%"},
@@ -337,6 +339,7 @@ grievancesystem.controller('studentController',studentController);
 
     columnDefs: [
         { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html', width:"10%"},
+        {name :"committee_details" ,displayName: 'Committee Details' ,cellTemplate: '/views/cellTemplate/committee_details.html', width: "10%"},
         { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html ', width:"12%"},
         {name :"description" ,displayName: 'Description' ,cellTemplate: '/views/cellTemplate/cell.html', width:"15%" },
         { name:"sub_category" ,displayName: 'Sub Category', cellTemplate: '/views/cellTemplate/cellSubcategory.html',width:"15%"},
@@ -371,9 +374,9 @@ grievancesystem.controller('studentController',studentController);
 
     columnDefs: [
                 { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html' },
+                {name :"committee_details" ,displayName: 'Committee Details' ,cellTemplate: '/views/cellTemplate/committee_details.html', width: "10%"},
                 { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html '},
                 {name :"description" ,displayName: 'Description' ,cellTemplate: '/views/cellTemplate/cell.html', width:"15%" },
-                { name:"assigned_committee" ,displayName: 'Assigned Committee',  cellTemplate: '/views/cellTemplate/cell.html'},
                 {name :"created_at" ,displayName: 'Date of Issue' ,cellTemplate: '/views/cellTemplate/cell.html' },
                 {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html '},
                 {name:"status" ,displayName: 'Status', cellTemplate: '/views/cellTemplate/cell.html '},
