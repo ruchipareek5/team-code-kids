@@ -70,6 +70,7 @@ Route::group(['middleware'=>'auth.basic'],function(){
     Route::post('/grievance/addComment','grievanceController@addRemarks');        //For adding remarks
     Route::get('/grievance/remarks/{id}','grievanceController@getRemarks');        //For fetching remarks student's page
     Route::post('/aicte/registerUser','RegisterController@register');
+    Route::get('/aicte/registerHistory','RegisterController@getRegisterUser');
     //For statistics panel
     Route::get('/grievance/aicte/statistics/{type}','AicteDashBoardController@getStatistics');
     Route::get('/aicte/grievances', 'AicteController@index');       //AICTE grievances
