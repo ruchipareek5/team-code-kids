@@ -32,7 +32,7 @@
 		margin: 3vh !important;
     	height: auto !important;
 	}
-	#student, #committee, #principal, #ombudsman, #aicte{
+	#student, #committee, #principal, #ombudsman, #aicte, #vendor{
 		height: 11vh;
     	margin-bottom: 3vh;
     	padding: 2px;
@@ -69,9 +69,18 @@
 	}
 	.form-head{
 		font-size: 4vmin;
-		    width: 100%;
+		width: 100%;
 	}
 	#loginForm .col-md-2{
 			display: none;
+	}
+	
+}
+@media (min-width: 1200px){
+	.responsive-cont-2{
+		max-width: 100% !important;
+	}
+	.responsive-cont-2 .col-lg-2{
+		max-width: 14.5%;
 	}
 }

@@ -52,7 +52,7 @@
 			<img src="assets/logos/aicte.png" height="100"><h1><b>AICTE Grievance Management System</b></h1>
 			</div>
 		</div>
-		<div class="container">
+		<div class="container responsive-cont-2">
 			<div class="row justify-content-around" id="row1">
 				<div class="col-lg-2" id="student" ><a href="#!/login"><img src="assets/images/students.jpg" height="100" class="stakeholder-template-image" width="188" style="border-top-left-radius: 1vw;border-top-right-radius: 1vw;"><img src="assets/icons/studenticon.png" height="30" style="float: left;" class="vertical-icon"> Student<img src="assets/icons/n.png" height="30" style="float: right" class="go-template-icon"></a> </div>
 
@@ -64,7 +64,7 @@
 
 				<div class="col-lg-2" id="aicte" ><a href="#!/login"><img src="assets/images/aicte.jpg" height="100" width="188" style="border-top-left-radius: 1vw;border-top-right-radius: 1vw;" class="stakeholder-template-image"><img src="assets/icons/aicteicon.png" height="30" style="float: left;" class="vertical-icon"> AICTE<img src="assets/icons/n.png" height="30" style="float: right" class="go-template-icon"></a></div>
 
-				<div class="col-lg-2" id="vendor" ><a href="#!/login"><img src="assets/images/vendor.jpg" height="100" width="188" style="border-top-left-radius: 1vw;border-top-right-radius: 1vw;"><img src="assets/icons/manage.png" height="30" style="float: left;"> Vendor<img src="assets/icons/n.png" height="30" style="float: right"></a></div>
+				<div class="col-lg-2" id="vendor" ><a href="#!/login"><img src="assets/images/vendor.jpg" height="100" width="188" style="border-top-left-radius: 1vw;border-top-right-radius: 1vw;" class="stakeholder-template-image"><img src="assets/icons/manage.png" height="30" style="float: left;" class="vertical-icon"> Vendor<img src="assets/icons/n.png" height="30" style="float: right" class="go-template-icon"></a></div>
 			</div>
 		</div>
 	</div>
