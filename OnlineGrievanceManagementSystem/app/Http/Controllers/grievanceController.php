@@ -45,7 +45,7 @@ class grievanceController extends Controller
         }
         $student_id = Session::get('user_id');
         $grievances = Grievance::where('student_id',$student_id)->whereIn('status',$array)->orderBy('updated_at','desc')
-                      ->get(['id','type','eta','documents','created_at','updated_at','description','status']);
+                      ->get(['id','type','sub_category','timeslot','eta','documents','created_at','updated_at','description','status']);
 
 
         return response(['message'=>$grievances],200);
@@ -71,8 +71,10 @@ class grievanceController extends Controller
     public function store(Request $request)
     {
         $type = $request->get('type');
+        $sub_category = $request->get('subCategory');
         $description = $request->get('detail');
         $file = $request->file('attachment');
+        $timeslot = $request->file('timeSlot');
         $student_id = DB::table('user_student')->where('id',Session::get('user_id'))->get(['id','college_id'])->first();
         $department_id = DB::table('table_department')->where('type','LIKE',$type)->where('college_id',$student_id->college_id)->get(['id'])->first();
         $grievance = new Grievance;
@@ -83,6 +85,8 @@ class grievanceController extends Controller
         $grievance->documents = $file==null?'':$file->store('documents');
         $grievance->status = 'raised';
         $grievance->eta = DB::raw('DATE_ADD(NOW(),INTERVAL 7 DAY)');
+        $grievance->sub_category = $sub_category;
+        $grievance->timeslot = $timeslot;
         $grievance->save();
         $data = [];
         $new_grievance = DB::table('table_grievance')->where('student_id',$student_id->id)->orderBy('id','desc')->get(['id'])->first();

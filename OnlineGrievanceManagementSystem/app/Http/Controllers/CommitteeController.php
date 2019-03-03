@@ -85,18 +85,18 @@ class CommitteeController extends Controller
 
         $array = [];
         if($type=='new'){
-            $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta
+            $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.sub_category,table_grievance.description, table_grievance.documents, table_grievance.timeslot,table_grievance.eta
             FROM table_grievance INNER JOIN user_student ON user_student.id = table_grievance.student_id 
             WHERE user_student.college_id = ".$condition[0]->college_id." AND table_grievance.type = '".$condition[0]->assigned_committee."'
             AND table_grievance.status = 'raised' order by table_grievance.updated_at desc");
         }
         elseif ($type=='inaction'){
-            $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta,table_grievance.level, table_grievance.vendor_status
+            $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.sub_category, table_grievance.documents, table_grievance.timeslot,table_grievance.eta,table_grievance.level, table_grievance.vendor_status
             FROM table_grievance INNER JOIN user_student ON user_student.id = table_grievance.student_id 
             WHERE user_student.college_id = ".$condition[0]->college_id." AND table_grievance.type = '".$condition[0]->assigned_committee."'
             AND table_grievance.status = 'inaction' order by table_grievance.updated_at desc");
         }elseif ($type=='addressed'){
-            $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.documents, table_grievance.eta, 
+            $grievance = DB::select("SELECT table_grievance.id, table_grievance.type, table_grievance.description, table_grievance.sub_category,table_grievance.documents, table_grievance.eta, table_grievance.timeslot,
             table_grievance.updated_at, table_grievance.delayed_status, table_grievance.vendor_attachment 
             FROM table_grievance INNER JOIN user_student ON user_student.id = table_grievance.student_id 
             WHERE user_student.college_id = ".$condition[0]->college_id." AND table_grievance.type = '".$condition[0]->assigned_committee."'
