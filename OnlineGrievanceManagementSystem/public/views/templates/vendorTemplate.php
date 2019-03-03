@@ -44,20 +44,14 @@
     		<div class="row">
     			<div class="col-md-2 leftNav">
     				<!-- navigation left dash board -->
-    				<div class="sideBtn active_sidebtn" ng-click="page = 'dashboard_vendor'">
-    					<img src="assets/icons/dashboard.png" class="icons">
-    					<div class="side-link">Dashboard</div>
-    				</div>
+    				
 
     				<div class="sideBtn" ng-click="page = 'requests_vendor'">
     					<img src="assets/icons/grievance.png" class="icons">
     					<div class="side-link">View Requests</div>
     				</div>
 
-    				<div class="sideBtn" ng-click="page = 'searchApplication_vendor'">
-    					<img src="assets/icons/search.png" class="icons">
-    					<div class="side-link">Search Application</div>
-    				</div>
+    				
 
     				<div class="sideBtn" ng-click="page = 'faq_vendor'">
     					<img src="assets/icons/faq.png"" class="icons">
@@ -69,15 +63,11 @@
     			<div class="col-md-10 rightArea">
                     <div ng-include src="'views/templates/alertTemplate.html'"></div>
 				 	<div ng-switch on="page">
-		                <div ng-switch-when="dashboard_vendor">
-		                    <div ng-include src="'views/partials/dashboard_vendor.php'"></div>
-		                </div>
+		                
 		                <div ng-switch-when="requests_vendor">
 		                    <div ng-include src="'views/partials/requests_vendor.php'"></div>
 		                </div>
-		                <div ng-switch-when="searchApplication_vendor">
-		                    <div ng-include src="'views/partials/searchApplication_vendor.php'"></div>
-		                </div>
+		                
 		                 <div ng-switch-when="faq_vendor">
 		                    <div ng-include src="'views/partials/faq_vendor.php'"></div>
 		                </div>

@@ -28,9 +28,12 @@ grievancesystem.controller('vendorController',vendorController);
                     $scope.errors = [];
                     $scope.selected_file='';
                     $scope.loadAllGrievance();
-                    $scope.loadGrievanceStatistics();
+                    ////$scope.loadGrievanceStatistics();
                     var fileElement = angular.element('#attachment');
                     fileElement.value = '';
+                    $("#commentAttachmentModal-container").removeClass("visible");
+                    
+                    
                 }, function error(e) {
                     $scope.errors = e.data.errors;
                 });
@@ -47,7 +50,7 @@ grievancesystem.controller('vendorController',vendorController);
     //  lodge grievance ends
 
 
-  $scope.page='dashboard_vendor';
+  $scope.page='requests_vendor';
 
 
  $scope.username='';
@@ -101,7 +104,7 @@ $http.get('/principal/committee').then(function(success){
                 console.log(errorResponse);
             });
     }
-    $scope.loadGrievanceStatistics();
+    //////$scope.loadGrievanceStatistics();
     // grievance statistics ends
 
         
