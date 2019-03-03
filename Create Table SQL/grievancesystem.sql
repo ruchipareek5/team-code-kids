@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2019 at 12:05 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.2
+-- Generation Time: Mar 02, 2019 at 09:24 PM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,7 +30,6 @@ USE `grievancesystem`;
 -- Table structure for table `table_aicte_announcement`
 --
 
-DROP TABLE IF EXISTS `table_aicte_announcement`;
 CREATE TABLE `table_aicte_announcement` (
   `id` int(255) NOT NULL,
   `aicte_user_id` int(11) NOT NULL,
@@ -45,7 +44,6 @@ CREATE TABLE `table_aicte_announcement` (
 -- Table structure for table `table_college`
 --
 
-DROP TABLE IF EXISTS `table_college`;
 CREATE TABLE `table_college` (
   `id` int(255) NOT NULL,
   `university_id` int(11) DEFAULT NULL,
@@ -86,7 +84,6 @@ INSERT INTO `table_college` (`id`, `university_id`, `name`, `state`, `location`,
 -- Table structure for table `table_department`
 --
 
-DROP TABLE IF EXISTS `table_department`;
 CREATE TABLE `table_department` (
   `id` int(255) NOT NULL,
   `college_id` int(11) DEFAULT NULL,
@@ -120,7 +117,6 @@ INSERT INTO `table_department` (`id`, `college_id`, `type`, `logo`, `created_at`
 -- Table structure for table `table_grievance`
 --
 
-DROP TABLE IF EXISTS `table_grievance`;
 CREATE TABLE `table_grievance` (
   `id` int(255) NOT NULL,
   `type` varchar(255) NOT NULL,
@@ -133,54 +129,66 @@ CREATE TABLE `table_grievance` (
   `status` varchar(255) NOT NULL DEFAULT 'raised',
   `delayed_status` tinyint(1) NOT NULL DEFAULT '0',
   `eta` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `level` tinyint(4) NOT NULL DEFAULT '0'
+  `level` tinyint(4) NOT NULL DEFAULT '0',
+  `vendor_status` varchar(255) DEFAULT NULL,
+  `vendor_id` int(11) DEFAULT NULL,
+  `vendor_attachment` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `table_grievance`
 --
 
-INSERT INTO `table_grievance` (`id`, `type`, `description`, `documents`, `student_id`, `created_at`, `updated_at`, `department_id`, `status`, `delayed_status`, `eta`, `level`) VALUES
-(1, 'Academics', 'Non availability of reference books in library.', NULL, 1, '2019-02-26 04:28:06', '2019-03-01 09:11:45', 12, 'reopened', 0, '2019-02-27 18:30:00', 0),
-(2, 'Academics', 'More classes required to complete the syllabus', NULL, 2, '2018-02-26 04:31:12', '2019-02-26 04:31:12', 12, 'raised', 0, '2019-03-01 18:30:00', 0),
-(3, 'Academics', 'Compensation for attendance due to institute representation.', NULL, 3, '2017-02-26 04:31:12', '2019-02-26 04:31:12', 12, 'inaction', 0, '2019-02-28 18:30:00', 0),
-(4, 'Academics', 'non availability of reference books in library.', NULL, 4, '2016-02-26 04:35:04', '2019-02-26 04:35:04', 12, 'inaction', 0, '2019-03-04 00:59:00', 0),
-(5, 'Academics', 'Non functioning lab equipment. needs replacing.', NULL, 5, '2019-02-26 04:35:04', '2019-02-26 04:35:04', 12, 'raised', 0, '2019-02-28 02:06:55', 0),
-(6, 'Hostel', 'WiFi not working properly.', NULL, 1, '2019-02-26 04:37:30', '2019-03-02 03:58:47', 1, 'addressed', 0, '2019-02-27 18:30:00', 0),
-(7, 'Hostel', 'Fan in room 221 needs replacing.', NULL, 2, '2018-02-26 04:37:30', '2019-03-02 04:35:16', 1, 'inaction', 0, '2019-02-27 18:30:00', 0),
-(8, 'Hostel', 'Unhygenic food being distributed', NULL, 3, '2017-02-26 04:39:18', '2019-02-26 04:39:18', 1, 'inaction', 0, '2019-02-27 18:30:00', 0),
-(9, 'Hostel', 'Fan in room 225 needs replacing.', NULL, 2, '2018-02-26 04:39:18', '2019-02-26 04:39:18', 1, 'addressed', 0, '2019-02-27 18:30:00', 0),
-(10, 'Ragging', 'Bad behavior of seniors.', NULL, 2, '2016-02-26 04:42:16', '2019-02-26 04:42:16', 8, 'addressed', 0, '2019-02-05 18:30:00', 0),
-(11, 'Training and Placement', 'Unable to attend upcoming placement drive.', NULL, 2, '2019-02-26 04:42:16', '2019-02-26 04:42:16', 5, 'raised', 0, '2019-02-27 07:30:00', 0),
-(12, 'Training and Placement', 'Not eligible to attend upcoming placement drive.', NULL, 5, '2015-02-26 04:45:42', '2019-02-26 04:45:42', 5, 'delayed', 1, '2019-02-24 18:30:00', 0),
-(13, 'Training and Placement', 'Not eligible to attend upcoming placement drive.', NULL, 3, '2016-02-26 04:45:42', '2019-03-02 05:15:46', 5, 'reopened', 0, '2019-02-26 18:30:00', 0),
-(14, 'Hostel', 'Router not working properly.', NULL, 6, '2019-02-26 04:54:28', '2019-02-26 04:54:28', 2, 'raised', 0, '2019-02-27 18:30:00', 0),
-(15, 'Hostel', 'Router not wiorking', NULL, 6, '2019-02-26 04:54:28', '2019-02-26 04:54:28', 2, 'delayed', 1, '2019-02-23 18:30:00', 0),
-(16, 'Academics', 'classes not being held.', NULL, 7, '2015-02-26 04:55:41', '2019-02-26 04:55:41', NULL, 'addressed', 0, '2019-02-26 18:30:00', 0),
-(17, 'Hostel', 'bad food', NULL, 7, '2019-02-26 04:55:41', '2019-02-26 04:55:41', 2, 'inaction', 0, '2019-02-27 18:30:00', 0),
-(18, 'Ragging', '4th years', '', 2, '2019-03-01 09:00:00', '2019-03-02 04:32:55', 8, 'inaction', 0, '2019-03-08 14:30:00', 0),
-(19, 'Accounts Department', 'kl;k;', '', 1, '2018-03-01 10:08:37', '2019-03-02 03:49:41', 6, 'inaction', 0, '2019-03-08 15:38:37', 0),
-(20, 'Transport', 'bus problem', '', 1, '2019-03-01 23:02:51', '2019-03-01 23:02:51', 9, 'raised', 0, '2019-03-09 04:32:52', 0),
-(21, 'Admission Cell', 'unsatisfied', '', 1, '2019-03-01 23:56:05', '2019-03-02 03:52:05', 2, 'addressed', 0, '2019-03-09 05:26:05', 0),
-(22, 'Accounts Department', 'unsatisfied', '', 1, '2019-03-01 23:56:15', '2019-03-01 23:56:15', 6, 'raised', 0, '2019-03-09 05:26:15', 0),
-(23, 'Security', 'unsatisfied', '', 1, '2019-03-01 23:56:36', '2019-03-02 03:55:11', 7, 'inaction', 0, '2019-03-09 05:26:36', 1),
-(24, 'Security', 'unsatisfied', '', 3, '2019-03-01 23:59:07', '2019-03-01 23:59:07', 7, 'raised', 0, '2019-03-09 05:29:07', 0),
-(25, 'Hostel', 'unsatisfied', '', 3, '2019-03-02 00:00:11', '2019-03-02 00:00:11', 1, 'raised', 0, '2019-03-09 05:30:11', 0),
-(26, 'Ragging', 'unsatisfied', '', 3, '2019-03-02 00:00:20', '2019-03-02 00:00:20', 8, 'raised', 0, '2019-03-09 05:30:20', 0),
-(27, 'Canteen', '---', '', 3, '2019-03-02 00:00:28', '2019-03-02 05:15:08', 10, 'addressed', 0, '2019-03-09 05:30:28', 0),
-(28, 'Transport', 'unsatisfied', '', 3, '2019-03-02 00:00:35', '2019-03-02 00:00:35', 9, 'raised', 0, '2019-03-09 05:30:35', 0),
-(29, 'Transport', 'bus issue', '', 3, '2019-03-02 00:04:12', '2019-03-02 00:04:12', 9, 'raised', 0, '2019-03-09 05:34:12', 0),
-(30, 'Canteen', 'unsatisfied', '', 3, '2019-03-02 01:07:11', '2019-03-02 01:16:12', 10, 'reopened', 0, '2019-03-09 06:37:11', 0),
-(31, 'Ragging', 'by juniors', '', 1, '2019-03-02 04:18:58', '2019-03-02 04:18:58', 8, 'raised', 0, '2019-03-09 09:48:58', 0),
-(32, 'Hostel', 'unsatisfied', '', 2, '2019-03-02 04:26:33', '2019-03-02 04:31:25', 1, 'reopened', 0, '2019-03-09 09:56:33', 0),
-(33, 'Ragging', '--', NULL, 3, '2016-03-26 18:30:00', '2019-03-02 10:18:47', 8, 'raised', 0, '0000-00-00 00:00:00', 0),
-(34, 'Ragging', '--', NULL, 5, '2015-03-20 18:30:00', '2019-03-02 04:57:06', 8, 'reopened', 0, '0000-00-00 00:00:00', 0),
-(35, 'Ragging', '--', NULL, 2, '2018-03-27 18:30:00', '2019-03-02 04:55:46', 8, 'inaction', 0, '0000-00-00 00:00:00', 1),
-(36, 'Ragging', '--', NULL, 4, '2017-03-26 18:30:00', '2019-03-02 04:55:33', 8, 'addressed', 0, '0000-00-00 00:00:00', 0),
-(37, 'Hostel', '--', NULL, 5, '2015-03-29 18:30:00', '2019-03-02 10:34:04', 1, 'raised', 0, '0000-00-00 00:00:00', 0),
-(38, 'Hostel', '--', NULL, 3, '2016-03-27 18:30:00', '2019-03-02 10:34:04', 1, 'raised', 0, '0000-00-00 00:00:00', 0),
-(39, 'Hostel', '--', NULL, 3, '2016-03-20 18:30:00', '2019-03-02 05:11:40', 8, 'reopened', 0, '0000-00-00 00:00:00', 0),
-(40, 'Ragging', '--', NULL, 4, '2016-03-20 18:30:00', '2019-03-02 10:37:07', 1, 'raised', 0, '0000-00-00 00:00:00', 0);
+INSERT INTO `table_grievance` (`id`, `type`, `description`, `documents`, `student_id`, `created_at`, `updated_at`, `department_id`, `status`, `delayed_status`, `eta`, `level`, `vendor_status`, `vendor_id`, `vendor_attachment`) VALUES
+(1, 'Academics', 'Non availability of reference books in library.', NULL, 1, '2019-02-26 04:28:06', '2019-03-02 14:05:42', 12, 'reopened', 0, '2019-02-27 18:30:00', 0, 'delivered', 1, ''),
+(2, 'Academics', 'More classes required to complete the syllabus', NULL, 2, '2018-02-26 04:31:12', '2019-02-26 04:31:12', 12, 'raised', 0, '2019-03-01 18:30:00', 0, NULL, NULL, ''),
+(3, 'Academics', 'Compensation for attendance due to institute representation.', NULL, 3, '2017-02-26 04:31:12', '2019-02-26 04:31:12', 12, 'inaction', 0, '2019-02-28 18:30:00', 0, NULL, NULL, ''),
+(4, 'Academics', 'non availability of reference books in library.', NULL, 4, '2016-02-26 04:35:04', '2019-02-26 04:35:04', 12, 'inaction', 0, '2019-03-04 00:59:00', 0, NULL, NULL, ''),
+(5, 'Academics', 'Non functioning lab equipment. needs replacing.', NULL, 5, '2019-02-26 04:35:04', '2019-02-26 04:35:04', 12, 'raised', 0, '2019-02-28 02:06:55', 0, NULL, NULL, ''),
+(6, 'Hostel', 'WiFi not working properly.', NULL, 1, '2019-02-26 04:37:30', '2019-03-02 03:58:47', 1, 'addressed', 0, '2019-02-27 18:30:00', 0, NULL, NULL, ''),
+(7, 'Hostel', 'Fan in room 221 needs replacing.', NULL, 2, '2018-02-26 04:37:30', '2019-03-02 04:35:16', 1, 'inaction', 0, '2019-02-27 18:30:00', 0, NULL, NULL, ''),
+(8, 'Hostel', 'Unhygenic food being distributed', NULL, 3, '2017-02-26 04:39:18', '2019-02-26 04:39:18', 1, 'inaction', 0, '2019-02-27 18:30:00', 0, NULL, NULL, ''),
+(9, 'Hostel', 'Fan in room 225 needs replacing.', NULL, 2, '2018-02-26 04:39:18', '2019-02-26 04:39:18', 1, 'addressed', 0, '2019-02-27 18:30:00', 0, NULL, NULL, ''),
+(10, 'Ragging', 'Bad behavior of seniors.', NULL, 2, '2016-02-26 04:42:16', '2019-02-26 04:42:16', 8, 'addressed', 0, '2019-02-05 18:30:00', 0, NULL, NULL, ''),
+(11, 'Training and Placement', 'Unable to attend upcoming placement drive.', NULL, 2, '2019-02-26 04:42:16', '2019-02-26 04:42:16', 5, 'raised', 0, '2019-02-27 07:30:00', 0, NULL, NULL, ''),
+(12, 'Training and Placement', 'Not eligible to attend upcoming placement drive.', NULL, 5, '2015-02-26 04:45:42', '2019-02-26 04:45:42', 5, 'delayed', 1, '2019-02-24 18:30:00', 1, NULL, NULL, ''),
+(13, 'Training and Placement', 'Not eligible to attend upcoming placement drive.', NULL, 3, '2016-02-26 04:45:42', '2019-03-02 05:15:46', 5, 'reopened', 0, '2019-02-26 18:30:00', 1, NULL, NULL, ''),
+(14, 'Hostel', 'Router not working properly.', NULL, 6, '2019-02-26 04:54:28', '2019-02-26 04:54:28', 2, 'raised', 0, '2019-02-27 18:30:00', 0, NULL, NULL, ''),
+(15, 'Hostel', 'Router not wiorking', NULL, 6, '2019-02-26 04:54:28', '2019-02-26 04:54:28', 2, 'delayed', 1, '2019-02-23 18:30:00', 1, NULL, NULL, ''),
+(16, 'Academics', 'classes not being held.', NULL, 7, '2015-02-26 04:55:41', '2019-02-26 04:55:41', NULL, 'delayed', 1, '2019-02-26 18:30:00', 1, NULL, NULL, ''),
+(17, 'Hostel', 'bad food', NULL, 7, '2019-02-26 04:55:41', '2019-02-26 04:55:41', 2, 'delayed', 1, '2019-02-27 18:30:00', 1, NULL, NULL, ''),
+(18, 'Ragging', 'bad behavior of 4th years', '', 2, '2019-03-01 09:00:00', '2019-03-02 04:32:55', 8, 'inaction', 0, '2019-03-08 14:30:00', 0, NULL, NULL, ''),
+(19, 'Accounts Department', 'scholarship amount not recieved', '', 1, '2018-03-01 10:08:37', '2019-03-02 03:49:41', 6, 'inaction', 0, '2019-03-08 15:38:37', 0, NULL, NULL, ''),
+(20, 'Transport', 'bus problem', '', 1, '2019-03-01 23:02:51', '2019-03-01 23:02:51', 9, 'raised', 0, '2019-03-09 04:32:52', 0, NULL, NULL, ''),
+(21, 'Admission Cell', 'I have provided certificates at admission time, which the department hasn\'t returned till now ', '', 1, '2019-03-01 23:56:05', '2019-03-02 03:52:05', 2, 'addressed', 0, '2019-03-09 05:26:05', 0, NULL, NULL, ''),
+(22, 'Accounts Department', 'hostel fees is not refunded after leaving hostel', '', 1, '2019-03-01 23:56:15', '2019-03-01 23:56:15', 6, 'raised', 0, '2019-03-09 05:26:15', 0, NULL, NULL, ''),
+(23, 'Security', 'unauthorized access of people  ', '', 1, '2019-03-01 23:56:36', '2019-03-02 03:55:11', 7, 'inaction', 0, '2019-03-09 05:26:36', 1, NULL, NULL, ''),
+(24, 'Security', 'dogs roam around in hostel ', '', 3, '2018-03-01 23:59:07', '2019-03-01 23:59:07', 7, 'delayed', 1, '2019-03-09 05:29:07', 2, NULL, NULL, ''),
+(25, 'Hostel', 'taps are leaking in bathroom which is causing wastage of water', '', 3, '2019-03-02 00:00:11', '2019-03-02 00:00:11', 1, 'raised', 0, '2019-03-09 05:30:11', 0, NULL, NULL, ''),
+(26, 'Ragging', 'seniors send us to bring stuff from food court, even if we are not willing to', '', 3, '2019-03-02 00:00:20', '2019-03-02 00:00:20', 8, 'raised', 0, '2019-03-09 05:30:20', 0, NULL, NULL, ''),
+(27, 'Canteen', 'quality of food is not improving even if we have been complaining from last 5-6 months ', '', 3, '2016-03-02 00:00:28', '2019-03-02 05:15:08', 10, 'addressed', 0, '2019-03-09 05:30:28', 0, NULL, NULL, ''),
+(28, 'Transport', 'buses are not clean ', '', 3, '2019-03-02 00:00:35', '2019-03-02 00:00:35', 9, 'raised', 0, '2019-03-09 05:30:35', 0, NULL, NULL, ''),
+(29, 'Transport', 'need buses for extra classes ', '', 3, '2015-03-02 00:04:12', '2019-03-02 00:04:12', 9, 'delayed', 1, '2019-03-09 05:34:12', 2, NULL, NULL, ''),
+(30, 'Canteen', 'found insect in food ', '', 3, '2019-03-02 01:07:11', '2019-03-02 01:16:12', 10, 'reopened', 0, '2019-03-09 06:37:11', 0, NULL, NULL, ''),
+(31, 'Ragging', 'forced by seniors to write their assignments and reports', '', 1, '2019-03-02 04:18:58', '2019-03-02 04:18:58', 8, 'raised', 0, '2019-03-09 09:48:58', 0, NULL, NULL, ''),
+(32, 'Hostel', 'bed is not fixed ', '', 2, '2019-03-02 04:26:33', '2019-03-02 04:31:25', 1, 'reopened', 0, '2019-03-09 09:56:33', 0, NULL, NULL, ''),
+(33, 'Ragging', 'seniors restrict our dressing and comment on us', NULL, 3, '2016-03-26 18:30:00', '2019-03-02 10:18:47', 8, 'raised', 0, '0000-00-00 00:00:00', 0, NULL, NULL, ''),
+(34, 'Ragging', 'was locked in my room for 3 hours by seniors ', NULL, 5, '2015-03-20 18:30:00', '2019-03-02 04:57:06', 8, 'reopened', 0, '0000-00-00 00:00:00', 1, NULL, NULL, ''),
+(35, 'Ragging', 'seniors asks us entertain them and use abusive language', NULL, 2, '2018-03-27 18:30:00', '2019-03-02 04:55:46', 8, 'inaction', 0, '0000-00-00 00:00:00', 1, NULL, NULL, ''),
+(36, 'Ragging', 'seniors force me to do their stuff', NULL, 4, '2017-03-26 18:30:00', '2019-03-02 04:55:33', 8, 'addressed', 0, '0000-00-00 00:00:00', 0, NULL, NULL, ''),
+(37, 'Hostel', 'LAN port is not working  ', NULL, 5, '2015-03-29 18:30:00', '2019-03-02 10:34:04', 1, 'raised', 0, '0000-00-00 00:00:00', 0, NULL, NULL, ''),
+(38, 'Hostel', 'bed and cupboards are not aligned properly', NULL, 3, '2016-03-27 18:30:00', '2019-03-02 10:34:04', 1, 'raised', 0, '0000-00-00 00:00:00', 0, NULL, NULL, ''),
+(39, 'Hostel', 'less space in my side and bed is can\'t be aligned', NULL, 3, '2016-03-20 18:30:00', '2019-03-02 05:11:40', 8, 'reopened', 0, '0000-00-00 00:00:00', 1, NULL, NULL, ''),
+(40, 'Ragging', 'senior\'s bad behavior', NULL, 4, '2016-03-20 18:30:00', '2019-03-02 10:37:07', 1, 'raised', 0, '0000-00-00 00:00:00', 0, NULL, NULL, ''),
+(41, 'Hostel', 'lan not working', 'documents/i33NKEH0SQ6KVMe5hcl6hjolaW141FpWyFvnIIZk.pdf', 2, '2019-03-02 07:46:34', '2019-03-02 07:56:02', 1, 'reopened', 0, '2019-03-09 13:16:34', 0, NULL, NULL, ''),
+(42, 'Examination Cell', 'issues in getting admit card even after paying the fees', NULL, 11, '2018-03-29 18:30:00', '2019-03-02 14:08:04', 4, 'delayed', 0, '0000-00-00 00:00:00', 1, NULL, NULL, ''),
+(43, 'Accounts Department', 'fee not refunded', NULL, 11, '2017-03-27 18:30:00', '2019-03-02 14:08:04', 6, 'addressed', 0, '0000-00-00 00:00:00', 0, NULL, NULL, ''),
+(44, 'Training and Placement cell', 'can\'t login to the placement portal', NULL, 12, '2019-03-02 14:11:52', '2019-03-02 14:11:52', 5, 'inaction', 0, '0000-00-00 00:00:00', 0, NULL, NULL, ''),
+(45, 'Canteen', 'food issue', NULL, 13, '2019-03-02 14:11:52', '2019-03-02 14:11:52', 10, 'raised', 0, '0000-00-00 00:00:00', 0, NULL, NULL, ''),
+(46, 'Canteen', 'bad quality food', NULL, 11, '2019-03-02 15:32:36', '2019-03-02 15:32:36', 10, 'raised', 0, '0000-00-00 00:00:00', 0, NULL, NULL, ''),
+(47, 'Accounts Department', 'scholarship fees', NULL, 13, '2019-03-02 15:32:36', '2019-03-02 15:32:36', 6, 'raised', 0, '0000-00-00 00:00:00', 0, NULL, NULL, ''),
+(48, 'Security', 'outside people should be send only after valid identification', NULL, 15, '2019-03-02 17:29:16', '2019-03-02 17:29:16', 7, 'raised', 0, '0000-00-00 00:00:00', 0, NULL, NULL, ''),
+(49, 'Accounts Department', 'fees refuding', NULL, 12, '2019-03-02 17:29:16', '2019-03-02 17:29:16', 6, 'raised', 0, '0000-00-00 00:00:00', 0, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -188,7 +196,6 @@ INSERT INTO `table_grievance` (`id`, `type`, `description`, `documents`, `studen
 -- Table structure for table `table_message`
 --
 
-DROP TABLE IF EXISTS `table_message`;
 CREATE TABLE `table_message` (
   `id` int(11) NOT NULL,
   `grievance_id` int(11) NOT NULL,
@@ -208,7 +215,12 @@ INSERT INTO `table_message` (`id`, `grievance_id`, `message`, `sender_id`, `upda
 (4, 30, 'approved', 16, '2019-03-02 06:40:18'),
 (5, 30, 'solution', 2, '2019-03-02 06:49:59'),
 (6, 23, 'pls approve', 65, '2019-03-02 09:25:11'),
-(7, 35, 'approve', 4, '2019-03-02 10:25:46');
+(7, 35, 'approve', 4, '2019-03-02 10:25:46'),
+(8, 41, 'need permission for approving this grievance', 25, '2019-03-02 13:20:20'),
+(9, 41, 'approved', 16, '2019-03-02 13:23:23'),
+(10, 41, 'approved again', 2, '2019-03-02 13:28:44'),
+(11, 41, 'not necessary', 1, '2019-03-02 13:31:59'),
+(12, 1, 'delivered', 71, '2019-03-02 20:11:02');
 
 -- --------------------------------------------------------
 
@@ -216,7 +228,6 @@ INSERT INTO `table_message` (`id`, `grievance_id`, `message`, `sender_id`, `upda
 -- Table structure for table `table_ombudsman_announcement`
 --
 
-DROP TABLE IF EXISTS `table_ombudsman_announcement`;
 CREATE TABLE `table_ombudsman_announcement` (
   `id` int(255) NOT NULL,
   `ombudsman_user_id` int(11) NOT NULL,
@@ -231,7 +242,6 @@ CREATE TABLE `table_ombudsman_announcement` (
 -- Table structure for table `table_principal_announcement`
 --
 
-DROP TABLE IF EXISTS `table_principal_announcement`;
 CREATE TABLE `table_principal_announcement` (
   `id` int(255) NOT NULL,
   `principal_user_id` int(255) NOT NULL,
@@ -246,7 +256,6 @@ CREATE TABLE `table_principal_announcement` (
 -- Table structure for table `table_search`
 --
 
-DROP TABLE IF EXISTS `table_search`;
 CREATE TABLE `table_search` (
   `id` int(255) NOT NULL,
   `query` varchar(255) NOT NULL,
@@ -260,7 +269,6 @@ CREATE TABLE `table_search` (
 -- Table structure for table `table_university`
 --
 
-DROP TABLE IF EXISTS `table_university`;
 CREATE TABLE `table_university` (
   `id` int(255) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -290,7 +298,6 @@ INSERT INTO `table_university` (`id`, `name`, `state`, `location`, `phone`, `log
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(255) NOT NULL,
   `username` varchar(255) NOT NULL,
@@ -330,9 +337,9 @@ INSERT INTO `users` (`id`, `username`, `password`, `roles`, `email`, `remember_t
 (21, 'Manish Bhasin', '$2y$10$fYrX6U67gHpL.ljr6cmAD.a9dRfxOtOaOFEUCVuGyPEB4/nvk7N9.', 'principal', 'manishbhasin@gmail.com', NULL, '2019-02-25 17:04:07', '2019-02-24 18:30:00'),
 (22, 'Vipin Sharma', '$2y$10$fYrX6U67gHpL.ljr6cmAD.a9dRfxOtOaOFEUCVuGyPEB4/nvk7N9.', 'principal', 'vipinsharma@gmail.com', NULL, '2019-02-25 17:04:52', '2019-02-23 18:30:00'),
 (23, 'Man Singh', '$2y$10$fYrX6U67gHpL.ljr6cmAD.a9dRfxOtOaOFEUCVuGyPEB4/nvk7N9.', 'principal', 'mansingh@gmail.com', NULL, '2019-02-25 17:06:13', '2019-02-25 05:12:18'),
-(24, 'Debdas Mishra', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'debdasmisrhra@gmail.com', NULL, '2019-02-25 17:52:56', '2019-02-24 18:30:00'),
+(24, 'Debdas Mishra', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'debdasmisrhra@cvrce.edu.in', NULL, '2019-03-02 12:32:53', '2019-02-24 18:30:00'),
 (25, 'P.K. Sahoo', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'pksahoo@cvrce.edu.in', NULL, '2019-03-02 10:31:34', '2019-02-24 18:30:00'),
-(26, 'Asit Rout', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'asitrout@gmail.com', NULL, '2019-02-25 17:54:37', '2019-02-24 18:54:47'),
+(26, 'Asit Rout', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'asitrout@cvrce.edu.in', NULL, '2019-03-02 12:33:56', '2019-02-24 18:54:47'),
 (27, 'Sujit Kumar', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'student', 'bpu/1501227456', NULL, '2019-03-02 10:11:23', '2019-02-24 18:30:00'),
 (28, 'Sachin Tiwari', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'student', 'bpu/1501227651', NULL, '2019-03-02 10:11:44', '2019-02-24 18:30:00'),
 (29, 'Sourav Shrestha', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'student', 'shrestha.sourav30@gmail.com', NULL, '2019-02-26 04:49:57', '2019-02-23 18:30:00'),
@@ -376,7 +383,11 @@ INSERT INTO `users` (`id`, `username`, `password`, `roles`, `email`, `remember_t
 (67, 'Vishves Dhave', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'vdhave@cvrce.edu.in', NULL, '2019-03-02 05:32:13', '0000-00-00 00:00:00'),
 (68, 'Alok Nagar', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'aloknagar@cvrce.edu.in', NULL, '2019-03-02 05:32:20', '0000-00-00 00:00:00'),
 (69, 'Shaina Sheikh', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'shaina@cvrce.edu.in', NULL, '2019-03-02 05:32:27', '0000-00-00 00:00:00'),
-(70, 'Kundan Singh', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'kundansingh@cvrce.edu .in', NULL, '2019-03-02 05:32:34', '0000-00-00 00:00:00');
+(70, 'Kundan Singh', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'committee member', 'kundansingh@cvrce.edu .in', NULL, '2019-03-02 05:32:34', '0000-00-00 00:00:00'),
+(71, 'Prashant Kumar', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'vendor', 'prashant@gmail.com', NULL, '2019-03-02 19:49:38', '0000-00-00 00:00:00'),
+(72, 'Rupal Kumari', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'vendor', 'rupalkumari@gmail.com', NULL, '2019-03-02 19:49:48', '0000-00-00 00:00:00'),
+(73, 'Murali Prasad', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'vendor', 'muraliprasad@gmail.com', NULL, '2019-03-02 19:49:53', '0000-00-00 00:00:00'),
+(74, 'Biplab Sinha', '$2y$10$1Mi6XypjWw25iLmI3WL8s.aHgs9W.TO99qyGvOVZrh/GFjHy6E3ji', 'vendor', 'biplabsinha@gmail.com', NULL, '2019-03-02 19:49:58', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -384,7 +395,6 @@ INSERT INTO `users` (`id`, `username`, `password`, `roles`, `email`, `remember_t
 -- Table structure for table `user_aicte`
 --
 
-DROP TABLE IF EXISTS `user_aicte`;
 CREATE TABLE `user_aicte` (
   `id` int(255) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -410,7 +420,6 @@ INSERT INTO `user_aicte` (`id`, `user_id`, `name`, `profile_picture`, `last_logi
 -- Table structure for table `user_committee_member`
 --
 
-DROP TABLE IF EXISTS `user_committee_member`;
 CREATE TABLE `user_committee_member` (
   `id` int(255) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -452,7 +461,6 @@ INSERT INTO `user_committee_member` (`id`, `user_id`, `profile_picture`, `name`,
 -- Table structure for table `user_ombudsman`
 --
 
-DROP TABLE IF EXISTS `user_ombudsman`;
 CREATE TABLE `user_ombudsman` (
   `id` int(255) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -481,7 +489,6 @@ INSERT INTO `user_ombudsman` (`id`, `user_id`, `name`, `profile_picture`, `phone
 -- Table structure for table `user_principal`
 --
 
-DROP TABLE IF EXISTS `user_principal`;
 CREATE TABLE `user_principal` (
   `id` int(255) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -521,7 +528,6 @@ INSERT INTO `user_principal` (`id`, `user_id`, `name`, `profile_picture`, `phone
 -- Table structure for table `user_student`
 --
 
-DROP TABLE IF EXISTS `user_student`;
 CREATE TABLE `user_student` (
   `id` int(255) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -575,6 +581,31 @@ INSERT INTO `user_student` (`id`, `user_id`, `name`, `profile_picture`, `college
 (52, 56, 'Kishore Kumar', NULL, 11, 4, 'mechanical', '1601227123', NULL, 'm.tech', 2, 1),
 (53, 57, 'Arpana Baral', NULL, 10, 3, 'civil', '1701227130', NULL, 'm.tech', 1, 1),
 (54, 58, 'Satyanarayana Mahanta', NULL, 13, 5, 'CSE', '1701543211', NULL, 'm.tech', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_vendor`
+--
+
+CREATE TABLE `user_vendor` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `profile_picture` varchar(255) DEFAULT NULL,
+  `phone_no` int(11) NOT NULL,
+  `college_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_vendor`
+--
+
+INSERT INTO `user_vendor` (`id`, `user_id`, `name`, `profile_picture`, `phone_no`, `college_id`) VALUES
+(1, 71, 'Prashant Kumar', NULL, 1223456789, 1),
+(2, 72, 'Rupal Kumari', NULL, 1451569845, 3),
+(3, 73, 'Murali Prasad', NULL, 1236548565, 2),
+(4, 74, 'Biplab Sinha', NULL, 2145689452, 4);
 
 --
 -- Indexes for dumped tables
@@ -697,6 +728,14 @@ ALTER TABLE `user_student`
   ADD KEY `university_id` (`university_id`);
 
 --
+-- Indexes for table `user_vendor`
+--
+ALTER TABLE `user_vendor`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `college_id` (`college_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -722,13 +761,13 @@ ALTER TABLE `table_department`
 -- AUTO_INCREMENT for table `table_grievance`
 --
 ALTER TABLE `table_grievance`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `table_message`
 --
 ALTER TABLE `table_message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `table_ombudsman_announcement`
@@ -758,7 +797,7 @@ ALTER TABLE `table_university`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `user_aicte`
@@ -789,6 +828,12 @@ ALTER TABLE `user_principal`
 --
 ALTER TABLE `user_student`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT for table `user_vendor`
+--
+ALTER TABLE `user_vendor`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -874,6 +919,13 @@ ALTER TABLE `user_student`
   ADD CONSTRAINT `user_student_ibfk_1` FOREIGN KEY (`college_id`) REFERENCES `table_college` (`id`),
   ADD CONSTRAINT `user_student_ibfk_2` FOREIGN KEY (`university_id`) REFERENCES `table_university` (`id`),
   ADD CONSTRAINT `user_student_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `user_vendor`
+--
+ALTER TABLE `user_vendor`
+  ADD CONSTRAINT `user_vendor_ibfk_1` FOREIGN KEY (`college_id`) REFERENCES `table_college` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `user_vendor_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
