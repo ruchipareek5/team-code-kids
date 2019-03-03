@@ -17,7 +17,7 @@ grievancesystem.controller('vendorController',vendorController);
                 url: API_URL+"grievance/addComment",
                 data: formData,
                 headers: {
-                    'Content-Type': undefined;
+                    'Content-Type': undefined
                 }
             };
      
