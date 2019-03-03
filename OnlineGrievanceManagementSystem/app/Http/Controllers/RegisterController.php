@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\EmailCredetial;
 use App\Mail\SendCredential;
 use App\User;
+use function Faker\Provider\pt_BR\check_digit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -26,25 +28,36 @@ class RegisterController extends Controller
                 $inputFileType = PHPExcel_IOFactory::identify($file);
                 $objReader = PHPExcel_IOFactory::createReader($inputFileType);
                 $objPHPExcel = $objReader->load($file);
+               $path = $file->storeAs('registrations',$file->getClientOriginalName());
             } catch (Exception $e) {
                 return response(['messge' => 'Error in uploading file to the server'], 500);
             }
             $sheet = $objPHPExcel->getSheet(0);
-            $sheetValue = [];
+
             $highestRow = $sheet->getHighestRow();
-            $highestColumn = $sheet->getHighestColumn();
+            $email = Auth::user()->email;
+            if($email == null)
+                return response(['message'=>'Your Session has been expired'],401);
+
+            DB::table('table_attachment')->insert([
+               'filename' => $path,
+                'type'=>$request->get('type')==0?'university':'ombudsman',
+                'uploaded_by'=>$email
+            ]);
             $university = [];
             for ($row = 2; $row <= $highestRow; $row++) {
                 //  Read a row of data into an array
                 $university[$row - 2] = new UniversityFile();
                 $university[$row - 2]->name = $sheet->getCell('A' . $row)->getValue();
-                if (!ctype_alpha($university[$row - 2]->name))
-                    return response(['message' => 'Name field contains other than alphabets ']);
+                if($sheet->getCell('A'.$row)->getDataType()=='n')
+                    return response(['message'=>'A'.$row.' Could not be numeric'],404);
+
                 $university[$row - 2]->location = $sheet->getCell('B' . $row)->getValue();
                 $university[$row - 2]->state = $sheet->getCell('C' . $row)->getValue();
                 $university[$row - 2]->phone = $sheet->getCell('D' . $row)->getValue();
-                if (!ctype_digit($university[$row - 2]->phone))
-                    return response(['message' => 'Name field contains other than numbers ']);
+                if($sheet->getCell('D'.$row)->getDataType()=='s')
+                    return response(['message'=>'D'.$row.' Could not be string'],404);
+
             }
             foreach ($university as $uni) {
                 DB::table('table_university')->insert([
@@ -60,13 +73,24 @@ class RegisterController extends Controller
 
             try {
                 $file = $request->file('file');
+
                 if($file->getClientOriginalExtension() != 'xlsx')
                     return response(['message'=>'Please upload only Excel files'],404);
                 if ($file == null)
                     return response(['message' => 'Error in uploading your file'], 500);
+
                 $inputFileType = PHPExcel_IOFactory::identify($file);
                 $objReader = PHPExcel_IOFactory::createReader($inputFileType);
                 $objPHPExcel = $objReader->load($file);
+                $path = $file->storeAs('registrations',$file->getClientOriginalName());
+                $email = Auth::user()->email;
+                if($email == null)
+                    return response(['message'=>'Your Session has been expired'],401);
+                DB::table('table_attachment')->insert([
+                    'filename' => $path,
+                    'type'=>$request->get('type')==0?'university':'ombudsman',
+                    'uploaded_by'=>$email
+                ]);
             } catch (Exception $e) {
                 return response(['messge' => 'Error in uploading file to the server'], 500);
             }
@@ -80,20 +104,24 @@ class RegisterController extends Controller
                 //  Read a row of data into an array
                 $ombudsman[$row - 2] = new UniversityFile();
                 $ombudsman[$row - 2]->name = $sheet->getCell('A' . $row)->getValue();
-                if (!ctype_alpha($ombudsman[$row - 2]->name))
-                    return response(['message' => 'Name field contains other than alphabets ']);
+                if($sheet->getCell('A'.$row)->getDataType()=='n')
+                    return response(['message'=>'A'.$row.' Could not be numeric'],404);
+               /* if (!ctype_alpha($ombudsman[$row - 2]->name))
+                    return response(['message' => 'Name field contains other than alphabets ']);*/
                 $ombudsman[$row - 2]->university_name = $sheet->getCell('B' . $row)->getValue();
                 $ombudsman[$row - 2]->email = $sheet->getCell('C' . $row)->getValue();
+                if($sheet->getCell('D'.$row)->getDataType()=='s')
+                    return response(['message'=>'D'.$row.' Could not be string'],404);
                 $ombudsman[$row - 2]->phone = $sheet->getCell('D' . $row)->getValue();
-                if (!ctype_digit($ombudsman[$row - 2]->name))
-                    return response(['message' => 'Phone field contains other than numbers ']);
+               /* if (!ctype_digit($ombudsman[$row - 2]->name))
+                    return response(['message' => 'Phone field contains other than numbers ']);*/
             }
             foreach ($ombudsman as $uni) {
 
                 $university = DB::table('table_university')->where('name', 'like', $uni->university_name)
                     ->get(['id'])->first();
                 if ($university == null)
-                    return response(['message' => 'Sorry university is not found in our table. Please upload the university id first. University name is ' . $uni->university_name], 404);
+                    return response(['message' => 'Sorry university is not found in our table. Please upload the university first. University name is ' . $uni->university_name], 404);
                 $user = new User();
                 $user->email = $uni->email;
                 $user->password = Hash::make(UtilityController::getPassword($uni->name, $uni->email));
@@ -125,6 +153,15 @@ class RegisterController extends Controller
 
 
     }
+
+    public function getRegisterUser(){
+        $attachments = DB::table('table_attachment')->get(['filename','type','date','uploaded_by']);
+        if($attachments == null)
+            return response(['message'=>'No History Found'],404);
+        return response(['message'=>$attachments],200);
+    }
+
+
 }
 
 class UniversityFile{
