@@ -109,7 +109,7 @@ grievancesystem.controller('studentController',studentController);
         // subcategory
         $scope.grievanceSubcategory=[{}];
          $scope.academicsSubcategory=[{"category":"Admission"},{"category":"Scholarship"},{"category":"Marksheet"},{"category":"Others"}];
-         $scope.hostelSubcategory=[{"category":"Electrical"},{"category":"Maintainace"},{"category":"WiFi"},,{"category":"Others"}
+         $scope.hostelSubcategory=[{"category":"Electrical"},{"category":"Maintainace"},{"category":"WiFi"},{"category":"Others"}
         ];
 
         $scope.grievanceTimeslot=[{"category":"8AM to 10AM"},{"category":"1PM to 5PM"},
@@ -134,6 +134,9 @@ grievancesystem.controller('studentController',studentController);
         $scope.lodgeGrievance = function () {
              formData.append('type',$scope.grievance.type);
             formData.append('detail',$scope.grievance.detail);
+            formData.append('subCategory',$scope.grievance.subCategory);
+            formData.append('timeSlot',$scope.grievance.timeSlot);
+            console.log($scope.grievance.timeSlot);
             var request = {
                 method: 'POST',
                 url: API_URL+"grievances",
@@ -166,10 +169,7 @@ grievancesystem.controller('studentController',studentController);
             angular.forEach($files, function (value, key) {
                 formData.append('type',$scope.grievance.type);
                 formData.append('detail',$scope.grievance.detail);
-                if($scope.grievance.subCategory!='')
-                    formData.append('subCategory',$scope.grievance.subCategory);
-                if($scope.grievance.timeSlot!='')
-                    formData.append('timeSlot',$scope.grievance.timeSlot);
+                    
                 formData.append('attachment', value);
 
             });
@@ -267,7 +267,7 @@ grievancesystem.controller('studentController',studentController);
             enableFiltering:false,
             enableCellEditing:false,
             enableColumnMenus: false,
-            enableHorizontalScrollbar:0,
+            enableHorizontalScrollbar:1,
             enableVerticalScrollbar:0,
             paginationPageSize: $scope.pageSize,
             minRowsToShow: $scope.numRows,
@@ -280,6 +280,8 @@ grievancesystem.controller('studentController',studentController);
                 {name :"created_at" ,displayName: 'Lodge on' ,cellTemplate: '/views/cellTemplate/cell.html', width: "12%"},
                 { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
                 { name:"description" ,displayName: 'Description', cellTemplate: '/views/cellTemplate/cell.html',width:"40%"},
+                { name:"sub_category" ,displayName: 'Sub Category', cellTemplate: '/views/cellTemplate/cellSubcategory.html',width:"15%"},
+                { name:"timeslot" ,displayName: 'Time Slot', cellTemplate: '/views/cellTemplate/cellTimeslot.html',width:"15%"},
                 {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html',width:"12%"},
                 {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html",width:"12%"  },
                 
@@ -295,7 +297,7 @@ grievancesystem.controller('studentController',studentController);
                 enableFiltering:false,
                 enableCellEditing:false,
                 enableColumnMenus: false,
-                enableHorizontalScrollbar:0,
+                enableHorizontalScrollbar:1,
                 enableVerticalScrollbar:0,
                 paginationPageSize: $scope.pageSize,
                 minRowsToShow: $scope.numRows,
@@ -307,6 +309,8 @@ grievancesystem.controller('studentController',studentController);
                     { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html', width:"12%"},
                     { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html ', width:"12%"},
                     {name :"description" ,displayName: 'Description' ,cellTemplate: '/views/cellTemplate/cell.html', width:"15%" },
+                    { name:"sub_category" ,displayName: 'Sub Category', cellTemplate: '/views/cellTemplate/cellSubcategory.html',width:"15%"},
+                    { name:"timeslot" ,displayName: 'Time Slot', cellTemplate: '/views/cellTemplate/cellTimeslot.html',width:"15%"},
                     {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html", width:"12%"  },
                     {name:"eta", displayName: 'ETA' ,cellTemplate: '/views/cellTemplate/cell.html ', width:"12%"},
                     { name:"comments" ,displayName: 'Comments',  cellTemplate: '/views/cellTemplate/student_comments.html', width:"25%"},
@@ -323,7 +327,7 @@ grievancesystem.controller('studentController',studentController);
             enableFiltering:false,
             enableCellEditing:false,
             enableColumnMenus: false,
-            enableHorizontalScrollbar:0,
+            enableHorizontalScrollbar:1,
             enableVerticalScrollbar:0,
             paginationPageSize: $scope.pageSize,
             minRowsToShow: $scope.numRows,
@@ -335,6 +339,8 @@ grievancesystem.controller('studentController',studentController);
         { name : "id",displayName: 'Grievance ID', cellTemplate: '/views/cellTemplate/cell.html', width:"10%"},
         { name:"type" ,displayName: 'Grievance Type', cellTemplate: '/views/cellTemplate/cell.html ', width:"12%"},
         {name :"description" ,displayName: 'Description' ,cellTemplate: '/views/cellTemplate/cell.html', width:"15%" },
+        { name:"sub_category" ,displayName: 'Sub Category', cellTemplate: '/views/cellTemplate/cellSubcategory.html',width:"15%"},
+        { name:"timeslot" ,displayName: 'Time Slot', cellTemplate: '/views/cellTemplate/cellTimeslot.html',width:"15%"},
         {name:"documents",displayName: 'Attachment',cellTemplate: "/views/cellTemplate/attachment.html", width:"9%"  },
         {name:"updated_at", displayName: 'Date of Complettion' ,cellTemplate: '/views/cellTemplate/cell.html ', width:"12%"},
         { name:"action" ,displayName: 'Actions',  cellTemplate: '/views/cellTemplate/student_action.html', width:"30%"},

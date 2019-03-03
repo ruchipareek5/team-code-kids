@@ -84,7 +84,7 @@
                <label>Available Timeslots</label>
                 <select  class="sub" ng-model="grievance.timeSlot" >
                     <option value="">Select</option>
-                    <option ng-repeat= "y in grievanceTimeslot" value={{y.category}} >{{y.category}}</option>
+                    <option ng-repeat= "y in grievanceTimeslot" value={{y.category}}>{{y.category}}</option>
                 </select>
             </div>           
         </div>

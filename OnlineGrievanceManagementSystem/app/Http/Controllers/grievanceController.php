@@ -74,7 +74,7 @@ class grievanceController extends Controller
         $sub_category = $request->get('subCategory');
         $description = $request->get('detail');
         $file = $request->file('attachment');
-        $timeslot = $request->file('timeSlot');
+        $timeslot = $request->get('timeSlot');
         $student_id = DB::table('user_student')->where('id',Session::get('user_id'))->get(['id','college_id'])->first();
         $department_id = DB::table('table_department')->where('type','LIKE',$type)->where('college_id',$student_id->college_id)->get(['id'])->first();
         $grievance = new Grievance;
